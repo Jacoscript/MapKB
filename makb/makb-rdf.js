@@ -13,8 +13,6 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 
 //Function to make a point query and visualize the results.
 	function makePointQuery(inputQuery){
-		//Clear the current map layer
-		clearMap();
 		//Get the specified query
 		var query = getQuery(inputQuery);
 		//HTTP encode the query
@@ -75,8 +73,6 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 	//Function to make a line query and visualize the results.
 	function makeLineQuery(inputQuery){
-		//clear the map
-		clearMap();
 		//get the query and encode it.
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
@@ -99,6 +95,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							geometry = bindings[i].geometry.value;
 							subject = bindings[i].subject.value;
 							dimensions = bindings[i].dimensions.value;
+							var ftypeName = subject.split("/");
 							//Check if there is a name. Otherwise name will be "Unknown"
 							name = "Unknown";
 							if(bindings[i].name != undefined)
@@ -115,7 +112,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							var latlngs = new Array();
 							latlngs = makeLatLngs(geometry);
 							//create a new polyline object with the given popup
-							polyLine = new L.polyline(latlngs,{color: '#228B22'});
+							polyLine = new L.polyline(latlngs,{color: getColor(ftypeName[3])});
 							polyLine.bindPopup("<br>Name: " +  name +'</a>' +
 									"<br>Purpose: " + purpose +
 									"<p> <a href='#' onClick=\"additionalInformation('"+subject+"');\">Additional Information</a><br>" 
@@ -135,8 +132,6 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 	//Function to make a line query and visualize the results.
 	function makePolygonQuery(inputQuery){
-		//clear the map
-		clearMap();
 		//get the query and encode it.
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
@@ -160,6 +155,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							geometry = bindings[i].geometry.value;
 							subject = bindings[i].subject.value;
 							dimensions = bindings[i].dimensions.value;
+							var ftypeName = subject.split("/");
 							//Check if there is a name. Otherwise name will be "Unknown"
 							name = "Unknown";
 							if(bindings[i].name != undefined)
@@ -173,71 +169,9 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 								purpose = bindings[i].purpose.value;
 							}
 							var latlngs = new Array();
-							latlngs = makeLatLngs(geometry);
+							latlngs = makeLatLngs(null,geometry);
 							//create a new polyline object with the given popup
-							polygon = new L.polygon(latlngs,{color: '#000000'});
-							polygon.bindPopup("<br>Name: " +  name +'</a>' +
-									"<br>Purpose: " + purpose +
-									"<p> <a href='#' onClick=\"additionalInformation('"+subject+"');\">Additional Information</a><br>" 
-									);
-							//add the polyline object to the mapping layer
-							grouping.addLayer(polygon);
-						}
-						//visualize the mapping layer
-						grouping.addTo(map);
-					}
-					else { //There was no results so do nothing.
-						alert("Error!");
-					}
-				}
-			}
-		});
-	}
-	//Function to make a line query and visualize the results.
-	function makeSplitPolygonQuery(inputQuery){
-		//clear the map
-		clearMap();
-		//get the query and encode it.
-		var query = getQuery(inputQuery);
-		query = encodeURIComponent(query);
-		//get the http requuest URL
-		var httpGet = MARMOTTA_SPARQL_URL + query;
-		// execute sparql query in marmotta
-		$.get({url: httpGet, 
-			success: function(result) {
-				//if no results, throw an error
-				if(!result) {
-					alert('No results!');
-				}
-				else {
-					bindings = result.results.bindings;
-					//go through all of the results. If 0 items, throw an error
-					if(bindings.length > 0) {
-						
-						//go through all fo the results
-						for(var i=0; i < bindings.length; i++) {
-							//declare the variables given the results
-							geometry1 = bindings[i].geometry1.value;
-							geometry2 = bindings[i].geometry2.value;
-							subject = bindings[i].subject.value;
-							dimensions = bindings[i].dimensions.value;
-							//Check if there is a name. Otherwise name will be "Unknown"
-							name = "Unknown";
-							if(bindings[i].name != undefined)
-							{
-								name = bindings[i].name.value;
-							}
-							//Check if there is a purpose. Otherwise purpose will be "Unknown"
-							purpose = "Unknown";
-							if(bindings[i].purpose != undefined)
-							{
-								purpose = bindings[i].purpose.value;
-							}
-							//Create a latlng array to store all fo the coordinates
-							var latlngs = new Array();
-							latlngs = makeLatLngs(geometry1,geometry2);
-							//create a new polyline object with the given popup
-							polygon = new L.polygon(latlngs,{color: '#000000'});
+							polygon = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							polygon.bindPopup("<br>Name: " +  name +'</a>' +
 									"<br>Purpose: " + purpose +
 									"<p> <a href='#' onClick=\"additionalInformation('"+subject+"');\">Additional Information</a><br>" 
@@ -300,6 +234,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	{
 		var query;
 		switch(queryType){
+			//This query is for the GNIS layer
 		case "GNIS":
 			query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
 			'FROM <http://localhost:8080/marmotta/context/GNIS> ' +
@@ -311,6 +246,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
 			'} ';
 		break;
+			//This query is for the Geonames layer
 		case "Geonames":
 		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
 			'FROM <http://localhost:8080/marmotta/context/Geonames> ' +
@@ -322,6 +258,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
 			'} ';
 		break;
+			//This query is for the Structures layer
 		case "Structures":
 		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
 			'FROM <http://localhost:8080/marmotta/context/Structures> ' +
@@ -333,6 +270,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
 			'} ';
 		break;
+			//This query is for the Trails layer
 		case "Trails":
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/Trails> ' +
@@ -344,6 +282,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
+			//This query is for the county layer
 		case "County":
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
@@ -355,33 +294,38 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
+			//This query is for the State layer
 		case "State":
-		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry1 ?geometry2 ' + 
+		query = 'SELECT ?subject ?gm ?dimensions ?purpose ?name ' + 
+		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) '+
 		'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry1 . '+
-		'?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 ' +
+		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ' +
+		'?gm <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+		'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
 		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
+		'}}' +
+		'GROUP BY ?subject ?gm ?purpose ?name ?dimensions';
 		break;
+			//This query is for the PADUS layer
 		case "PADUS":
 		query = 'SELECT ?subject ?gm ?purpose ?name '+
-		'(GROUP_CONCAT(DISTINCT ?geometry; SEPARATOR="; ") AS ?c) '+
+		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) '+
 		'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> '+
 		'WHERE { GRAPH ?g { '+
 		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . '+
-		'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geometry . '+
+		'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
 		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } '+
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } '+
 		'}} '+
 		'GROUP BY ?subject ?gm ?purpose ?name ';
 		break;
+			//This query is for Custom queries. However, it is not currently in use
 		case "Custom":
 			query = document.getElementById('queryText').value;
 			break;
+			//This query is for the additional information link
 		case "moreInfo":
 			query = 'SELECT * FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
@@ -392,6 +336,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> ' +
 			'WHERE { GRAPH ?g {<' + URI + '> ?property ?object }}';
 			break;
+			//If this function gets called without a query then there must have been an error.
 		default:
 			alert("Error, No Query Selected");
 		}
@@ -423,23 +368,8 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		} 
 		//Check if the user is looking up a URI. Otherwise, perform a query finding additional entities that have the same data for that field.
 		if(property != "http://www.opengis.net/ont/geosparql#hasGeometry" && property != "http://data.usgs.gov/ontology/structures/hasState" && property != "http://dbpedia.org/ontology/county" && property != "http://dbpedia.org/ontology/state")
-		{
-			/*var query = 'SELECT ?subject ?geom ?geometry ?name ?purpose ?geometry2'+queryData+' FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/Trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
-			'WHERE { GRAPH ?g { ' + 
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + queryFields + 
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-			'OPTIONAL { ?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 } ' +
-			' } ' +
-			'FILTER regex( '+filterProperty+' , "'+object+'")  }';*/
-			
-			var query = 'SELECT ?subject ?geom ?name ?purpose ?geometry2 '+queryData+' (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
+		{	
+			var query = 'SELECT ?subject ?geom ?name ?purpose  '+queryData+' (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
@@ -452,28 +382,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
 			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
 			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-			'OPTIONAL { ?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ' +
 			' } ' +
 			'FILTER regex( '+filterProperty+' , "'+object+'")  } ' +
-			'GROUP BY ?subject ?geom ?name ?purpose ?geometry2 '+queryData+' ' ;
+			'GROUP BY ?subject ?geom ?name ?purpose '+queryData+' ' ;
 		}
+		//Check if the user is asking for a geometry.
 		else if(property == "http://www.opengis.net/ont/geosparql#hasGeometry")
-		{
-			/*var query = 'SELECT  ?subject ?geometry2 (GROUP_CONCAT(DISTINCT ?g; SEPARATOR="; ") AS ?geometry) ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/Trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> ' +
-			'WHERE { GRAPH ?g { ' + 
-			'<'+object+'> <http://www.opengis.net/ont/geosparql#asGML> ?g . ' +
-			'OPTIONAL { <'+object+'> <http://dbpedia.org/ontology/coordinates> ?geometry2 } ' +
-			' } ' +
-			'FILTER regex( ?subject , "'+object+'")  } ' + ' +
-			'GROUP BY <'+object+'> ';*/
-			
+		{	
 			var query = 'SELECT  ?subject ?geometry2 (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
@@ -483,16 +398,17 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> ' +
 			'WHERE { GRAPH ?g { ' +
-			//'BIND ( <'+object+'> AS ?subject ) ' +
 			'?subject <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
 			'OPTIONAL { ?subject <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ' +
 			' } ' +
 			'FILTER regex( ?subject , "'+object+'")  } ' + 
 			'GROUP BY ?subject ?geometry2';
 		}
+		//Check if the user is requesting a state attribute
 		else if(property == "http://data.usgs.gov/ontology/structures/hasState" || property == "http://dbpedia.org/ontology/state")
 		{
-			var query = 'SELECT ?geometry ?geometry2 ?dimensions ?purpose ?name FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
+			var query = 'SELECT (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ?geometry2 ?dimensions ?purpose ?name ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Trails> ' +
@@ -500,17 +416,20 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
 			'WHERE { GRAPH ?g { ' + 
 			'<'+object+'> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
 			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . '+
-			'?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 ' +
+			'OPTIONAL { ?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ' +
 			'OPTIONAL { <'+object+'> <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
 			'OPTIONAL { <'+object+'> <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 			' } ' +
-			' }';
+			' } ' +
+			'GROUP BY ?geom ?geometry2 ?dimensions ?purpose ?name';
 		}
+		//check if the user is requesting a county attribute
 		else if(property == "http://dbpedia.org/ontology/county")
 		{
-			var query = 'SELECT ?geometry ?geometry2 ?dimensions ?purpose ?name FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
+			var query = 'SELECT ?geometry ?dimensions ?purpose ?name ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Trails> ' +
@@ -519,8 +438,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'WHERE { GRAPH ?g { ' + 
 			'<'+object+'> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . '+
-			'OPTIONAL { ?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 . }' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
 			'OPTIONAL { <'+object+'> <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
 			'OPTIONAL { <'+object+'> <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 			' } ' +
@@ -546,11 +464,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							//Check if there is a subject attach. If there isn't, then this is a geometry request.
 							uri = object;
 							geometry = bindings[i].geometry.value;
-							//geometry = bindings[i].c.value;
-							//THIS SHOULD BE REMOVED WHEN ALL GEOMETRIES ARE STORED THE SAME
-							geometry2=null;
-							if(bindings[i].geometry2 != undefined)
-								geometry2 = bindings[i].geometry2.value
+							//Check if there is a subject in the data. If there is, update the uri.
 							if(bindings[i].subject != undefined)
 								uri = bindings[i].subject.value;
 							//If there is no name, set to Unknown
@@ -566,17 +480,6 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							//create an object to store the latlng if the entity is a line.
 							var latlngs = new Array();
 							
-							
-							/*
-							if(bindings[i].geometry2 == undefined)
-							{
-								latlngs = makeLatLngs(geometry); 
-							}
-							else 
-							{
-								latlngs = makeLatLngs(geometry,bindings[i].geometry2.value);
-							}*/
-							
 							//get the coordinate information from the results
 							//Create the icon for the results if it is a point
 							var smallIcon = L.icon({
@@ -585,7 +488,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 								  popupAnchor:  [1, -24],
 								  iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
 									});
-							//if the entity is a point, create a point. Otherwise, create a polyline.		
+							//if the entity is a point, create a point. Otherwise, create a polyline or polygon.		
 							if( ftypeName[3] == "gnis" || ftypeName[3] == "structures" || ftypeName[3] == "geonames")
 							{
 								latlngs = makeLatLngs(geometry); 
@@ -594,17 +497,17 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							else if(ftypeName[3] == "trails")
 							{
 								latlngs = makeLatLngs(geometry); 
-								marker = new L.polyline(latlngs,{color: '#228B22'});
+								marker = new L.polyline(latlngs,{color: getColor(ftypeName[3])});
 							}
 							else if(ftypeName[3] == "countyorequivalent" || ftypeName[3] == "stateorterritory")
 							{
-								latlngs = makeLatLngs(geometry,geometry2); 
-								marker = new L.polygon(latlngs,{color: '#000000'});
+								latlngs = makeLatLngs(null,geometry); 
+								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							}
 							else if(ftypeName[3] == "padus")
 							{
 								latlngs = makeLatLngs(null,null,geometry); 
-								marker = new L.polygon(latlngs,{color: '#000000'});
+								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							}
 							marker.bindPopup("<br>Name: " +  name +'</a>' +
 								"<br>Purpose: " + purpose +
@@ -624,12 +527,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			}
 		});	
 	}
-	//This function will make the latLngs given up to two geometries.
+	//This function will make the latLngs for three different types of stored geometries
 	function makeLatLngs(geometry1, geometry2, geometry3)
 	{
 		//Create a latlng array to store all fo the coordinates
 		var latlngs = new Array();
-		//go through the list of coordinates and add them to the latlng array
+		//These geometries are basic points, polylines or polygons.
 		if(geometry1 != null)
 		{
 			var coordinates = geometry1.split(" ");
@@ -643,16 +546,23 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				for(var j = 0; j < coordinates.length-1; j+=2) {
 					latlngs.push([coordinates[j+1], coordinates[j]]);
 				}
-			
-				if(geometry2 != null)
-				{
-					var coordinates2 = geometry2.split(" ");
-					for(var j = 1; j < coordinates2.length-1; j+=2) {
-						latlngs.push([coordinates2[j+1], coordinates2[j]]);
-					}
+			}
+		}
+		//These will be geometries that were broken in half due to storage constraints
+		else if(geometry2 != null)
+		{
+			var multipolygon = geometry2.split('; ');
+			for(var j=0; j < multipolygon.length; j++) {
+				coordinates = multipolygon[j].split(" ");
+				var templatlngs = new Array();
+				for(var k = 0; k < coordinates.length-1; k+=2) 
+				{				
+					latlngs.push([coordinates[k+1], coordinates[k]]);				
 				}
 			}
 		}
+		//These will be multi-geometries where a single geometries contains many different polygons, lines, etc.
+		//NOTE, this has only been applied to PADUS data. The data is returning to us swapped coordinates. Need to figure out why then standardize the function.
 		else if(geometry3 != null)
 		{
 			var multipolygon = geometry3.split('; ');
@@ -668,10 +578,8 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		}
 		return latlngs;
 	}
-	
-	function getPADUS(){
-		//Clear the current map layer
-		clearMap();
+	//This function maps PADUS data.
+	function makeMultiPolygonQuery(){
 		//Get the specified query
 		var query = getQuery('PADUS');
 		//HTTP encode the query
@@ -694,7 +602,8 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							//declare the variables given the results.
 							//featureToolTip = "Unknown";
 							subject = bindings[i].subject.value;
-							geometry = bindings[i].c.value;
+							geometry = bindings[i].geometry.value;
+							var ftypeName = subject.split("/");
 							name = "Unknown";
 							if(bindings[i].name != undefined)
 							{
@@ -712,7 +621,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							latlngs = makeLatLngs(null, null, geometry);
 
 							//create a new polyline object with the given popup
-							polygon = new L.polygon(latlngs,{color: '#000000'});
+							polygon = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							polygon.bindPopup("<br>Name: " +  name +'</a>' +
 									"<br>Purpose: " + purpose +
 									"<p> <a href='#' onClick=\"additionalInformation('"+subject+"');\">Additional Information</a><br>" 
@@ -730,147 +639,285 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			}
 		});
 	}
+	//This function will return the color for a specific polygon/polyline object
+	function getColor(featureType){
+		var color;
+		switch(featureType){
+			case "trails":
+				color = '#228B22';
+				break;
+			case "stateorterritory":
+				color = '#000000';
+				break;
+			case "countyorequivalent":
+				color = '#696969';
+				break;
+			case "padus":
+				color = '#B22222';
+				break;
+			default:
+				color = '#000000';
+		}
+		return color;
+	}
 	//This function will return the symbol that should be used for a particular feature type.
 	function getSymbol(featureType){
 		var symbol;
 		switch(featureType){
+		case "ADM3":
+		case "ADMD":
+			symbol = "Administration";
+			break;
 		case "AIRP":
+		case "AIRF":
 		case "Airport":
 			symbol = "Airport";
-		break;
+			break;
 		case "AREA":
 		case "Area":
 			symbol = "Area";
-		break;
+			break;
+		case "Bay":
+		case "BAY":
+			symbol = "Bay";
+			break;
 		case "BCH":
 		case "Beach":
 			symbol = "Beach";
-		break;
+			break;
 		case "BDG":
 		case "Bridge":
 			symbol = "Bridge";
-		break;
+			break;
 		case "BLDG":
+		case "BLDO":
 		case "Building":
 			symbol = "Building";
-		break;
+			break;
+		case "CMPQ":
+		case "CMP":
+			symbol = "Camp";
+			break;
+		case "CNL":
 		case "Canal":
 			symbol = "Canal";
-		break;
+			break;
 		case "CAPE":
 		case "Cape":
 			symbol = "Cape";
-		break;
+			break;
+		case "US Capitol":
+			symbol = "Capitol";
+			break;
 		case "CMTY":
 		case "Cemetery":
 			symbol = "Cemetery";
-		break;
+			break;
 		case "CHN":
 		case "Channel":
 			symbol = "Channel";
-		break;
+			break;
 		case "CH":
+		case "MSSNQ":
 		case "Church":
 			symbol = "Church";
-		break;
+			break;
 		case "Civil":
 			symbol = "Civil";
-		break;
+			break;
 		case "Crossing":
+		case "RDJCT":
 			symbol = "Crossing";
-		break;
+			break;
 		case "DAM":
 		case "Dam":
 			symbol = "Dam";
-		break;
+			break;
+		case "Falls":
+		case "OVF":
+			symbol = "Falls";
+			break;
+		case "FRMQ":
+		case "FRM":
+			symbol = "Farm";
+			break;
+		case "Fire Station / EMS Station":
+			symbol = "Firemen";
+			break;
+		case "GDN":
+			symbol = "Garden";
+			break;
+		case "RECG":
+			symbol = "Golf";
+			break;
 		case "Gut":
 			symbol = "Gut";
-		break;
+			break;
 		case "HBR":
 		case "Harbor":
 			symbol = "Harbor";
-		break;
+			break;
+		case "AIRH":
+			symbol = "Helipad";
+			break;
 		case "HSP":
+		case "CTRM":
 		case "Hospital":
+		case "Hospital / Medical Center":
 			symbol = "Hospital";
-		break;
+			break;
+		case "HTL":
+			symbol = "Hotel";
+			break;
 		case "ISL":
 		case "Island":
 			symbol = "Island";
-		break;
+			break;
+		case "US Supreme Court":
+		case "Court House":
+		case "State Supreme Court":
+			symbol = "Judge";
+			break;
 		case "LK":
 		case "Lake":
 			symbol =  "Lake";
-		break;
+			break;
+		case "LIBR":
+		case "ARCHV":
+			symbol = "Library";
+			break;
 		case "Locale":
 			symbol = "Locale";
-		break;
+			break;
+		case "MALL":
+		case "RET":
+			symbol = "Mall";
+			break;
+		case "Visitor / Information Center":
+			symbol = "Map";
+			break;
+		case "MAR":
+			symbol = "Marina";
+			break;
 		case "INSM":
 		case "MILB":
 		case "Military":
 			symbol = "Military";
-		break;
+			break;
+		case "MNMT":
+			symbol = "Monument";
+			break;
+		case "MUS":
+			symbol = "Museum";
+			break;
 		case "Park":
 		case "PRK":
 			symbol = "Park";
-		break;
+			break;
+		case "PKLT":
+			symbol = "Parking Garage";
+			break;
+		case "Picnic Area":
+			symbol = "Picnic";
+			break;
 		case "Pillar":
 			symbol = "Pillar";
-		break;
+			break;
+		case "Law Enforcement":
+		case "Prison / Correctional Facility":
+			symbol = "Police";
+			break;
 		case "PPL":
+		case "PPLX":
 		case "Populated Place":
 			symbol = "Populated Place";
-		break;
+			break;
 		case "PO":
 		case "Post Office":
 			symbol = "Post Office";
-		break;
+			break;
+		case "PS":
+			symbol = "Power Substation";
+			break;
+		case "RSTN":
+			symbol = "Rail Road";
+			break;
 		case "RES":
 		case "Reserve":
 			symbol = "Reserve";
-		break;
+			break;
 		case "RSV":
 		case "Reservoir":
 			symbol = "Reservoir";
-		break;
+			break;
+		case "REST":
+			symbol = "Restaurant";
+			break;
+		case "RD":
+			symbol = "Road";
+			break;
+		case "PPLQ":
+		case "HSTS":
+			symbol = "Ruins";
+			break;
 		case "SCH":
+		case "ITTR":
 		case "School":
+		case "School: Elementary":
+		case "School: High School":
+		case "College / University":
+		case "Technical / Trade School":
+		case "School: Middle School":
+		case "STNB":
 			symbol = "School";
-		break;
+			break;
+		case "ATHF":
+		case "STDM":
+			symbol = "Soccer";
+			break;
 		case "SPNG":
 		case "Spring":
 			symbol = "Spring";
-		break;
+			break;
+		case "SQR":
+			symbol = "Square";
+			break;
 		case "STM":
+		case "INLT":
 		case "Stream":
 			symbol = "Stream";
-		break;
+			break;
 		case "MT":
 		case "Summit":
 			symbol = "Summit";
-		break;
+			break;
+		case "THTR":
+			symbol = "Theatre";
+			break;
 		case "TOWR":
 		case "Tower":
 			symbol = "Tower";
-		break;
+			break;
 		case "TRL":
 		case "Trail":
 			symbol = "Trail";
-		break;
+			break;
+		case "MTRO":
+			symbol = "Underground";
+			break;
 		case "VAL":
 		case "Valley":
 			symbol = "Valley";
-		break;
+			break;
+		case "WHRF":
+			symbol = "Wharf";
+			break;
+		case "FRST":
 		case "Woods":
 			symbol = "Woods";
-		break;
+			break;
 		default:
 			symbol = "Unknown";
 		}
 		return symbol;
-	}
-	//This function will clear the map.
-	function clearMap()
-	{
-		grouping.clearLayers();
 	}

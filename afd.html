@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="UTF-8">
-  <title>USGS Advanced Feature Descriptions Map</title>
+  <title>USGS Map As A Knowledge Base Map</title>
 
   <!-- top menu bar css + js -->
   <link rel="stylesheet" href="cssmenu2/menu_styles.css">
@@ -57,7 +57,7 @@
   <div id='cssmenu' style="z-index: 2">
 	<ul>
 	   <li><a href='#' onClick='resetMap();'>Reset Extent</a></li>
-
+		<!-- layers menu -->
 	   <li class='active'><a href='#'>Layers</a>
 	      <ul>
 		 <li><a href='#' onClick="makePointQuery('GNIS');">USGS GNIS - DC</a></li>
@@ -65,25 +65,12 @@
 		 <li><a href='#' onClick="makePointQuery('Geonames');">GeoNames.org - DC</a></li>
 		 <li><a href='#' onClick="makeLineQuery('Trails');">Trails - DC</a></li>
 		 <li><a href='#' onClick="makePolygonQuery('County');">CountyOrEqual - DC</a></li>
-		 <li><a href='#' onClick="makeSplitPolygonQuery('State');">StateOrEqual - DC</a></li>
-		 <li><a href='#' onClick="getPADUS();">PADUS - DC</a></li>
-		 <!--<li><a href='#' onClick="loadWfsPtLayer('gnis_Virginia');">USGS GNIS - Virginia</a></li>
-	       	 <li><a href='#' onClick="loadWfsPtLayer('structures_Virginia');">USGS Structures - Virginia</a></li>
-		 <li><a href='#' onClick="loadWfsPtLayer('geonamesUS');">Geonames.org - US</a></li>
-		 <li><a href='#' onClick="loadWfsPtLayer('USGS_TNM_Structures');">WFS USGS Structures</a></li> -->
-		 <!--<li><a href='#' onClick="loadWfsPtLayer('osm_dc_pts');">Open Street Map Points - DC</a></li>-->
+		 <li><a href='#' onClick="makePolygonQuery('State');">StateOrEqual - DC</a></li>
+		 <li><a href='#' onClick="makeMultiPolygonQuery();">PADUS - DC</a></li>
 	      </ul>
 	   </li>
-	   
-	   <li><a href='#'>WFS Tests</a>
-	      <ul>
-		<li><a href='#' onClick="loadWfsPtLayer('GNIS_DC_Features_20180401');">Test WFS Points</a></li>
-	   	<li><a href='#' onClick="loadWfsLineLayer('usgs_ntd_trans_road');">Test WFS Lines</a></li>
-		<li><a href='#' onClick="loadWfsPolyLayer('');">Test WFS Polygons</a></li>
-	      </ul>
-	   </li>
-	   <!--<li><a href='#' onClick="testAddTab();">Test Add Tab</a></li>-->
-	   <li><a href='#' onClick='qWrite_show();'>Make Query</a></li>
+	   <!--<li><a href='#' onClick='qWrite_show();'>Make Query</a></li>-->
+	   <li><a href='#' onClick='clearMap();'>Clear Map</a></li>
 	</ul>
 	
   </div>
@@ -124,7 +111,7 @@
   <!-- initialize leaflet map -->
   <script>
 	var grouping = L.markerClusterGroup({
-                disableClusteringAtZoom: 15,
+                disableClusteringAtZoom: 14,
                 spiderfyOnMaxZoom: false
         });
 
@@ -135,7 +122,8 @@
     }
 
     // init map with open street map as base map over DC area
-    var map = L.map('mapid').setView([38.8895, -77.0353], 13);
+    var map = L.map('mapid').setView([38.8895, -77.0353], 11);
+	map.options.minZoom = 2;
 
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
                 maxZoom: 16,
@@ -157,10 +145,12 @@
 	function qWrite_hide(){
 		document.getElementById('qWritePopup').style.display = "none";
 	}
-	
+	//This function will clear the map.
+	function clearMap()
+	{
+		grouping.clearLayers();
+	}
   </script>
-
 </body>
-
 </html>
 

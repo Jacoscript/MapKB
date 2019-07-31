@@ -7,6 +7,8 @@ var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
 var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
 var FEATURE_BASE_URL = 'http://data.usgs.gov/';
 
+var noFeatures = false;
+
 // load the namespace IDs json from URL
 var nsids = {};
 $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
@@ -39,7 +41,7 @@ function getNsId(datasetName) {
  * Aggregate additional attributes of given feature via Marmotta.
  */
 function getAdvFtrDesc(datasetName, uri) {
-
+	noFeatures = false;
    // first clear tabs/data from previous features displayed
    $('#afd-tabs ul li').remove();
    $('#afd-tabs div').remove();
@@ -104,17 +106,21 @@ function executeAFDQuery(uri, query, useSrcName, datasetName) {
 		    bindings = result.results.bindings;
 		    if(bindings.length > 0) {
 			// deref each coref and follow sameAs link
-			for(var i=0; i < bindings.length; i++) {
-			    coref = bindings[i].coref.value;
-			    dsuri = bindings[i].dsuri.value;
-				
-			    // deref uri
-			    getFtrDescByUri(coref,dsuri, useSrcName);
-			    // see if uri has any of its own sameAs links
-			    followSameAsLink(coref, uri, datasetName);
-			}
+				for(var i=0; i < bindings.length; i++) {
+					coref = bindings[i].coref.value;
+					dsuri = bindings[i].dsuri.value;
+					
+					// deref uri
+					getFtrDescByUri(coref,dsuri, useSrcName);
+					// see if uri has any of its own sameAs links
+					followSameAsLink(coref, uri, datasetName);
+				}
 		    }
 		    else { // no corefs, so just deref single feature URI
+			if(noFeatures)
+			alert("No Advanced Feature Description Available");
+			
+			noFeatures = true;
 			//getFtrDescByUri(uri, datasetName, useSrcName);
 		    }
 		}
@@ -173,6 +179,7 @@ function followSameAsLinkQuery(uri, query, useSrcName, datasetName) {
 		if(!result) {
 		    // FIXME this should probably be handled as an error; query should at least return results json with 0 bindings unless error occurs
 		    getFtrDescByUri(uri,datasetName,useSrcName);
+			
 		}
 		// if RESULTS, then dereference each one
 		else {
@@ -186,6 +193,7 @@ function followSameAsLinkQuery(uri, query, useSrcName, datasetName) {
 			}
 		    }
 		    else { // no corefs, so just deref single feature URI
+			
 			//getFtrDescByUri(uri,datasetName,useSrcName);
 		    }
 		}
