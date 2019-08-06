@@ -61,12 +61,25 @@ function loadWfsPtLayer(ftypeName, ftypeNS, wfsBaseUrl, lyrCrs, geomFld, filter)
 
 	// create the leaflet-wfst POINT layer and add it to the map
 	const wfstPoint = new L.WFST(wfstPointOptions, new L.Format.GeoJSON({
-	  crs: lyrCrs,
-	  pointToLayer(geoJsonPoint, latlng) {
-	   // const layer = new L.Marker(latlng);
-	    const layer = new L.CircleMarker(latlng, {color:'#A9A9A9',opacity:1.0,fillColor:'#3232FF',fillOpacity:0.6,radius: 8});
-	    return layer;
-	  }
+		crs: lyrCrs,
+		pointToLayer(geoJsonPoint, latlng) {
+			var iconImage = 'leaflet/icons/Unknown.png';
+			var featureTooltip = "Unknown Type";
+			if(geoJsonPoint.properties.FEATURE_CL){
+			  iconImage = 'leaflet/icons/' + geoJsonPoint.properties.FEATURE_CL + '.png';
+			  featureTooltip = geoJsonPoint.properties.FEATURE_CL
+			}
+
+			var smallIcon = L.icon({
+                      iconSize: [27, 27],
+                      iconAnchor: [13, 27],
+                      popupAnchor:  [0, -30],
+					  tooltipAnchor: [0, -25],
+					  iconUrl: iconImage
+			});
+			
+			return L.marker(latlng, {icon: smallIcon}).bindTooltip(featureTooltip, {direction: 'top'});
+		}
 	})
 	);
 

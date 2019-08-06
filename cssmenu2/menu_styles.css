@@ -438,7 +438,7 @@
 			.form2 {
 			max-width:650px;
 			min-width:650px;
-			//max-height:400px;
+			max-height:400px;
 			padding:10px 50px;
 			border:2px solid gray;
 			border-radius:10px;
