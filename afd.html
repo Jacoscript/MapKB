@@ -68,8 +68,6 @@
 	     <ul>
 	       <li><a href='#' onClick='clearMap();'>Clear Map</a></li>
 	       <li><a href='#' onClick='clearTabs();'>Clear Tabs</a></li>
-		   <li><a href='#' onClick='qWrite_show();'>Apply Filter</a></li>
-	       <li><a href='#' onClick='createQueryTab();'>Make Query</a></li>
 		 </ul>
 	   </li>
 	   <li class='active'><a href='#'>Layers</a>
@@ -101,49 +99,7 @@
   <div id="maincontainer" style="width: 100%; height: 100%;">
      <!-- leaflet map -->
      <div id="mapid" style="z-index: 1; width: 70%; height: 90.55%; float: left; border-style: solid; border-width: 1px; margin-right: 3px; margin-top: 9px;"></div>
-	<!-- Query Form-->
-	<div id="qWritePopup">
-		<div id="popupContact2">
-			<div id="" style="overflow-y: scroll; overflow-x: hidden;">
-				<h2 class="h2">Custom User Query</h2>
-				<!--<hr class="hr">-->
-				<div class="form2">
-					<!--<button onclick="addFilter()">Add More Filters </button>-->
-					<!-- <form action="" id="" method="POST" name=""> -->
-					<img id="close" src="images/3.png" onclick ="qWrite_hide()">		
-					<div id="filterArea">
-						<div id="filterForm0">
-						Dataset Option Option:
-						<select name="dataType0" id="dataType0">
-						<option value="GNIS_DC_Features_20180401"> GNIS_DC_Features_20180401 </option>
-						<option value="usgs_structures"> usgs_structures </option>
-						<option value="geonamesDC"> geonamesDC </option>
-						<option value="structures_Texas"> structures_Texas </option>
-						<option value="structures_Virginia"> structures_Virginia </option>
-						<option value="gnis_Virginia"> gnis_Virginia </option>
-						<option value="geonamesUS"> geonamesUS </option>
-						</select><br><br>
-						Filter Option:
-						<select name="filterType0" id="filterType0" oninput="addQueryFields('filterType0')">
-						<option value=""> Select a Filter Option </option>
-						<option value="PropertyIsEqualTo"> PropertyIsEqualTo </option>
-						<option value="PropertyIsNotEqualTo"> PropertyIsNotEqualTo </option>
-						<option value="PropertyIsLessThan"> PropertyIsLessThan </option>
-						<option value="PropertyIsGreaterThan"> PropertyIsGreaterThan </option>
-						<option value="PropertyIsLessThanOrEqualTo"> PropertyIsLessThanOrEqualTo </option>
-						<option value="PropertyIsGreaterThanOrEqualTo">PropertyIsGreaterThanOrEqualTo </option>
-						<option value="PropertIsNull"> PropertIsNull </option>
-						<option value="GmlObjectId"> GmlObjectId </option>
-						<option value="PropertyIsBetween"> PropertyIsBetween </option>
-						</select><br><br>
-						</div>
-					</div>
-					<button onclick="addFilter()" style="height: 40px; width: 80px;"> Add Filter </button>	
-					<button onclick="makeFilter(), qWrite_hide()" style="height: 40px; width: 80px;"> Submit </button>	
-				</div>
-			</div>
-		</div>
-	</div>
+	
      <!-- advanced feature description tabs -->
      <div class="widget" style="height: 92%; font-family: Arial, Helvetica, sans-serif; overflow-x: scroll; overflow-y: hidden; margin-top: 7px;">
 		<fieldset>
@@ -152,8 +108,9 @@
 	    <ul id="afd-tabs-list">
 	       <!-- list is populated programmatically -->
 	    </ul>
-		</fieldset>
+		
     </div>
+    </fieldset>
 	<!-- tab div content populated programmatically -->
      </div>
   </div>
@@ -237,190 +194,6 @@
 		else if(loc == 'DC FEMS Engine 19'){
 			map.setView([38.87161, -76.96695], 16);
 		}
-	}
-	
-	//Inserts an element after a referenced one.
-	function insertAfter(el, referenceNode) {
-    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-	}
-	
-	//Function to add a query based on an additional filter
-	function addQueryFields(selected){
-		
-		//get the request query
-		var query = document.getElementById(selected).value;
-		var fieldNum = selected[selected.length-1];
-		
-		//declare other variables we will use
-		var divExists = document.getElementById('filterFormField' + fieldNum);
-		var htmlHolder = "";
-		
-		//check if the fields already exist. If so, remove them.
-		if( divExists !== null)
-		{
-			divExists.innerHTML="";
-		}
-		//Determine what the new fields should be.
-		if (query == "PropertyIsEqualTo" || query == "PropertyIsNotEqualTo" || query == "PropertyIsLessThan" || query == "PropertyIsGreaterThan"
-			|| query == "PropertyIsLessThanOrEqualTo" || query == "PropertyIsGreaterThanOrEqualTo")
-		{
-			htmlHolder = 
-				'<br>Property Expression: <input type="text" name="proexp'+ fieldNum + '" id="proexp'+ fieldNum + '"><br><br> \
-				Literal Expression: <input type="text" name="litexp'+ fieldNum + '" id="litexp'+ fieldNum + '"><br> ';
-		}
-		else if(query =="PropertIsNull")
-		{
-			htmlHolder = '<br>Property Name: <input type="text" name="propname'+ fieldNum + '" id="propname'+ fieldNum + '"><br><br>';
-		}
-		else if(query == "GmlObjectId")
-		{
-			htmlHolder = '<br>Value ID: <input type="text" name="idvalue'+ fieldNum + '" id="idvalue'+ fieldNum + '"><br><br>';
-		}
-		else if(query == "PropertyIsBetween")
-		{
-			htmlHolder = 
-				'<br>Property Expression: <input type="text" name="proexp'+ fieldNum + '" id="proexp'+ fieldNum + '"><br><br> \
-				Literal Lowerbound Expression: <input type="text" name="litlowerexp'+ fieldNum + '" id="litlowerexp'+ fieldNum + '"><br><br> \
-				Literal Upperbound Expression: <input type="text" name="litupperexp'+ fieldNum + '" id="litupperexp'+ fieldNum + '"><br> ';
-		}
-		else if(query == "")
-		{
-			htmlHolder = "";
-		}
-		//If the div doesnt exist, add it.
-		if( divExists === null)
-		{
-			var div = document.createElement('div');
-			div.className = 'filterFormField' + fieldNum;
-			div.id = 'filterFormField' + fieldNum;
-			div.innerHTML = htmlHolder;
-			insertAfter(div,document.getElementById(selected));
-			
-			//document.getElementById('filterType'+countFilter).appendChild(div);
-		}
-		//if the div does exist, replace it.
-		else
-		{
-		divExists.innerHTML = htmlHolder;
-		}
-	}
-	
-	//Function to add an additional filter
-	function addFilter(){
-		countFilter = countFilter + 1;
-		var div = document.createElement('div');
-		div.className = 'filterForm' + countFilter;
-		div.innerHTML = '<br><div id="filterForm'+countFilter+'"> \
-				Filter Option: \
-				<select name="filterType'+countFilter+'" id="filterType'+countFilter+'" oninput="addQueryFields(\'filterType'+countFilter+'\')"> \
-				<option value=""> Select a Filter Option </option> \
-				<option value="PropertyIsEqualTo"> PropertyIsEqualTo </option> \
-				<option value="PropertyIsNotEqualTo"> PropertyIsNotEqualTo </option> \
-				<option value="PropertyIsLessThan"> PropertyIsLessThan </option> \
-				<option value="PropertyIsGreaterThan"> PropertyIsGreaterThan </option> \
-				<option value="PropertyIsLessThanOrEqualTo"> PropertyIsLessThanOrEqualTo </option> \
-				<option value="PropertyIsGreaterThanOrEqualTo">PropertyIsGreaterThanOrEqualTo </option> \
-				<option value="PropertIsNull"> PropertIsNull </option> \
-				<option value="GmlObjectId"> GmlObjectId </option> \
-				<option value="PropertyIsBetween"> PropertyIsBetween </option> \
-				</select>  \
-				</div> ';
-
-		document.getElementById('filterArea').appendChild(div);
-		
-		//countFilter = countFilter + 1;
-	}
-	
-	//Make a filter given the parameters
-	function makeFilter(){
-        var dataType = document.getElementById("dataType0");
-        var dataName = dataType.options[dataType.selectedIndex].value;
-
-		//var proexp = document.getElementById("proexp1").value;
-        //ar litexp = document.getElementById("litexp1").value;
-
-		//var filterHolder = new L.Filter.EQ("ADMIN1","VA");
-		var filterHolder;
-		var i;
-		for(i = 0; i<=countFilter; i++)
-		{	
-			var filter;
-			var newFilter;
-			
-			var filterType = document.getElementById("filterType"+i)
-			var filterName = filterType.options[filterType.selectedIndex].value;
-			
-			if (filterName == "PropertyIsEqualTo")
-			{
-				var proexp = document.getElementById("proexp"+i).value;
-				var litexp = document.getElementById("litexp"+i).value;
-				filter = new L.Filter.EQ(proexp,litexp);
-			}
-			else if(filterName == "PropertyIsNotEqualTo")
-			{
-				var proexp = document.getElementById("proexp"+i).value;
-				var litexp = document.getElementById("litexp"+i).value;
-				filter = new L.Filter.NotEQ(proexp,litexp);
-			}
-			else if(filterName == "PropertyIsLessThan")
-			{
-				var proexp = document.getElementById("proexp"+i).value;
-				var litexp = document.getElementById("litexp"+i).value;
-				filter = new L.Filter.LT(proexp,litexp);
-			}
-			else if(filterName == "PropertyIsGreaterThan")
-			{
-				var proexp = document.getElementById("proexp"+i).value;
-				var litexp = document.getElementById("litexp"+i).value;
-				filter = new L.Filter.GT(proexp,litexp);
-			}
-			else if(filterName == "PropertyIsLessThanOrEqualTo")
-			{
-				var proexp = document.getElementById("proexp"+i).value;
-				var litexp = document.getElementById("litexp"+i).value;
-				filter = new L.Filter.LEQ(proexp,litexp);
-			}
-			else if(filterName == "PropertyIsGreaterThanOrEqualTo")
-			{
-				var proexp = document.getElementById("proexp"+i).value;
-				var litexp = document.getElementById("litexp"+i).value;
-				filter = new L.Filter.GEQ(proexp,litexp);
-			}
-			else if(filterName == "PropertIsNull")
-			{
-				var propName = document.getElementById("propname"+i).value;
-				filter = new L.Filter.IsNull(propName);
-			}
-			else if(filterName == "GmlObjectId")
-			{ 
-				var objectID = document.getElementById("idvalue"+i).value;
-				filter = new L.Filter.GmlObjectId(objectID);
-			}
-			else if(filterName == "PropertyIsBetween")
-			{	
-				var proexp = document.getElementById("proexp"+i).value;
-				var lowerBound = document.getElementById("litlowerexp"+i).value;
-				var upperBound = document.getElementById("litupperexp"+i).value;
-				filter = new L.Filter.IsBetween(proexp, lowerBound, upperBound);
-			}
-			
-			if(i == 0)
-			{
-				filterHolder = filter;
-			}
-			else
-			{
-				newFilter = new L.Filter.And(filterHolder,filter);
-				filterHolder = newFilter;
-			}
-			//newFilter = new L.Filter.And(filterHolder,filter);
-			//filterHolder = newFilter;
-			
-        //var filter = new L.Filter.EQ('FEATURE_NA','Trinidad');
-        }
-		
-		//var testFilter = new L.Filter.And(filterHolder, new L.Filter.IsBetween("LATITUDE", "38.8", "38.9"));
-		loadWfsPtLayer(dataName, null, null, null, null, filterHolder);
 	}
   </script>
 </body>
