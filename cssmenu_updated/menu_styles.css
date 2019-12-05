@@ -1,3 +1,4 @@
+/* Entire file is a WIP since last engineer left code base without comments */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 #cssmenu,
 #cssmenu ul,
@@ -59,6 +60,7 @@
 #cssmenu > ul > li {
   float: left;
 }
+/* For all menu items */
 #cssmenu > ul > li > a {
   padding: 20px 25px;
   font-size: 13px;
@@ -74,10 +76,12 @@
   -o-transition: color .2s ease;
   transition: color .2s ease;
 }
+/* Both below lines, separately or together, allow the menu items to change color on hover. Idk why...*/
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li > a:hover,
-#cssmenu > ul > li.active > a {
-  color: #cae5fd;
+/* For all menu items change color after hover.. idk how this works but it has to have '.after' or '.before' to change color. */
+#cssmenu > ul > li.active > a.after {
+  color: #88d0ed;
 }
 #cssmenu > ul > li.has-sub > a {
   padding-right: 40px;
@@ -110,6 +114,7 @@
 #cssmenu ul > li.has-sub:hover > a:after {
   background-position: 0 -18px;
 }
+/* Button for dropdown; before; color is white */
 #cssmenu ul > li.has-sub > a:before {
   content: '';
   position: absolute;
@@ -122,6 +127,7 @@
   border-top-color: #ffffff;
   z-index: 99;
 }
+/* Button for dropdown; after; color is dark gray*/
 #cssmenu ul > li.has-sub:hover > a:before {
   border-top-color: #19799f;
 }
@@ -164,6 +170,7 @@
   padding-right: 10px;
   opacity: 1;
 }
+/* For all dropdowns. Could be not just add tags to these?? */
 #cssmenu ul ul li a {
   width: 180px;
   padding: 12px 25px;
