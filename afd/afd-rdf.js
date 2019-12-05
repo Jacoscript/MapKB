@@ -391,7 +391,14 @@ function createTab(name, content) {
     newTabDiv.style.height = '100%';
     newTabDiv.style.width = '90%';
     newTabDiv.style.display = 'none';
+	newTabDiv.style.fontSize = '10px';
 
+	//We store the query builder tab id so that we can add to it later.
+	if(name == 'Query Builder')
+	{
+		queryTabID = newTabDiv.id
+	}
+	
     // set additional attributes of div
     var divAriaLabelledBy = document.createAttribute('aria-labelledby');
     divAriaLabelledBy.value = 'ui-id-' + (numTabs+1);
@@ -416,6 +423,7 @@ function createTab(name, content) {
     tabsList.appendChild(newTabDiv);
 
     $("#afd-tabs").tabs("refresh");
+	//document.getElementById(newTabDiv.id)[0].click();
 
 }
 

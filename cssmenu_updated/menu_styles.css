@@ -372,7 +372,8 @@
   }
   #cssmenu #menu-button.menu-opened:before,
   #cssmenu .submenu-button.submenu-opened:before {
-    border-top-color: #19799f;
+    /* Previous color: #19799f */
+	border-top-color: #19799f;
   }
 }
 			/*----------------------------------------------

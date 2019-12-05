@@ -11,6 +11,119 @@ var FEATURE_BASE_URL = 'http://data.usgs.gov/';
 var nsids = {};
 $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 
+//Function to make a query that can understand how to visualize all the different geometries
+	function makeUniversalQuery(inputQuery){
+	//Get the specified query
+		var query = getQuery(inputQuery);
+		//HTTP encode the query
+		query = encodeURIComponent(query);
+		//Create the URL for the HTTP request
+		var httpGet = MARMOTTA_SPARQL_URL + query;
+		// execute sparql query in marmotta
+		$.get({url: httpGet, 
+			success: function(result) {
+				//If there are no results say so. Otherwise, visualize them.
+				if(!result) {
+					alert('No results!');
+				}
+				else {
+					bindings = result.results.bindings;
+					//Check how many results there are. If 0 through an error. Otherwise, visualize them.
+					if(bindings.length > 0) {
+						//go through all of the results.
+						for(var i=0; i < bindings.length; i++) {
+							//declare the variables given the results.
+							featureToolTip = "Unknown";
+							geometry = bindings[i].geometry.value;
+							
+							uri = bindings[i].subject.value;
+							if(bindings[i].subject != undefined)
+								uri = bindings[i].subject.value;
+							
+							//If there is no name, set to Unknown
+							name = "Unknown";
+							if(bindings[i].name != undefined)
+								name = bindings[i].name.value;
+							
+							//If there is no purpose, set to Unknown
+							purpose = "Unknown";
+							if(bindings[i].purpose != undefined)
+								purpose = bindings[i].purpose.value;
+							
+							//Check if there is a dimensions. Otherwise name will be "Unknown"
+							dimensions = "Unknown";
+							if(bindings[i].dimensions != undefined)
+								dimensions = bindings[i].dimensions.value;
+							
+							//get the type name via the uri
+							var ftypeName = uri.split("/");
+							
+							var latlngs = new Array();
+							
+							//get the coordinate information from the results
+							//Create the icon for the results if it is a point
+							var smallIcon = L.icon({
+								  iconSize: [27, 27],
+								  iconAnchor: [13, 27],
+								  popupAnchor:  [1, -24],
+								  iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+									});
+							//if the entity is a point, create a point. Otherwise, create a polyline or polygon.		
+							if( ftypeName[3] == "gnis" || ftypeName[3] == "structures" || ftypeName[3] == "geonames" || ftypeName[3] == "nhdpoint")
+							{
+								latlngs = makeLatLngs(geometry); 
+								marker = new L.marker(latlngs, {icon: smallIcon});
+							}
+							else if(ftypeName[3] == "trails" || ftypeName[3] == "nhdflowline" || ftypeName[3] == "nhdline")
+							{
+								//According to the number of dimension, properly visualize the geometry.
+								if(dimensions = "3")
+									latlngs = makeLatLngs(null,null,null,geometry);
+								else
+									latlngs = makeLatLngs(geometry); 
+								
+								marker = new L.polyline(latlngs,{color: getColor(ftypeName[3])});
+							}
+							/*else if (ftypeName[3] == "countyorequivalent")
+							{
+								alert("HERE!");
+								latlngs = makeLatLngs(geometry); 
+								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
+							}*/
+						else if(ftypeName[3] == "countyorequivalent" || ftypeName[3] == "stateorterritory" || ftypeName[3]== "nhdwaterbody" )
+							{
+								if(dimensions == "3")
+									latlngs = makeLatLngs(null,null,null,geometry);
+								else
+									latlngs = makeLatLngs(null,geometry); 
+								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
+							}
+							else if(ftypeName[3] == "padus")
+							{
+								latlngs = makeLatLngs(null,null,geometry); 
+								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
+							}
+							marker.bindPopup("<br>Name: " +  name +'</a>' +
+								"<br>Purpose: " + purpose +
+								"<p> <a href='#' onClick=\"additionalInformation('"+uri+"');\">Additional Information</a><br>" +
+								"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a></p>"
+							);
+							//Add the marker to the map layer
+							grouping.addLayer(marker);
+						}
+						//Visualize the map layer
+						grouping.addTo(map);
+					}
+					else { //There was no results so do nothing.
+						alert("Error!");
+					}
+				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
+			}
+		});
+	}
 //Function to make a point query and visualize the results.
 	function makePointQuery(inputQuery){
 		//Get the specified query
@@ -38,6 +151,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							uri = bindings[i].subject.value;
 							purpose = bindings[i].purpose.value;
 							geometry = bindings[i].geometry.value;
+							wkt = bindings[i].wkt.value;
 							//specify the icon depending on the feature type.
 							var smallIcon = L.icon({
 								iconSize: [27, 27],
@@ -50,13 +164,16 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							//get the type name from the URI of the feature
 							var ftypeName = uri.split("/");
 							var latlngs = new Array();
+							var coordinates = geometry.split(" ");
 							latlngs = makeLatLngs(geometry);
 							//Create a marker with a popup
 							circlePoint = new L.marker(latlngs, {icon: smallIcon}).bindTooltip(featureToolTip, {direction:'top'});
 							circlePoint.bindPopup("<br>Name: " +  name +'</a>' +
 									"<br>Purpose: " + purpose +
 									"<p> <a href='#' onClick=\"additionalInformation('"+uri+"');\">Additional Information</a><br>" +
-									"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a></p>"
+									"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a><br>" +
+									"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName[3]+"');\">Nearby Points</a><br>" +
+									"<a href='#' onClick=\"createDBpediaQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Dbpedia Info</a></p>"
 									);
 							//add the new marker for the given entity to the mapping layer.
 							grouping.addLayer(circlePoint);
@@ -68,6 +185,9 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						alert("Error!");
 					}
 				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
 			}
 		});
 	}
@@ -94,8 +214,14 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							//declare the variables given the results
 							geometry = bindings[i].geometry.value;
 							subject = bindings[i].subject.value;
-							dimensions = bindings[i].dimensions.value;
+							//dimensions = bindings[i].dimensions.value;
 							var ftypeName = subject.split("/");
+							//Check if there is a dimensions. Otherwise name will be "Unknown"
+							dimensions = "Unknown";
+							if(bindings[i].dimensions != undefined)
+							{
+								dimensions = bindings[i].dimensions.value;
+							}
 							//Check if there is a name. Otherwise name will be "Unknown"
 							name = "Unknown";
 							if(bindings[i].name != undefined)
@@ -110,7 +236,11 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							}
 							//Create a latlng array to store all fo the coordinates
 							var latlngs = new Array();
-							latlngs = makeLatLngs(geometry);
+							//Check if there are three dimensions. If so, do the following.
+							if(dimensions == "3")
+								latlngs = makeLatLngs(null,null,null,geometry);
+							else
+								latlngs = makeLatLngs(geometry);
 							//create a new polyline object with the given popup
 							polyLine = new L.polyline(latlngs,{color: getColor(ftypeName[3])});
 							polyLine.bindPopup("<br>Name: " +  name +'</a>' +
@@ -127,6 +257,9 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						alert("Error!");
 					}
 				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
 			}
 		});
 	}
@@ -154,8 +287,14 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							//declare the variables given the results
 							geometry = bindings[i].geometry.value;
 							subject = bindings[i].subject.value;
-							dimensions = bindings[i].dimensions.value;
+							//dimensions = bindings[i].dimensions.value;
 							var ftypeName = subject.split("/");
+							//Check if there is a dimensions. Otherwise name will be "Unknown"
+							dimensions = "Unknown";
+							if(bindings[i].dimensions != undefined)
+							{
+								dimensions = bindings[i].dimensions.value;
+							}
 							//Check if there is a name. Otherwise name will be "Unknown"
 							name = "Unknown";
 							if(bindings[i].name != undefined)
@@ -169,7 +308,10 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 								purpose = bindings[i].purpose.value;
 							}
 							var latlngs = new Array();
-							latlngs = makeLatLngs(null,geometry);
+							if(dimensions == "3")
+								latlngs = makeLatLngs(null,null,null,geometry);
+							else
+								latlngs = makeLatLngs(null,geometry);
 							//create a new polyline object with the given popup
 							polygon = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							polygon.bindPopup("<br>Name: " +  name +'</a>' +
@@ -186,6 +328,9 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						alert("Error!");
 					}
 				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
 			}
 		});
 	}
@@ -226,6 +371,9 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					//Create the tab for the additional information.
 					createTab('Additional Information', HTML);
 				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
 			}
 		});
 	}
@@ -233,10 +381,15 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	function getQuery(queryType, URI)
 	{
 		var query;
+		if(queryType == null)
+		{
+			alert("Error, No Query Selected");
+			return null;
+		}
 		switch(queryType){
 			//This query is for the GNIS layer
 		case "GNIS":
-			query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
+			query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/GNIS> ' +
 			'WHERE { ' +
 			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
@@ -244,11 +397,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
 			'} ';
 		break;
 			//This query is for the Geonames layer
 		case "Geonames":
-		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
+		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/Geonames> ' +
 			'WHERE { ' +
 			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
@@ -256,11 +410,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
 			'} ';
 		break;
 			//This query is for the Structures layer
 		case "Structures":
-		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
+		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/Structures> ' +
 			'WHERE { ' +
 			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
@@ -268,6 +423,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
 			'} ';
 		break;
 			//This query is for the Trails layer
@@ -282,10 +438,34 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
+			//This query is for the NHDFlowline layer
+		case "NHDFlowline":
+		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + +
+		'FROM NAMED <http://localhost:8080/marmotta/context/NHDFlowline> ' +
+		'WHERE { GRAPH ?g { ' +
+		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+		'}}' ;
+		break;
 			//This query is for the county layer
 		case "County":
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
+		'WHERE { GRAPH ?g { ' +
+		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+		'}}' ;
+		break;
+			//This query is for the NHDWaterbody layer
+		case "NHDWaterbody":
+		query = 'SELECT ?subject ?geom ?purpose ?name ?dimensions ?geometry ' + 
+		'FROM NAMED <http://localhost:8080/marmotta/context/NHDWaterbody> ' +
 		'WHERE { GRAPH ?g { ' +
 		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
 		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
@@ -334,11 +514,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/NHDWaterbody> ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/NHDFlowline> ' +
 			'WHERE { GRAPH ?g {<' + URI + '> ?property ?object }}';
 			break;
 			//If this function gets called without a query then there must have been an error.
 		default:
-			alert("Error, No Query Selected");
+			query = queryType;
 		}
 		return query;
 	}
@@ -369,7 +551,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		//Check if the user is looking up a URI. Otherwise, perform a query finding additional entities that have the same data for that field.
 		if(property != "http://www.opengis.net/ont/geosparql#hasGeometry" && property != "http://data.usgs.gov/ontology/structures/hasState" && property != "http://dbpedia.org/ontology/county" && property != "http://dbpedia.org/ontology/state")
 		{	
-			var query = 'SELECT ?subject ?geom ?name ?purpose  '+queryData+' (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
+			var query = 'SELECT ?subject ?geom ?name ?purpose '+queryData+' (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
@@ -377,6 +559,8 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/NHDWaterbody> ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/NHDFlowline> ' +
 			'WHERE { GRAPH ?g { ' + 
 			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + queryFields + 
 			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
@@ -389,7 +573,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		//Check if the user is asking for a geometry.
 		else if(property == "http://www.opengis.net/ont/geosparql#hasGeometry")
 		{	
-			var query = 'SELECT  ?subject ?geometry2 (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
+			var query = 'SELECT  ?subject ?geometry2 ?dimensions (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/GNIS> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Geonames> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/Structures> ' +
@@ -397,12 +581,15 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'FROM NAMED <http://localhost:8080/marmotta/context/CountyOrEquivalent> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/StateOrTerritory> ' +
 			'FROM NAMED <http://localhost:8080/marmotta/context/PADUS> ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/NHDWaterbody> ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/NHDFlowline> ' +
 			'WHERE { GRAPH ?g { ' +
 			'?subject <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
 			'OPTIONAL { ?subject <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ' +
 			' } ' +
 			'FILTER regex( ?subject , "'+object+'")  } ' + 
-			'GROUP BY ?subject ?geometry2';
+			'GROUP BY ?subject ?geometry2 ?dimensions';
 		}
 		//Check if the user is requesting a state attribute
 		else if(property == "http://data.usgs.gov/ontology/structures/hasState" || property == "http://dbpedia.org/ontology/state")
@@ -465,6 +652,11 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							uri = object;
 							geometry = bindings[i].geometry.value;
 							//Check if there is a subject in the data. If there is, update the uri.
+							dimensions = "Unknown";
+							if(bindings[i].dimensions != undefined)
+							{
+								dimensions = bindings[i].dimensions.value;
+							}
 							if(bindings[i].subject != undefined)
 								uri = bindings[i].subject.value;
 							//If there is no name, set to Unknown
@@ -494,14 +686,20 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 								latlngs = makeLatLngs(geometry); 
 								marker = new L.marker(latlngs, {icon: smallIcon});
 							}
-							else if(ftypeName[3] == "trails")
+							else if(ftypeName[3] == "trails" || ftypeName[3] == "nhdflowline")
 							{
-								latlngs = makeLatLngs(geometry); 
+								if(dimensions == "3")
+									latlngs = makeLatLngs(null,null,null,geometry);
+								else
+									latlngs = makeLatLngs(geometry); 
 								marker = new L.polyline(latlngs,{color: getColor(ftypeName[3])});
 							}
-							else if(ftypeName[3] == "countyorequivalent" || ftypeName[3] == "stateorterritory")
+							else if(ftypeName[3] == "countyorequivalent" || ftypeName[3] == "stateorterritory" || ftypeName[3] == "nhdwaterbody")
 							{
-								latlngs = makeLatLngs(null,geometry); 
+								if(dimensions == "3")
+									latlngs = makeLatLngs(null,null,null,geometry);
+								else
+									latlngs = makeLatLngs(null,geometry); 
 								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							}
 							else if(ftypeName[3] == "padus")
@@ -524,11 +722,14 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						alert("Error! #2");
 					}
 				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
 			}
 		});	
 	}
 	//This function will make the latLngs for three different types of stored geometries
-	function makeLatLngs(geometry1, geometry2, geometry3)
+	function makeLatLngs(geometry1, geometry2, geometry3, geometry4)
 	{
 		//Create a latlng array to store all fo the coordinates
 		var latlngs = new Array();
@@ -538,8 +739,8 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			var coordinates = geometry1.split(" ");
 			if(coordinates.length == 2)
 			{
-				latlngs.push(coordinates[1]);
 				latlngs.push(coordinates[0]);
+				latlngs.push(coordinates[1]);
 			}
 			else 
 			{
@@ -555,9 +756,9 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			for(var j=0; j < multipolygon.length; j++) {
 				coordinates = multipolygon[j].split(" ");
 				var templatlngs = new Array();
-				for(var k = 0; k < coordinates.length-1; k+=2) 
+				for(var k = j*2; k < coordinates.length-1; k+=2) 
 				{				
-					latlngs.push([coordinates[k+1], coordinates[k]]);				
+					latlngs.push([coordinates[k], coordinates[k+1]]);				
 				}
 			}
 		}
@@ -576,8 +777,25 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				latlngs.push(templatlngs);
 			}
 		}
+		else if(geometry4 != null)
+		{
+			var coordinates = geometry4.split(" ");
+			if(coordinates.length == 3)
+			{
+				latlngs.push(coordinates[0]);
+				latlngs.push(coordinates[1]);
+			}
+			else 
+			{
+				for(var j = 0; j < coordinates.length-1; j+=3) {
+					latlngs.push([coordinates[j], coordinates[j+1]]);
+				}
+			}
+		} 
+		
 		return latlngs;
 	}
+	
 	//This function maps PADUS data.
 	function makeMultiPolygonQuery(){
 		//Get the specified query
@@ -636,9 +854,99 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						alert("Error!");
 					}
 				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
 			}
 		});
 	}
+	
+	//This function performs a GeoSPARQL query to look-up and find nearby points
+	function nearbyPoints(inputGeometry,URI,namespace){
+		clearMap();
+		//alert(inputGeometry);
+		//Get the specified query
+		var query = 
+			'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
+			'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
+			'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
+			'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
+			'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
+			'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
+			'FROM <http://localhost:8080/marmotta/context/'+namespace+'> ' +
+			'WHERE { ' +
+			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
+			'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT . ' +
+			'BIND(CONCAT("SRID=4326;",STR(?gWKT),"") AS ?strWKT) . ' +
+			'BIND("SRID=4326;'+inputGeometry+'"^^geo:wktLiteral AS ?inputPoint ) . ' +
+			'BIND( geof:buffer(?inputPoint, .02 , units:degree) AS ?area ) ' +
+			'FILTER( geof:sfWithin(?strWKT, ?area) )' +
+			'} ';
+		//HTTP encode the query
+		query = encodeURIComponent(query);
+		//Create the URL for the HTTP request
+		var httpGet = MARMOTTA_SPARQL_URL + query;
+		// execute sparql query in marmotta
+		$.get({url: httpGet, 
+			success: function(result) {
+				//If there are no results say so. Otherwise, visualize them.
+				if(!result) {
+					alert('No results!');
+				}
+				else {
+					bindings = result.results.bindings;
+					//Check how many results there are. If 0 through an error. Otherwise, visualize them.
+					if(bindings.length > 0) {
+						//go through all of the results.
+						for(var i=0; i < bindings.length; i++) {
+							//declare the variables given the results.
+							featureToolTip = "Unknown";
+							name = bindings[i].name.value;
+							uri = bindings[i].subject.value;
+							purpose = bindings[i].purpose.value;
+							geometry = bindings[i].geometry.value;
+							//specify the icon depending on the feature type.
+							var smallIcon = L.icon({
+								iconSize: [27, 27],
+								iconAnchor: [13, 27],
+								popupAnchor:  [0, -30],
+                                tooltipAnchor: [0, -25],
+								iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+							});
+							featureToolTip = purpose;
+							//get the type name from the URI of the feature
+							var ftypeName = uri.split("/");
+							var latlngs = new Array();
+							latlngs = makeLatLngs(geometry);
+							//Create a marker with a popup
+							circlePoint = new L.marker(latlngs, {icon: smallIcon}).bindTooltip(featureToolTip, {direction:'top'});
+							circlePoint.bindPopup("<br>Name: " +  name +'</a>' +
+									"<br>Purpose: " + purpose +
+									"<p> <a href='#' onClick=\"additionalInformation('"+uri+"');\">Additional Information</a><br>" +
+									"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a><br>" +
+									"<a href='#' onClick=\"nearbyPoints('"+geometry+"', '"+uri+"');\">Nearby Points</a></p>"
+									);
+							//add the new marker for the given entity to the mapping layer.
+							grouping.addLayer(circlePoint);
+						}
+						//visualize the mapping layer when all the markers have been added.
+						grouping.addTo(map);
+					}
+					else { //There was no results so do nothing.
+						alert("Error!");
+					}
+				}
+			},
+			error: function(result) {
+				alert("The Query Failed.");
+			}
+		});
+	}
+	
 	//This function will return the color for a specific polygon/polyline object
 	function getColor(featureType){
 		var color;

@@ -5,9 +5,9 @@
   <title>USGS Map As A Knowledge Base Map</title>
 
   <!-- top menu bar css + js -->
-  <link rel="stylesheet" href="cssmenu2/menu_styles.css">
+  <link rel="stylesheet" href="cssmenu_updated/menu_styles.css">
   <script src="jquery/jquery-latest.min.js" type="text/javascript"></script>
-  <script src="cssmenu2/menu_script.js"></script>
+  <script src="cssmenu_updated/menu_script.js"></script>
 
   <!-- leaflet map css -->
   <link rel="stylesheet" href="leaflet/leaflet.css" />
@@ -40,7 +40,10 @@
   
   <!-- makb js -->
   <script src="makb/makb-rdf.js"></script>
+  <script src="makb/makb-qb.js"></script>
   
+  <!-- dbpedia js-->
+  <script src="ld/dbpedia.js"></script>
   <!-- afd tabs (jquery-ui) -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -65,52 +68,60 @@
   <div id='cssmenu' style="z-index: 2">
 	<ul>
 	    <li class='active'><a href='#'>Functions</a>
-	     <ul>
-	       <li><a href='#' onClick='clearMap();'>Clear Map</a></li>
-	       <li><a href='#' onClick='clearTabs();'>Clear Tabs</a></li>
-		 </ul>
-	   </li>
-	   <li class='active'><a href='#'>Layers</a>
-	     <ul>
-		   <li><a href='#' onClick="makePointQuery('GNIS');">USGS GNIS - DC</a></li>
-		   <li><a href='#' onClick="makePointQuery('Structures');">USGS Structures - DC</a></li>
-		   <li><a href='#' onClick="makePointQuery('Geonames');">GeoNames.org - DC</a></li>
-		   <li><a href='#' onClick="makeLineQuery('Trails');">Trails - DC</a></li>
-		   <li><a href='#' onClick="makePolygonQuery('County');">CountyOrEqual - DC</a></li>
-		   <li><a href='#' onClick="makePolygonQuery('State');">StateOrEqual - DC</a></li>
-		   <li><a href='#' onClick="makeMultiPolygonQuery();">PADUS - DC</a></li>
-	     </ul>
-	   </li>
-	   <li class='active'><a href='#'>Set View</a>
-	     <ul>
-		   <li><a href='#' onClick="zoomMapToLocation('Initial');">Reset to Initial</a></li>
-		   <li><a href='#' onClick="zoomMapToLocation('US Capitol');">US Capitol</a></li>
-		   <li><a href='#' onClick="zoomMapToLocation('Reflecting Pool');">Reflecting Pool</a></li>
-		   <li><a href='#' onClick="zoomMapToLocation('McMillan Reservoir');">McMillan Reservoir</a></li>
-		   <li><a href='#' onClick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a></li>
-		 </ul>
-	   </li>
+			<ul>
+				<li><a href='#' onClick='clearMap();'>Clear Map</a></li>
+				<li><a href='#' onClick='clearMarkers();'>Clear Markers</a></li>
+				<li><a href='#' onClick='clearTabs();'>Clear Tabs</a></li>
+			</ul>
+		</li>
+		<li class='active'><a href='#'>Layers</a>
+			<ul>
+				<li><a href='#' onClick="makePointQuery('GNIS');">USGS GNIS - DC</a></li>
+				<li><a href='#' onClick="makePointQuery('Structures');">USGS Structures - DC</a></li>
+				<li><a href='#' onClick="makePointQuery('Geonames');">GeoNames.org - DC</a></li>
+				<li><a href='#' onClick="makeLineQuery('Trails');">Trails - DC</a></li>
+				<li><a href='#' onClick="makePolygonQuery('County');">CountyOrEqual - DC</a></li>
+				<li><a href='#' onClick="makePolygonQuery('State');">StateOrEqual - DC</a></li>
+				<li><a href='#' onClick="makeMultiPolygonQuery();">PADUS - DC</a></li>
+				<li><a href='#' onClick="makeLineQuery('NHDFlowline');">NHD Flowline - DC</a></li>
+				<li><a href='#' onClick="makePolygonQuery('NHDWaterbody');">NHD Waterbody - DC</a></li>
+			</ul>
+		</li>
+		<li class='active'><a href='#'>Set View</a>
+			<ul>
+				<li><a href='#' onClick="zoomMapToLocation('Initial');">Reset to Initial</a></li>
+				<li><a href='#' onClick="zoomMapToLocation('US Capitol');">US Capitol</a></li>
+				<li><a href='#' onClick="zoomMapToLocation('Reflecting Pool');">Reflecting Pool</a></li>
+				<li><a href='#' onClick="zoomMapToLocation('McMillan Reservoir');">McMillan Reservoir</a></li>
+				<li><a href='#' onClick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a></li>
+			</ul>
+		</li>
+			<li class='active'><a href='#' onClick="createQueryTab();">Custom Query Builder</a>
+		</li>
+		<li class='active'><a href='#'>Markers</a>
+			<ul>
+				<!-- Populate with user desired locations -->
+			</ul>
+		</li>
 	</ul>
 	
   </div>
 
-  <div style="clear: both;"></div>
+  
 
   <div id="maincontainer" style="width: 100%; height: 100%;">
      <!-- leaflet map -->
      <div id="mapid" style="z-index: 1; width: 70%; height: 90.55%; float: left; border-style: solid; border-width: 1px; margin-right: 3px; margin-top: 9px;"></div>
-	
      <!-- advanced feature description tabs -->
-     <div class="widget" style="height: 92%; font-family: Arial, Helvetica, sans-serif; overflow-x: scroll; overflow-y: hidden; margin-top: 7px;">
+     <div class="widget" style="height: 90.55%; font-family: Arial, Helvetica, sans-serif; <!--overflow-x: scroll; --> overflow-y: hidden; margin-top: 7px;">
 		<fieldset>
         <legend>Advanced Feature Descriptions</legend>
-        <div id="afd-tabs" style="z-index: 1; width: 98%; height: 95%; float: left; margin-top: 5px;">
+        <div id="afd-tabs" style="z-index: 1; width: 98%; height: 50px; float: left; margin-top: 5px;">
 	    <ul id="afd-tabs-list">
 	       <!-- list is populated programmatically -->
 	    </ul>
-		
+		</fieldset>
     </div>
-    </fieldset>
 	<!-- tab div content populated programmatically -->
      </div>
   </div>
@@ -118,14 +129,16 @@
   <!-- initialize leaflet map -->
   <script>
 	var countFilter = 0;
+	
+	var queryTabID = "";
 
 	var grouping = L.markerClusterGroup({
                 disableClusteringAtZoom: 15,
                 spiderfyOnMaxZoom: false
         });
 
-    // init map with open street map as base map over DC area
-    var map = L.map('mapid', {zoomSnap: 0.5, wheelPxPerZoomLevel: 120}).setView([38.88971, -77.00894], 12);
+    // Init map with open street map as base map over DC area
+    var map = L.map('mapid', {zoomSnap: .25, wheelPxPerZoomLevel: 120}).setView([38.88971, -77.00894], 12);
 	map.options.minZoom = 2;
 
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
@@ -142,17 +155,24 @@
 	var zoom = L.control.zoomBox(options);
 	map.addControl(zoom);
 
+	// NOTE: Subtraction of map offset doesn't seem to have an effects
     // set height of afd tabs to height of map
     $('#afd-tabs').height(
-	$('#mapid').height() - /* minus map offset */ 33	
+	$('#mapid').height() - /* minus map offset */ 33
     );
 	
-	//Function to display the query as a tab
-	function createQueryTab(){
-		var HTML = "<textarea id='queryText' name='queryText' placeholder='Enter Query Text Here' class='textarea2' style='height: 500px; width: 260px;'></textarea> <br> <button style='height: 40px; width: 120px;' onclick='makePointQuery('Custom'), qWrite_hide()'>Submit Query</button>";
-		createTab('Query Input', HTML);
+	//Function to clear the map of data
+	function clearMap()
+	{
+		grouping.clearLayers();
 	}
-
+	
+	//Function to clear all markers from map
+	function clearMarkers()
+	{
+		return;
+	}
+	
 	//Function to clear all current tabs
 	function clearTabs(){
 		$('#afd-tabs ul li').remove();
@@ -168,12 +188,6 @@
 	//Function to Hide query writing area
 	function qWrite_hide(){
 		document.getElementById('qWritePopup').style.display = "none";
-	}
-
-	//Function to clear the map of data
-	function clearMap()
-	{
-		grouping.clearLayers();
 	}
 	
 	//Function to zoom to pre-defined locations around the map
@@ -195,6 +209,17 @@
 			map.setView([38.87161, -76.96695], 16);
 		}
 	}
+	
+	//Inserts an element after a referenced one.
+	function insertAfter(el, referenceNode) {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+	}
+	
+
+	
+	
+	
+	
   </script>
 </body>
 </html>
