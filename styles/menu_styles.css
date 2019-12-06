@@ -1,0 +1,92 @@
+/* 
+Tanner Fry 
+tfry@contractor.usgs.gov
+
+A file for the design of the css menu above the maps page. Since cssmenu is a class,
+it can be ported to other pages if need be.
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+	background-color: #ffffff;
+}
+
+/* 
+Sets up background of nav bar and standards for elements inside
+such as the font family and font size
+*/
+.cssmenu {
+	background: #3db2e1;
+	background: -o-linear-gradient(top, #69c4e8, #21a1d4);
+	background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
+	background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
+	background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
+	background: linear-gradient(to bottom, #69c4e8, #21a1d4);
+	border-radius: 5px;
+	box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
+	font-family: 'Open Sans';
+	width: auto;
+}
+/* Modify all headers to be in a row */
+.cssmenu ul li {
+	font-size: 15px;
+	font-weight: 700;
+}
+.cssmenu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.cssmenu li {
+	float: left;
+}
+
+/* Customize specific dropdown btns */
+a.dropbtn, a.nodropbtn {
+	color: #ffffff;
+	display: inline-block;
+	text-align: center;
+	padding: 15px;
+	text-decoration: none;
+}
+
+li.dropdown {
+	display: inline-block;
+}
+
+/* Stylizing background of dropdowns */
+.dropdown-content {
+	display: none;
+	background: #3db2e1;
+	background: -o-linear-gradient(top, #69c4e8, #21a1d4);
+	background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
+	background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
+	background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
+	background: linear-gradient(to bottom, #69c4e8, #21a1d4);
+	border-radius: 5px;
+	box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
+	min-width: 160px;
+	position: absolute;
+	top: 6.2%; /* 6.2% touches nav bar whem .dropbtn padding is 15px */
+	z-index: 1000; /* Allows menu items to show in front of leaflet map */
+}
+
+/* Stlyizing links inside dropdowns */
+.dropdown-content a {
+	color: #ffffff;
+	display: block;
+	padding: 12px 16px;
+	text-align: left;
+	text-decoration: none;
+}
+
+.dropdown-content a:hover {
+	color: #88d0ed;
+	font-family: 'Open Sans';
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
