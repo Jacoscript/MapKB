@@ -388,7 +388,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		}
 		switch(queryType){
 			//This query is for the GNIS layer
-		case "GNIS":
+		case "gnis":
 			query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/gnis> ' +
 			'WHERE { ' +
@@ -401,7 +401,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'} ';
 		break;
 			//This query is for the Geonames layer
-		case "Geonames":
+		case "geonames":
 		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/geonames> ' +
 			'WHERE { ' +
@@ -414,7 +414,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'} ';
 		break;
 			//This query is for the Structures layer
-		case "Structures":
+		case "structures":
 		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/structures> ' +
 			'WHERE { ' +
@@ -427,7 +427,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			'} ';
 		break;
 			//This query is for the Trails layer
-		case "Trails":
+		case "trails":
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
 		'WHERE { GRAPH ?g { ' +
@@ -439,7 +439,19 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'}}' ;
 		break;
 			//This query is for the NHDFlowline layer
-		case "NHDFlowline":
+		case "nhdflowline":
+		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + +
+		'FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ' +
+		'WHERE { GRAPH ?g { ' +
+		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+		'}}' ;
+		break;
+			//This query is for the NHDFlowline layer
+		case "nhdline":
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + +
 		'FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ' +
 		'WHERE { GRAPH ?g { ' +
@@ -450,8 +462,20 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
+			//This query is for the NHDFlowline layer
+		case "nhdpoint":
+		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + +
+		'FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ' +
+		'WHERE { GRAPH ?g { ' +
+		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+		'}}' ;
+		break;
 			//This query is for the county layer
-		case "County":
+		case "countyorequivalent":
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
 		'WHERE { GRAPH ?g { ' +
@@ -463,7 +487,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'}}' ;
 		break;
 			//This query is for the NHDWaterbody layer
-		case "NHDWaterbody":
+		case "nhdwaterbody":
 		query = 'SELECT ?subject ?geom ?purpose ?name ?dimensions ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ' +
 		'WHERE { GRAPH ?g { ' +
@@ -475,7 +499,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'}}' ;
 		break;
 			//This query is for the State layer
-		case "State":
+		case "stateorterritory":
 		query = 'SELECT ?subject ?gm ?dimensions ?purpose ?name ' + 
 		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) '+
 		'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
@@ -489,7 +513,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'GROUP BY ?subject ?gm ?purpose ?name ?dimensions';
 		break;
 			//This query is for the PADUS layer
-		case "PADUS":
+		case "padus":
 		query = 'SELECT ?subject ?gm ?purpose ?name '+
 		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) '+
 		'FROM NAMED <http://localhost:8080/marmotta/context/padus> '+
