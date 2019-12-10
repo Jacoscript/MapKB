@@ -10,8 +10,10 @@ it can be ported to other pages if need be.
 
 body {
 	background-color: #ffffff;
-	height: 100%;
-	width: 100%;
+	/* 
+	Note: setting width: 100%; allows other content to extend past browser view. 
+	Not needed and also don't know what content does this yet
+	*/
 }
 
 /* 
