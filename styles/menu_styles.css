@@ -18,7 +18,7 @@ body {
 Sets up background of nav bar and standards for elements inside
 such as the font family and font size
 */
-.cssmenu {
+.css-menu {
 	background: #3db2e1;
 	background: -o-linear-gradient(top, #69c4e8, #21a1d4);
 	background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
@@ -31,28 +31,42 @@ such as the font family and font size
 	width: auto;
 }
 /* Modify all headers to be in a row */
-.cssmenu ul li {
+.css-menu ul li {
 	font-size: 15px;
-	font-weight: 700;
+	font-weight: bold;
 }
-.cssmenu ul {
+.css-menu ul {
 	list-style-type: none;
 	margin: 0px;
 	overflow: hidden;
 	padding: 0px;
 }
 
-.cssmenu li {
+.css-menu li {
 	float: left;
 }
 
-/* Customize specific dropdown and dropdown btns */
+/* Customize arrow down images and specific dropdown/dropdown btns*/
+/* 
+.arrow-down {
+	height: 16px;
+	position: absolute;
+	width: 16px;
+}
+*/
 .dropbtn, .nodropbtn {
 	color: #ffffff;
 	display: inline-block;
-	text-align: center;
 	padding: 15px;
+	text-align: center;
 	text-decoration: none;
+}
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+.dropdown:hover .dropbtn {
+	/* Change dropbtn to gray on hover of entire drop-down */
+	color: #88d0ed;
 }
 
 /* Stylizing background of dropdowns */
@@ -82,11 +96,14 @@ such as the font family and font size
 .dropdown-content a:hover {
 	color: #88d0ed;
 	font-family: 'Open Sans';
+	animation-name: light-to-dark-blues;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
 }
-.drop-down:hover .dropdown-content {
-	display: block;
-}
-.drop-down:hover .dropbtn {
-	/* Change dropbtn to gray on hover of entire drop-down */
-	color: #88d0ed;
+
+/* Animations and other features */
+@keyframes light-to-dark-blues {
+	0% {background-color: #3db2e1;}
+	50% {background-color: #146585;}
+	100% {background-color: #3db2e1;}
 }
