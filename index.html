@@ -3,7 +3,7 @@
 	<head>
 		<meta charset = 'utf-8' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<p>test</p>
+		
 		<!-- CSS styles -->
 		<link rel="stylesheet" href="styles/menu_styles.css">
 		<!-- leaflet map css -->
@@ -41,15 +41,15 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<!-- Do we need this???? -->
 		<script>
-		$( function() {
-		$( "#afd-tabs" ).tabs({
-		  beforeLoad: function( event, ui ) {
-			ui.jqXHR.fail(function() {
-			  ui.panel.html("Couldn't load data into this tab.");
-			});
-		  }
-		});
-		} );
+			$( function() {
+				$( "#afd-tabs" ).tabs({
+				  beforeLoad: function( event, ui ) {
+					ui.jqXHR.fail(function() {
+					  ui.panel.html("Couldn't load data into this tab.");
+					});
+				  }
+				});
+			} );
 		</script>
 	</head>
 	<body>
@@ -58,7 +58,7 @@
 				<li>
 					<a class='nodropbtn' href='#' onClick='createQueryTab();'>Custom Query Builder</a>
 				</li>
-				<li class='dropdown'>
+				<li class='drop-down'>
 					<a class='dropbtn' href='#'>Functions</a>
 					<ul class='dropdown-content'>
 						<a href='#' onClick='clearMap();'>Clear Map</a>
@@ -66,7 +66,7 @@
 						<a href='#' onClick='clearTabs();'>Clear Tabs</a>
 					</ul>
 				</li>
-				<li class='dropdown'>
+				<li class='drop-down'>
 					<a class='dropbtn' href='#'>Layers</a>
 					<ul class='dropdown-content'>
 						<a href='#' onClick="makePointQuery('gnis');">USGS GNIS - DC</a>
@@ -82,14 +82,14 @@
 						<a href='#' onClick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
 					</ul>
 				</li>
-				<li class='dropdown'>
+				<li class='drop-down'>
 					<a class='dropbtn' href='#'>Markers</a>
 					<ul class='dropdown-content'>
 						<a href='#'>Add Marker</a>
 						<!-- Populate with user desired locations -->
 					</ul>
 				</li>
-				<li class='dropdown'>
+				<li class='drop-down'>
 					<a class='dropbtn' href='#'>Set View</a>
 					<ul class='dropdown-content'>
 						<a href='#' onClick="zoomMapToLocation('Initial');">Reset to Initial</a>
