@@ -28,7 +28,10 @@ such as the font family and font size
 	background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
 	background: linear-gradient(to bottom, #69c4e8, #21a1d4);
 	border-radius: 5px;
-	box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 
+	2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px 
+	rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 
+	0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
 	font-family: 'Open Sans';
 	width: auto;
 }
@@ -45,7 +48,7 @@ such as the font family and font size
 }
 
 .css-menu li {
-	float: left;
+	float: left; /*<-- Remove if we want options on right*/
 }
 
 /* Customize arrow down images and specific dropdown/dropdown btns*/
@@ -62,6 +65,7 @@ such as the font family and font size
 	padding: 15px;
 	text-align: center;
 	text-decoration: none;
+	/*float: left; <-- For if we want options on right*/
 }
 .dropdown:hover .dropbtn {
 	/* Change dropbtn to gray on hover of entire drop-down */
@@ -69,6 +73,9 @@ such as the font family and font size
 }
 .dropdown:hover .dropdown-content {
 	display: block;
+}
+.options {
+	/*float: right; <-- For if we want options on right*/
 }
 
 /* Stylizing background of dropdowns */
@@ -106,15 +113,15 @@ such as the font family and font size
 /* Stylizing sub menus */
 #sub-add-marker {
 	display: none;
-	margin-left: 16%;
-	z-index: 10000
+	margin-left: 192px;
+	z-index: 10000;
 }
 
 #sub-del-marker {
 	display: none;
-	margin-left: 16%;
-	margin-top: 3.7%;
-	z-index: 10000
+	margin-left: 192px;
+	margin-top: 43px;
+	z-index: 10000;
 }
 
 /* Animations and other features */
