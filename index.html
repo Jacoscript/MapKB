@@ -4,8 +4,10 @@
 		<meta charset = 'utf-8' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!-- CSS styles -->
+		<!-- CSS styles and js -->
 		<link rel="stylesheet" href="styles/menu_styles.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="scripts/menu_styles.js"></script>
 		<!-- leaflet map css -->
 		<link rel="stylesheet" href="leaflet/leaflet.css" />
 		<link rel="stylesheet" href="leaflet-cluster/dist/MarkerCluster.css" />
@@ -37,7 +39,7 @@
 		
 		<!-- afd tabs (jquery-ui) -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<!-- Do we need this???? -->
 		<script>
@@ -86,8 +88,18 @@
 				<li class='dropdown'>
 					<a class='dropbtn' href='#'>Markers</a>
 					<ul class='dropdown-content'>
-						<a href='#'>Add Marker</a>
-						<!-- Populate with user desired locations -->
+						<a id="add-marker" href='#'>Add Marker</a>
+						<a id="del-marker" href='#'>Delete Marker</a>
+					</ul>
+					<!-- Note: jQuery is used on the sub-tabs to display them -->
+					<ul id="sub-add-marker">
+						<a href="#">Test 1</a>
+						<a href="#">Test 2</a>
+					</ul>
+					<ul id="sub-del-marker">
+						<a href="#">Test 3</a>
+						<a href="#">Test 4</a>
+						<a href="#">Test 5</a>
 					</ul>
 				</li>
 				<li class='dropdown'>
