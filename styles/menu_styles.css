@@ -67,7 +67,7 @@ such as the font family and font size
 	text-decoration: none;
 	/*float: left; <-- For if we want options on right*/
 }
-.dropdown:hover .dropbtn {
+.dropdown:hover .dropbtn, .nodropbtn:hover {
 	/* Change dropbtn to gray on hover of entire dropdown */
 	color: #88d0ed;
 }
