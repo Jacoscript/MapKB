@@ -4,17 +4,31 @@
 // menu for the MAKB web page.
 
 function pageLoad(jQuery) {
+	handleDropDowns();
 	handleSubTabs();
 };
+
+// ########################################## //
+// ### Dropdown and dropdown content code ### //
+// ########################################## //
+
+function handleDropDowns(){
+	// A function to handle dropdown-content moving towards menu bar.
+	$(".dropbtn").mouseenter(moveContentUp)
+}
+function moveContentUp(){
+	$(".dropdown-content").css("top", "75px");
+	$(".dropdown-content").animate({"top": "58px"}, 200);
+}
 
 // #################### //
 // ### Sub-tab code ### //
 // #################### //
 
 // Handle sub-tabs
-// A function that makes sure that sub-tabs are open only when they are
-// interacted by their parent tab.
 function handleSubTabs(){
+	// A function that makes sure that sub-tabs are open only when they are
+	// interacted by their parent tab.
 	// TODO: Grab position of parent tab and set margin based off of parent tab
 	
 	// Below doesn't work
@@ -22,25 +36,25 @@ function handleSubTabs(){
 	
 	
 	// Hover sub-tabs for Add Marker
-	// Syntax: .mouseenter(eventdata, function);
+	// Syntax: .mouseenter(eventData, function);
 	$("#add-marker").mouseenter("add-marker", showSubTabs);
 	$("#add-marker").mouseleave("add-marker", hideSubTabs);
 	$("#sub-add-marker").mouseenter("add-marker", showSubTabs);
 	$("#sub-add-marker").mouseleave("add-marker", hideSubTabs);
 	
 	// Hover sub-tabs for Del Marker
-	// Syntax: .mouseenter(eventdata, function);
+	// Syntax: .mouseenter(eventData, function);
 	$("#del-marker").mouseenter("del-marker", showSubTabs);
 	$("#del-marker").mouseleave("del-marker", hideSubTabs);
 	$("#sub-del-marker").mouseenter("del-marker", showSubTabs);
 	$("#sub-del-marker").mouseleave("del-marker", hideSubTabs);
 };
 
-function showSubTabs(specificTab) {
-	$("#sub-" + specificTab.data).css("display", "block");
+function showSubTabs(eventData) {
+	$("#sub-" + eventData.data).css("display", "block");
 };
-function hideSubTabs(specificTab) {
-	$("#sub-" + specificTab.data).css("display", "none");
+function hideSubTabs(eventData) {
+	$("#sub-" + eventData.data).css("display", "none");
 };
 
 $(document).ready(function() {
