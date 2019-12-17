@@ -68,12 +68,13 @@ such as the font family and font size
 	/*float: left; <-- For if we want options on right*/
 }
 .dropdown:hover .dropbtn {
-	/* Change dropbtn to gray on hover of entire drop-down */
+	/* Change dropbtn to gray on hover of entire dropdown */
 	color: #88d0ed;
 }
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
 .options {
 	/*float: right; <-- For if we want options on right*/
 }
@@ -108,6 +109,9 @@ such as the font family and font size
 	animation-name: light-to-dark-blues;
 	animation-duration: 3s;
 	animation-iteration-count: infinite;
+	-webkit-animation-name: light-to-dark-blues;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-iteration-count: infinite;
 }
 
 /* Stylizing sub menus */
@@ -126,6 +130,12 @@ such as the font family and font size
 
 /* Animations and other features */
 @keyframes light-to-dark-blues {
+	0% {background-color: #3db2e1;}
+	50% {background-color: #146585;}
+	100% {background-color: #3db2e1;}
+}
+/* Safari 4.0 - 8.0 */ 
+@-webkit-keyframes light-to-dark-blues {
 	0% {background-color: #3db2e1;}
 	50% {background-color: #146585;}
 	100% {background-color: #3db2e1;}
