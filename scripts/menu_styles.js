@@ -14,7 +14,7 @@ function pageLoad(jQuery) {
 
 function handleDropDowns(){
 	// A function to handle dropdown-content moving towards menu bar.
-	$(".dropbtn").mouseenter(moveContentUp)
+	$(".drop-btn").mouseenter(moveContentUp)
 }
 function moveContentUp(){
 	$(".dropdown-content").css("top", "75px");
