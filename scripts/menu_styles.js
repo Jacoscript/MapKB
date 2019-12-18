@@ -13,7 +13,7 @@ function pageLoad(jQuery) {
 // ########################################## //
 
 function handleDropDowns(){
-	// A function to handle dropdown-content moving towards menu bar.
+	// A function to stylize dropdown-content moving towards menu bar.
 	$(".drop-btn").mouseenter(moveContentUp)
 }
 function moveContentUp(){
@@ -29,11 +29,8 @@ function moveContentUp(){
 function handleSubTabs(){
 	// A function that makes sure that sub-tabs are open only when they are
 	// interacted by their parent tab.
-	// TODO: Grab position of parent tab and set margin based off of parent tab
 	
-	// Below doesn't work
-	// $("#add-marker").html("Add Marker " + $(".dropbtn").offset().top);
-	
+	// NOTE: Make sure any new sub-tabs are added below
 	
 	// Hover sub-tabs for Add Marker
 	// Syntax: .mouseenter(eventData, function);
