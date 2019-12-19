@@ -5,11 +5,12 @@
     box-shadow: 0 4px 8px 0 #242424, 0 6px 20px 0 #242424;
     display: none;
     left: 35%;
+    max-width: 30%;
     padding: 35px 5px 5px 5px;
     position: fixed;
     text-align: center;
     width: 30%;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 .notification-bar-title {
