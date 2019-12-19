@@ -3,21 +3,26 @@
 // This script is used for notification functions and stylization.
 
 // Global variables
-var notifications = [];
-var toggle_notification = false; // False = turned off
+var notification_queue = [];
+var notification_toggle = false; // False = turned off
 
 // ########################### //
 // ### Notification System ### //
 // ########################### //
 
 function notificationBar(typeOfMessage, secondsAlive, messageContent){
+    // TODO: Check notification against queue and add it if not in
+        // TODO: If notification not in queue and another notification is already, then make sure
+        // latest notification gets played after current notification
+
+        
 	// Variables
 	animation_time = 100;
 
 	// A function that allows 4 different types of messages to be displayed.
 	// Error, Other, Success, Warning
-	if (toggle_notification == false && typeOfMessage != "Remove"){
-		toggle_notification = true;
+	if (notification_toggle == false && typeOfMessage != "Remove"){
+		notification_toggle = true;
 		$(".notification-bar").css("display", "block");
 		$(".notification-bar-title").css("display", "block");
 		$(".notification-bar").animate({"bottom": "5%"}, animation_time);
@@ -77,14 +82,14 @@ function notificationBar(typeOfMessage, secondsAlive, messageContent){
 			$(".notification-bar").html(messageContent);
 		}
 	} else if (typeOfMessage == "Remove") {
-		if (toggle_notification != false) {
+		if (notification_toggle != false) {
 			$(".notification-bar").animate({"bottom": "-100px"}, animation_time);
 			$(".notification-bar-title").animate({"bottom": "-100px"}, animation_time);
 			setTimeout(function(){
 				$(".notification-bar").css("display", "none");
 				$(".notification-bar-title").css("display", "none");
 			}, animation_time);
-			toggle_notification = false;
+			notification_toggle = false;
 		}
 	}
 
@@ -102,7 +107,7 @@ function notificationBar(typeOfMessage, secondsAlive, messageContent){
 				$(".notification-bar").css("display", "none");
 				$(".notification-bar-title").css("display", "none");
 			}, animation_time);
-			toggle_notification = false;
+			notification_toggle = false;
 		}, secondsAlive * 1000);
 	}
 }

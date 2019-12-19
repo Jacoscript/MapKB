@@ -6,7 +6,7 @@
 function pageLoad(jQuery) {
 	handleDropDowns();
 	handleSubTabs();
-};
+}
 
 // ########################################## //
 // ### Dropdown and dropdown content code ### //
@@ -31,12 +31,12 @@ function handleSubTabs(){
 	
 	// NOTE: Make sure any new sub-tabs are added below
 	
-	// Hover sub-tabs for Add Marker
+	// Hover sub-tabs for Markers
 	// Syntax: .mouseenter(eventData, function);
-	$("#add-marker").mouseenter("add-marker", showSubTabs);
-	$("#add-marker").mouseleave("add-marker", hideSubTabs);
-	$("#sub-add-marker").mouseenter("add-marker", showSubTabs);
-	$("#sub-add-marker").mouseleave("add-marker", hideSubTabs);
+	$("#markers").mouseenter("markers", showSubTabs);
+	$("#markers").mouseleave("markers", hideSubTabs);
+	$("#sub-markers").mouseenter("markers", showSubTabs);
+	$("#sub-markers").mouseleave("markers", hideSubTabs);
 	
 	// Hover sub-tabs for Del Marker
 	// Syntax: .mouseenter(eventData, function);
@@ -44,14 +44,14 @@ function handleSubTabs(){
 	$("#del-marker").mouseleave("del-marker", hideSubTabs);
 	$("#sub-del-marker").mouseenter("del-marker", showSubTabs);
 	$("#sub-del-marker").mouseleave("del-marker", hideSubTabs);
-};
+}
 
 function showSubTabs(eventData) {
 	$("#sub-" + eventData.data).css("display", "block");
-};
+}
 function hideSubTabs(eventData) {
 	$("#sub-" + eventData.data).css("display", "none");
-};
+}
 
 $(document).ready(function() {
 	pageLoad();

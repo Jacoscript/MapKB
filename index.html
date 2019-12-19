@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="styles/menu_styles.css">
 		<link rel="stylesheet" href="styles/notification.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="scripts/markers.js"></script>
 		<script src="scripts/menu_styles.js"></script>
 		<script src="scripts/notifications.js"></script>
 
@@ -93,18 +94,17 @@
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Markers</a>
 					<ul class="dropdown-content">
-						<a id="add-marker" href="#">Add Marker</a>
+						<a id="add-marker" href="#" onclick="addMarker();">Add Marker</a>
+						<a id="clr-marker" href="#" onclick="clrMarker();">Clear Markers</a>
 						<a id="del-marker" href="#">Delete Marker</a>
+						<a id="markers" href="#">Marker Markers</a>
 					</ul>
 					<!-- Note: jQuery is used on the sub-tabs to display them -->
-					<ul id="sub-add-marker">
-						<a href="#">Test 1</a>
-						<a href="#">Test 2</a>
-					</ul>
 					<ul id="sub-del-marker">
-						<a href="#">Test 3</a>
-						<a href="#">Test 4</a>
-						<a href="#">Test 5</a>
+						<!-- Populated by markers.js addMarker() function -->
+					</ul>
+					<ul id="sub-markers">
+						<!-- Populated by markers.js addMarker() function -->
 					</ul>
 				</li>
 				<li class="dropdown">
