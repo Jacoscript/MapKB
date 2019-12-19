@@ -60,7 +60,7 @@ function hideSubTabs(eventData) {
 // ### Notification System ### //
 // ########################### //
 
-function notificationBar(typeOfMessage, messageContent){
+function notificationBar(typeOfMessage, secondsAlive, messageContent){
 	// A function that allows 4 different types of messages to be displayed.
 	if (toggle_notification == false){
 		toggle_notification = true;
@@ -101,7 +101,6 @@ function notificationBar(typeOfMessage, messageContent){
 		$(".notification-bar").css("background-image", "linear-gradient(0deg, #e67300 -40%, #ffbf80 140%)");
 		$(".notification-bar").css("box-shadow", "0 4px 8px 0 #994d00, 0 6px 20px 0 #994d00");
 		$(".notification-bar").css("color", "#000000");
-
 	} else if (typeOfMessage == "Remove") {
 		$(".notification-bar").animate({"bottom": "-100px"}, 300);
 		$(".notification-bar-title").animate({"bottom": "-100px"}, 300);
@@ -111,7 +110,16 @@ function notificationBar(typeOfMessage, messageContent){
 		}, 300);
 		toggle_notification = false;
 	}
-	
+	// Make notification disappear after X seconds
+	setTimeout(function() {
+		$(".notification-bar").animate({"bottom": "-100px"}, 300);
+		$(".notification-bar-title").animate({"bottom": "-100px"}, 300);
+		setTimeout(function() {
+			$(".notification-bar").css("display", "none");
+			$(".notification-bar-title").css("display", "none");
+		}, 300);
+		toggle_notification = false;
+	}, secondsAlive * 1000);
 }
 
 $(document).ready(function() {
