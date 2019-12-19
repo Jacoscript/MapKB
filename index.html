@@ -6,8 +6,10 @@
 		
 		<!-- CSS styles and js -->
 		<link rel="stylesheet" href="styles/menu_styles.css">
+		<link rel="stylesheet" href="styles/notification.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="scripts/menu_styles.js"></script>
+
 		<!-- leaflet map css -->
 		<link rel="stylesheet" href="leaflet/leaflet.css" />
 		<link rel="stylesheet" href="leaflet-cluster/dist/MarkerCluster.css" />
@@ -55,34 +57,36 @@
 		</script>
 	</head>
 	<body>
+		<div class="notification-bar"></div>
+		<div class="notification-bar-title"></div>
 		<div class="css-menu">
 			<ul>
 				<li>
-					<a class="no-drop-btn" href="#" onClick="createQueryTab();">Custom Query Builder</a>
+					<a class="no-drop-btn" href="#" onclick="createQueryTab();">Custom Query Builder</a>
 				</li>
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Functions</a>
 					<!--<img class="arrow-down" src="webpage-icons/arrow-down-light.svg"/>-->
 					<ul class="dropdown-content">
-						<a href="#" onClick="clearMap();">Clear Map</a>
-						<a href="#" onClick="clearMarkers();">Clear Markers</a>
-						<a href="#" onClick="clearTabs();">Clear Tabs</a>
+						<a href="#" onclick="clearMap();">Clear Map</a>
+						<a href="#" onclick="clearMarkers();">Clear Markers</a>
+						<a href="#" onclick="clearTabs();">Clear Tabs</a>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Layers</a>
 					<ul class="dropdown-content">
-						<a href="#" onClick="makePointQuery('gnis');">USGS GNIS - DC</a>
-						<a href="#" onClick="makePointQuery('structures');">USGS Structures - DC</a>
-						<a href="#" onClick="makePointQuery('geonames');">GeoNames.org - DC</a>
-						<a href="#" onClick="makeLineQuery('trails');">Trails - DC</a>
-						<a href="#" onClick="makePolygonQuery('countyorequivalent');">CountyOrEqual - DC</a>
-						<a href="#" onClick="makePolygonQuery('stateorterritory');">StateOrEqual - DC</a>
-						<a href="#" onClick="makeMultiPolygonQuery();">PADUS - DC</a>
-						<a href="#" onClick="makePointQuery('nhdpoint');">NHD Point - DC</a>
-						<a href="#" onClick="makeLineQuery('nhdflowline');">NHD Flowline - DC</a>
-						<a href="#" onClick="makeLineQuery('nhdline');">NHD Line - DC</a>
-						<a href="#" onClick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
+						<a href="#" onclick="makePointQuery('gnis');">USGS GNIS - DC</a>
+						<a href="#" onclick="makePointQuery('structures');">USGS Structures - DC</a>
+						<a href="#" onclick="makePointQuery('geonames');">GeoNames.org - DC</a>
+						<a href="#" onclick="makeLineQuery('trails');">Trails - DC</a>
+						<a href="#" onclick="makePolygonQuery('countyorequivalent');">CountyOrEqual - DC</a>
+						<a href="#" onclick="makePolygonQuery('stateorterritory');">StateOrEqual - DC</a>
+						<a href="#" onclick="makeMultiPolygonQuery();">PADUS - DC</a>
+						<a href="#" onclick="makePointQuery('nhdpoint');">NHD Point - DC</a>
+						<a href="#" onclick="makeLineQuery('nhdflowline');">NHD Flowline - DC</a>
+						<a href="#" onclick="makeLineQuery('nhdline');">NHD Line - DC</a>
+						<a href="#" onclick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -105,15 +109,25 @@
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Set View</a>
 					<ul class="dropdown-content">
-						<a href="#" onClick="zoomMapToLocation('Initial');">Reset to Initial</a>
-						<a href="#" onClick="zoomMapToLocation('US Capitol');">US Capitol</a>
-						<a href="#" onClick="zoomMapToLocation('Reflecting Pool');">Reflecting Pool</a>
-						<a href="#" onClick="zoomMapToLocation('McMillan Reservoir');">McMillan Reservoir</a>
-						<a href="#" onClick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a>
+						<a href="#" onclick="zoomMapToLocation('Initial');">Reset to Initial</a>
+						<a href="#" onclick="zoomMapToLocation('US Capitol');">US Capitol</a>
+						<a href="#" onclick="zoomMapToLocation('Reflecting Pool');">Reflecting Pool</a>
+						<a href="#" onclick="zoomMapToLocation('McMillan Reservoir');">McMillan Reservoir</a>
+						<a href="#" onclick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="drop-btn" href="#">Notifications</a>
+					<ul class="dropdown-content">
+						<a href="#" onclick="notificationBar('Error');">Error Message</a>
+						<a href="#" onclick="notificationBar('Other');">Other Message</a>
+						<a href="#" onclick="notificationBar('Success');">Success Message</a>
+						<a href="#" onclick="notificationBar('Warning');">Warning Message</a>
+						<a href="#" onclick="notificationBar('Remove');">Remove Notification</a>
 					</ul>
 				</li>
 				<li class="dropdown options">
-					<a class="drop-btn" href="#">Options </a>
+					<a class="drop-btn" href="#">Options</a>
 					<ul class="dropdown-content">
 						<a href="#">Option 1</a>
 						<a href="#">Option 2</a>
