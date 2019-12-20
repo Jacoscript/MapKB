@@ -29,7 +29,7 @@ map.addControl(zoom);
 
 // NOTE: Subtraction of map offset doesn't seem to have an effects
 // set height of afd tabs to height of map
-$('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 33);
+$('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 107);
 
 // ################################# //
 // ### Map functions and loading ### //
@@ -47,6 +47,23 @@ function clearTabs(){
 	// Not sure if below line is depreciated or what. Tabs list seems to refresh without it
 	$("#afd-tabs").tabs("refresh");
 }
+
+// Add center of map lat/long update
+function onLocationError(e) {
+	alert(e.message);
+}
+function onMapMove() {
+	var locale = map.getCenter();
+	console.log(map.getCenter())
+	$("#txt-Latitude").val(locale.lat);
+	$("#txt-Longitude").val(locale.lng);
+};
+
+// When the map moves we run our function up above
+map.on('move', onMapMove);
+ 
+// Boilerplate
+map.on('locationerror', onLocationError);
 
 // Function to "Expand" query writing area
 function qWrite_show(){
@@ -75,6 +92,9 @@ function zoomMapToLocation(loc, lat, long) {
 		// able to add their own markers and is connected to the map via this
 		// function
 		map.setView([lat, long], 12);
+		// Update lat/long text boxes
+		$("#txt-Latitude").val(lat);
+		$("#txt-Longitude").val(long);
 	}
 }
 
@@ -82,3 +102,8 @@ function zoomMapToLocation(loc, lat, long) {
 function insertAfter(el, referenceNode) {
 	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
+
+$(document).ready(function() {
+	// Update lat long on first onLoad of web page
+	onMapMove();
+});

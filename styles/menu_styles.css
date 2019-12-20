@@ -130,6 +130,24 @@ such as the font family and font size
 	z-index: 10000;
 }
 
+/* Stylizing leaflet ids */
+#txt-Latitude {
+
+}
+#txt-Longitude {
+
+}
+
+#crosshair img {
+	position: absolute;
+	margin: 0;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+
 /* Animations and other features */
 @keyframes light-to-dark-blues {
 	0% {background-color: #3db2e1;}

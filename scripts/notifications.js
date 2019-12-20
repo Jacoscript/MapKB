@@ -119,5 +119,5 @@ function timerNotification(timeSeconds) {
 
 $(document).ready(function() {
 	loopNotificationQueue();
-	showNotification('Warning', 'This is only a test.');
+	//showNotification('Warning', 'This is only a test.');
 });
