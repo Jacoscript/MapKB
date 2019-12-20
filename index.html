@@ -59,8 +59,6 @@
 		</script>
 	</head>
 	<body>
-		<div class="notification-bar"></div>
-		<div class="notification-bar-title"></div>
 		<div class="css-menu">
 			<ul>
 				<li>
@@ -97,7 +95,7 @@
 						<a id="add-marker" href="#" onclick="addMarker();">Add Marker</a>
 						<a id="clr-marker" href="#" onclick="clrMarker();">Clear Markers</a>
 						<a id="del-marker" href="#">Delete Marker</a>
-						<a id="markers" href="#">Marker Markers</a>
+						<a id="markers" href="#">Markers</a>
 					</ul>
 					<!-- Note: jQuery is used on the sub-tabs to display them -->
 					<ul id="sub-del-marker">
@@ -120,11 +118,10 @@
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Notifications</a>
 					<ul class="dropdown-content">
-						<a href="#" onclick="notificationBar('Error', 3);">Error Message</a>
-						<a href="#" onclick="notificationBar('Other', 3);">Other Message</a>
-						<a href="#" onclick="notificationBar('Success', 3);">Success Message</a>
-						<a href="#" onclick="notificationBar('Warning', 3);">Warning Message</a>
-						<a href="#" onclick="notificationBar('Remove');">Remove Notification</a>
+						<a href="#" onclick="addToNotificationQueue('Error');">Error Message</a>
+						<a href="#" onclick="addToNotificationQueue('Other');">Other Message</a>
+						<a href="#" onclick="addToNotificationQueue('Success');">Success Message</a>
+						<a href="#" onclick="addToNotificationQueue('Warning');">Warning Message</a>
 					</ul>
 				</li>
 				<li class="dropdown options">
@@ -159,6 +156,7 @@
 		
 		<!-- Initialize leaflet map, note: must run script after leaflet map is created -->
 		<script src="scripts/leaflet_map.js"></script>
+		<div class="notification-bar"></div>
 	</body>
 </html>
 
