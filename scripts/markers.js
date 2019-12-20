@@ -15,7 +15,8 @@ function addMarker() {
     // Note: Marker lat/long may be referenced by user input or a reticle
     //       on the map. Not sure which approach will be taken yet.
     var lat, long;
-    var refName = "";
+    var ref_name = "";
+    var zoom_level = 12;  // Default is 12
 
     // Get information
     var userInfo = prompt("Please give the marker a name:", "Marker name");
@@ -25,16 +26,18 @@ function addMarker() {
         return;
     } else {
         var locale = map.getCenter();  // Map center
-        refName = userInfo;
+        ref_name = userInfo;
         lat = locale.lat;
         long = locale.lng;
+        zoom_level = map.getZoom();
     }
 
     // Set up object
     userMarkersBuilder = {
-        markerName: refName,
+        markerName: ref_name,
         markerLat: lat,
-        markerLong: long
+        markerLong: long,
+        markerZoom: zoom_level
     };
 
     // Add marker to list for later deletion
@@ -47,9 +50,10 @@ function addMarker() {
     // function can know which marker to delete when selected.
     $("#sub-del-marker").append("<a href=\"#\" onclick=\"delMarker('" 
     + userMarkersBuilder.markerName + "');\">" + userMarkersBuilder.markerName + "</a>");
+
     $("#sub-markers").append("<a href=\"#\" onclick=\"zoomMapToLocation('User Marker', '" 
-    + userMarkersBuilder.markerLat + "', '" + userMarkersBuilder.markerLong + "');\">"
-    + userMarkersBuilder.markerName + "</a>");
+    + userMarkersBuilder.markerLat + "', '" + userMarkersBuilder.markerLong 
+    + "', '" + userMarkersBuilder.markerZoom +"');\">" + userMarkersBuilder.markerName + "</a>");
 }
 
 function clrMarker() {

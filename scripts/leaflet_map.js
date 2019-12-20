@@ -76,7 +76,7 @@ function qWrite_hide(){
 }
 
 // Function to zoom to pre-defined locations around the map
-function zoomMapToLocation(loc, lat, long) {
+function zoomMapToLocation(loc, lat, long, zoomLevel) {
 	if (loc == 'Initial'){
 		map.setView([38.8897547, -77.0089138], 12);
 	} else if (loc == 'US Capitol') {
@@ -91,7 +91,11 @@ function zoomMapToLocation(loc, lat, long) {
 		// Used with the markers.js functions regarding addMarkers. A user is
 		// able to add their own markers and is connected to the map via this
 		// function
-		map.setView([lat, long], 12);
+		if (zoomLevel == null) {
+			map.setView([lat, long], 12);
+		} else {
+			map.setView([lat, long], zoomLevel);
+		}
 		// Update lat/long text boxes
 		$("#txt-Latitude").val(lat);
 		$("#txt-Longitude").val(long);
