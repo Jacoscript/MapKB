@@ -53,24 +53,24 @@ function modifyNotification(typeOfMessage, messageContent){
 		}
 		$(".notification-bar").html(messageContent);
 		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Error</h3>")
-		$(".notification-bar").css({"background-color":"#ff1a1a", "background-image":"linear-gradient(0deg, #cc0000 -40%, #ff6666 140%)",
-									"box-shadow":"0 4px 8px 0 #800000, 0 6px 20px 0 #800000", "color":"#ffffff"});
+		$(".notification-bar").css({"background-color":"#ff1a1a", "background-image":"linear-gradient(0deg, #660000 -40%, #ff0000 140%)",
+									"box-shadow":"0 4px 8px 0 #1a0000, 0 6px 20px 0 #1a0000", "color":"#ffffff"});
 	} else if (typeOfMessage == "Other") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "No message content specified.";
 		}
 		$(".notification-bar").html(messageContent);
 		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Other</h3>")
-		$(".notification-bar").css({"background-color":"#ff1a1a", "background-image":"linear-gradient(0deg, #cc0000 -40%, #ff6666 140%)",
-									"box-shadow":"0 4px 8px 0 #800000, 0 6px 20px 0 #800000", "color":"#ffffff"});
+		$(".notification-bar").css({"background-color":"#ff1a1a", "background-image":"linear-gradient(0deg, #333333 -40%, #808080 140%)",
+									"box-shadow":"0 4px 8px 0 #0d0d0d, 0 6px 20px 0 #0d0d0d", "color":"#ffffff"});
 	} else if (typeOfMessage == "Success") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "It was successful but no message content was specified.";
 		}
 		$(".notification-bar").html(messageContent);
 		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Success</h3>")
-		$(".notification-bar").css({"background-color":"#78c200", "background-image":"linear-gradient(0deg, #3f6600 -40%, #a7ff1a 140%)",
-									"box-shadow":"0 4px 8px 0 #2f4d00, 0 6px 20px 0 #2f4d00", "color":"#ffffff"});
+		$(".notification-bar").css({"background-color":"#78c200", "background-image":"linear-gradient(0deg, #3f6600 -40%, #9dff00 140%)",
+									"box-shadow":"0 4px 8px 0 #101a00, 0 6px 20px 0 #101a00", "color":"#ffffff"});
 	} else if (typeOfMessage == "Warning") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "There may be issues but no message content was specified.";
