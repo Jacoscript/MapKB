@@ -119,7 +119,7 @@ such as the font family and font size
 #sub-markers {
 	display: none;
 	margin-left: 192px;
-	margin-top: 132px; /* 44px from top for each tab between marker and menu */
+	margin-top: 0px; /* 44px from top for each tab between marker and menu */
 	z-index: 10000;
 }
 
