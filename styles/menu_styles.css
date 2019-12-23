@@ -131,13 +131,21 @@ such as the font family and font size
 }
 
 /* Stylizing leaflet ids */
-#txt-Latitude {
-
+#crosshair-position {
+	padding-top: 10px;
 }
-#txt-Longitude {
-
+#txtbox-Latitude {
+	float: right;
+	margin-right: 3px;
+	text-align: center;
+}
+#txtbox-Longitude {
+	float: right;
+	margin-right: 3px;
+	text-align: center;
 }
 
+/* Place crosshair at the center of the leaflet map */
 #crosshair img {
 	position: absolute;
 	margin: 0;
