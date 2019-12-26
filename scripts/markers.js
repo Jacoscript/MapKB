@@ -18,19 +18,22 @@ function addMarker() {
     var ref_name = "";
     var zoom_level = 12;  // Default is 12
 
-    // Get information
+    // Get information and error check
     var userInfo = prompt("Please give the marker a name:", "Marker name");
-    if (userInfo == "" || userInfo == "Marker name") {
+    console.log("User Info: " + userInfo);
+    while (userInfo == "" || userInfo == "Marker name") {
         userInfo = prompt("Please give the marker a name:", "Marker name");
-    } else if (userInfo == null ) {
+    }
+    if (userInfo == null) {
+        addToNotificationQueue("Error", "Marker 'userInfo' is null.")
         return;
-    } else {
-        var locale = map.getCenter();  // Map center
+    }
+
+    var locale = map.getCenter();  // Map center
         ref_name = userInfo;
         lat = locale.lat;
         long = locale.lng;
         zoom_level = map.getZoom();
-    }
 
     // Set up object
     userMarkersBuilder = {

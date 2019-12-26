@@ -19,7 +19,7 @@ function addToNotificationQueue(type, content) {
 	}
 }
 
-var loop_times = 10;  // time in seconds between each loop
+var loop_times = 6;  // time in seconds between each loop
 var i = 1;
 function loopNotificationQueue() {
 	// A function that continuously checks, every 10 seconds, the notification
