@@ -12,12 +12,12 @@ var selected_c = 0;
 var selected_p = 0;
 var selected_f = 0;
 var selected_comparison = '';
-var total_queries = 5;
+var max_queries = 6;
 
 	//Function to display the query as a tab
 	function createQueryTab(){
 		// Check whether query is already open
-		if (current_queries == total_queries) {
+		if (current_queries == max_queries) {
 			return;
 		} else {
 			current_queries += 1;
