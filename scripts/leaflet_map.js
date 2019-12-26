@@ -41,10 +41,11 @@ function clearMap(){
 
 // Function to clear all current tabs
 function clearTabs(){
+	console.log("Clearing tabs.");
 	$('#afd-tabs ul li').remove();
 	$('#afd-tabs div').remove();
 	// Not sure if below line is depreciated or what. Tabs list seems to refresh without it
-	$("#afd-tabs").tabs("refresh");
+	// $("#afd-tabs").tabs("refresh");
 }
 
 // Add center of map lat/long update

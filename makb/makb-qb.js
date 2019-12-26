@@ -7,61 +7,68 @@ var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
 var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
 var FEATURE_BASE_URL = 'http://data.usgs.gov/';
 
+var current_queries = 0;
 var selected_c = 0;
 var selected_p = 0;
 var selected_f = 0;
 var selected_comparison = '';
+var total_queries = 5;
 
 	//Function to display the query as a tab
 	function createQueryTab(){
-		
-		var HTML = '<p style="font-size:15px";>Choose what graphs you would like to query: <br></p>' +
-					'<select style="font-size:10px"; id="queryContextSelector">'; 
-		
-		
-		//Get the specified query
-		var query = 'SELECT DISTINCT ?g '+
-					'WHERE { ' +
-					'GRAPH ?g { ?s ?p ?o } ' +
-					'}' ; 
-		
-		//HTTP encode the query
-		query = encodeURIComponent(query);
-		//Create the URL for the HTTP request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
-		
-		// execute sparql query in marmotta
-		$.get({url: httpGet, 
-			success: function(result) {
-				//If there are no results say so. Otherwise, visualize them.
-				if(!result) {
-					alert('No results!');
-				}
-				else {
-					bindings = result.results.bindings;
-					//Check how many results there are. If 0 through an error. Otherwise, visualize them.
-					if(bindings.length > 0) {
-						//go through all of the results.
-						for(var i=0; i < bindings.length; i++) {
-							//declare the variables given the results.
-							context = bindings[i].g.value;
-							//only include relevant contexts.
-							if(context.includes("http://localhost:8080/marmotta/context/"))
-							{
-								var tempString = '<option value="'+context+'">'+context+'</option>';
-								HTML = HTML + tempString;
+		// Check whether query is already open
+		if (current_queries == total_queries) {
+			return;
+		} else {
+			current_queries += 1;
+			var HTML = '<p style="font-size:15px";>Choose what graphs you would like to query: <br></p>' +
+						'<select style="font-size:10px"; id="queryContextSelector">'; 
+			
+			
+			//Get the specified query
+			var query = 'SELECT DISTINCT ?g '+
+						'WHERE { ' +
+						'GRAPH ?g { ?s ?p ?o } ' +
+						'}' ; 
+			
+			//HTTP encode the query
+			query = encodeURIComponent(query);
+			//Create the URL for the HTTP request
+			var httpGet = MARMOTTA_SPARQL_URL + query;
+			
+			// execute sparql query in marmotta
+			$.get({url: httpGet, 
+				success: function(result) {
+					//If there are no results say so. Otherwise, visualize them.
+					if(!result) {
+						alert('No results!');
+					}
+					else {
+						bindings = result.results.bindings;
+						//Check how many results there are. If 0 through an error. Otherwise, visualize them.
+						if(bindings.length > 0) {
+							//go through all of the results.
+							for(var i=0; i < bindings.length; i++) {
+								//declare the variables given the results.
+								context = bindings[i].g.value;
+								//only include relevant contexts.
+								if(context.includes("http://localhost:8080/marmotta/context/"))
+								{
+									var tempString = '<option value="'+context+'">'+context+'</option>';
+									HTML = HTML + tempString;
+								}
 							}
+							HTML = HTML + '</select><br><br>'
+										+ '<button type="button" onclick="findQueryPredicates();">Find Predicates</button> ';
+							createTab('Query Builder', HTML);
 						}
-						HTML = HTML + '</select><br><br>'
-									+ '<button type="button" onclick="findQueryPredicates();">Find Predicates</button> ';
-						createTab('Query Builder', HTML);
-					}
-					else { //There was no results so do nothing.
-						alert("Error!");
+						else { //There was no results so do nothing.
+							alert("Error!");
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 	
 	//Function to return the predicates for the given context
@@ -161,30 +168,30 @@ var selected_comparison = '';
 						'<select style="font-size:10px"; id="queryFilterSelector">'; 
 		
 		/*if( predicates[0]=="http://dbpedia.org/ontology/zipCode"
-http://www.opengis.net/ont/geosparql#dimension	
-http://dbpedia.org/ontology/dateLastUpdated
-http://dbpedia.org/ontology/category
-http://dbpedia.org/ontology/otherName
-http://www.opengis.net/ont/geosparql#asGML
-http://www.w3.org/2003/01/geo/wgs84_pos#long
-http://dbpedia.org/ontology/manager
-http://dbpedia.org/ontology/comment
-http://dbpedia.org/ontology/localAuthority
-http://dbpedia.org/ontology/administrativeDistrict
-http://dbpedia.org/ontology/owner
-http://dbpedia.org/ontology/elevation
-http://www.w3.org/2003/01/geo/wgs84_pos#lat
-http://www.opengis.net/ont/geosparql#asWKT
-http://dbpedia.org/ontology/address
-http://dbpedia.org/ontology/purpose
-http://dbpedia.org/ontology/population
-http://dbpedia.org/ontology/state
-http://www.opengis.net/ont/geosparql#hasGeometry
-http://dbpedia.org/ontology/PopulatedPlace/area
-	http://purl.org/dc/elements/1.1/identifier
-	http://purl.org/dc/elements/1.1/title
-	http://purl.org/dc/elements/1.1/subject
-	http://purl.org/dc/elements/1.1/creator*/
+		http://www.opengis.net/ont/geosparql#dimension	
+		http://dbpedia.org/ontology/dateLastUpdated
+		http://dbpedia.org/ontology/category
+		http://dbpedia.org/ontology/otherName
+		http://www.opengis.net/ont/geosparql#asGML
+		http://www.w3.org/2003/01/geo/wgs84_pos#long
+		http://dbpedia.org/ontology/manager
+		http://dbpedia.org/ontology/comment
+		http://dbpedia.org/ontology/localAuthority
+		http://dbpedia.org/ontology/administrativeDistrict
+		http://dbpedia.org/ontology/owner
+		http://dbpedia.org/ontology/elevation
+		http://www.w3.org/2003/01/geo/wgs84_pos#lat
+		http://www.opengis.net/ont/geosparql#asWKT
+		http://dbpedia.org/ontology/address
+		http://dbpedia.org/ontology/purpose
+		http://dbpedia.org/ontology/population
+		http://dbpedia.org/ontology/state
+		http://www.opengis.net/ont/geosparql#hasGeometry
+		http://dbpedia.org/ontology/PopulatedPlace/area
+		http://purl.org/dc/elements/1.1/identifier
+		http://purl.org/dc/elements/1.1/title
+		http://purl.org/dc/elements/1.1/subject
+		http://purl.org/dc/elements/1.1/creator*/
 	
 		HTML += '<option value="regex">Contains String</option>';
 		HTML += '<option value="lessthan">Is Less Than</option>';
