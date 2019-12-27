@@ -19,47 +19,47 @@ function addMarker() {
     var zoom_level = 12;  // Default is 12
 
     // Get information and error check
-    var userInfo = prompt("Please give the marker a name:", "Marker name");
-    console.log("User Info: " + userInfo);
-    while (userInfo == "" || userInfo == "Marker name") {
-        userInfo = prompt("Please give the marker a name:", "Marker name");
+    var user_Info = prompt("Please give the marker a name:", "Marker name");
+    while (user_Info == "" || user_Info == "Marker name") {
+        user_Info = prompt("Please give the marker a name:", "Marker name");
     }
-    if (userInfo == null) {
-        addToNotificationQueue("Error", "Marker 'userInfo' is null.")
+    if (user_Info == null) {
+        addToNotificationQueue("Error", "Marker 'user_Info' is null.")
         return;
     }
 
     var locale = map.getCenter();  // Map center
-    ref_name = userInfo;
-    lat = locale.lat;
-    long = locale.lng;
-    zoom_level = map.getZoom();
+
+     // Marker icon location: leaflet/images/marker-icon.png or marker-icon-2x.png
+     var map_marker = L.marker([locale.lat, locale.lng]).addTo(map);
+
+     // Set marker popup info to marker name
+     map_marker.bindPopup(user_Info);
+ 
+     // Allow marker to show popup on hover
+     map_marker.on("mouseover", function(e) {
+         this.openPopup();
+     });
+     map_marker.on("mouseout", function(e) {
+         this.closePopup();
+     });
+
 
     // Set up object
     userMarkersBuilder = {
-        markerName: ref_name,
-        markerLat: lat,
-        markerLong: long,
-        markerZoom: zoom_level
+        markerName: user_Info,
+        markerLat: locale.lat,
+        markerLong: locale.lng,
+        markerIcon: map_marker,
+        markerZoom: map.getZoom()
     };
 
+    // Log
+    console.log("New Marker '" + user_Info + "' at (lat: " + locale.lat + ", long: " + locale.lng + ")");
+    
     // Add marker to list for later deletion
     userMarkers.push(userMarkersBuilder);
     
-    // Marker icon location: leaflet/images/marker-icon.png or marker-icon-2x.png
-    var new_marker = L.marker([userMarkersBuilder.markerLat, userMarkersBuilder.markerLong]).addTo(map);
-
-    // Set marker popup info to marker name
-    new_marker.bindPopup(userMarkersBuilder.markerName);
-
-    // Allow marker to show popup on hover
-    new_marker.on("mouseover", function(e) {
-        this.openPopup();
-    });
-    new_marker.on("mouseout", function(e) {
-        this.closePopup();
-    });
-
     // Add marker to the html ul, sub-del-marker, as well as sub-markers
     // Note: Marker name is passed to the del-marker function so that the 
     // Note: function can know which marker to delete when selected.
@@ -73,18 +73,24 @@ function addMarker() {
 
 function clrMarker() {
     // Function to clear all markers from map
-	userMarkers = [];
+    
+    // Remove marker icons from map
+    for (var i = 0; i < userMarkers.length; i++) {
+        map.removeLayer(userMarkers[i].markerIcon);
+    }
+    userMarkers = [];
 	// Remove html of sub-tabs for add-markers and del-markers
     $('#sub-del-marker a').remove();
     $('#sub-markers a').remove();
-
-    // TODO: remove marker icons from map
 }
 
 function delMarker(refName) {
     // Function to delete a user's specific marker from the map
+
     for (var i = userMarkers.length - 1; i >= 0; i--) {
         if (userMarkers[i].markerName == refName) {
+            // Delete marker icon
+            map.removeLayer(userMarkers[i].markerIcon);
             // Delete marker
             userMarkers.splice(i ,1);
             // Delete specifc dropdowns
