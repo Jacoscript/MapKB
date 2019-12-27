@@ -27,7 +27,7 @@ var options = { position: "topleft" };
 var zoom = L.control.zoomBox(options);
 map.addControl(zoom);
 
-// set height of afd tabs to height of map
+// Set height of afd tabs to height of map
 $('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 108);
 
 // ################################# //
@@ -37,6 +37,11 @@ $('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 108);
 // Function to clear the map of data
 function clearMap(){
 	grouping.clearLayers();
+
+	// Set all triggers to false
+	for (key of Object.keys(triggerLayers)) {
+		triggerLayers[key] = false;
+	}
 }
 
 // Function to clear all current tabs

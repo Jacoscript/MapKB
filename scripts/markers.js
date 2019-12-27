@@ -3,8 +3,8 @@
 // This script is used for the general stylizing and user interaction with the
 // marker system within the menu/leaflet map.
 
-var userMarkers = [];
-var userMarkersBuilder = {};
+var user_markers = [];
+var user_markers_Builder = {};
 
 function pageLoadMarkers() {
     // Function that runs after the page loads
@@ -31,16 +31,13 @@ function addMarker() {
     var locale = map.getCenter();  // Map center
 
      // Marker icon location: leaflet/images/marker-icon.png or marker-icon-2x.png
-     var map_marker = L.marker([locale.lat, locale.lng], {
-        bounceOnAdd: true,
-        bounceOnAddOptions: {duration: 1000, height: 200, loop: 1}
-     }).addTo(map);
+     var map_marker = L.marker([locale.lat, locale.lng]).addTo(map);
 
      // Set marker tooltip info to marker name
      map_marker.bindTooltip(user_Info, {className: 'marker-CSS', direction: 'top', offset: L.point({x: 0, y: -11})});
 
     // Set up object
-    userMarkersBuilder = {
+    user_markers_Builder = {
         markerName: user_Info,
         markerLat: locale.lat,
         markerLong: locale.lng,
@@ -52,27 +49,27 @@ function addMarker() {
     console.log("New Marker '" + user_Info + "' at (lat: " + locale.lat + ", long: " + locale.lng + ")");
     
     // Add marker to list for later deletion
-    userMarkers.push(userMarkersBuilder);
+    user_markers.push(user_markers_Builder);
     
     // Add marker to the html ul, sub-del-marker, as well as sub-markers
     // Note: Marker name is passed to the del-marker function so that the 
     // Note: function can know which marker to delete when selected.
     $("#sub-del-marker").append("<a href=\"#\" onclick=\"delMarker('" 
-    + userMarkersBuilder.markerName + "');\">" + userMarkersBuilder.markerName + "</a>");
+    + user_markers_Builder.markerName + "');\">" + user_markers_Builder.markerName + "</a>");
 
     $("#sub-markers").append("<a href=\"#\" onclick=\"zoomMapToLocation('User Marker', '" 
-    + userMarkersBuilder.markerLat + "', '" + userMarkersBuilder.markerLong 
-    + "', '" + userMarkersBuilder.markerZoom +"');\">" + userMarkersBuilder.markerName + "</a>");
+    + user_markers_Builder.markerLat + "', '" + user_markers_Builder.markerLong 
+    + "', '" + user_markers_Builder.markerZoom +"');\">" + user_markers_Builder.markerName + "</a>");
 }
 
 function clrMarker() {
     // Function to clear all markers from map
     
     // Remove marker icons from map
-    for (var i = 0; i < userMarkers.length; i++) {
-        map.removeLayer(userMarkers[i].markerIcon);
+    for (var i = 0; i < user_markers.length; i++) {
+        map.removeLayer(user_markers[i].markerIcon);
     }
-    userMarkers = [];
+    user_markers = [];
 	// Remove html of sub-tabs for add-markers and del-markers
     $('#sub-del-marker a').remove();
     $('#sub-markers a').remove();
@@ -81,12 +78,12 @@ function clrMarker() {
 function delMarker(refName) {
     // Function to delete a user's specific marker from the map
 
-    for (var i = userMarkers.length - 1; i >= 0; i--) {
-        if (userMarkers[i].markerName == refName) {
+    for (var i = user_markers.length - 1; i >= 0; i--) {
+        if (user_markers[i].markerName == refName) {
             // Delete marker icon
-            map.removeLayer(userMarkers[i].markerIcon);
+            map.removeLayer(user_markers[i].markerIcon);
             // Delete marker
-            userMarkers.splice(i ,1);
+            user_markers.splice(i ,1);
             // Delete specifc dropdowns
             $("#sub-del-marker a").filter(":contains('" + refName + "')").remove()
             $("#sub-markers a").filter(":contains('" + refName + "')").remove()

@@ -7,6 +7,20 @@ var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
 var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
 var FEATURE_BASE_URL = 'http://data.usgs.gov/';
 
+var triggerLayers = {
+	countyorequivalent: false,
+	geonames: false,
+	gnis: false,
+	nhdflowline: false,
+	nhdline: false,
+	nhdpoint: false,
+	nhdwaterbody: false,
+	padus: false,
+	stateorterritory: false,
+	structures: false,
+	trails: false,
+};  // An object used to check whether a layer is in use or not
+
 // load the namespace IDs json from URL
 var nsids = {};
 $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
@@ -126,6 +140,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 //Function to make a point query and visualize the results.
 	function makePointQuery(inputQuery){
+		//Check whether specific query has been applied
+		if (triggerLayers[inputQuery] == true) {
+			return;
+		} else {
+			triggerLayers[inputQuery] = true;
+		}
+
 		//Get the specified query
 		var query = getQuery(inputQuery);
 		//HTTP encode the query
@@ -208,6 +229,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 	//Function to make a line query and visualize the results.
 	function makeLineQuery(inputQuery){
+		//Check whether specific query has been applied
+		if (triggerLayers[inputQuery] == true) {
+			return;
+		} else {
+			triggerLayers[inputQuery] = true;
+		}
+
 		//get the query and encode it.
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
@@ -280,6 +308,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 	//Function to make a line query and visualize the results.
 	function makePolygonQuery(inputQuery){
+		//Check whether specific query has been applied
+		if (triggerLayers[inputQuery] == true) {
+			return;
+		} else {
+			triggerLayers[inputQuery] = true;
+		}
+
 		//get the query and encode it.
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
@@ -850,6 +885,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	
 	//This function maps PADUS data.
 	function makeMultiPolygonQuery(){
+		//Check whether specific query has been applied
+		if (triggerLayers['padus'] == true) {
+			return;
+		} else {
+			triggerLayers['padus'] = true;
+		}
+
 		//Get the specified query
 		var query = getQuery('padus');
 		//HTTP encode the query
