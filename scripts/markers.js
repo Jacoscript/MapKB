@@ -24,14 +24,17 @@ function addMarker() {
         user_Info = prompt("Please give the marker a name:", "Marker name");
     }
     if (user_Info == null) {
-        addToNotificationQueue("Error", "Marker 'user_Info' is null.")
+        // User cancelled adding a marker
         return;
     }
 
     var locale = map.getCenter();  // Map center
 
      // Marker icon location: leaflet/images/marker-icon.png or marker-icon-2x.png
-     var map_marker = L.marker([locale.lat, locale.lng]).addTo(map);
+     var map_marker = L.marker([locale.lat, locale.lng], {
+        bounceOnAdd: true,
+        bounceOnAddOptions: {duration: 1000, height: 200, loop: 1}
+     }).addTo(map);
 
      // Set marker tooltip info to marker name
      map_marker.bindTooltip(user_Info, {className: 'marker-CSS', direction: 'top', offset: L.point({x: 0, y: -11})});
