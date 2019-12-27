@@ -6,7 +6,7 @@
 var userMarkers = [];
 var userMarkersBuilder = {};
 
-function pageLoadMarkers(jQuery) {
+function pageLoadMarkers() {
     // Function that runs after the page loads
 }
 
@@ -33,17 +33,8 @@ function addMarker() {
      // Marker icon location: leaflet/images/marker-icon.png or marker-icon-2x.png
      var map_marker = L.marker([locale.lat, locale.lng]).addTo(map);
 
-     // Set marker popup info to marker name
-     map_marker.bindPopup(user_Info);
- 
-     // Allow marker to show popup on hover
-     map_marker.on("mouseover", function(e) {
-         this.openPopup();
-     });
-     map_marker.on("mouseout", function(e) {
-         this.closePopup();
-     });
-
+     // Set marker tooltip info to marker name
+     map_marker.bindTooltip(user_Info, {className: 'marker-CSS', direction: 'top', offset: L.point({x: 0, y: -11})});
 
     // Set up object
     userMarkersBuilder = {
