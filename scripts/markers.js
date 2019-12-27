@@ -30,10 +30,10 @@ function addMarker() {
     }
 
     var locale = map.getCenter();  // Map center
-        ref_name = userInfo;
-        lat = locale.lat;
-        long = locale.lng;
-        zoom_level = map.getZoom();
+    ref_name = userInfo;
+    lat = locale.lat;
+    long = locale.lng;
+    zoom_level = map.getZoom();
 
     // Set up object
     userMarkersBuilder = {
@@ -46,11 +46,23 @@ function addMarker() {
     // Add marker to list for later deletion
     userMarkers.push(userMarkersBuilder);
     
-    // TODO: Add marker icon to map
+    // Marker icon location: leaflet/images/marker-icon.png or marker-icon-2x.png
+    var new_marker = L.marker([userMarkersBuilder.markerLat, userMarkersBuilder.markerLong]).addTo(map);
+
+    // Set marker popup info to marker name
+    new_marker.bindPopup(userMarkersBuilder.markerName);
+
+    // Allow marker to show popup on hover
+    new_marker.on("mouseover", function(e) {
+        this.openPopup();
+    });
+    new_marker.on("mouseout", function(e) {
+        this.closePopup();
+    });
 
     // Add marker to the html ul, sub-del-marker, as well as sub-markers
-    // Note: marker name is passed to the del-marker function so that the 
-    // function can know which marker to delete when selected.
+    // Note: Marker name is passed to the del-marker function so that the 
+    // Note: function can know which marker to delete when selected.
     $("#sub-del-marker").append("<a href=\"#\" onclick=\"delMarker('" 
     + userMarkersBuilder.markerName + "');\">" + userMarkersBuilder.markerName + "</a>");
 
