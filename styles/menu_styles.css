@@ -74,7 +74,6 @@ such as the font family and font size
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-
 .options {
 	/* TODO: Fix options tab to float to the right */
 	/*float: right; <-- For if we want options on right*/
