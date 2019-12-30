@@ -19,78 +19,74 @@ function addToNotificationQueue(type, content) {
 	}
 }
 
-var loop_times = 6;  // time in seconds between each loop
-var i = 1;
+var loop_time = 2;  // time in hours how long the loop should continue
+var loop_notification_index = 1;
 function loopNotificationQueue() {
 	// A function that continuously checks, every 10 seconds, the notification
 	// queue so it knows when to show notifications or not.
+
 	setTimeout(function() {
-		if (notification_queue.length > 0) {
-			i++;
+		if (notification_queue.length > 0 && notification_toggle == false) {
+			loop_notification_index++;
 			notif_type = notification_queue[0][0];
 			notif_content = notification_queue[0][1];
 			showNotification(notif_type, notif_content);
 			notification_queue.shift();  // Pop first element
-			if (i < 999) {
+			if (loop_notification_index < (loop_time * 3600)) {
 				loopNotificationQueue();
 			}
 		} else {
-			i++;
+			loop_notification_index++;
 			loopNotificationQueue();
 		}
-	}, loop_times * 1000);
+	}, 2000);
+	console.log(loop_notification_index);
 }
 
 function modifyNotification(typeOfMessage, messageContent){        
-	// Variables
-	animation_time = 100;
-
 	// A function that allows 4 different types of messages to be displayed.
 	// Error, Other, Success, Warning
+
+	// Perform checks on message content and change css for the given type of notification
 	if (typeOfMessage == "Error") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "There was an error but not message content was specified.";
 		}
-		$(".notification-bar").html(messageContent);
-		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Error</h3>")
 		$(".notification-bar").css({"background-color":"#ff1a1a", "background-image":"linear-gradient(0deg, #660000 -40%, #ff0000 140%)",
 									"box-shadow":"0 4px 8px 0 #1a0000, 0 6px 20px 0 #1a0000", "color":"#ffffff"});
 	} else if (typeOfMessage == "Other") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "No message content specified.";
 		}
-		$(".notification-bar").html(messageContent);
-		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Other</h3>")
 		$(".notification-bar").css({"background-color":"#ff1a1a", "background-image":"linear-gradient(0deg, #333333 -40%, #808080 140%)",
 									"box-shadow":"0 4px 8px 0 #0d0d0d, 0 6px 20px 0 #0d0d0d", "color":"#ffffff"});
 	} else if (typeOfMessage == "Success") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "It was successful but no message content was specified.";
 		}
-		$(".notification-bar").html(messageContent);
-		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Success</h3>")
 		$(".notification-bar").css({"background-color":"#78c200", "background-image":"linear-gradient(0deg, #3f6600 -40%, #9dff00 140%)",
 									"box-shadow":"0 4px 8px 0 #101a00, 0 6px 20px 0 #101a00", "color":"#ffffff"});
 	} else if (typeOfMessage == "Warning") {
 		if (messageContent == null || messageContent == "") {
 			messageContent = "There may be issues but no message content was specified.";
 		}
-		$(".notification-bar").html(messageContent);
-		$(".notification-bar").prepend("<h3 class=\"notification-bar-title\">Warning</h3>")
 		$(".notification-bar").css({"background-color":"#ff9933", "background-image":"linear-gradient(0deg, #e67300 -40%, #ffbf80 140%)", 
 									"box-shadow":"0 4px 8px 0 #994d00, 0 6px 20px 0 #994d00", "color":"#000000"});
 	}
-}
 
-function toggleNotification(type, content) {
-	if (notification_toggle == false) {
-		showNotification(type, content);
-	} else {
-		hideNotification();
+	// Reset notification content to the given content and prepend a title
+	if (typeOfMessage == "Error" || typeOfMessage == "Other" || typeOfMessage == "Success" || typeOfMessage == "Warning") {
+		$(".notification-bar").html("<h3 class=\"notification-bar-title\">" + typeOfMessage + "</h3>")
 	}
+	$(".notification-bar").append(messageContent);
+
+	// Add notification exit button (or link with 'x' char?)
+	$(".notification-bar").prepend("<a class=\"notification-bar-exit\" onclick=\"hideNotification()\">X</a>");
 }
 
 function showNotification(type, content) {
+	// A function that displays and animates a given notification
+
 	notification_toggle = true;
 	$(".notification-bar").css("display", "block");
 	modifyNotification(type, content);
@@ -98,7 +94,6 @@ function showNotification(type, content) {
 
 	// Slide bar into view after displaying it
 	$(".notification-bar").animate({bottom: "0%"}, notification_speed);
-	timerNotification(5);
 }
 
 function hideNotification() {
@@ -108,13 +103,6 @@ function hideNotification() {
 	setTimeout(function () {
 		$(".notification-bar").css("display", "none");
 	}, notification_speed);
-}
-
-function timerNotification(timeSeconds) {
-	// Starts timer and counts down. Once completed, notification disappears.
-	setTimeout(function() {
-		hideNotification();
-	}, timeSeconds * 1000);
 }
 
 $(document).ready(function() {

@@ -19,6 +19,17 @@ A file for the css design of the notification system.
     z-index: 9998;
 }
 
+.notification-bar-exit {
+    float: right;
+    margin: 0px;
+    padding-right: 5px;
+}
+
+.notification-bar-exit:hover {
+    color: #808080;
+    cursor: pointer;
+}
+
 .notification-bar-title {
     margin: 0px;
     padding: 0px;
