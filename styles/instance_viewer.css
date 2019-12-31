@@ -1,0 +1,23 @@
+/* 
+Tanner Fry 
+tfry@contractor.usgs.gov
+
+A file for the css design of the ontology instance viewer.
+*/
+.ontology-container {
+    z-index: 1000;
+}
+/* Canvas size is 300px by 300px (Has to be pixels to keep res with bitmaps) */
+#instance-viewer {
+    border: 1px solid #000000;
+    bottom: -1px;
+    left: -1px;
+    position: absolute;
+    z-index: inherit;
+}
+#instance-viewer-title {
+    bottom: 280px;
+    left: 85px;
+    position: absolute;
+    z-index: 1001;
+}
