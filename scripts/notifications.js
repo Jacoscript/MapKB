@@ -87,21 +87,26 @@ function modifyNotification(typeOfMessage, messageContent){
 function showNotification(type, content) {
 	// A function that displays and animates a given notification
 
-	notification_toggle = true;
 	$(".notification-bar").css("display", "block");
 	modifyNotification(type, content);
 	console.log("Showing notification '" + type + "' with content of '" + content + "'.");
 
 	// Slide bar into view after displaying it
 	$(".notification-bar").animate({bottom: "0%"}, notification_speed);
+	notification_toggle = true;
 }
 
 function hideNotification() {
-	notification_toggle = false;
 	// Slide away bar after removing it
 	$(".notification-bar").animate({bottom: "-30%"}, notification_speed);
-	setTimeout(function () {
+	setTimeout(function() {
 		$(".notification-bar").css("display", "none");
+	}, notification_speed);
+	
+	// Make sure the queue doesn't try and show another notification while one
+	// is still being hidden
+	setTimeout(function() {
+		notification_toggle = false;
 	}, notification_speed);
 }
 
