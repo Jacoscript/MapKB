@@ -1,12 +1,13 @@
 /* 
 Matthew Wagner & Tanner Fry 
-mewagner@contractor.usgs.gov
-tfry@contractor.usgs.gov
+mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
 
 A file for the css design of the maps web page. Since cssmenu is a class,
 it can be ported to other pages if need be.
 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
 
 body {
 	background-color: #ffffff;
@@ -110,7 +111,7 @@ such as the font family and font size
 	text-align: left;
 	text-decoration: none;
 }
-.dropdown-content a:hover, #sub-del-marker a:hover, #sub-markers a:hover{
+.dropdown-content a:hover, #sub-del-marker a:hover, #sub-markers a:hover {
 	border-radius: 5px;
 	color: #88d0ed;
 	font-family: 'Open Sans';

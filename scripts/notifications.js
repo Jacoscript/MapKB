@@ -14,8 +14,10 @@ var notification_toggle = false; // False = turned off
 function addToNotificationQueue(type, content) {
 	if (type == "Error" || type == "Other" ||type == "Success" || type == "Warning") {
 		notification_queue.push([type, content]);
+		// Add to 'In Queue' dropdown item in the notifications tab
+		$("#notification-in-queue").html("In Queue (" + notification_queue.length + ")");
 	} else {
-		showNotification("Error", "Notification was not of type 'Error', 'Other', 'Success' or warning'.");
+		showNotification("Error", "Notification '" + type + "' was not of type 'Error', 'Other', 'Success' or 'Warning'.");
 	}
 }
 
@@ -31,7 +33,6 @@ function loopNotificationQueue() {
 			notif_type = notification_queue[0][0];
 			notif_content = notification_queue[0][1];
 			showNotification(notif_type, notif_content);
-			notification_queue.shift();  // Pop first element
 			if (loop_notification_index < (loop_time * 3600)) {
 				loopNotificationQueue();
 			}
@@ -76,7 +77,7 @@ function modifyNotification(typeOfMessage, messageContent){
 
 	// Reset notification content to the given content and prepend a title
 	if (typeOfMessage == "Error" || typeOfMessage == "Other" || typeOfMessage == "Success" || typeOfMessage == "Warning") {
-		$(".notification-bar").html("<h3 class=\"notification-bar-title\">" + typeOfMessage + "</h3>")
+		$(".notification-bar").html("<h3 class=\"notification-bar-title\">" + typeOfMessage + "</h3>");
 	}
 	$(".notification-bar").append(messageContent);
 
@@ -102,12 +103,18 @@ function hideNotification() {
 	setTimeout(function() {
 		$(".notification-bar").css("display", "none");
 	}, notification_speed);
-	
+
 	// Make sure the queue doesn't try and show another notification while one
 	// is still being hidden
 	setTimeout(function() {
 		notification_toggle = false;
 	}, notification_speed);
+
+	// Remove notification after hidden
+	notification_queue.shift();  // Pop first element
+
+	// Update 'In-Queue' dropdown item in notification tab
+	$("#notification-in-queue").html("In Queue (" + notification_queue.length + ")");
 }
 
 $(document).ready(function() {

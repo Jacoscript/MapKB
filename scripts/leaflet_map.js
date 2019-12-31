@@ -2,6 +2,7 @@
 // mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
 // This script is used for the general interaction and loading of the leaflet map as well
 // as other functions regarding the map.
+
 var countFilter = 0;
 var grouping = L.markerClusterGroup({
 	disableClusteringAtZoom: 15,

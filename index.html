@@ -31,16 +31,20 @@
 		<link rel="stylesheet" href="leaflet-zoom/L.Control.ZoomBox.css" />
 		<script src="leaflet-zoom/L.Control.ZoomBox.min.js"></script>
 		
+		<!-- ontology instance viewer css and js-->
+		<link rel="stylesheet" href="styles/instance_viewer.css" />
+		<script src="scripts/instance_viewer.js"></script>
+
 		<!-- afd js  -->
 		<script src="afd/afd-wfs.js"></script>
 		<script src="afd/afd-rdf.js"></script>
 
+		<!-- dbpedia js-->
+		<script src="ld/dbpedia.js"></script>
+		
 		<!-- makb js -->
 		<script src="makb/makb-rdf.js"></script>
 		<script src="makb/makb-qb.js"></script>
-
-		<!-- dbpedia js-->
-		<script src="ld/dbpedia.js"></script>
 		
 		<!-- afd tabs (jquery-ui) -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -80,6 +84,12 @@
 					</ul>
 				</li>
 				<li class="dropdown">
+					<a class="drop-btn" href="#">Ontologies</a>
+					<ul class="dropdown-content">
+						<a href="#" onclick="openInstanceViewer();">Open Instance Viewer</a>
+					</ul>
+				</li>
+				<li class="dropdown">
 					<a class="drop-btn" href="#">Markers</a>
 					<ul class="dropdown-content">
 						<a id="markers" href="#">Markers</a>
@@ -109,7 +119,7 @@
 					<li class="dropdown nav-notifications">
 						<a class="drop-btn" href="#">Notifications</a>
 						<ul class="dropdown-content">
-							<a href="#">In Queue</a>
+							<a href="#" id="notification-in-queue">In Queue</a>
 							<a href="#" onclick="addToNotificationQueue('Error');">Error Message</a>
 							<a href="#" onclick="addToNotificationQueue('Other');">Other Message</a>
 							<a href="#" onclick="addToNotificationQueue('Success');">Success Message</a>
@@ -128,16 +138,22 @@
 			</ul>
 		</div>
 		
-		<div id="maincontainer" style="width: 100%; height: 100%;">
+		<div id="main-container" style="width: 100%; height: 100%;">
 			<!-- leaflet map -->
 			<div id="mapid" style="z-index: 1; width: 70%; height: 90.55%; float: left; border-style: solid; border-width: 1px; margin-right: 3px; margin-top: 9px;">
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
+				<!-- ontology instance view -->
+				<div class="ontology-container">
+					<span id="instance-viewer-title">Ontology Instance Viewer</span>
+					<canvas id="instance-viewer" height=300 width=300></canvas>
+				</div>
 			</div>
 			<div id="crosshair-position">
 				Crosshair Latitude: <input type="text" id="txtbox-Latitude" />
 				<br /><br />
 				Crosshair Longitude: <input type="text" id="txtbox-Longitude" />
 			</div>
+
 			<!-- advanced feature description tabs -->
 			<div class="widget" style="height: 80%; font-family: Arial, Helvetica, sans-serif; margin-top: 7px;">
 				<fieldset>

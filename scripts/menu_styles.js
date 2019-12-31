@@ -31,14 +31,14 @@ function handleSubTabs(){
 	
 	// NOTE: Make sure any new sub-tabs are added below
 	
-	// Hover sub-tabs for Markers
+	// Hover sub-tabs for markers
 	// Syntax: .mouseenter(eventData, function);
 	$("#markers").mouseenter("markers", showSubTabs);
 	$("#markers").mouseleave("markers", hideSubTabs);
 	$("#sub-markers").mouseenter("markers", showSubTabs);
 	$("#sub-markers").mouseleave("markers", hideSubTabs);
 	
-	// Hover sub-tabs for Del Marker
+	// Hover sub-tabs for del marker
 	// Syntax: .mouseenter(eventData, function);
 	$("#del-marker").mouseenter("del-marker", showSubTabs);
 	$("#del-marker").mouseleave("del-marker", hideSubTabs);
