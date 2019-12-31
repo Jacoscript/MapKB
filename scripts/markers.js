@@ -38,10 +38,11 @@ function addMarker() {
 
     // Set up object
     user_markers_Builder = {
-        markerName: user_Info,
+        markerIcon: map_marker,
+        markerID: user_markers.length,
         markerLat: locale.lat,
         markerLong: locale.lng,
-        markerIcon: map_marker,
+        markerName: user_Info,
         markerZoom: map.getZoom()
     };
 
@@ -54,10 +55,10 @@ function addMarker() {
     // Add marker to the html ul, sub-del-marker, as well as sub-markers
     // Note: Marker name is passed to the del-marker function so that the 
     // Note: function can know which marker to delete when selected.
-    $("#sub-del-marker").append("<a href=\"#\" onclick=\"delMarker('" 
-    + user_markers_Builder.markerName + "');\">" + user_markers_Builder.markerName + "</a>");
+    $("#sub-del-marker").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"delMarker('" 
+    + user_markers_Builder.markerID + "');\">" + user_markers_Builder.markerName + "</a>");
 
-    $("#sub-markers").append("<a href=\"#\" onclick=\"zoomMapToLocation('User Marker', '" 
+    $("#sub-markers").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"zoomMapToLocation('User Marker', '" 
     + user_markers_Builder.markerLat + "', '" + user_markers_Builder.markerLong 
     + "', '" + user_markers_Builder.markerZoom +"');\">" + user_markers_Builder.markerName + "</a>");
 }
@@ -75,20 +76,20 @@ function clrMarker() {
     $('#sub-markers a').remove();
 }
 
-function delMarker(refName) {
+function delMarker(markerID) {
     // Function to delete a user's specific marker from the map
 
     for (var i = user_markers.length - 1; i >= 0; i--) {
-        if (user_markers[i].markerName == refName) {
+        if (user_markers[i].markerID == markerID) {
             // Delete marker icon
             map.removeLayer(user_markers[i].markerIcon);
-            // Delete marker
-            user_markers.splice(i ,1);
-            // Delete specifc dropdowns
-            $("#sub-del-marker a").filter(":contains('" + refName + "')").remove()
-            $("#sub-markers a").filter(":contains('" + refName + "')").remove()
+            // Delete marker from list
+            user_markers.splice(i, 1);
         }
     }
+    // Delete specifc dropdowns
+    $("#marker-" + markerID).remove();
+    $("#marker-" + markerID).remove();
 }
 
 
