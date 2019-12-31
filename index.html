@@ -105,23 +105,25 @@
 						<a href="#" onclick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a>
 					</ul>
 				</li>
-				<li class="dropdown">
-					<a class="drop-btn" href="#">Notifications</a>
-					<ul class="dropdown-content">
-						<a href="#" onclick="addToNotificationQueue('Error');">Error Message</a>
-						<a href="#" onclick="addToNotificationQueue('Other');">Other Message</a>
-						<a href="#" onclick="addToNotificationQueue('Success');">Success Message</a>
-						<a href="#" onclick="addToNotificationQueue('Warning');">Warning Message</a>
-					</ul>
-				</li>
-				<li class="dropdown options">
-					<a class="drop-btn" href="#">Options</a>
-					<!--<img class="arrow-down" src="webpage-icons/arrow-down-light.svg"/>-->
-					<ul class="dropdown-content">
-						<a href="#" onclick="clearMap();">Clear Map</a>
-						<a href="#" onclick="clearTabs();">Clear Tabs</a>
-					</ul>
-				</li>
+				<div class="move-right-side">
+					<li class="dropdown nav-notifications">
+						<a class="drop-btn" href="#">Notifications</a>
+						<ul class="dropdown-content">
+							<a href="#" onclick="addToNotificationQueue('Error');">Error Message</a>
+							<a href="#" onclick="addToNotificationQueue('Other');">Other Message</a>
+							<a href="#" onclick="addToNotificationQueue('Success');">Success Message</a>
+							<a href="#" onclick="addToNotificationQueue('Warning');">Warning Message</a>
+						</ul>
+					</li>
+					<li class="dropdown nav-options">
+						<a class="drop-btn" href="#">Options</a>
+						<!--<img class="arrow-down" src="webpage-icons/arrow-down-light.svg"/>-->
+						<ul class="dropdown-content">
+							<a href="#" onclick="clearMap();">Clear Map</a>
+							<a href="#" onclick="clearTabs();">Clear Tabs</a>
+						</ul>
+					</li>
+				</div>
 			</ul>
 		</div>
 		
