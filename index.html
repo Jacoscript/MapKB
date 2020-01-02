@@ -7,6 +7,7 @@
 		<!-- CSS styles and webpage js -->
 		<link rel="stylesheet" href="styles/menu_styles.css" />
 		<link rel="stylesheet" href="styles/notifications.css" />
+		<link rel="stylesheet" href="styles/web_page.css" />
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="scripts/menu_styles.js"></script>
 		<script src="scripts/notifications.js"></script>
@@ -119,7 +120,7 @@
 					<li class="dropdown nav-notifications">
 						<a class="drop-btn" href="#">Notifications</a>
 						<ul class="dropdown-content">
-							<a href="#" id="notification-in-queue">In Queue</a>
+							<a href="#" id="notification-in-queue">In Queue (0)</a>
 							<a href="#" onclick="addToNotificationQueue('Error');">Error Message</a>
 							<a href="#" onclick="addToNotificationQueue('Other');">Other Message</a>
 							<a href="#" onclick="addToNotificationQueue('Success');">Success Message</a>
@@ -140,12 +141,12 @@
 		
 		<div id="main-container" style="width: 100%; height: 100%;">
 			<!-- leaflet map -->
-			<div id="mapid" style="z-index: 1; width: 70%; height: 90.55%; float: left; border-style: solid; border-width: 1px; margin-right: 3px; margin-top: 9px;">
+			<div id="mapid" style="height: 90.55%; width: 70%;">
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
 				<!-- ontology instance view -->
 				<div class="ontology-container">
 					<span id="instance-viewer-title">Ontology Instance Viewer</span>
-					<canvas id="instance-viewer" height=300 width=300></canvas>
+					<canvas id="instance-viewer" height=300 width=300 style="z-index: 1000;"></canvas>
 				</div>
 			</div>
 			<div id="crosshair-position">

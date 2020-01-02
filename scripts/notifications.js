@@ -41,7 +41,7 @@ function loopNotificationQueue() {
 			loopNotificationQueue();
 		}
 	}, 2000);
-	console.log(loop_notification_index);
+	console.log("Notification queue time: (" + loop_notification_index + "/" + loop_time * 3600 + ")");
 }
 
 function modifyNotification(typeOfMessage, messageContent){        
