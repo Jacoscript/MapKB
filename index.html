@@ -87,7 +87,8 @@
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Ontologies</a>
 					<ul class="dropdown-content">
-						<a href="#" onclick="openInstanceViewer();">Open Instance Viewer</a>
+						<a href="#" onclick="createOntologyViewer();">Open Small Ontology Viewer</a>
+						<a href="http://144.47.161.52:8080/webvowl_1.1.7/#url=http://144.47.161.52:8080/MAKB_Fry/makb/ontologies/Example_1.json" target="_blank">Open Full Ontology Viewer</a>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -145,8 +146,13 @@
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
 				<!-- ontology instance view -->
 				<div class="ontology-container">
-					<span id="instance-viewer-title">Ontology Instance Viewer</span>
-					<canvas id="instance-viewer" height=300 width=300 style="z-index: 1000;"></canvas>
+					<span id="ontology-viewer-title">Ontology Viewer</span>
+					<canvas id="ontology-viewer" height=300 width=300 style="z-index: 1000;"></canvas>
+					<div id="example">
+						<div id="graph">
+							<svg class="svgGraph" height=300 width=300></svg>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="crosshair-position">
@@ -168,10 +174,14 @@
 				<!-- tab div content populated programmatically -->
 			</div>
 		</div>
-		
 		<!-- Initialize leaflet map, note: must run script after leaflet map is created -->
 		<script src="scripts/leaflet_map.js"></script>
 		<div class="notification-bar"></div>
+
+		<!-- Initialize ontology view -->
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script src="scripts/specVOWL.js"></script>
+		<script src="scripts/webVOWLGraph.js"></script>
 	</body>
 </html>
 
