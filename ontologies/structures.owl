@@ -1,0 +1,850 @@
+@prefix : <http://data.usgs.gov/lod/topo#> .
+@prefix ogc: <http://www.opengeospatial.org/standards/sfa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix topo: <http://data.usgs.gov/lod/topo#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@base <http://data.usgs.gov/lod/structure> .
+
+<http://data.usgs.gov/lod/structure> rdf:type owl:Ontology ;
+                                      dcterms:description "Topographic feature data of The National Map of the U.S. Geological Survey"^^xsd:string ;
+                                      rdfs:isDefinedBy "Spec-X Data Dictionary Report. https://usgs-mrs.cr.usgs.gov/SPECX/lookup/lookupQuery"^^xsd:string ;
+                                      owl:versionInfo "October 2019" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://data.usgs.gov/lod/topo#description
+topo:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/hasPart
+dcterms:hasPart rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/isPartOf
+dcterms:isPartOf rdf:type owl:AnnotationProperty .
+
+
+###  http://www.geonames.org/ontology#nearby
+<http://www.geonames.org/ontology#nearby> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.opengis.net/ont/geosparql#asWKT
+geosparql:asWKT rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://data.usgs.gov/lod/topo#administers
+topo:administers rdf:type owl:ObjectProperty ;
+                 rdfs:domain topo:AdminType ;
+                 rdfs:range geosparql:Feature .
+
+
+###  http://data.usgs.gov/lod/topo#fCode
+topo:fCode rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdf:type owl:SymmetricProperty .
+
+
+###  http://data.usgs.gov/lod/topo#fType
+topo:fType rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf topo:subType ,
+                              owl:topObjectProperty ;
+           rdf:type owl:SymmetricProperty .
+
+
+###  http://data.usgs.gov/lod/topo#foot_ID
+topo:foot_ID rdf:type owl:ObjectProperty .
+
+
+###  http://data.usgs.gov/lod/topo#gnis_ID
+topo:gnis_ID rdf:type owl:ObjectProperty ;
+             rdfs:domain topo:Name ;
+             rdfs:range topo:GNIS_ID .
+
+
+###  http://data.usgs.gov/lod/topo#name
+topo:name rdf:type owl:ObjectProperty ;
+          rdfs:range [ rdf:type owl:Restriction ;
+                       owl:onProperty topo:name ;
+                       owl:someValuesFrom topo:Name
+                     ] .
+
+
+###  http://data.usgs.gov/lod/topo#objectID
+topo:objectID rdf:type owl:ObjectProperty .
+
+
+###  http://data.usgs.gov/lod/topo#pointLocationType
+topo:pointLocationType rdf:type owl:ObjectProperty .
+
+
+###  http://data.usgs.gov/lod/topo#shapeLength
+topo:shapeLength rdf:type owl:ObjectProperty .
+
+
+###  http://data.usgs.gov/lod/topo#subType
+topo:subType rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf topo:fType ,
+                                owl:topObjectProperty ;
+             rdf:type owl:SymmetricProperty ;
+             rdfs:comment "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map." .
+
+
+###  http://www.opengis.net/ont/geosparql#hasGeometry
+geosparql:hasGeometry rdf:type owl:ObjectProperty ;
+                      rdfs:domain geosparql:Feature ;
+                      rdfs:range geosparql:Geometry .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#first
+rdf:first rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#nil
+rdf:nil rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#object
+rdf:object rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate
+rdf:predicate rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#rest
+rdf:rest rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#subject
+rdf:subject rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://data.usgs.gov/lod/topo#ownerClassCode
+topo:ownerClassCode rdf:type owl:DatatypeProperty .
+
+
+###  http://data.usgs.gov/lod/topo#pointLocationTypeCode
+topo:pointLocationTypeCode rdf:type owl:DatatypeProperty .
+
+
+###  http://data.usgs.gov/lod/topo#shape
+topo:shape rdf:type owl:DatatypeProperty ;
+           rdfs:comment "Feature geometry" .
+
+
+###  http://data.usgs.gov/lod/topo#shapeLength
+topo:shapeLength rdf:type owl:DatatypeProperty .
+
+
+###  http://data.usgs.gov/lod/topo#yesNo
+topo:yesNo rdf:type owl:DatatypeProperty .
+
+
+###  http://www.opengis.net/ont/geosparql#asGML
+geosparql:asGML rdf:type owl:DatatypeProperty .
+
+
+###  http://www.opengis.net/ont/geosparql#asWKT
+geosparql:asWKT rdf:type owl:DatatypeProperty .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#alt
+w3cgeo:alt rdf:type owl:DatatypeProperty .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+w3cgeo:lat rdf:type owl:DatatypeProperty .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+w3cgeo:long rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://data.usgs.gov/lod/topo#Address
+topo:Address rdf:type owl:Class ;
+             rdfs:comment "The street address of the feature." .
+
+
+###  http://data.usgs.gov/lod/topo#AddressBuildingName
+topo:AddressBuildingName rdf:type owl:Class ;
+                         rdfs:subClassOf topo:Address ;
+                         rdfs:comment "Name of the building housing the function. For example, Springfield Municipal Building is the name of the building housing the police department for the city of Springfield." .
+
+
+###  http://data.usgs.gov/lod/topo#AdminType
+topo:AdminType rdf:type owl:Class ;
+               rdfs:subClassOf topo:Organization ;
+               rdfs:comment "The type of organization with administrative responsibility for a feature." .
+
+
+###  http://data.usgs.gov/lod/topo#AmbulanceService
+topo:AmbulanceService rdf:type owl:Class ;
+                      rdfs:subClassOf topo:EmergencyResponseLawEnforcement ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty topo:fCode ;
+                                        owl:allValuesFrom <http://data.usgs.gov/lod/topo#74001>
+                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#Cabin
+topo:Cabin rdf:type owl:Class ;
+           rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#Campground
+topo:Campground rdf:type owl:Class ;
+                rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#Cemetery
+topo:Cemetery rdf:type owl:Class ;
+              rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#CityTownHall
+topo:CityTownHall rdf:type owl:Class ;
+                  rdfs:subClassOf topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#Code
+topo:Code rdf:type owl:Class .
+
+
+###  http://data.usgs.gov/lod/topo#CollegeUniversity
+topo:CollegeUniversity rdf:type owl:Class ;
+                       rdfs:subClassOf topo:Education ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty topo:fCode ;
+                                         owl:allValuesFrom <http://data.usgs.gov/lod/topo#73006>
+                                       ] .
+
+
+###  http://data.usgs.gov/lod/topo#Complex_ID
+topo:Complex_ID rdf:type owl:Class ;
+                rdfs:subClassOf topo:Code ;
+                rdfs:comment "Permanent identifier of the structure in the Structure_Complex feature class." .
+
+
+###  http://data.usgs.gov/lod/topo#CourtHouse
+topo:CourtHouse rdf:type owl:Class ;
+                rdfs:subClassOf topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#Education
+topo:Education rdf:type owl:Class ;
+               rdfs:subClassOf geosparql:Feature ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty topo:fType ;
+                                 owl:allValuesFrom <http://data.usgs.gov/lod/topo#730>
+                               ] .
+
+
+###  http://data.usgs.gov/lod/topo#Elementary
+topo:Elementary rdf:type owl:Class ;
+                rdfs:subClassOf topo:Education ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty topo:fCode ;
+                                  owl:allValuesFrom <http://data.usgs.gov/lod/topo#73003>
+                                ] .
+
+
+###  http://data.usgs.gov/lod/topo#EmergencyResponseLawEnforcement
+topo:EmergencyResponseLawEnforcement rdf:type owl:Class ;
+                                     rdfs:subClassOf geosparql:Feature ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty topo:fType ;
+                                                       owl:allValuesFrom <http://data.usgs.gov/lod/topo#740>
+                                                     ] .
+
+
+###  http://data.usgs.gov/lod/topo#Energy
+topo:Energy rdf:type owl:Class ;
+            rdfs:subClassOf geosparql:Feature ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty topo:fType ;
+                              owl:allValuesFrom <http://data.usgs.gov/lod/topo#750>
+                            ] .
+
+
+###  http://data.usgs.gov/lod/topo#FCode
+topo:FCode rdf:type owl:Class ;
+           rdfs:subClassOf topo:Code .
+
+
+###  http://data.usgs.gov/lod/topo#FType
+topo:FType rdf:type owl:Class ;
+           rdfs:subClassOf topo:Code .
+
+
+###  http://data.usgs.gov/lod/topo#FeatureClass
+topo:FeatureClass rdf:type owl:Class ;
+                  rdfs:subClassOf topo:TNMKB ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:subType ;
+                                    owl:someValuesFrom geosparql:Geometry
+                                  ] ;
+                  rdfs:comment "A geometry type representing a feature" .
+
+
+###  http://data.usgs.gov/lod/topo#FireStationEMSStation
+topo:FireStationEMSStation rdf:type owl:Class ;
+                           rdfs:subClassOf topo:EmergencyResponseLawEnforcement ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty topo:fCode ;
+                                             owl:allValuesFrom <http://data.usgs.gov/lod/topo#74026>
+                                           ] .
+
+
+###  http://data.usgs.gov/lod/topo#Foot_ID
+topo:Foot_ID rdf:type owl:Class ;
+             rdfs:subClassOf topo:Code ;
+             rdfs:comment "Permanent identifier of the structure in the Structure_Footprint feature class." .
+
+
+###  http://data.usgs.gov/lod/topo#GNIS_ID
+topo:GNIS_ID rdf:type owl:Class ;
+             rdfs:subClassOf topo:Code .
+
+
+###  http://data.usgs.gov/lod/topo#GovernmentAndMilitary
+topo:GovernmentAndMilitary rdf:type owl:Class ;
+                           rdfs:subClassOf geosparql:Feature .
+
+
+###  http://data.usgs.gov/lod/topo#Headquarters
+topo:Headquarters rdf:type owl:Class ;
+                  rdfs:subClassOf topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#HealthAndMedical
+topo:HealthAndMedical rdf:type owl:Class ;
+                      rdfs:subClassOf geosparql:Feature .
+
+
+###  http://data.usgs.gov/lod/topo#HighSchool
+topo:HighSchool rdf:type owl:Class ;
+                rdfs:subClassOf topo:Education ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty topo:fCode ;
+                                  owl:allValuesFrom <http://data.usgs.gov/lod/topo#73005>
+                                ] .
+
+
+###  http://data.usgs.gov/lod/topo#HistoricSitePointOfInterest
+topo:HistoricSitePointOfInterest rdf:type owl:Class ;
+                                 rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#HospitalMedicalCenter
+topo:HospitalMedicalCenter rdf:type owl:Class ;
+                           rdfs:subClassOf topo:HealthAndMedical .
+
+
+###  http://data.usgs.gov/lod/topo#LawEnforcement
+topo:LawEnforcement rdf:type owl:Class ;
+                    rdfs:subClassOf topo:EmergencyResponseLawEnforcement ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty topo:fCode ;
+                                      owl:allValuesFrom <http://data.usgs.gov/lod/topo#74034>
+                                    ] .
+
+
+###  http://data.usgs.gov/lod/topo#MailAndShipping
+topo:MailAndShipping rdf:type owl:Class ;
+                     rdfs:subClassOf geosparql:Feature .
+
+
+###  http://data.usgs.gov/lod/topo#MapUnit
+topo:MapUnit rdf:type owl:Class ;
+             rdfs:subClassOf topo:MeasurementUnit .
+
+
+###  http://data.usgs.gov/lod/topo#MeasurementUnit
+topo:MeasurementUnit rdf:type owl:Class .
+
+
+###  http://data.usgs.gov/lod/topo#MiddleSchool
+topo:MiddleSchool rdf:type owl:Class ;
+                  rdfs:subClassOf topo:Education ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:fCode ;
+                                    owl:allValuesFrom <http://data.usgs.gov/lod/topo#73004>
+                                  ] .
+
+
+###  http://data.usgs.gov/lod/topo#Name
+topo:Name rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty topo:gnis_ID ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass topo:GNIS_ID
+                          ] .
+
+
+###  http://data.usgs.gov/lod/topo#NationalSymbolMonument
+topo:NationalSymbolMonument rdf:type owl:Class ;
+                            rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#OBJECTID
+topo:OBJECTID rdf:type owl:Class ;
+              rdfs:subClassOf topo:Code .
+
+
+###  http://data.usgs.gov/lod/topo#OilGasPipeline
+topo:OilGasPipeline rdf:type owl:Class ;
+                    rdfs:subClassOf topo:Energy ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty topo:fCode ;
+                                      owl:allValuesFrom <http://data.usgs.gov/lod/topo#75017>
+                                    ] .
+
+
+###  http://data.usgs.gov/lod/topo#Organization
+topo:Organization rdf:type owl:Class .
+
+
+###  http://data.usgs.gov/lod/topo#OwnerClass
+topo:OwnerClass rdf:type owl:Class ;
+                rdfs:subClassOf topo:Code .
+
+
+###  http://data.usgs.gov/lod/topo#PicnicArea
+topo:PicnicArea rdf:type owl:Class ;
+                rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#PointLocationType
+topo:PointLocationType rdf:type owl:Class ;
+                       rdfs:subClassOf topo:Code .
+
+
+###  http://data.usgs.gov/lod/topo#PostOffice
+topo:PostOffice rdf:type owl:Class ;
+                rdfs:subClassOf topo:MailAndShipping .
+
+
+###  http://data.usgs.gov/lod/topo#PrisonCorrectionalFacility
+topo:PrisonCorrectionalFacility rdf:type owl:Class ;
+                                rdfs:subClassOf topo:EmergencyResponseLawEnforcement ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty topo:fCode ;
+                                                  owl:allValuesFrom <http://data.usgs.gov/lod/topo#74036>
+                                                ] .
+
+
+###  http://data.usgs.gov/lod/topo#PublicAttractionAndLandmarkBuilding
+topo:PublicAttractionAndLandmarkBuilding rdf:type owl:Class ;
+                                         rdfs:subClassOf geosparql:Feature .
+
+
+###  http://data.usgs.gov/lod/topo#RangerStation
+topo:RangerStation rdf:type owl:Class ;
+                   rdfs:subClassOf topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#School
+topo:School rdf:type owl:Class ;
+            rdfs:subClassOf topo:Education ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty topo:fCode ;
+                              owl:allValuesFrom <http://data.usgs.gov/lod/topo#73002>
+                            ] .
+
+
+###  http://data.usgs.gov/lod/topo#StateCapitol
+topo:StateCapitol rdf:type owl:Class ;
+                  rdfs:subClassOf topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#StateSupremeCourt
+topo:StateSupremeCourt rdf:type owl:Class ;
+                       rdfs:subClassOf topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#Struct_Line
+topo:Struct_Line rdf:type owl:Class ;
+                 rdfs:subClassOf topo:FeatureClass ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty topo:subType ;
+                                   owl:allValuesFrom <http://data.usgs.gov/lod/topo#750>
+                                 ] ;
+                 rdfs:comment "A feature class representing the location of a building or other structure as a linear feature" .
+
+
+###  http://data.usgs.gov/lod/topo#Struct_Point
+topo:Struct_Point rdf:type owl:Class ;
+                  rdfs:subClassOf topo:FeatureClass ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:subType ;
+                                    owl:someValuesFrom <http://data.usgs.gov/lod/topo#730>
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:subType ;
+                                    owl:someValuesFrom <http://data.usgs.gov/lod/topo#740>
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:pointLocationType ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass topo:PointLocationType
+                                  ] ;
+                  rdfs:comment "A feature class representing the location of a building or other structure as a point" .
+
+
+###  http://data.usgs.gov/lod/topo#Structure_Complex
+topo:Structure_Complex rdf:type owl:Class ;
+                       rdfs:subClassOf topo:FeatureClass .
+
+
+###  http://data.usgs.gov/lod/topo#TNMKB
+topo:TNMKB rdf:type owl:Class ;
+           rdfs:comment "The data models inherent to The National Map themes" .
+
+
+###  http://data.usgs.gov/lod/topo#TechnicalTradeSchool
+topo:TechnicalTradeSchool rdf:type owl:Class ;
+                          rdfs:subClassOf topo:Education ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty topo:fCode ;
+                                            owl:allValuesFrom <http://data.usgs.gov/lod/topo#73007>
+                                          ] .
+
+
+###  http://data.usgs.gov/lod/topo#Trailhead
+topo:Trailhead rdf:type owl:Class ;
+               rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#VisitorCenter
+topo:VisitorCenter rdf:type owl:Class ;
+                   rdfs:subClassOf topo:PublicAttractionAndLandmarkBuilding .
+
+
+###  http://data.usgs.gov/lod/topo#730
+<http://data.usgs.gov/lod/topo#730> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty topo:fType ;
+                                                      owl:allValuesFrom topo:Education
+                                                    ] .
+
+
+###  http://data.usgs.gov/lod/topo#73002
+<http://data.usgs.gov/lod/topo#73002> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:School
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#73003
+<http://data.usgs.gov/lod/topo#73003> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:Elementary
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#73004
+<http://data.usgs.gov/lod/topo#73004> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:MiddleSchool
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#73005
+<http://data.usgs.gov/lod/topo#73005> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:HighSchool
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#73006
+<http://data.usgs.gov/lod/topo#73006> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:CollegeUniversity
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#73007
+<http://data.usgs.gov/lod/topo#73007> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:TechnicalTradeSchool
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#740
+<http://data.usgs.gov/lod/topo#740> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty topo:fType ;
+                                                      owl:allValuesFrom topo:EmergencyResponseLawEnforcement
+                                                    ] .
+
+
+###  http://data.usgs.gov/lod/topo#74001
+<http://data.usgs.gov/lod/topo#74001> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode .
+
+
+###  http://data.usgs.gov/lod/topo#74026
+<http://data.usgs.gov/lod/topo#74026> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode .
+
+
+###  http://data.usgs.gov/lod/topo#74034
+<http://data.usgs.gov/lod/topo#74034> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:LawEnforcement
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#74036
+<http://data.usgs.gov/lod/topo#74036> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode .
+
+
+###  http://data.usgs.gov/lod/topo#750
+<http://data.usgs.gov/lod/topo#750> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty topo:fType ;
+                                                      owl:allValuesFrom topo:Energy
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty topo:subType ;
+                                                      owl:allValuesFrom topo:Struct_Line
+                                                    ] .
+
+
+###  http://data.usgs.gov/lod/topo#75017
+<http://data.usgs.gov/lod/topo#75017> rdf:type owl:Class ;
+                                      rdfs:subClassOf topo:FCode ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty topo:fCode ;
+                                                        owl:allValuesFrom topo:OilGasPipeline
+                                                      ] .
+
+
+###  http://data.usgs.gov/lod/topo#780
+<http://data.usgs.gov/lod/topo#780> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType .
+
+
+###  http://data.usgs.gov/lod/topo#800
+<http://data.usgs.gov/lod/topo#800> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType .
+
+
+###  http://data.usgs.gov/lod/topo#820
+<http://data.usgs.gov/lod/topo#820> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType .
+
+
+###  http://data.usgs.gov/lod/topo#830
+<http://data.usgs.gov/lod/topo#830> rdf:type owl:Class ;
+                                    rdfs:subClassOf topo:FType .
+
+
+###  http://www.opengis.net/ont/geosparql#Feature
+geosparql:Feature rdf:type owl:Class ;
+                  rdfs:subClassOf geosparql:SpatialObject ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:name ;
+                                    owl:someValuesFrom topo:Name
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty geosparql:hasGeometry ;
+                                    owl:someValuesFrom geosparql:Geometry
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty topo:objectID ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass topo:OBJECTID
+                                  ] ;
+                  owl:disjointWith geosparql:Geometry ;
+                  rdfs:comment "This class represents the top-level feature type. This class is equivalent to GFI_Feature defined in ISO 19156, and it is superclass of all feature types." ;
+                  rdfs:isDefinedBy "http://www.opengis.net/spec/geosparql/1.0" .
+
+
+###  http://www.opengis.net/ont/geosparql#Geometry
+geosparql:Geometry rdf:type owl:Class ;
+                   rdfs:subClassOf geosparql:SpatialObject ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty topo:subType ;
+                                     owl:someValuesFrom topo:FeatureClass
+                                   ] .
+
+
+###  http://www.opengis.net/ont/geosparql#SpatialObject
+geosparql:SpatialObject rdf:type owl:Class ;
+                        rdfs:comment "The class Spatial Object represents everything that can have a spatial representation. It is superclass of Feature and Geometry." ;
+                        rdfs:isDefinedBy "http://www.opengis.net/spec/geosparql/1.0" ;
+                        rdfs:label "Spatial Object" .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#List
+rdf:List rdf:type owl:Class ;
+         rdfs:subClassOf rdfs:Class .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement
+rdf:Statement rdf:type owl:Class ;
+              rdfs:subClassOf rdfs:Class .
+
+
+###  http://www.w3.org/2000/01/rdf-schema#Class
+rdfs:Class rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://data.usgs.gov/lod/topo#Approximate
+topo:Approximate rdf:type owl:NamedIndividual ,
+                          topo:PointLocationType ;
+                 topo:pointLocationTypeCode 4 .
+
+
+###  http://data.usgs.gov/lod/topo#Centroid
+topo:Centroid rdf:type owl:NamedIndividual ,
+                       topo:PointLocationType ;
+              topo:pointLocationTypeCode 1 .
+
+
+###  http://data.usgs.gov/lod/topo#County
+topo:County rdf:type owl:NamedIndividual ,
+                     topo:OwnerClass ;
+            topo:ownerClassCode 5 .
+
+
+###  http://data.usgs.gov/lod/topo#EgressEntrance
+topo:EgressEntrance rdf:type owl:NamedIndividual ,
+                             topo:PointLocationType ;
+                    topo:pointLocationTypeCode 2 .
+
+
+###  http://data.usgs.gov/lod/topo#Federal
+topo:Federal rdf:type owl:NamedIndividual ,
+                      topo:OwnerClass ;
+             topo:ownerClassCode 1 .
+
+
+###  http://data.usgs.gov/lod/topo#Municipal
+topo:Municipal rdf:type owl:NamedIndividual ,
+                        topo:OwnerClass ;
+               topo:ownerClassCode 6 .
+
+
+###  http://data.usgs.gov/lod/topo#No
+topo:No rdf:type owl:NamedIndividual ;
+        topo:yesNo 2 .
+
+
+###  http://data.usgs.gov/lod/topo#Private
+topo:Private rdf:type owl:NamedIndividual ,
+                      topo:OwnerClass ;
+             topo:ownerClassCode 7 .
+
+
+###  http://data.usgs.gov/lod/topo#Regional
+topo:Regional rdf:type owl:NamedIndividual ,
+                       topo:OwnerClass ;
+              topo:ownerClassCode 4 .
+
+
+###  http://data.usgs.gov/lod/topo#State
+topo:State rdf:type owl:NamedIndividual ,
+                    topo:OwnerClass ;
+           topo:ownerClassCode 3 .
+
+
+###  http://data.usgs.gov/lod/topo#Tribal
+topo:Tribal rdf:type owl:NamedIndividual ,
+                     topo:OwnerClass ;
+            topo:ownerClassCode 2 .
+
+
+###  http://data.usgs.gov/lod/topo#Turn-offLocation
+topo:Turn-offLocation rdf:type owl:NamedIndividual ,
+                               topo:PointLocationType ;
+                      topo:pointLocationTypeCode 3 .
+
+
+###  http://data.usgs.gov/lod/topo#USCapitol
+topo:USCapitol rdf:type owl:NamedIndividual ,
+                        topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#USSupremeCourt
+topo:USSupremeCourt rdf:type owl:NamedIndividual ,
+                             topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#Unknown
+topo:Unknown rdf:type owl:NamedIndividual ,
+                      topo:OwnerClass ;
+             topo:ownerClassCode 0 ;
+             topo:pointLocationTypeCode 0 ;
+             topo:yesNo 0 .
+
+
+###  http://data.usgs.gov/lod/topo#WhiteHouse
+topo:WhiteHouse rdf:type owl:NamedIndividual ,
+                         topo:GovernmentAndMilitary .
+
+
+###  http://data.usgs.gov/lod/topo#Yes
+topo:Yes rdf:type owl:NamedIndividual ;
+         topo:yesNo 1 .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+topo:shapeLength rdfs:comment "Length of the feature, which may differ from the field measured length due to differences in calculation. Units are map units" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

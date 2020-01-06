@@ -1,0 +1,2523 @@
+{
+  "_comment" : "Created with OWL2VOWL (version 0.3.7), http://vowl.visualdataweb.org",
+  "header" : {
+    "languages" : [ "undefined" ],
+    "baseIris" : [ "http://www.w3.org/1999/02/22-rdf-syntax-ns", "http://www.w3.org/2002/07/owl", "http://data.usgs.gov/lod/topo", "http://www.w3.org/2000/01/rdf-schema", "http://www.w3.org/2003/01/geo/wgs84_pos", "http://www.w3.org/2001/XMLSchema", "http://www.opengis.net/ont/geosparql" ],
+    "prefixList" : {
+      "w3cgeo" : "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "owl" : "http://www.w3.org/2002/07/owl#",
+      "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "topo" : "http://data.usgs.gov/lod/topo#",
+      "geosparql" : "http://www.opengis.net/ont/geosparql#",
+      "dcterms" : "http://purl.org/dc/terms/",
+      "xsd" : "http://www.w3.org/2001/XMLSchema#",
+      "" : "http://data.usgs.gov/lod/topo#",
+      "ogc" : "http://www.opengeospatial.org/standards/sfa#",
+      "xml" : "http://www.w3.org/XML/1998/namespace",
+      "rdfs" : "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "iri" : "http://data.usgs.gov/lod/structure",
+    "version" : "October 2019",
+    "description" : {
+      "undefined" : "Topographic feature data of The National Map of the U.S. Geological Survey"
+    },
+    "other" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "Spec-X Data Dictionary Report. https://usgs-mrs.cr.usgs.gov/SPECX/lookup/lookupQuery",
+        "type" : "label"
+      } ],
+      "versionInfo" : [ {
+        "identifier" : "versionInfo",
+        "language" : "undefined",
+        "value" : "October 2019",
+        "type" : "label"
+      } ]
+    }
+  },
+  "namespace" : [ ],
+  "class" : [ {
+    "id" : "0",
+    "type" : "owl:Class"
+  }, {
+    "id" : "6",
+    "type" : "owl:Class"
+  }, {
+    "id" : "7",
+    "type" : "owl:Class"
+  }, {
+    "id" : "14",
+    "type" : "owl:Class"
+  }, {
+    "id" : "8",
+    "type" : "owl:Class"
+  }, {
+    "id" : "37",
+    "type" : "owl:Class"
+  }, {
+    "id" : "40",
+    "type" : "owl:Class"
+  }, {
+    "id" : "46",
+    "type" : "owl:Class"
+  }, {
+    "id" : "47",
+    "type" : "owl:Class"
+  }, {
+    "id" : "49",
+    "type" : "owl:Class"
+  }, {
+    "id" : "51",
+    "type" : "owl:Class"
+  }, {
+    "id" : "17",
+    "type" : "owl:Class"
+  }, {
+    "id" : "30",
+    "type" : "owl:Class"
+  }, {
+    "id" : "43",
+    "type" : "owl:Class"
+  }, {
+    "id" : "1",
+    "type" : "owl:Class"
+  }, {
+    "id" : "63",
+    "type" : "owl:Class"
+  }, {
+    "id" : "64",
+    "type" : "owl:Class"
+  }, {
+    "id" : "66",
+    "type" : "owl:Class"
+  }, {
+    "id" : "67",
+    "type" : "owl:Class"
+  }, {
+    "id" : "15",
+    "type" : "owl:Class"
+  }, {
+    "id" : "45",
+    "type" : "owl:Class"
+  }, {
+    "id" : "72",
+    "type" : "owl:Class"
+  }, {
+    "id" : "20",
+    "type" : "owl:Class"
+  }, {
+    "id" : "62",
+    "type" : "owl:Class"
+  }, {
+    "id" : "59",
+    "type" : "owl:Class"
+  }, {
+    "id" : "4",
+    "type" : "owl:Class"
+  }, {
+    "id" : "75",
+    "type" : "owl:Class"
+  }, {
+    "id" : "50",
+    "type" : "owl:Class"
+  }, {
+    "id" : "77",
+    "type" : "owl:Class"
+  }, {
+    "id" : "79",
+    "type" : "owl:Class"
+  }, {
+    "id" : "69",
+    "type" : "owl:Class"
+  }, {
+    "id" : "33",
+    "type" : "owl:Class"
+  }, {
+    "id" : "65",
+    "type" : "owl:Class"
+  }, {
+    "id" : "26",
+    "type" : "owl:Class"
+  }, {
+    "id" : "74",
+    "type" : "owl:Class"
+  }, {
+    "id" : "24",
+    "type" : "owl:Class"
+  }, {
+    "id" : "38",
+    "type" : "owl:Class"
+  }, {
+    "id" : "18",
+    "type" : "owl:Class"
+  }, {
+    "id" : "87",
+    "type" : "owl:Class"
+  }, {
+    "id" : "88",
+    "type" : "owl:Class"
+  }, {
+    "id" : "35",
+    "type" : "owl:Class"
+  }, {
+    "id" : "2",
+    "type" : "owl:Class"
+  }, {
+    "id" : "60",
+    "type" : "owl:Class"
+  }, {
+    "id" : "80",
+    "type" : "owl:Class"
+  }, {
+    "id" : "81",
+    "type" : "owl:Class"
+  }, {
+    "id" : "82",
+    "type" : "owl:Class"
+  }, {
+    "id" : "83",
+    "type" : "owl:Class"
+  }, {
+    "id" : "53",
+    "type" : "owl:Class"
+  }, {
+    "id" : "57",
+    "type" : "owl:Class"
+  }, {
+    "id" : "31",
+    "type" : "owl:Class"
+  }, {
+    "id" : "5",
+    "type" : "owl:Class"
+  }, {
+    "id" : "25",
+    "type" : "owl:Class"
+  }, {
+    "id" : "28",
+    "type" : "owl:Class"
+  }, {
+    "id" : "41",
+    "type" : "owl:Class"
+  }, {
+    "id" : "120",
+    "type" : "rdfs:Literal"
+  }, {
+    "id" : "135",
+    "type" : "rdfs:Literal"
+  }, {
+    "id" : "48",
+    "type" : "owl:Class"
+  }, {
+    "id" : "136",
+    "type" : "rdfs:Literal"
+  }, {
+    "id" : "29",
+    "type" : "owl:Class"
+  }, {
+    "id" : "137",
+    "type" : "rdfs:Literal"
+  }, {
+    "id" : "10",
+    "type" : "owl:Thing"
+  }, {
+    "id" : "142",
+    "type" : "owl:Class"
+  }, {
+    "id" : "132",
+    "type" : "owl:Class"
+  }, {
+    "id" : "27",
+    "type" : "owl:Class"
+  }, {
+    "id" : "133",
+    "type" : "owl:Class"
+  }, {
+    "id" : "95",
+    "type" : "owl:Class"
+  }, {
+    "id" : "97",
+    "type" : "owl:Class"
+  }, {
+    "id" : "73",
+    "type" : "owl:Class"
+  }, {
+    "id" : "71",
+    "type" : "owl:Class"
+  }, {
+    "id" : "150",
+    "type" : "owl:Class"
+  }, {
+    "id" : "61",
+    "type" : "owl:Class"
+  }, {
+    "id" : "92",
+    "type" : "owl:Class"
+  }, {
+    "id" : "86",
+    "type" : "owl:Class"
+  }, {
+    "id" : "70",
+    "type" : "owl:Class"
+  }, {
+    "id" : "78",
+    "type" : "owl:Class"
+  }, {
+    "id" : "139",
+    "type" : "owl:Class"
+  }, {
+    "id" : "3",
+    "type" : "owl:Class"
+  }, {
+    "id" : "84",
+    "type" : "owl:Class"
+  }, {
+    "id" : "55",
+    "type" : "owl:Class"
+  }, {
+    "id" : "103",
+    "type" : "owl:Class"
+  }, {
+    "id" : "68",
+    "type" : "owl:Class"
+  }, {
+    "id" : "143",
+    "type" : "owl:Class"
+  }, {
+    "id" : "85",
+    "type" : "owl:Class"
+  }, {
+    "id" : "21",
+    "type" : "owl:Class"
+  } ],
+  "classAttribute" : [ {
+    "iri" : "http://data.usgs.gov/lod/topo#EmergencyResponseLawEnforcement",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EmergencyResponseLawEnforcement"
+    },
+    "subClasses" : [ "2", "3", "4", "5" ],
+    "attributes" : [ "external" ],
+    "id" : "0",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Name",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Name"
+    },
+    "attributes" : [ "external" ],
+    "id" : "6"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Cemetery",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Cemetery"
+    },
+    "attributes" : [ "external" ],
+    "id" : "7",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#750",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "750"
+    },
+    "attributes" : [ "external" ],
+    "id" : "14",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#PublicAttractionAndLandmarkBuilding",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "PublicAttractionAndLandmarkBuilding"
+    },
+    "subClasses" : [ "25", "26", "27", "28", "29", "30", "7", "31" ],
+    "attributes" : [ "external" ],
+    "id" : "8",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#75017",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "75017"
+    },
+    "attributes" : [ "external" ],
+    "id" : "37",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#StateCapitol",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "StateCapitol"
+    },
+    "attributes" : [ "external" ],
+    "id" : "40",
+    "superClasses" : [ "41" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#CityTownHall",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "CityTownHall"
+    },
+    "attributes" : [ "external" ],
+    "id" : "46",
+    "superClasses" : [ "41" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#HighSchool",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "HighSchool"
+    },
+    "attributes" : [ "external" ],
+    "id" : "47",
+    "superClasses" : [ "48" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#HealthAndMedical",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "HealthAndMedical"
+    },
+    "subClasses" : [ "50" ],
+    "attributes" : [ "external" ],
+    "id" : "49",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#740",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "740"
+    },
+    "attributes" : [ "external" ],
+    "id" : "51",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#List",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "List"
+    },
+    "attributes" : [ "external" ],
+    "id" : "17",
+    "superClasses" : [ "18" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Campground",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Campground"
+    },
+    "attributes" : [ "external" ],
+    "id" : "30",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#GNIS_ID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "GNIS_ID"
+    },
+    "attributes" : [ "external" ],
+    "id" : "43",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://www.opengis.net/ont/geosparql#Feature",
+    "baseIri" : "http://www.opengis.net/ont/geosparql",
+    "instances" : 0,
+    "annotations" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://www.opengis.net/spec/geosparql/1.0",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "Feature"
+    },
+    "subClasses" : [ "0", "61", "49", "8", "62", "41", "48" ],
+    "comment" : {
+      "undefined" : "This class represents the top-level feature type. This class is equivalent to GFI_Feature defined in ISO 19156, and it is superclass of all feature types."
+    },
+    "attributes" : [ "external" ],
+    "id" : "1",
+    "superClasses" : [ "60" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#School",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "School"
+    },
+    "attributes" : [ "external" ],
+    "id" : "63",
+    "superClasses" : [ "48" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#AdminType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "AdminType"
+    },
+    "comment" : {
+      "undefined" : "The type of organization with administrative responsibility for a feature."
+    },
+    "attributes" : [ "external" ],
+    "id" : "64",
+    "superClasses" : [ "65" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#730",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "730"
+    },
+    "attributes" : [ "external" ],
+    "id" : "66",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Headquarters",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Headquarters"
+    },
+    "attributes" : [ "external" ],
+    "id" : "67",
+    "superClasses" : [ "41" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#FType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "FType"
+    },
+    "subClasses" : [ "68", "69", "51", "14", "70", "71", "66" ],
+    "attributes" : [ "external" ],
+    "id" : "15",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Complex_ID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Complex_ID"
+    },
+    "comment" : {
+      "undefined" : "Permanent identifier of the structure in the Structure_Complex feature class."
+    },
+    "attributes" : [ "external" ],
+    "id" : "45",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Structure_Complex",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Structure_Complex"
+    },
+    "attributes" : [ "external" ],
+    "id" : "72",
+    "superClasses" : [ "73" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#OBJECTID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "OBJECTID"
+    },
+    "attributes" : [ "external" ],
+    "id" : "20",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Energy",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Energy"
+    },
+    "subClasses" : [ "74" ],
+    "attributes" : [ "external" ],
+    "id" : "62",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Statement"
+    },
+    "attributes" : [ "external" ],
+    "id" : "59",
+    "superClasses" : [ "18" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#LawEnforcement",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "LawEnforcement"
+    },
+    "attributes" : [ "external" ],
+    "id" : "4",
+    "superClasses" : [ "0" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#CollegeUniversity",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "CollegeUniversity"
+    },
+    "attributes" : [ "external" ],
+    "id" : "75",
+    "superClasses" : [ "48" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#HospitalMedicalCenter",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "HospitalMedicalCenter"
+    },
+    "attributes" : [ "external" ],
+    "id" : "50",
+    "superClasses" : [ "49" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#MeasurementUnit",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MeasurementUnit"
+    },
+    "subClasses" : [ "78" ],
+    "attributes" : [ "external" ],
+    "id" : "77"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#PostOffice",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "PostOffice"
+    },
+    "attributes" : [ "external" ],
+    "id" : "79",
+    "superClasses" : [ "61" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#780",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "780"
+    },
+    "attributes" : [ "external" ],
+    "id" : "69",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#PointLocationType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "PointLocationType"
+    },
+    "individuals" : [ {
+      "iri" : "http://data.usgs.gov/lod/topo#EgressEntrance",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "EgressEntrance"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Approximate",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Approximate"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Centroid",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Centroid"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Turn-offLocation",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Turn-offLocation"
+      }
+    } ],
+    "attributes" : [ "external" ],
+    "id" : "33",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Organization",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Organization"
+    },
+    "subClasses" : [ "64" ],
+    "attributes" : [ "external" ],
+    "id" : "65"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#VisitorCenter",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "VisitorCenter"
+    },
+    "attributes" : [ "external" ],
+    "id" : "26",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#OilGasPipeline",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "OilGasPipeline"
+    },
+    "attributes" : [ "external" ],
+    "id" : "74",
+    "superClasses" : [ "62" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Foot_ID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Foot_ID"
+    },
+    "comment" : {
+      "undefined" : "Permanent identifier of the structure in the Structure_Footprint feature class."
+    },
+    "attributes" : [ "external" ],
+    "id" : "24",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#FCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "FCode"
+    },
+    "subClasses" : [ "80", "81", "82", "37", "83", "84", "85", "86", "55", "53", "57" ],
+    "attributes" : [ "external" ],
+    "id" : "38",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Class",
+    "baseIri" : "http://www.w3.org/2000/01/rdf-schema",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Class"
+    },
+    "subClasses" : [ "59", "17" ],
+    "attributes" : [ "external" ],
+    "id" : "18"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Elementary",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Elementary"
+    },
+    "attributes" : [ "external" ],
+    "id" : "87",
+    "superClasses" : [ "48" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#StateSupremeCourt",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "StateSupremeCourt"
+    },
+    "attributes" : [ "external" ],
+    "id" : "88",
+    "superClasses" : [ "41" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#OwnerClass",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "OwnerClass"
+    },
+    "individuals" : [ {
+      "iri" : "http://data.usgs.gov/lod/topo#Municipal",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Municipal"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Tribal",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Tribal"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Regional",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Regional"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#County",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "County"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Unknown",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Unknown"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#State",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "State"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Private",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Private"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#Federal",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "Federal"
+      }
+    } ],
+    "attributes" : [ "external" ],
+    "id" : "35",
+    "superClasses" : [ "21" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#FireStationEMSStation",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "FireStationEMSStation"
+    },
+    "attributes" : [ "external" ],
+    "id" : "2",
+    "superClasses" : [ "0" ]
+  }, {
+    "iri" : "http://www.opengis.net/ont/geosparql#SpatialObject",
+    "baseIri" : "http://www.opengis.net/ont/geosparql",
+    "instances" : 0,
+    "annotations" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://www.opengis.net/spec/geosparql/1.0",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "SpatialObject",
+      "undefined" : "Spatial Object"
+    },
+    "subClasses" : [ "1", "92" ],
+    "comment" : {
+      "undefined" : "The class Spatial Object represents everything that can have a spatial representation. It is superclass of Feature and Geometry."
+    },
+    "attributes" : [ "external" ],
+    "id" : "60"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#73005",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "73005"
+    },
+    "attributes" : [ "external" ],
+    "id" : "80",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#73004",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "73004"
+    },
+    "attributes" : [ "external" ],
+    "id" : "81",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#73007",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "73007"
+    },
+    "attributes" : [ "external" ],
+    "id" : "82",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#73006",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "73006"
+    },
+    "attributes" : [ "external" ],
+    "id" : "83",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#73003",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "73003"
+    },
+    "attributes" : [ "external" ],
+    "id" : "53",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#73002",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "73002"
+    },
+    "attributes" : [ "external" ],
+    "id" : "57",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Trailhead",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Trailhead"
+    },
+    "attributes" : [ "external" ],
+    "id" : "31",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#AmbulanceService",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "AmbulanceService"
+    },
+    "attributes" : [ "external" ],
+    "id" : "5",
+    "superClasses" : [ "0" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#PicnicArea",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "PicnicArea"
+    },
+    "attributes" : [ "external" ],
+    "id" : "25",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#NationalSymbolMonument",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "NationalSymbolMonument"
+    },
+    "attributes" : [ "external" ],
+    "id" : "28",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#GovernmentAndMilitary",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "GovernmentAndMilitary"
+    },
+    "individuals" : [ {
+      "iri" : "http://data.usgs.gov/lod/topo#USSupremeCourt",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "USSupremeCourt"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#WhiteHouse",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "WhiteHouse"
+      }
+    }, {
+      "iri" : "http://data.usgs.gov/lod/topo#USCapitol",
+      "baseIri" : "http://data.usgs.gov/lod/topo",
+      "labels" : {
+        "IRI-based" : "USCapitol"
+      }
+    } ],
+    "subClasses" : [ "46", "67", "132", "40", "133", "88" ],
+    "attributes" : [ "external" ],
+    "id" : "41",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "id" : "120",
+    "label" : {
+      "IRI-based" : "Literal",
+      "undefined" : "Literal"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "id" : "135",
+    "label" : {
+      "IRI-based" : "Literal",
+      "undefined" : "Literal"
+    }
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Education",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Education"
+    },
+    "subClasses" : [ "97", "47", "87", "63", "75", "103" ],
+    "attributes" : [ "external" ],
+    "id" : "48",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "id" : "136",
+    "label" : {
+      "IRI-based" : "Literal",
+      "undefined" : "Literal"
+    }
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Cabin",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Cabin"
+    },
+    "attributes" : [ "external" ],
+    "id" : "29",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "id" : "137",
+    "label" : {
+      "IRI-based" : "Literal",
+      "undefined" : "Literal"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2002/07/owl#Thing",
+    "baseIri" : "http://owl2vowl.de",
+    "id" : "10",
+    "label" : {
+      "undefined" : "Thing"
+    }
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Address",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Address"
+    },
+    "subClasses" : [ "143" ],
+    "comment" : {
+      "undefined" : "The street address of the feature."
+    },
+    "attributes" : [ "external" ],
+    "id" : "142"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#CourtHouse",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "CourtHouse"
+    },
+    "attributes" : [ "external" ],
+    "id" : "132",
+    "superClasses" : [ "41" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#HistoricSitePointOfInterest",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "HistoricSitePointOfInterest"
+    },
+    "attributes" : [ "external" ],
+    "id" : "27",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#RangerStation",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "RangerStation"
+    },
+    "attributes" : [ "external" ],
+    "id" : "133",
+    "superClasses" : [ "41" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Struct_Line",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Struct_Line"
+    },
+    "comment" : {
+      "undefined" : "A feature class representing the location of a building or other structure as a linear feature"
+    },
+    "attributes" : [ "external" ],
+    "id" : "95",
+    "superClasses" : [ "73" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#TechnicalTradeSchool",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "TechnicalTradeSchool"
+    },
+    "attributes" : [ "external" ],
+    "id" : "97",
+    "superClasses" : [ "48" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#FeatureClass",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "FeatureClass"
+    },
+    "subClasses" : [ "95", "72", "139" ],
+    "comment" : {
+      "undefined" : "A geometry type representing a feature"
+    },
+    "attributes" : [ "external" ],
+    "id" : "73",
+    "superClasses" : [ "150" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#830",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "830"
+    },
+    "attributes" : [ "external" ],
+    "id" : "71",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#TNMKB",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "TNMKB"
+    },
+    "subClasses" : [ "73" ],
+    "comment" : {
+      "undefined" : "The data models inherent to The National Map themes"
+    },
+    "attributes" : [ "external" ],
+    "id" : "150"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#MailAndShipping",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MailAndShipping"
+    },
+    "subClasses" : [ "79" ],
+    "attributes" : [ "external" ],
+    "id" : "61",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://www.opengis.net/ont/geosparql#Geometry",
+    "baseIri" : "http://www.opengis.net/ont/geosparql",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Geometry"
+    },
+    "attributes" : [ "external" ],
+    "id" : "92",
+    "superClasses" : [ "60" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#74001",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "74001"
+    },
+    "attributes" : [ "external" ],
+    "id" : "86",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#820",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "820"
+    },
+    "attributes" : [ "external" ],
+    "id" : "70",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#MapUnit",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MapUnit"
+    },
+    "attributes" : [ "external" ],
+    "id" : "78",
+    "superClasses" : [ "77" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Struct_Point",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Struct_Point"
+    },
+    "comment" : {
+      "undefined" : "A feature class representing the location of a building or other structure as a point"
+    },
+    "attributes" : [ "external" ],
+    "id" : "139",
+    "superClasses" : [ "73" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#PrisonCorrectionalFacility",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "PrisonCorrectionalFacility"
+    },
+    "attributes" : [ "external" ],
+    "id" : "3",
+    "superClasses" : [ "0" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#74036",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "74036"
+    },
+    "attributes" : [ "external" ],
+    "id" : "84",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#74034",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "74034"
+    },
+    "attributes" : [ "external" ],
+    "id" : "55",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#MiddleSchool",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MiddleSchool"
+    },
+    "attributes" : [ "external" ],
+    "id" : "103",
+    "superClasses" : [ "48" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#800",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "800"
+    },
+    "attributes" : [ "external" ],
+    "id" : "68",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#AddressBuildingName",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "AddressBuildingName"
+    },
+    "comment" : {
+      "undefined" : "Name of the building housing the function. For example, Springfield Municipal Building is the name of the building housing the police department for the city of Springfield."
+    },
+    "attributes" : [ "external" ],
+    "id" : "143",
+    "superClasses" : [ "142" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#74026",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "74026"
+    },
+    "attributes" : [ "external" ],
+    "id" : "85",
+    "superClasses" : [ "38" ]
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#Code",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Code"
+    },
+    "subClasses" : [ "20", "15", "24", "33", "35", "38", "43", "45" ],
+    "attributes" : [ "external" ],
+    "id" : "21"
+  } ],
+  "property" : [ {
+    "id" : "9",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "16",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "19",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "22",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "23",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "32",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "34",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "36",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "39",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "42",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "44",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "52",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "54",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "56",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "58",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "76",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "89",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "90",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "91",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "93",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "94",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "96",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "98",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "99",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "100",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "101",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "102",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "104",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "105",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "106",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "107",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "108",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "109",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "110",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "111",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "112",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "113",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "114",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "115",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "116",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "117",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "118",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "119",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "121",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "122",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "123",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "124",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "125",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "126",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "127",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "128",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "129",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "130",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "131",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "134",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "138",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "140",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "141",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "144",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "145",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "146",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "147",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "148",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "149",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "151",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "152",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "153",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "154",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "155",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "156",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "157",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "158",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "159",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "160",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "161",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "162",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "163",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "164",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "165",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "166",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "167",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "168",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "169",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "170",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "171",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "172",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "173",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "174",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "175",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "176",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "177",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "178",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "179",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "180",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "181",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "182",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "183",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "184",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "185",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "186",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "187",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "188",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "189",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "190",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "191",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "192",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "193",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "194",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "195",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "196",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "197",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "198",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "199",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "200",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "201",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "202",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "203",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "204",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "205",
+    "type" : "rdfs:SubClassOf"
+  } ],
+  "propertyAttribute" : [ {
+    "iri" : "http://www.w3.org/2002/07/owl#topObjectProperty",
+    "baseIri" : "http://www.w3.org/2002/07/owl",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "topObjectProperty"
+    },
+    "domain" : "10",
+    "subproperty" : [ "11", "12", "13" ],
+    "attributes" : [ "external", "object" ],
+    "id" : "9"
+  }, {
+    "range" : "18",
+    "domain" : "17",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "16"
+  }, {
+    "range" : "21",
+    "domain" : "20",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "19"
+  }, {
+    "range" : "21",
+    "domain" : "15",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "22"
+  }, {
+    "range" : "21",
+    "domain" : "24",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "23"
+  }, {
+    "range" : "21",
+    "domain" : "33",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "32"
+  }, {
+    "range" : "21",
+    "domain" : "35",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "34"
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "subject"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "36"
+  }, {
+    "range" : "21",
+    "domain" : "38",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "39"
+  }, {
+    "range" : "21",
+    "domain" : "43",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "42"
+  }, {
+    "range" : "21",
+    "domain" : "45",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "44"
+  }, {
+    "range" : "38",
+    "domain" : "53",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "52"
+  }, {
+    "range" : "38",
+    "domain" : "55",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "54"
+  }, {
+    "range" : "38",
+    "domain" : "57",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "56"
+  }, {
+    "range" : "18",
+    "domain" : "59",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "58"
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "object"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "76"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#administers",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "1",
+    "label" : {
+      "IRI-based" : "administers"
+    },
+    "domain" : "64",
+    "attributes" : [ "external", "object" ],
+    "id" : "89"
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "rest"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "90"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#subType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "73",
+    "label" : {
+      "IRI-based" : "subType"
+    },
+    "superproperty" : [ "9", "12" ],
+    "domain" : "92",
+    "subproperty" : [ "12" ],
+    "comment" : {
+      "undefined" : "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map."
+    },
+    "attributes" : [ "symmetric", "external", "someValues", "object" ],
+    "id" : "91"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "63",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "57",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "93"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#subType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "95",
+    "label" : {
+      "IRI-based" : "subType"
+    },
+    "superproperty" : [ "9", "12" ],
+    "domain" : "14",
+    "subproperty" : [ "12" ],
+    "comment" : {
+      "undefined" : "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map."
+    },
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "94"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "82",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "97",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "96"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "80",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "47",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "98"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "62",
+    "label" : {
+      "IRI-based" : "fType"
+    },
+    "superproperty" : [ "9", "13" ],
+    "domain" : "14",
+    "subproperty" : [ "13" ],
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "99"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#subType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "92",
+    "label" : {
+      "IRI-based" : "subType"
+    },
+    "superproperty" : [ "9", "12" ],
+    "domain" : "73",
+    "subproperty" : [ "12" ],
+    "comment" : {
+      "undefined" : "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map."
+    },
+    "attributes" : [ "symmetric", "external", "someValues", "object" ],
+    "id" : "100"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "87",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "53",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "101"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "103",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "81",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "102"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "47",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "80",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "104"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "75",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "83",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "105"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "51",
+    "label" : {
+      "IRI-based" : "fType"
+    },
+    "superproperty" : [ "9", "13" ],
+    "domain" : "0",
+    "subproperty" : [ "13" ],
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "106"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "85",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "2",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "107"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "97",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "82",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "108"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "53",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "87",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "109"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "86",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "5",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "110"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "83",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "75",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "111"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "55",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "4",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "112"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "66",
+    "label" : {
+      "IRI-based" : "fType"
+    },
+    "superproperty" : [ "9", "13" ],
+    "domain" : "48",
+    "subproperty" : [ "13" ],
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "113"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "48",
+    "label" : {
+      "IRI-based" : "fType"
+    },
+    "superproperty" : [ "9", "13" ],
+    "domain" : "66",
+    "subproperty" : [ "13" ],
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "114"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "4",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "55",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "115"
+  }, {
+    "range" : "8",
+    "domain" : "30",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "116"
+  }, {
+    "range" : "8",
+    "domain" : "31",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "117"
+  }, {
+    "range" : "8",
+    "domain" : "7",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "118"
+  }, {
+    "iri" : "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+    "baseIri" : "http://www.w3.org/2003/01/geo/wgs84_pos",
+    "range" : "120",
+    "label" : {
+      "IRI-based" : "long"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "119"
+  }, {
+    "range" : "8",
+    "domain" : "27",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "121"
+  }, {
+    "range" : "8",
+    "domain" : "26",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "122"
+  }, {
+    "range" : "8",
+    "domain" : "29",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "123"
+  }, {
+    "range" : "8",
+    "domain" : "28",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "124"
+  }, {
+    "range" : "60",
+    "domain" : "1",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "125"
+  }, {
+    "range" : "0",
+    "domain" : "5",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "126"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#pointLocationType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "pointLocationType"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "127"
+  }, {
+    "range" : "8",
+    "domain" : "25",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "128"
+  }, {
+    "range" : "60",
+    "domain" : "92",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "129"
+  }, {
+    "range" : "0",
+    "domain" : "4",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "130"
+  }, {
+    "range" : "0",
+    "domain" : "3",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "131"
+  }, {
+    "range" : "0",
+    "domain" : "2",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "134"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#subType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "51",
+    "label" : {
+      "IRI-based" : "subType"
+    },
+    "superproperty" : [ "9", "12" ],
+    "domain" : "139",
+    "subproperty" : [ "12" ],
+    "comment" : {
+      "undefined" : "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map."
+    },
+    "attributes" : [ "symmetric", "external", "someValues", "object" ],
+    "id" : "138"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "74",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "37",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "140"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#subType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "66",
+    "label" : {
+      "IRI-based" : "subType"
+    },
+    "superproperty" : [ "9", "12" ],
+    "domain" : "139",
+    "subproperty" : [ "12" ],
+    "comment" : {
+      "undefined" : "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map."
+    },
+    "attributes" : [ "symmetric", "external", "someValues", "object" ],
+    "id" : "141"
+  }, {
+    "range" : "41",
+    "domain" : "133",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "144"
+  }, {
+    "range" : "41",
+    "domain" : "40",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "145"
+  }, {
+    "range" : "62",
+    "domain" : "74",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "146"
+  }, {
+    "range" : "41",
+    "domain" : "88",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "147"
+  }, {
+    "range" : "41",
+    "domain" : "132",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "148"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#foot_ID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "foot_ID"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "149"
+  }, {
+    "range" : "41",
+    "domain" : "67",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "151"
+  }, {
+    "range" : "41",
+    "domain" : "46",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "152"
+  }, {
+    "range" : "15",
+    "domain" : "70",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "153"
+  }, {
+    "range" : "15",
+    "domain" : "14",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "154"
+  }, {
+    "range" : "15",
+    "domain" : "66",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "155"
+  }, {
+    "range" : "15",
+    "domain" : "71",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "156"
+  }, {
+    "range" : "15",
+    "domain" : "68",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "157"
+  }, {
+    "range" : "1",
+    "domain" : "48",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "158"
+  }, {
+    "range" : "15",
+    "domain" : "51",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "159"
+  }, {
+    "range" : "15",
+    "domain" : "69",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "160"
+  }, {
+    "iri" : "http://www.opengis.net/ont/geosparql#hasGeometry",
+    "baseIri" : "http://www.opengis.net/ont/geosparql",
+    "range" : "92",
+    "label" : {
+      "IRI-based" : "hasGeometry"
+    },
+    "domain" : "1",
+    "attributes" : [ "external", "object" ],
+    "id" : "161"
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "predicate"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "162"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#yesNo",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "135",
+    "label" : {
+      "IRI-based" : "yesNo"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "163"
+  }, {
+    "range" : "1",
+    "domain" : "62",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "164"
+  }, {
+    "range" : "1",
+    "domain" : "8",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "165"
+  }, {
+    "range" : "1",
+    "domain" : "41",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "166"
+  }, {
+    "range" : "1",
+    "domain" : "0",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "167"
+  }, {
+    "range" : "49",
+    "domain" : "50",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "168"
+  }, {
+    "range" : "1",
+    "domain" : "49",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "169"
+  }, {
+    "range" : "1",
+    "domain" : "61",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "170"
+  }, {
+    "range" : "38",
+    "domain" : "84",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "171"
+  }, {
+    "range" : "38",
+    "domain" : "83",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "172"
+  }, {
+    "range" : "38",
+    "domain" : "86",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "173"
+  }, {
+    "range" : "38",
+    "domain" : "85",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "174"
+  }, {
+    "range" : "38",
+    "domain" : "81",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "175"
+  }, {
+    "range" : "38",
+    "domain" : "37",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "176"
+  }, {
+    "range" : "38",
+    "domain" : "82",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "177"
+  }, {
+    "iri" : "http://www.opengis.net/ont/geosparql#hasGeometry",
+    "baseIri" : "http://www.opengis.net/ont/geosparql",
+    "range" : "92",
+    "label" : {
+      "IRI-based" : "hasGeometry"
+    },
+    "domain" : "1",
+    "attributes" : [ "external", "someValues", "object" ],
+    "id" : "178"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#name",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "6",
+    "label" : {
+      "IRI-based" : "name"
+    },
+    "domain" : "1",
+    "attributes" : [ "external", "someValues", "object" ],
+    "id" : "179"
+  }, {
+    "range" : "92",
+    "domain" : "1",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "180"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "37",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "74",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "181"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#pointLocationTypeCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "137",
+    "label" : {
+      "IRI-based" : "pointLocationTypeCode"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "182"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "84",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "3",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "183"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "57",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "63",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "184"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#subType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "subType"
+    },
+    "superproperty" : [ "9", "12" ],
+    "domain" : "95",
+    "subproperty" : [ "12" ],
+    "comment" : {
+      "undefined" : "SubTypes define FeatureTypes (FTypes) of geometry Feature Classes of The National Map."
+    },
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "185"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "fType"
+    },
+    "superproperty" : [ "9", "13" ],
+    "domain" : "62",
+    "subproperty" : [ "13" ],
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "186"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#objectID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "objectID"
+    },
+    "domain" : "10",
+    "attributes" : [ "external", "object" ],
+    "id" : "187"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fCode",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "81",
+    "label" : {
+      "IRI-based" : "fCode"
+    },
+    "superproperty" : [ "9" ],
+    "domain" : "103",
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "188"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#fType",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "0",
+    "label" : {
+      "IRI-based" : "fType"
+    },
+    "superproperty" : [ "9", "13" ],
+    "domain" : "51",
+    "subproperty" : [ "13" ],
+    "attributes" : [ "symmetric", "external", "object", "allValues" ],
+    "id" : "189"
+  }, {
+    "range" : "77",
+    "domain" : "78",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "190"
+  }, {
+    "range" : "61",
+    "domain" : "79",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "191"
+  }, {
+    "range" : "38",
+    "domain" : "80",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "192"
+  }, {
+    "range" : "65",
+    "domain" : "64",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "193"
+  }, {
+    "range" : "73",
+    "domain" : "72",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "194"
+  }, {
+    "range" : "73",
+    "domain" : "95",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "195"
+  }, {
+    "range" : "150",
+    "domain" : "73",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "196"
+  }, {
+    "range" : "73",
+    "domain" : "139",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "197"
+  }, {
+    "range" : "142",
+    "domain" : "143",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "198"
+  }, {
+    "range" : "48",
+    "domain" : "103",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "199"
+  }, {
+    "iri" : "http://data.usgs.gov/lod/topo#gnis_ID",
+    "baseIri" : "http://data.usgs.gov/lod/topo",
+    "range" : "43",
+    "label" : {
+      "IRI-based" : "gnis_ID"
+    },
+    "domain" : "6",
+    "attributes" : [ "external", "object" ],
+    "id" : "200"
+  }, {
+    "range" : "48",
+    "domain" : "75",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "201"
+  }, {
+    "range" : "48",
+    "domain" : "47",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "202"
+  }, {
+    "range" : "48",
+    "domain" : "97",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "203"
+  }, {
+    "range" : "48",
+    "domain" : "63",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "204"
+  }, {
+    "range" : "48",
+    "domain" : "87",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "205"
+  } ]
+}

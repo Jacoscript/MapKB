@@ -1,0 +1,343 @@
+{
+  "_comment" : "Example 1 Created with OWL2VOWL (version 0.3.7), http://vowl.visualdataweb.org",
+  "header" : {
+    "baseIris" : [ "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example", "http://www.w3.org/2000/01/rdf-schema", "http://www.w3.org/2001/XMLSchema" ],
+    "prefixList" : {
+      "owl" : "http://www.w3.org/2002/07/owl#",
+      "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "xsd" : "http://www.w3.org/2001/XMLSchema#",
+      "" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#",
+      "University_Example" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#",
+      "xml" : "http://www.w3.org/XML/1998/namespace",
+      "rdfs" : "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example"
+  },
+  "namespace" : [ ],
+  "class" : [ {
+    "id" : "0",
+    "type" : "owl:Class"
+  }, {
+    "id" : "11",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "12",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "13",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "15",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "1",
+    "type" : "owl:Class"
+  }, {
+    "id" : "4",
+    "type" : "owl:Class"
+  }, {
+    "id" : "8",
+    "type" : "owl:Class"
+  }, {
+    "id" : "2",
+    "type" : "owl:Class"
+  }, {
+    "id" : "6",
+    "type" : "owl:Class"
+  } ],
+  "classAttribute" : [ {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Person",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Person"
+    },
+    "subClasses" : [ "1", "2" ],
+    "id" : "0"
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "11",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#integer",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "12",
+    "label" : {
+      "IRI-based" : "integer"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "13",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#integer",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "15",
+    "label" : {
+      "IRI-based" : "integer"
+    }
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Lecturer",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Lecturer"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Lecturer2",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "Lecturer2"
+      }
+    }, {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Lecturer1",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "Lecturer1"
+      }
+    } ],
+    "id" : "1",
+    "superClasses" : [ "0" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Module",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Module"
+    },
+    "subClasses" : [ "8", "6" ],
+    "id" : "4"
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#MathMod",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MathMod"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Math201",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "Math201"
+      }
+    }, {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Math204",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "Math204"
+      }
+    } ],
+    "id" : "8",
+    "superClasses" : [ "4" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Student",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Student"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Student1",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "Student1"
+      }
+    }, {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#Student2",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "Student2"
+      }
+    } ],
+    "id" : "2",
+    "superClasses" : [ "0" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#CSMod",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "CSMod"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#CS103",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "CS103"
+      }
+    }, {
+      "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#CS101",
+      "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+      "labels" : {
+        "IRI-based" : "CS101"
+      }
+    } ],
+    "id" : "6",
+    "superClasses" : [ "4" ]
+  } ],
+  "property" : [ {
+    "id" : "3",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "5",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "7",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "9",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "10",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "14",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "16",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "17",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "18",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "19",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "20",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "21",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "22",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "23",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "24",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "25",
+    "type" : "rdfs:SubClassOf"
+  } ],
+  "propertyAttribute" : [ {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#teaches",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "range" : "4",
+    "label" : {
+      "IRI-based" : "teaches"
+    },
+    "domain" : "1",
+    "attributes" : [ "object" ],
+    "id" : "3"
+  }, {
+    "range" : "6",
+    "domain" : "2",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "5"
+  }, {
+    "range" : "8",
+    "domain" : "1",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "7"
+  }, {
+    "range" : "2",
+    "domain" : "1",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "9"
+  }, {
+    "range" : "2",
+    "domain" : "8",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "10"
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#StaffID",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "range" : "12",
+    "label" : {
+      "IRI-based" : "StaffID"
+    },
+    "domain" : "1",
+    "attributes" : [ "datatype" ],
+    "id" : "14"
+  }, {
+    "range" : "6",
+    "domain" : "1",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "16"
+  }, {
+    "range" : "6",
+    "domain" : "8",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "17"
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#studies",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "range" : "4",
+    "label" : {
+      "IRI-based" : "studies"
+    },
+    "domain" : "2",
+    "attributes" : [ "object" ],
+    "id" : "18"
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#LastName",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "range" : "11",
+    "label" : {
+      "IRI-based" : "LastName"
+    },
+    "domain" : "0",
+    "attributes" : [ "datatype" ],
+    "id" : "19"
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#FirstName",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "range" : "13",
+    "label" : {
+      "IRI-based" : "FirstName"
+    },
+    "domain" : "0",
+    "attributes" : [ "datatype" ],
+    "id" : "20"
+  }, {
+    "iri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example#StudentID",
+    "baseIri" : "http://www.semanticweb.org/tfry/ontologies/2019/11/University_Example",
+    "range" : "15",
+    "label" : {
+      "IRI-based" : "StudentID"
+    },
+    "domain" : "2",
+    "attributes" : [ "datatype" ],
+    "id" : "21"
+  }, {
+    "range" : "4",
+    "domain" : "6",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "22"
+  }, {
+    "range" : "0",
+    "domain" : "1",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "23"
+  }, {
+    "range" : "4",
+    "domain" : "8",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "24"
+  }, {
+    "range" : "0",
+    "domain" : "2",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "25"
+  } ]
+}

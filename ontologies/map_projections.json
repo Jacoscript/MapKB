@@ -1,0 +1,1360 @@
+{
+  "_comment" : "Created with OWL2VOWL (version 0.3.7), http://vowl.visualdataweb.org",
+  "header" : {
+    "languages" : [ "undefined" ],
+    "baseIris" : [ "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56", "http://www.w3.org/2000/01/rdf-schema", "http://www.w3.org/2001/XMLSchema" ],
+    "prefixList" : {
+      "has" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#has:",
+      "owl" : "http://www.w3.org/2002/07/owl#",
+      "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "terms" : "http://purl.org/dc/terms/",
+      "xsd" : "http://www.w3.org/2001/XMLSchema#",
+      "" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#",
+      "xml" : "http://www.w3.org/XML/1998/namespace",
+      "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+      "untitled-ontology-56" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#"
+    },
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56"
+  },
+  "namespace" : [ ],
+  "class" : [ {
+    "id" : "0",
+    "type" : "owl:Thing"
+  }, {
+    "id" : "2",
+    "type" : "owl:Class"
+  }, {
+    "id" : "4",
+    "type" : "owl:Class"
+  }, {
+    "id" : "30",
+    "type" : "owl:Class"
+  }, {
+    "id" : "31",
+    "type" : "owl:Class"
+  }, {
+    "id" : "48",
+    "type" : "owl:Class"
+  }, {
+    "id" : "53",
+    "type" : "owl:Class"
+  }, {
+    "id" : "26",
+    "type" : "owl:Class"
+  }, {
+    "id" : "50",
+    "type" : "owl:Class"
+  }, {
+    "id" : "40",
+    "type" : "owl:Class"
+  }, {
+    "id" : "24",
+    "type" : "owl:Class"
+  }, {
+    "id" : "62",
+    "type" : "owl:Class"
+  }, {
+    "id" : "20",
+    "type" : "owl:Class"
+  }, {
+    "id" : "70",
+    "type" : "owl:Class"
+  }, {
+    "id" : "47",
+    "type" : "owl:Class"
+  }, {
+    "id" : "42",
+    "type" : "owl:Class"
+  }, {
+    "id" : "78",
+    "type" : "owl:Thing"
+  }, {
+    "id" : "85",
+    "type" : "owl:Class"
+  }, {
+    "id" : "44",
+    "type" : "owl:Class"
+  }, {
+    "id" : "32",
+    "type" : "owl:Class"
+  }, {
+    "id" : "80",
+    "type" : "owl:Class"
+  }, {
+    "id" : "18",
+    "type" : "owl:Class"
+  }, {
+    "id" : "5",
+    "type" : "owl:Class"
+  }, {
+    "id" : "96",
+    "type" : "owl:Class"
+  }, {
+    "id" : "6",
+    "type" : "owl:Class"
+  }, {
+    "id" : "88",
+    "type" : "owl:Class"
+  }, {
+    "id" : "103",
+    "type" : "owl:Class"
+  }, {
+    "id" : "7",
+    "type" : "owl:Class"
+  }, {
+    "id" : "14",
+    "type" : "owl:Class"
+  }, {
+    "id" : "10",
+    "type" : "owl:Class"
+  }, {
+    "id" : "76",
+    "type" : "owl:Class"
+  }, {
+    "id" : "16",
+    "type" : "owl:Class"
+  }, {
+    "id" : "36",
+    "type" : "owl:Class"
+  }, {
+    "id" : "12",
+    "type" : "owl:Class"
+  }, {
+    "id" : "63",
+    "type" : "owl:Class"
+  }, {
+    "id" : "22",
+    "type" : "owl:Class"
+  }, {
+    "id" : "52",
+    "type" : "owl:Class"
+  }, {
+    "id" : "104",
+    "type" : "owl:Class"
+  }, {
+    "id" : "8",
+    "type" : "owl:Class"
+  }, {
+    "id" : "124",
+    "type" : "owl:Class"
+  }, {
+    "id" : "61",
+    "type" : "owl:Class"
+  }, {
+    "id" : "92",
+    "type" : "owl:Class"
+  }, {
+    "id" : "108",
+    "type" : "owl:Class"
+  }, {
+    "id" : "34",
+    "type" : "owl:Class"
+  }, {
+    "id" : "3",
+    "type" : "owl:Class"
+  }, {
+    "id" : "102",
+    "type" : "owl:Class"
+  }, {
+    "id" : "28",
+    "type" : "owl:Class"
+  }, {
+    "id" : "38",
+    "type" : "owl:Class"
+  }, {
+    "id" : "29",
+    "type" : "owl:Class"
+  } ],
+  "classAttribute" : [ {
+    "iri" : "http://www.w3.org/2002/07/owl#Thing",
+    "baseIri" : "http://owl2vowl.de",
+    "id" : "0",
+    "label" : {
+      "undefined" : "Thing"
+    }
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EqualEarth",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EqualEarth"
+    },
+    "id" : "2",
+    "superClasses" : [ "3" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Projection"
+    },
+    "subClasses" : [ "5", "3", "6", "7", "8" ],
+    "id" : "4"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertVI",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EckertVI"
+    },
+    "id" : "30",
+    "superClasses" : [ "3" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Distance"
+    },
+    "id" : "31",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#CylindricalEqualArea",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "CylindricalEqualArea"
+    },
+    "id" : "48",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#StraightRhumb",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "StraightRhumb"
+    },
+    "id" : "53",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertAzimuthalEqualArea",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "description" : {
+      "undefined" : "HISTORY\n\nThe last major projection presented by Johann Heinrich Lambert in his 1772 Beitrage was his azimuthal equal-area projection (Lambert, 1772, p. 75-78). His name is usually applied to the projection in modern references, but it is oc­ casionally called merely the Azimuthal (or Zenithal)' Equal-Area projection. Not only is it equal-area, with, of course, the azimuthal property showing true direc­ tions from the center of the projection, but its scale at a given distance from the center varies less from the scale at the center than the scale of any of the other major azimuthals (see table 21).\nLambert discussed the polar and equatorial aspects of the Azimuthal Equal­ Area projection, but the oblique aspect is just as popular now. The polar aspect was apparently independently derived by Lorgna in Italy in 1789, and the latter was called the originator in a publication a century later (USC&GS, 1882,\np. 290). G. A. Ginzburg proposed two modifications of the general Lambert Azi­ muthal projection in 1949 to reduce the angular distortion at the expense of creat­ ing a slight distortion in area (Maling, 1960, p. 206). A common modification was devised by Ernst Hammer in 1892 and is called the Hammer or Hammer-Aitoff projection. It consists of halving the vertical coordinates of the equatorial aspect of one hemisphere and doubling the values of the meridians from center. It re­ tains equality of area, but it is no longer azimuthal."
+    },
+    "label" : {
+      "IRI-based" : "LambertAzimuthalEqualArea"
+    },
+    "id" : "26",
+    "superClasses" : [ "6" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantCylindrical",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EquidistantCylindrical"
+    },
+    "id" : "50",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 3,
+    "label" : {
+      "IRI-based" : "GlobalLook"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#VanDerGrinten",
+      "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+      "labels" : {
+        "IRI-based" : "VanDerGrinten"
+      }
+    } ],
+    "id" : "40",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#BipolarObliqueConicConformal",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "BipolarObliqueConicConformal"
+    },
+    "id" : "24",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SphericalFormula",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SphericalFormula"
+    },
+    "id" : "62",
+    "superClasses" : [ "63" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Orthographic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Orthographic"
+    },
+    "id" : "20",
+    "superClasses" : [ "6" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Angle"
+    },
+    "id" : "70",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mercator",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Mercator"
+    },
+    "id" : "47",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#MillerCylindrical",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MillerCylindrical"
+    },
+    "id" : "42",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.w3.org/2002/07/owl#Thing",
+    "baseIri" : "http://owl2vowl.de",
+    "id" : "78",
+    "label" : {
+      "undefined" : "Thing"
+    }
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Usage",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Usage"
+    },
+    "id" : "85"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#NaturalEarth",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "NaturalEarth"
+    },
+    "id" : "44",
+    "superClasses" : [ "3" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "GeometryElements"
+    },
+    "subClasses" : [ "70", "53", "80", "40", "28", "76", "31" ],
+    "id" : "32"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Area"
+    },
+    "id" : "80",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Stereographic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Stereographic"
+    },
+    "id" : "18",
+    "superClasses" : [ "6" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 2,
+    "label" : {
+      "IRI-based" : "SpaceProjections"
+    },
+    "subClasses" : [ "12", "10" ],
+    "id" : "5",
+    "superClasses" : [ "4" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Sinusoidal",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Sinusoidal"
+    },
+    "id" : "96",
+    "superClasses" : [ "3" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 5,
+    "label" : {
+      "IRI-based" : "Azimuthal"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AximuthalEquidistant",
+      "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+      "labels" : {
+        "IRI-based" : "AximuthalEquidistant"
+      }
+    } ],
+    "subClasses" : [ "26", "20", "61", "16", "14", "18" ],
+    "id" : "6",
+    "superClasses" : [ "4" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertIV",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EckertIV"
+    },
+    "id" : "88",
+    "superClasses" : [ "3" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TransverseMercator",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "TransverseMercator"
+    },
+    "id" : "103",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 7,
+    "label" : {
+      "IRI-based" : "Cylindrical"
+    },
+    "subClasses" : [ "50", "47", "52", "104", "103", "42", "48" ],
+    "id" : "7",
+    "superClasses" : [ "4" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeneralPerspective",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "GeneralPerspective"
+    },
+    "id" : "14",
+    "superClasses" : [ "6" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceObliqueMercator",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SpaceObliqueMercator"
+    },
+    "id" : "10",
+    "superClasses" : [ "5" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GreatCircle",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "GreatCircle"
+    },
+    "id" : "76",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Gnomonic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Gnomonic"
+    },
+    "id" : "16",
+    "superClasses" : [ "6" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertConformalConic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "LambertConformalConic"
+    },
+    "id" : "36",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SatelliteTracking",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SatelliteTracking"
+    },
+    "id" : "12",
+    "superClasses" : [ "5" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Formula",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Formula"
+    },
+    "subClasses" : [ "108", "62" ],
+    "id" : "63"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantConic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EquidistantConic"
+    },
+    "id" : "22",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ObliqueMercator",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "ObliqueMercator"
+    },
+    "id" : "52",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cassini",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Cassini"
+    },
+    "id" : "104",
+    "superClasses" : [ "7" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 5,
+    "label" : {
+      "IRI-based" : "Conical"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AlbersEqualAreaConic",
+      "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+      "labels" : {
+        "IRI-based" : "AlbersEqualAreaConic"
+      }
+    } ],
+    "subClasses" : [ "34", "102", "22", "36", "24", "38" ],
+    "id" : "8",
+    "superClasses" : [ "4" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#History",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "History"
+    },
+    "id" : "124"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AzimuthalEquidistant",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "AzimuthalEquidistant"
+    },
+    "id" : "61",
+    "superClasses" : [ "6" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mollweide",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Mollweide"
+    },
+    "id" : "92",
+    "superClasses" : [ "3" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EllipsoidalFormula",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "EllipsoidalFormula"
+    },
+    "id" : "108",
+    "superClasses" : [ "63" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Polyconic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Polyconic"
+    },
+    "id" : "34",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 7,
+    "label" : {
+      "IRI-based" : "Pseudocylindrical"
+    },
+    "subClasses" : [ "96", "92", "44", "88", "30", "29", "2" ],
+    "id" : "3",
+    "superClasses" : [ "4" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AlbersConicEqualArea",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "AlbersConicEqualArea"
+    },
+    "id" : "102",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 1,
+    "label" : {
+      "IRI-based" : "Compromise"
+    },
+    "individuals" : [ {
+      "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#VanDerGrinten",
+      "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+      "labels" : {
+        "IRI-based" : "VanDerGrinten"
+      }
+    } ],
+    "id" : "28",
+    "superClasses" : [ "32" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Bonne",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Bonne"
+    },
+    "id" : "38",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Robinson",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Robinson"
+    },
+    "id" : "29",
+    "superClasses" : [ "3" ]
+  } ],
+  "property" : [ {
+    "id" : "1",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "9",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "11",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "13",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "15",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "17",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "19",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "21",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "23",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "25",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "27",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "33",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "35",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "37",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "39",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "41",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "43",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "45",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "46",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "49",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "51",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "54",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "55",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "56",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "57",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "58",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "59",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "60",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "64",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "65",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "66",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "67",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "68",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "69",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "71",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "72",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "73",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "74",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "75",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "77",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "79",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "81",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "82",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "83",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "84",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "86",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "87",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "89",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "90",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "91",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "93",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "94",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "95",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "97",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "98",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "99",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "100",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "101",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "105",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "106",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "107",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "109",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "110",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "111",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "112",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "113",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "114",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "115",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "116",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "117",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "118",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "119",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "120",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "121",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "122",
+    "type" : "rdf:Property"
+  }, {
+    "id" : "123",
+    "type" : "rdf:Property"
+  } ],
+  "propertyAttribute" : [ {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#hasGraphic",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "range" : "0",
+    "label" : {
+      "IRI-based" : "hasGraphic"
+    },
+    "domain" : "0",
+    "attributes" : [ "object" ],
+    "id" : "1"
+  }, {
+    "domain" : "5",
+    "range" : "10",
+    "id" : "9",
+    "label" : {
+      "IRI-based" : "29",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "5",
+    "range" : "12",
+    "id" : "11",
+    "label" : {
+      "IRI-based" : "28",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "6",
+    "range" : "14",
+    "id" : "13",
+    "label" : {
+      "IRI-based" : "25",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "6",
+    "range" : "16",
+    "id" : "15",
+    "label" : {
+      "IRI-based" : "24",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "6",
+    "range" : "18",
+    "id" : "17",
+    "label" : {
+      "IRI-based" : "27",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "6",
+    "range" : "20",
+    "id" : "19",
+    "label" : {
+      "IRI-based" : "26",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "8",
+    "range" : "22",
+    "id" : "21",
+    "label" : {
+      "IRI-based" : "21",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "8",
+    "range" : "24",
+    "id" : "23",
+    "label" : {
+      "IRI-based" : "20",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "6",
+    "range" : "26",
+    "id" : "25",
+    "label" : {
+      "IRI-based" : "23",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "28",
+    "range" : "29",
+    "id" : "27",
+    "label" : {
+      "IRI-based" : "22",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "8",
+    "range" : "34",
+    "id" : "33",
+    "label" : {
+      "IRI-based" : "18",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "8",
+    "range" : "36",
+    "id" : "35",
+    "label" : {
+      "IRI-based" : "17",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "8",
+    "range" : "38",
+    "id" : "37",
+    "label" : {
+      "IRI-based" : "19",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "40",
+    "range" : "29",
+    "id" : "39",
+    "label" : {
+      "IRI-based" : "14",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "42",
+    "id" : "41",
+    "label" : {
+      "IRI-based" : "13",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "40",
+    "range" : "44",
+    "id" : "43",
+    "label" : {
+      "IRI-based" : "16",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "40",
+    "range" : "2",
+    "id" : "45",
+    "label" : {
+      "IRI-based" : "15",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "47",
+    "id" : "46",
+    "label" : {
+      "IRI-based" : "10",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "50",
+    "id" : "49",
+    "label" : {
+      "IRI-based" : "12",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "52",
+    "id" : "51",
+    "label" : {
+      "IRI-based" : "11",
+      "undefined" : "is a"
+    }
+  }, {
+    "range" : "6",
+    "domain" : "14",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "54"
+  }, {
+    "range" : "7",
+    "domain" : "50",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "55"
+  }, {
+    "range" : "6",
+    "domain" : "18",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "56"
+  }, {
+    "range" : "6",
+    "domain" : "20",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "57"
+  }, {
+    "range" : "6",
+    "domain" : "26",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "58"
+  }, {
+    "range" : "6",
+    "domain" : "16",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "59"
+  }, {
+    "range" : "6",
+    "domain" : "61",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "60"
+  }, {
+    "range" : "4",
+    "domain" : "8",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "64"
+  }, {
+    "range" : "4",
+    "domain" : "7",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "65"
+  }, {
+    "range" : "5",
+    "domain" : "10",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "66"
+  }, {
+    "range" : "5",
+    "domain" : "12",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "67"
+  }, {
+    "range" : "4",
+    "domain" : "6",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "68"
+  }, {
+    "range" : "4",
+    "domain" : "3",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "69"
+  }, {
+    "range" : "4",
+    "domain" : "5",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "71"
+  }, {
+    "range" : "32",
+    "domain" : "28",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "72"
+  }, {
+    "range" : "32",
+    "domain" : "40",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "73"
+  }, {
+    "range" : "32",
+    "domain" : "31",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "74"
+  }, {
+    "range" : "32",
+    "domain" : "76",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "75"
+  }, {
+    "range" : "32",
+    "domain" : "70",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "77"
+  }, {
+    "range" : "32",
+    "domain" : "80",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "79"
+  }, {
+    "range" : "32",
+    "domain" : "53",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "81"
+  }, {
+    "range" : "3",
+    "domain" : "29",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "82"
+  }, {
+    "range" : "3",
+    "domain" : "30",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "83"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#preserves",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "range" : "0",
+    "label" : {
+      "IRI-based" : "preserves"
+    },
+    "domain" : "0",
+    "attributes" : [ "object" ],
+    "id" : "84"
+  }, {
+    "range" : "3",
+    "domain" : "2",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "86"
+  }, {
+    "range" : "3",
+    "domain" : "88",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "87"
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#usedFor",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "range" : "78",
+    "label" : {
+      "IRI-based" : "usedFor"
+    },
+    "domain" : "4",
+    "attributes" : [ "object" ],
+    "id" : "89"
+  }, {
+    "range" : "3",
+    "domain" : "44",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "90"
+  }, {
+    "range" : "3",
+    "domain" : "92",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "91"
+  }, {
+    "range" : "8",
+    "domain" : "24",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "93"
+  }, {
+    "range" : "8",
+    "domain" : "36",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "94"
+  }, {
+    "range" : "3",
+    "domain" : "96",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "95"
+  }, {
+    "range" : "8",
+    "domain" : "38",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "97"
+  }, {
+    "range" : "8",
+    "domain" : "34",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "98"
+  }, {
+    "range" : "63",
+    "domain" : "62",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "99"
+  }, {
+    "range" : "8",
+    "domain" : "22",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "100"
+  }, {
+    "range" : "8",
+    "domain" : "102",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "101"
+  }, {
+    "range" : "7",
+    "domain" : "48",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "105"
+  }, {
+    "range" : "7",
+    "domain" : "42",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "106"
+  }, {
+    "range" : "63",
+    "domain" : "108",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "107"
+  }, {
+    "range" : "7",
+    "domain" : "52",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "109"
+  }, {
+    "range" : "7",
+    "domain" : "47",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "110"
+  }, {
+    "range" : "7",
+    "domain" : "103",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "111"
+  }, {
+    "range" : "7",
+    "domain" : "104",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "112"
+  }, {
+    "domain" : "3",
+    "range" : "44",
+    "id" : "113",
+    "label" : {
+      "IRI-based" : "2",
+      "undefined" : "is a"
+    }
+  }, {
+    "iri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#regionMapped",
+    "baseIri" : "http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56",
+    "range" : "0",
+    "label" : {
+      "IRI-based" : "regionMapped"
+    },
+    "domain" : "0",
+    "attributes" : [ "object" ],
+    "id" : "114"
+  }, {
+    "domain" : "3",
+    "range" : "96",
+    "id" : "115",
+    "label" : {
+      "IRI-based" : "3",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "3",
+    "range" : "88",
+    "id" : "116",
+    "label" : {
+      "IRI-based" : "4",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "3",
+    "range" : "2",
+    "id" : "117",
+    "label" : {
+      "IRI-based" : "5",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "3",
+    "range" : "29",
+    "id" : "118",
+    "label" : {
+      "IRI-based" : "6",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "103",
+    "id" : "119",
+    "label" : {
+      "IRI-based" : "7",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "104",
+    "id" : "120",
+    "label" : {
+      "IRI-based" : "8",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "7",
+    "range" : "48",
+    "id" : "121",
+    "label" : {
+      "IRI-based" : "9",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "3",
+    "range" : "30",
+    "id" : "122",
+    "label" : {
+      "IRI-based" : "0",
+      "undefined" : "is a"
+    }
+  }, {
+    "domain" : "3",
+    "range" : "92",
+    "id" : "123",
+    "label" : {
+      "IRI-based" : "1",
+      "undefined" : "is a"
+    }
+  } ]
+}

@@ -1,0 +1,854 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#"
+     xml:base="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56"
+     xmlns:has="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#has:"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:untitled-ontology-56="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#hasGraphic -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#hasGraphic"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#preserves -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#preserves"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#regionMapped -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#regionMapped"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#usedFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#usedFor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AlbersConicEqualArea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AlbersConicEqualArea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AzimuthalEquidistant -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AzimuthalEquidistant">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#BipolarObliqueConicConformal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#BipolarObliqueConicConformal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Bonne -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Bonne">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cassini -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cassini">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#CylindricalEqualArea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#CylindricalEqualArea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertIV -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertIV">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertVI -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertVI">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EllipsoidalFormula -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EllipsoidalFormula">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Formula"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EqualEarth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EqualEarth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantConic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantConic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantCylindrical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantCylindrical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Formula -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Formula"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeneralPerspective -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeneralPerspective">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Gnomonic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Gnomonic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GreatCircle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GreatCircle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#History -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#History"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertAzimuthalEqualArea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertAzimuthalEqualArea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertConformalConic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertConformalConic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mercator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mercator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#MillerCylindrical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#MillerCylindrical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mollweide -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mollweide">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#NaturalEarth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#NaturalEarth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ObliqueMercator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ObliqueMercator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Orthographic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Orthographic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Polyconic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Polyconic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Robinson -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Robinson">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SatelliteTracking -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SatelliteTracking">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Sinusoidal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Sinusoidal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceObliqueMercator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceObliqueMercator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Projection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SphericalFormula -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SphericalFormula">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Formula"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Stereographic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Stereographic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#StraightRhumb -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#StraightRhumb">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeometryElements"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TransverseMercator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TransverseMercator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Usage -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Usage"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AlbersEqualAreaConic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AlbersEqualAreaConic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+        <regionMapped rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ContinentOcean"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AximuthalEquidistant -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#AximuthalEquidistant">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#BipolarObliqueConicConformal -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#BipolarObliqueConicConformal">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Bonne -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Bonne">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cassini -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cassini">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ContinentOcean -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ContinentOcean"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#CylindricalEqualArea -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#CylindricalEqualArea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertIV -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertIV">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertVI -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EckertVI">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EqualEarth -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EqualEarth">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantConic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantConic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantCylindrical -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#EquidistantCylindrical">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Distance"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeneralPerspective -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GeneralPerspective">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Perspective"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Globe -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Globe"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Gnomonic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Gnomonic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GreatCircle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GreatCircle -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GreatCircle"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertAzimuthalEqualArea -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertAzimuthalEqualArea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertConformalConic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertConformalConic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mercator -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mercator">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#StraightRhumb"/>
+        <regionMapped rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ContinentOcean"/>
+        <usedFor rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Navigation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#MillerCylindrical -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#MillerCylindrical">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ModifiedStereographicConformal -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ModifiedStereographicConformal">
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mollweide -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Mollweide">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#NaturalEarth -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#NaturalEarth">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Navigation -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Navigation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ObliqueMercator -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#ObliqueMercator">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Orthographic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Orthographic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TrueDirection"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Perspective -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Perspective"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Polyconic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Polyconic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Conical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TrueDirection"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Robinson -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Robinson">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SatelliteTracking -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SatelliteTracking">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Sinusoidal -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Sinusoidal">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Pseudocylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Area"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceObliqueMercator -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceObliqueMercator">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#SpaceProjections"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Stereographic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Stereographic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Azimuthal"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TrueDirection"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#StraightRhumb -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#StraightRhumb"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TransverseMercator -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TransverseMercator">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Cylindrical"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Angle"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TrueDirection -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#TrueDirection"/>
+    
+
+
+    <!-- http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#VanDerGrinten -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#VanDerGrinten">
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#GlobalLook"/>
+        <preserves rdf:resource="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#Compromise"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.semanticweb.org/usery/ontologies/2019/8/untitled-ontology-56#LambertAzimuthalEqualArea">
+        <terms:description>GEOMETRIC CONSTRUCTION 
+The polar aspect (for the sphere) may be drawn with a simple geometric con­struction: In figure 40, if angle AOR is the latitude q, and P is the pole at the center, PA is the radius of that latitude on the polar map. The oblique and equa­torial aspects have no direct geometric construction. They may be prepared indirectly by using other azimuthal projections (Harrison, 1943), but it is now simpler to plot automatically or manually from rectangular coordinates which are generated by a relatively simple computer program.</terms:description>
+        <terms:description>HISTORY
+
+The last major projection presented by Johann Heinrich Lambert in his 1772 Beitrage was his azimuthal equal-area projection (Lambert, 1772, p. 75-78). His name is usually applied to the projection in modern references, but it is oc­ casionally called merely the Azimuthal (or Zenithal)&apos; Equal-Area projection. Not only is it equal-area, with, of course, the azimuthal property showing true direc­ tions from the center of the projection, but its scale at a given distance from the center varies less from the scale at the center than the scale of any of the other major azimuthals (see table 21).
+Lambert discussed the polar and equatorial aspects of the Azimuthal Equal­ Area projection, but the oblique aspect is just as popular now. The polar aspect was apparently independently derived by Lorgna in Italy in 1789, and the latter was called the originator in a publication a century later (USC&amp;GS, 1882,
+p. 290). G. A. Ginzburg proposed two modifications of the general Lambert Azi­ muthal projection in 1949 to reduce the angular distortion at the expense of creat­ ing a slight distortion in area (Maling, 1960, p. 206). A common modification was devised by Ernst Hammer in 1892 and is called the Hammer or Hammer-Aitoff projection. It consists of halving the vertical coordinates of the equatorial aspect of one hemisphere and doubling the values of the meridians from center. It re­ tains equality of area, but it is no longer azimuthal.</terms:description>
+        <terms:description>Summary Description
+Azimuthal.
+Equal-Area.
+All meridians in the polar aspect, the central meridian in other aspects, and the quator in the equatorial aspect are straight lines.
+The outer meridian of a hemisphere in the equatorial aspect (for the sphere) and the parallels in the polar aspect (sphere or ellipsoid) are circles.
+All other meridians and parallels are complex curves.
+Not a perspective projection.
+Scale decreases radially as the distance increases from the center, the only point without distortion.
+Scale increases in the direction perpendicular to radii as the distance increases from the center.
+Directions from the center are true for the sphere and the polar ellipsoidal forms.
+Point opposite the center is shown as a circle surrounding the map (for the sphere).
+Used for maps of continents and hemispheres.
+Presented by Lambert in 1772.</terms:description>
+        <terms:description>FEATURES 
+The Lambert Azimuthal Equal-Area projection is not a perspective projection. It may be called a &quot;synthetic&quot; azimuthal in that it was derived for the specific pur­pose of maintaining equal area. The ellipsoidal form maintains equal area, but it is not quite azimuthal except in the polar aspect, so the name for the general ellip­soidal form is a slight misnomer, although it looks like the spherical azimuthal form and has most of its other characteristics. 
+The polar aspect (fig. 39A), like that of the Orthographic and Stereographic, has circles for parallels of latitude, all centered about the North or South Pole, and straight equally spaced radii of these circles for meridians. The difference is, nce again, in the spacing of the parallels. For the Lambert, the spacing between the parallels gradually decreases with increasing distance from the pole. The opposite pole, not visible on either the Orthographic or Stereographic, may be shown on the Lambert as a large circle surrounding the map, almost half again as far as the Equator from the center. Normally, the projection is not shown beyond one hemisphere (or beyond the Equator in the polar aspect). 
+The equatorial aspect (fig. 39B) has, like the other azimuthals, a straight Equa­tor and straight central meridian, with a circle representing the 90th meridian east and west of the central meridian. Unlike those for the Orthographic and Stereographic, the remaining meridians and parallels are uncommon complex curves. The chief visual distinguishing characteristic is that the spacing of the meridians near the 90th meridian and Jf the parallels near the poles is about 0. 7 of the spacing at the center of the projection, or moderately less to the eye. The parallels of latitude look considerably like circular arcs, except near the 90th meridians, where they exhibit a noticeable turn toward the nearest pole. 
+The oblique aspect (fig. 39C) of the Lambert Azimuthal Equal-Area resembles the Orthographic to some extent, until it is seen that crowding is far less pro­nounced as the distance from the center increases. Aside from the straight central meridian, all meridians and parallels are complex curves, not ellipses. 
+In both the equatorial and oblique aspects, the point opposite the center may be shown as a circle surrounding the map, corresponding to the opposite pole in the polar aspect. Except for the advantage of showing the entire Earth in an equal­area projection from one point, the distortion is so great beyond the inner hemi­sphere that for world maps the Earth should be shown as two separate hemispheri­cal maps, the second map centered on the point opposite the center of the first map.</terms:description>
+        <terms:description>USAGE 
+The spherical form in all three aspects of the Lambert Azimuthal Equal-Area projection has appeared in recent commercial atlases for Eastern and Western Hemispheres (replacing the long-used Globular projection) and for maps of oceans and most of the continents and polar regions. 
+The polar aspect appears in the National Atlas (USGS, 1970, p. 148-149) for maps delineating north and south polar expeditions, at a scale of 1:39,000,000. It is used at a scale of 1:20,000,000 for the Arctic Region as an inset on the 1978 USGS Map of Prospective Hydrocarbon Provinces of the World. 
+The USGS has prepared six base maps of the Pacific Ocean on the spherical form of the Lambert Azimuthal Equal-Area. Four sections, at 1:10,000,000, have centers at 35° N., 150° E.; 35° N., 135° W.; 35° S., 135° E.; and 40° S., I00° W. The Pacific-Antarctic region, at a scale of 1:8,300,000, is centered at 20° S. and 165° W., while a Pacific Basin map at 1:17,100,000 is centered at the Equator and 160° W. (The last two maps were originally erroneously labeled with scales that are too small.) The base maps have been used for individual geographic, geologic, tec­tonic, minerals, and energy maps. The USGS has also cooperated with the Na­tional Geographic Society in revising maps of the entire Moon drawn to the spheri­cal form of the equatorial Lambert Azimuthal Equal-Area.</terms:description>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
