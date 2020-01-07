@@ -5,19 +5,11 @@ var   graphTag = document.getElementById('graph')
     , linkDistanceLiteralSlider
     , onLoadCalled = false;
 // Set the default graph data
-var jsonURI = "foaf";
+var jsonURI = "foaf_spec";
 
 var graphOptions = function graphOptionsFunct() {
 
-    var   resetOption = document.getElementById('resetOption')
-        , sliderOption = document.getElementById('sliderOption');
-
-    d3.select(resetOption) 
-        .append("button")
-        .attr("id", "reset")
-        .property("type", "reset")
-        .text("Reset")
-        .on("click", resetGraph);
+    var sliderOption = document.getElementById('sliderOption');
 
     var slidDiv = d3.select(sliderOption)
         .append("div")
@@ -39,10 +31,10 @@ var graphOptions = function graphOptionsFunct() {
 };
 
 var loadGraph = function loadGraphFunct() {
-    var   height = 600
-        , width = document.getElementById("example").offsetWidth;
+    var height = 600
+      , width = document.getElementById("example").offsetWidth;
 
-    d3.json("WebVOWL/data/examples" + jsonURI + ".json", function(error, data) {
+    d3.json("ontologies/examples/" + jsonURI + ".json", function(error, data) {
         json = data;
         drawGraph(graphTag, width, height);
     });

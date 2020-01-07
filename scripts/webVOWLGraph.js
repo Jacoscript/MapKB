@@ -420,7 +420,6 @@ var resetGraph = function resetGraphFunct() {
 
 /* Initialize various fields */
 var initialize = function initializeFunct() {
-    debugger;
     for (var i = 0; i < json.nodes.length; i++) {
         var   node = json.nodes[i]
             , maxTextWidth
