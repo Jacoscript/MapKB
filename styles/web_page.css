@@ -34,21 +34,27 @@ leaflet map, and more.
 #resetOption {
     display: none;
     position: absolute;
-    right: 17%;
-    top: 1%;
+    right: 17.2%;
+    top: 1.4%;
     z-index: 3;
 }
 #sliderOption {
+    background-color: #d9d9d9;
+    border: 1px solid #808080;
     display: none;
+    height: 25px;
     left: 1%;
+    margin-left: 2px;
+    padding: 0px 5px 0px 5px;
     position: absolute;
     top: 1%;
+    width: 193px;
     z-index: 3;
 }
 #toggleLeafletOption {
     position: absolute;
     right: 1%;
-    top: 1%;
+    top: 1.4%;
     z-index: 3;
 }
 
@@ -64,13 +70,13 @@ leaflet map, and more.
 #resetViewLeafletOption {
     position: absolute;
     right: 18.3%;
-    top: 1.2%;  /* Needs 0.2% due to inheritance from leaflet container */
+    top: 1.6%;  /* Needs 0.2% due to inheritance from leaflet container */
     z-index: 2001;
 }
 #toggleOntologyOption {
     position: absolute;
     right: 1%;
-    top: 1.2%;  /* Needs 0.2% due to inheritance from leaflet container */
+    top: 1.6%;  /* Needs 0.2% due to inheritance from leaflet container */
     z-index: 2001;
 }
 
@@ -81,7 +87,7 @@ leaflet map, and more.
     color: #000000;
     cursor: default;
     font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
-    padding: 2px 5px 2px 5px;
+    padding: 5px 5px 5px 5px;
 }
 .btnLeaflet:hover {
     background-color: #e6e6e6;
@@ -93,7 +99,7 @@ leaflet map, and more.
     color: #000000;
     cursor: default;
     font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
-    padding: 2px 5px 2px 5px;
+    padding: 5px 5px 5px 5px;
 }
 .btnOntology:hover {
     background-color: #e6f2ff;

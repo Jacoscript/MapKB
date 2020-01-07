@@ -18,6 +18,7 @@ var graphOptions = function graphOptionsFunct() {
     linkDistanceClassLabel = slidDiv.append("label")
         .attr("for", "distanceSlider")
         .text(DEFAULT_VISIBLE_LINKDISTANCE);
+    linkDistanceClassLabel.style({"margin-top": "3.5px", "position": "absolute"});
     linkDistanceLiteralLabel = linkDistanceClassLabel;
 
     linkDistanceClassSlider = slidDiv.append("input")
@@ -27,6 +28,7 @@ var graphOptions = function graphOptionsFunct() {
         .attr("value", DEFAULT_VISIBLE_LINKDISTANCE)
         .attr("step", 10)
         .on("input", changeDistance);
+    linkDistanceClassSlider.style({"margin-left": "30px", "position": "absolute"});
     linkDistanceLiteralSlider = linkDistanceClassSlider;
 };
 
