@@ -10,7 +10,7 @@ function pageLoadMarkers() {
     // Function that runs after the page loads
 }
 
-function addMarker() {
+function addLeafletMarker() {
     // Function that adds a user's specific markers to the map
     // Note: Marker lat/long may be referenced by user input or a reticle
     //       on the map. Not sure which approach will be taken yet.
@@ -55,7 +55,7 @@ function addMarker() {
     // Add marker to the html ul, sub-del-marker, as well as sub-markers
     // Note: Marker name is passed to the del-marker function so that the 
     // Note: function can know which marker to delete when selected.
-    $("#sub-del-marker").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"delMarker('" 
+    $("#sub-del-marker").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"delLeafletMarker('" 
     + user_markers_Builder.markerID + "');\">" + user_markers_Builder.markerName + "</a>");
 
     $("#sub-markers").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"zoomMapToLocation('User Marker', '" 
@@ -63,7 +63,7 @@ function addMarker() {
     + "', '" + user_markers_Builder.markerZoom +"');\">" + user_markers_Builder.markerName + "</a>");
 }
 
-function clrMarker() {
+function clrLeafletMarkers() {
     // Function to clear all markers from map
     
     // Remove marker icons from map
@@ -76,7 +76,7 @@ function clrMarker() {
     $('#sub-markers a').remove();
 }
 
-function delMarker(markerID) {
+function delLeafletMarker(markerID) {
     // Function to delete a user's specific marker from the map
 
     for (var i = user_markers.length - 1; i >= 0; i--) {

@@ -28,9 +28,6 @@ var options = { position: "topleft" };
 var zoom = L.control.zoomBox(options);
 map.addControl(zoom);
 
-// Set height of afd tabs to height of map
-$('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 108);
-
 // ################################# //
 // ### Map functions and loading ### //
 // ################################# //
@@ -60,9 +57,10 @@ function onLocationError(e) {
 }
 function onMapMove() {
 	var locale = map.getCenter();
-	console.log(map.getCenter())
 	$("#txtbox-Latitude").val(locale.lat);
 	$("#txtbox-Longitude").val(locale.lng);
+	// Set height of afd tabs to height of map
+	$('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 108);
 };
 
 // When the map moves we run our function up above
