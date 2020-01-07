@@ -4,7 +4,7 @@
 		<meta charset = "utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!-- CSS styles and webpage js -->
+		<!-- Main CSS styles and webpage js -->
 		<link rel="stylesheet" href="styles/menu_styles.css" />
 		<link rel="stylesheet" href="styles/notifications.css" />
 		<link rel="stylesheet" href="styles/web_page.css" />
@@ -18,27 +18,31 @@
 		<link rel="stylesheet" href="leaflet-cluster/dist/MarkerCluster.Default.css" />
 		<link rel="stylesheet" href="styles/markers.css" />
 		
-		<!-- leaflet map + wfs-t plugin js -->
+		<!-- leaflet map and wfs-t plugin js -->
 		<script src="leaflet/leaflet.js"></script>
 		<script src="leaflet-wfts/leaflet-wfst.min.js"></script>
 		<script src="leaflet-cluster/dist/leaflet.markercluster.js"></script>
 		<script src="scripts/markers.js"></script>
 
-		<!-- leaflet Mouse Position plugin  -->
+		<!-- leaflet MousePosition plugin  -->
 		<link rel="stylesheet" href="leaflet-coord/L.Control.MousePosition.css" />
 		<script src="leaflet-coord/L.Control.MousePosition.js"></script>
 
+		<!-- ontology/vowl css and js -->
+		<link rel="stylesheet" href="styles/vowl.css" />
+		<script src="scripts/leaflet_ontology_viewer.js"></script>
+		
 		<!-- leaflet ZoomBox plugin  -->
 		<link rel="stylesheet" href="leaflet-zoom/L.Control.ZoomBox.css" />
 		<script src="leaflet-zoom/L.Control.ZoomBox.min.js"></script>
-		
-		<!-- ontology instance viewer css and js-->
-		<link rel="stylesheet" href="styles/instance_viewer.css" />
-		<script src="scripts/instance_viewer.js"></script>
 
 		<!-- afd js  -->
 		<script src="afd/afd-wfs.js"></script>
 		<script src="afd/afd-rdf.js"></script>
+
+		<!-- afd tabs (jquery-ui) -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 		<!-- dbpedia js-->
 		<script src="ld/dbpedia.js"></script>
@@ -46,10 +50,7 @@
 		<!-- makb js -->
 		<script src="makb/makb-rdf.js"></script>
 		<script src="makb/makb-qb.js"></script>
-		
-		<!-- afd tabs (jquery-ui) -->
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 		<script>
 			$( function() {
 				$( "#afd-tabs" ).tabs({
@@ -87,8 +88,8 @@
 				<li class="dropdown">
 					<a class="drop-btn" href="#">Ontologies</a>
 					<ul class="dropdown-content">
-						<a href="#" onclick="createOntologyViewer();">Open Small Ontology Viewer</a>
 						<a href="http://144.47.161.52:8080/webvowl_1.1.7/#url=http://144.47.161.52:8080/MAKB_Fry/makb/ontologies/Example_1.json" target="_blank">Open Full Ontology Viewer</a>
+						<a href="#" onclick="toggleOntologyViewer();">Toggle Small Ontology Viewer</a>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -141,19 +142,21 @@
 		</div>
 		
 		<div id="main-container" style="width: 100%; height: 100%;">
+			<!-- Ontology view -->
+			<section id="example">
+				<div id="graph">
+					<div id="resetOption"></div>
+					<div id="sliderOption"></div>
+					<div id="toggleLeafletOption"></div>
+				</div>
+				<p id="browserCheck" class="hidden"></p>
+			</section>
+
 			<!-- leaflet map -->
 			<div id="mapid" style="height: 90.55%; width: 70%;">
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
-				<!-- ontology instance view -->
-				<div class="ontology-container">
-					<span id="ontology-viewer-title">Ontology Viewer</span>
-					<canvas id="ontology-viewer" height=300 width=300 style="z-index: 1000;"></canvas>
-					<div id="example">
-						<div id="graph">
-							<svg class="svgGraph" height=300 width=300></svg>
-						</div>
-					</div>
-				</div>
+				<div id="resetViewLeafletOption"></div>
+				<div id="toggleOntologyOption"></div>
 			</div>
 			<div id="crosshair-position">
 				Crosshair Latitude: <input type="text" id="txtbox-Latitude" />
@@ -179,7 +182,8 @@
 		<div class="notification-bar"></div>
 
 		<!-- Initialize ontology view -->
-		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script src="scripts/specBrowserWarning.js"></script> 
+		<script src="https://d3js.org/d3.v3.js"></script>
 		<script src="scripts/specVOWL.js"></script>
 		<script src="scripts/webVOWLGraph.js"></script>
 	</body>

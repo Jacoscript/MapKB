@@ -1,3 +1,58 @@
+/* 
+Tanner Fry 
+tfry@contractor.usgs.gov
+
+A file for the css design of all web page elements including svg graph,
+leaflet map, and more.
+*/
+/*  Ontology graph styles */
+#example {
+    display: none;
+    height: 100%;
+    float: left;
+    margin-right: 5px;
+    margin-top: 9px;
+    position: relative;
+    width: 70%;
+}
+#graph {
+    display: none;
+    height: 100%;
+    float: left;
+    position: relative;
+    width: 100%;
+}
+.svgGraph {
+    border: 1px solid #000000;
+    display: none;
+    float: left;
+    height: 90.55%;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+#resetOption {
+    display: none;
+    position: absolute;
+    right: 17%;
+    top: 1%;
+    z-index: 3;
+}
+#sliderOption {
+    display: none;
+    left: 1%;
+    position: absolute;
+    top: 1%;
+    z-index: 3;
+}
+#toggleLeafletOption {
+    position: absolute;
+    right: 1%;
+    top: 1%;
+    z-index: 3;
+}
+
+/* Leaflet map styles */
 #mapid {
     border-style: solid;
     border-width: 1px;
@@ -5,4 +60,43 @@
     margin-right: 3px;
     margin-top: 9px;
     z-index: 1;
+}
+#resetViewLeafletOption {
+    position: absolute;
+    right: 18.3%;
+    top: 1.2%;  /* Needs 0.2% due to inheritance from leaflet container */
+    z-index: 2001;
+}
+#toggleOntologyOption {
+    position: absolute;
+    right: 1%;
+    top: 1.2%;  /* Needs 0.2% due to inheritance from leaflet container */
+    z-index: 2001;
+}
+
+/* Leaflet/Ontology buttons */
+.btnLeaflet {
+    background-color: #ffffff;
+    border: 1px solid #808080;
+    color: #000000;
+    cursor: default;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding: 2px 5px 2px 5px;
+}
+.btnLeaflet:hover {
+    background-color: #e6e6e6;
+    cursor: default;
+}
+.btnOntology {
+    background-color: #d9d9d9;
+    border: 1px solid #a6a6a6;
+    color: #000000;
+    cursor: default;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding: 2px 5px 2px 5px;
+}
+.btnOntology:hover {
+    background-color: #e6f2ff;
+    border: 1px solid #1a8cff;
+    cursor: default;
 }
