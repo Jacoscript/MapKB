@@ -99,9 +99,10 @@ path, .nofill {
     visibility: hidden;
 }
 
-.svgGraph .text tspan:only-child, .svgGraph .text:empty { /* labels with one line and nodes */
-    dominant-baseline: central; /* not supported by IE 11 */
-}
+/* .svgGraph .text tspan:only-child, .svgGraph .text:empty { labels with one line and nodes
+    dominant-baseline: central; not supported by IE 11 
+} 
+*/
 
 marker path {
     /* Safari and Chrome workaround for inheriting the style of its link.
