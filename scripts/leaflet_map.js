@@ -1,7 +1,7 @@
 // Matthew Wagner & Tanner Fry
 // mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
-// This script is used for the general interaction and loading of the leaflet map as well
-// as other functions regarding the map.
+// This script is used for the general interaction and loading of the leaflet
+//  map as well as other functions regarding the map.
 
 var countFilter = 0;
 var grouping = L.markerClusterGroup({
@@ -9,6 +9,10 @@ var grouping = L.markerClusterGroup({
 	spiderfyOnMaxZoom: false
 });
 var queryTabID = "";
+
+// ######################### //
+// ### Leaflet map setup ### //
+// ######################### //
 
 // Init map with open street map as base map over DC area
 var map = L.map('mapid', {zoomSnap: .25, wheelPxPerZoomLevel: 120}).setView([38.88971, -77.00894], 12);
@@ -32,8 +36,9 @@ map.addControl(zoom);
 // ### Map functions and loading ### //
 // ################################# //
 
-// Function to clear the map of data
 function clearMap(){
+	// Function to clear the map of data
+
 	grouping.clearLayers();
 
 	// Set all triggers to false
@@ -42,20 +47,38 @@ function clearMap(){
 	}
 }
 
-// Function to clear all current tabs
 function clearTabs(){
+	// Function to clear all current tabs
+
 	console.log("Clearing tabs.");
 	$('#afd-tabs ul li').remove();
 	$('#afd-tabs div').remove();
-	// Not sure if below line is depreciated or what. Tabs list seems to refresh without it
+	// Not sure if below line is depreciated or what. Tabs list seems to 
+	// refresh without it
 	// $("#afd-tabs").tabs("refresh");
 }
 
-// Add center of map lat/long update
+function insertAfter(el, referenceNode) {
+	// Inserts an element after a referenced one.
+
+	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+function onLayerLoad() {
+	// A function to disable web page features while a soecific layer is
+	// loaded
+	
+	// Set loading cursor for all
+}
+
 function onLocationError(e) {
 	alert(e.message);
 }
+
 function onMapMove() {
+	// Function to add center of map lat/long information and update the 
+	// afd tabs to the appropriate height
+
 	var locale = map.getCenter();
 	$("#txtbox-Latitude").val(locale.lat);
 	$("#txtbox-Longitude").val(locale.lng);
@@ -69,18 +92,21 @@ map.on('move', onMapMove);
 // Boilerplate
 map.on('locationerror', onLocationError);
 
-// Function to "Expand" query writing area
 function qWrite_show(){
+	// Function to show query writing area
+
 	document.getElementById('qWritePopup').style.display = "block";
 }
 
-// Function to Hide query writing area
 function qWrite_hide(){
+	// Function to Hide query writing area
+
 	document.getElementById('qWritePopup').style.display = "none";
 }
 
-// Function to zoom to pre-defined locations around the map
 function zoomMapToLocation(loc, lat, long, zoomLevel) {
+	// Function to zoom to pre-defined locations around the map
+
 	if (loc == 'Initial'){
 		map.setView([38.8897547, -77.0089138], 12);
 	} else if (loc == 'US Capitol') {
@@ -101,11 +127,6 @@ function zoomMapToLocation(loc, lat, long, zoomLevel) {
 			map.setView([lat, long], zoomLevel);
 		}
 	}
-}
-
-// Inserts an element after a referenced one.
-function insertAfter(el, referenceNode) {
-	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
 $(document).ready(function() {
