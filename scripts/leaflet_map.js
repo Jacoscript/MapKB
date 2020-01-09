@@ -11,7 +11,7 @@ var grouping = L.markerClusterGroup({
 var queryTabID = "";
 
 // ######################### //
-// ### Leaflet map setup ### //
+// ### Leaflet Map Setup ### //
 // ######################### //
 
 // Init map with open street map as base map over DC area
@@ -33,7 +33,7 @@ var zoom = L.control.zoomBox(options);
 map.addControl(zoom);
 
 // ################################# //
-// ### Map functions and loading ### //
+// ### Map Functions and Loading ### //
 // ################################# //
 
 function clearMap(){
@@ -68,7 +68,11 @@ function onLayerLoad() {
 	// A function to disable web page features while a soecific layer is
 	// loaded
 	
+	// Disable features
+	
+
 	// Set loading cursor for all
+	// $("*").css("cursor", "progress");
 }
 
 function onLocationError(e) {
@@ -132,4 +136,5 @@ function zoomMapToLocation(loc, lat, long, zoomLevel) {
 $(document).ready(function() {
 	// Update lat long on first onLoad of web page
 	onMapMove();
+	onLayerLoad();
 });

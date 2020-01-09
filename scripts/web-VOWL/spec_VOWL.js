@@ -9,7 +9,7 @@ var jsonURI = "foaf_spec";
 
 var graphOptions = function graphOptionsFunct() {
 
-    var sliderOption = document.getElementById('sliderOption');
+    var sliderOption = document.getElementById('sliderOntologyOption');
 
     var slidDiv = d3.select(sliderOption)
         .append("div")

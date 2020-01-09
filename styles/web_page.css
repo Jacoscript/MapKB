@@ -8,7 +8,7 @@ leaflet map, and more.
 /*  Ontology graph styles */
 #example {
     display: none;
-    height: 100%;
+    height: 90.55%;
     float: left;
     margin-right: 5px;
     margin-top: 9px;
@@ -26,35 +26,53 @@ leaflet map, and more.
     border: 1px solid #000000;
     display: none;
     float: left;
-    height: 90.55%;
+    height: 100%;
     position: relative;
     width: 100%;
     z-index: 2;
 }
-#resetOption {
+#policiesAndContributions {
+    bottom: -0.1%;
+    color: #333333;
     display: none;
+    font: 11px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    margin: 0px;
     position: absolute;
-    right: 17.2%;
-    top: 1.4%;
+    right: 0.4%;
     z-index: 3;
 }
-#sliderOption {
+#policiesAndContributions > a {
+    color: #0078A8;
+    font-size:  11px;
+    text-decoration: none;
+}
+#policiesAndContributions > a:hover {
+    text-decoration: underline;
+}
+#resetViewOntologyOption {
+    display: none;
+    position: absolute;
+    right: 145px;
+    top: 10px;
+    z-index: 3;
+}
+#sliderOntologyOption {
     background-color: #d9d9d9;
     border: 1px solid #808080;
     display: none;
     height: 25px;
-    left: 1%;
+    left: 10px;
     margin-left: 2px;
     padding: 0px 5px 0px 5px;
     position: absolute;
-    top: 1%;
+    top: 10px;
     width: 193px;
     z-index: 3;
 }
 #toggleLeafletOption {
     position: absolute;
-    right: 1%;
-    top: 1.4%;
+    right: 9px;
+    top: 10px;
     z-index: 3;
 }
 
@@ -69,15 +87,15 @@ leaflet map, and more.
 }
 #resetViewLeafletOption {
     position: absolute;
-    right: 18.3%;
-    top: 1.6%;  /* Needs 0.2% due to inheritance from leaflet container */
-    z-index: 2001;
+    right: 155px;
+    top: 11px;
+    z-index: 401;  /* 400 is the map tile layers */
 }
 #toggleOntologyOption {
     position: absolute;
-    right: 1%;
-    top: 1.6%;  /* Needs 0.2% due to inheritance from leaflet container */
-    z-index: 2001;
+    right: 10px;
+    top: 11px;
+    z-index: 401;  /* 400 is the map tile layers */
 }
 
 /* Leaflet/Ontology buttons */

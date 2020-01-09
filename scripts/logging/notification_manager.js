@@ -5,7 +5,7 @@
 // ########################### //
 // ### Notification System ### //
 // ########################### //
-
+'use strict';
 class ManagerNotification {
 	constructor() {
 		this.loop_time = 2;  // time in hours how long the loop should continue
@@ -25,10 +25,10 @@ class ManagerNotification {
 			// Add to 'In Queue' dropdown item in the notifications tab
 			$("#notification-in-queue").html("In Queue (" + this.notification_queue.length + ")");
 		} else {
-			showNotification("Error", "Notification '" + type + "' was not of type 'Error', 'Other', 'Success' or 'Warning'.");
+			this.showNotification("Error", "Notification '" + type + "' was not of type 'Error', 'Other', 'Success' or 'Warning'.");
 		}
 	}
-	
+
 	loopNotificationQueue() {
 		// A function that continuously checks, every 10 seconds, the notification
 		// queue so it knows when to show notifications or not.
@@ -37,8 +37,8 @@ class ManagerNotification {
 		setTimeout(function() {
 			if (that.notification_queue.length > 0 && that.notification_toggle == false) {
 				that.loop_notification_index++;
-				notif_type = that.notification_queue[0][0];
-				notif_content = that.notification_queue[0][1];
+				var notif_type = that.notification_queue[0][0];
+				var notif_content = that.notification_queue[0][1];
 				that.showNotification(notif_type, notif_content);
 				if (that.loop_notification_index < (that.loop_time * 3600)) {
 					that.loopNotificationQueue();
@@ -89,7 +89,7 @@ class ManagerNotification {
 		$(".notification-bar").append(messageContent);
 	
 		// Add notification exit button (or link with 'x' char?)
-		$(".notification-bar").prepend("<a class=\"notification-bar-exit\" onclick=\"hideNotification()\">X</a>");
+		$(".notification-bar").prepend("<a class=\"notification-bar-exit\" onclick=\"notification_manager.hideNotification()\">X</a>");
 	}
 	
 	// ############################# //
@@ -100,12 +100,36 @@ class ManagerNotification {
 		// A function that displays and animates a given notification
 	
 		$(".notification-bar").css("display", "block");
-		modifyNotification(type, content);
-		console.log("Showing notification '" + type + "' with content of '" + content + "'.");
+		this.modifyNotification(type, content);
+		if (type == "Error") {
+			console.error("[Notification]: " + type + " - " + content + ".");
+		} else if (type == "Other") {
+			console.info("[Notification]: " + type + " - " + content + ".");
+		} else if (type == "Success") {
+			console.info("[Notification]: " + type + " - " + content + ".");
+		} else if (type == "Warning") {
+			console.warn("[Notification]: " + type + " - " + content + ".");
+		}
 	
 		// Slide bar into view after displaying it
 		$(".notification-bar").animate({bottom: "0%"}, this.notification_speed);
 		this.notification_toggle = true;
+
+		// TODO: Log notificationto logs.txts
+		var data = {
+			notif_type: "test type",
+			notif_content: "test content"
+		};
+
+		// TODO: Set up java servlet for apache tomcat first
+		// $.ajax({
+		// 	type: "POST",
+		// 	url: "/test_servlet/MyServlet",
+		// 	data: JSON.stringify(data), 
+		// 	dataType: "json",
+		// 	success: function(){console.log("Notification logged to node server.");},
+		// 	contentType: "application/json"
+		// });
 	}
 	
 	hideNotification() {
@@ -119,8 +143,9 @@ class ManagerNotification {
 	
 		// Make sure the queue doesn't try and show another notification while one
 		// is still being hidden
+		var that = this;
 		setTimeout(function() {
-			this.notification_toggle = false;
+			that.notification_toggle = false;
 		}, this.notification_speed);
 	
 		// Remove notification after hidden
@@ -131,8 +156,9 @@ class ManagerNotification {
 	}
 }
 
+var notification_manager = new ManagerNotification();
+
 $(document).ready(function() {
-	var manager = new ManagerNotification();
-	manager.loopNotificationQueue();
+	notification_manager.loopNotificationQueue();
 	//showNotification('Warning', 'This is only a test.');
 });

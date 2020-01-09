@@ -123,10 +123,10 @@
 						<a class="drop-btn" href="#">Notifications</a>
 						<ul class="dropdown-content">
 							<a href="#" id="notification-in-queue">In Queue (0)</a>
-							<a href="#" onclick="addToNotificationQueue('Error');">Error Message</a>
-							<a href="#" onclick="addToNotificationQueue('Other');">Other Message</a>
-							<a href="#" onclick="addToNotificationQueue('Success');">Success Message</a>
-							<a href="#" onclick="addToNotificationQueue('Warning');">Warning Message</a>
+							<a href="#" onclick="notification_manager.addToNotificationQueue('Error');">Error Message</a>
+							<a href="#" onclick="notification_manager.addToNotificationQueue('Other');">Other Message</a>
+							<a href="#" onclick="notification_manager.addToNotificationQueue('Success');">Success Message</a>
+							<a href="#" onclick="notification_manager.addToNotificationQueue('Warning');">Warning Message</a>
 						</ul>
 					</li>
 					<li class="dropdown nav-options">
@@ -145,9 +145,10 @@
 			<!-- Ontology view -->
 			<section id="example">
 				<div id="graph">
-					<div id="resetOption"></div>
-					<div id="sliderOption"></div>
+					<div id="resetViewOntologyOption"></div>
+					<div id="sliderOntologyOption"></div>
 					<div id="toggleLeafletOption"></div>
+					<div id="policiesAndContributions"></div>
 				</div>
 				<p id="browserCheck" class="hidden"></p>
 			</section>
