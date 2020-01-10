@@ -12,7 +12,12 @@ var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query='
 
 	//Function to query to dbpedia SPARQL endpoint
 	
-	function createDBpediaQuery(name, lat, lng){
+	function createDBpediaQuery(
+		name, 
+		lat, 
+		lng, 
+		results_callback = function(result) { createTab('DBpedia', result) }, 
+		no_results_callback = function(msg) { alert(msg) }) {
 		var HTML = '';
 		
 		//Get the specified query
@@ -25,6 +30,7 @@ var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query='
 					'FILTER (regex(?name, \''+name+'\') && (?lat >= '+lat+' - .001 && ?lat <= '+lat+' + .001) && (?long >= '+lng+' - .001 && ?long <= '+lng+' + .001))' +
 					'}' +
 					'LIMIT 100'; 
+		console.log(query);
 		
 		//HTTP encode the query
 		query = encodeURIComponent(query);
@@ -36,7 +42,7 @@ var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query='
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					no_results_callback('No results!');
 				}
 				else {
 					bindings = result.results.bindings;
@@ -53,10 +59,11 @@ var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query='
 
 						}
 						
-						createTab('DBpedia', HTML);
+						results_callback(HTML);
+						//createTab('DBpedia', HTML);
 					}
 					else { //There was no results so do nothing.
-						alert("No Dbpedia Entities Matching This One.");
+						no_results_callback("No Dbpedia Entities Matching This One.");
 					}
 				}
 			}
