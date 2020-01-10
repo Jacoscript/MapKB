@@ -90,6 +90,26 @@ class ManagerNotification {
 	
 		// Add notification exit button (or link with 'x' char?)
 		$(".notification-bar").prepend("<a class=\"notification-bar-exit\" onclick=\"notification_manager.hideNotification()\">X</a>");
+
+		// Log notification to database
+		// TODO: Notifications need a web address at error time, timestamp, and user agent
+		var data = {
+			notif_user_agent: "Placeholder",
+			notif_time_stamp: "Placeholder",
+			notif_type: typeOfMessage,
+			notif_content: messageContent,
+			notif_web_address: "Placeholder"
+		};
+
+		// TODO: Finish setting up java servlet to connect and update postgres DB
+		$.ajax({
+			type: "POST",
+			url: "/loggingservlet/Servlet",
+			data: JSON.stringify(data),
+			dataType: "json",
+			success: function(){console.log("Notification logged to node server.");},
+			contentType: "application/json"
+		});
 	}
 	
 	// ############################# //
@@ -114,22 +134,6 @@ class ManagerNotification {
 		// Slide bar into view after displaying it
 		$(".notification-bar").animate({bottom: "0%"}, this.notification_speed);
 		this.notification_toggle = true;
-
-		// TODO: Log notificationto logs.txts
-		var data = {
-			notif_type: "test type",
-			notif_content: "test content"
-		};
-
-		// TODO: Set up java servlet for apache tomcat first
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "/test_servlet/MyServlet",
-		// 	data: JSON.stringify(data), 
-		// 	dataType: "json",
-		// 	success: function(){console.log("Notification logged to node server.");},
-		// 	contentType: "application/json"
-		// });
 	}
 	
 	hideNotification() {
