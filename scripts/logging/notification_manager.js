@@ -92,15 +92,40 @@ class ManagerNotification {
 		$(".notification-bar").prepend("<a class=\"notification-bar-exit\" onclick=\"notification_manager.hideNotification()\">X</a>");
 
 		// Log notification to database
-		// TODO: Notifications need a web address at error time, timestamp, and user agent
+		// TODO: Notifications need a web address at notification time, timestamp, and user agent
+		// Time zone help: https://www.toptal.com/software/definitive-guide-to-datetime-manipulation
+		var date = new Date();
+		var day = date.getUTCDate();
+		var month = date.getUTCMonth();
+		var year = date.getUTCFullYear();
+		var hour = date.getUTCHours();  // Local time
+		var minutes = date.getUTCMinutes();
+		var seconds = date.getUTCSeconds();
+		var tz_offset = date.getTimezoneOffset();
+		// Convert client time to UTC time
+		var sign = tz_offset > 0 ? "-" : "+";
+
+		var tz_offset_hours = this.date_pad(Math.floor(Math.abs(tz_offset)/60));
+		var tz_offset_minutes = this.date_pad(Math.abs(tz_offset)%60);
+
+		var tz_complete_offset = sign + tz_offset_hours + ":" + tz_offset_minutes + ":00";
+		var full_date = this.date_pad((month + 1)) + "/" + this.date_pad(day) + "/" + year + " " + hour + ":" + minutes + ":" + seconds + " " + tz_complete_offset;
+
+		// Get current web address
+		var current_web_address = "None"
+		try {
+			current_web_address = window.location;
+		} catch {
+			console.log("[Error]: Couldn't get current web address for notification log.");
+		}
 		var data = {
-			notif_user_agent: "Placeholder",
-			notif_time_stamp: "Placeholder",
+			notif_user_agent: navigator.userAgent,
+			notif_time_stamp: full_date,  // Time stamp is UTC (6hrs ahead of Rolla)
 			notif_type: typeOfMessage,
 			notif_content: messageContent,
-			notif_web_address: "Placeholder"
+			notif_web_address: current_web_address.toString()
 		};
-
+		
 		// TODO: Finish setting up java servlet to connect and update postgres DB
 		$.ajax({
 			type: "POST",
@@ -110,7 +135,7 @@ class ManagerNotification {
 			success: function(){console.log("Notification logged to node server.");},
 			contentType: "application/json"
 		});
-	}
+	}	
 	
 	// ############################# //
 	// ### Notification Movement ### //
@@ -134,7 +159,7 @@ class ManagerNotification {
 		// Slide bar into view after displaying it
 		$(".notification-bar").animate({bottom: "0%"}, this.notification_speed);
 		this.notification_toggle = true;
-	}
+	}	
 	
 	hideNotification() {
 		// A function, when called, hides a displayed notification.
@@ -157,6 +182,13 @@ class ManagerNotification {
 	
 		// Update 'In-Queue' dropdown item in notification tab
 		$("#notification-in-queue").html("In Queue (" + this.notification_queue.length + ")");
+	}
+
+	date_pad(n) {
+		// A function that pads the month and day with a '0' when either one
+		// has only one digit in their value store.
+
+		return  n < 10 ? '0' + n : n;
 	}
 }
 
