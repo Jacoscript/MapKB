@@ -96,13 +96,12 @@ function executeAFDQuery(uri, query, useSrcName, datasetName) {
 	   success: function(result) {
 	   	// if NO RESULTS, then just dereference feature URI
 		if(!result) {
-		    alert('No results!');
+            notification_manager.addToNotificationQueue("Warning", "No results after executing AFD Query.");
 		    // FIXME this should probably be handled as an error; query should at least return results json with 0 bindings unless error occurs
 		    getFtrDescByUri(uri, datasetName, useSrcName);
 		}
 		// if RESULTS, then dereference each one AND follow sameAs link out 1 node
 		else {
-			//alert('Got Here');
 		    bindings = result.results.bindings;
 		    if(bindings.length > 0) {
 			// deref each coref and follow sameAs link
@@ -118,7 +117,7 @@ function executeAFDQuery(uri, query, useSrcName, datasetName) {
 		    }
 		    else { // no corefs, so just deref single feature URI
 			if(noFeatures)
-			alert("No Advanced Feature Description Available");
+                notification_manager.addToNotificationQueue("Warning", "No advanced feature descriptions available.");
 			
 			noFeatures = true;
 			//getFtrDescByUri(uri, datasetName, useSrcName);
@@ -226,7 +225,7 @@ function getFtrDescByUri(uri, dsuri, useSrcName) {
 	    createTab(dsname, attsHtml);
 	}
 	else { // NO RESULTS! render as a new tab in UI and state couldn't load results
-	    alert('NO results for deref URI: ' + uri);
+        notification_manager.addToNotificationQueue("Warning", "No results for dereference URI: " + uri + ".");
 	    createTab(dsname,'<b>Unable to retrieve attributes of feature.</b>');
 	}
    }});

@@ -109,7 +109,9 @@ class ManagerNotification {
 		var tz_offset_minutes = this.date_pad(Math.abs(tz_offset)%60);
 
 		var tz_complete_offset = sign + tz_offset_hours + ":" + tz_offset_minutes + ":00";
-		var full_date = this.date_pad((month + 1)) + "/" + this.date_pad(day) + "/" + year + " " + hour + ":" + minutes + ":" + seconds + " " + tz_complete_offset;
+		var full_date = this.date_pad((month + 1)) + "/" + this.date_pad(day) 
+						+ "/" + year + " " + hour + ":" + minutes + ":" 
+						+ seconds + " " + tz_complete_offset;
 
 		// Get current web address
 		var current_web_address = "None"

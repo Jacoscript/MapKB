@@ -38,7 +38,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while making universal query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -129,12 +129,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating universal query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Universal query failed.");
 			}
 		});
 	}
@@ -158,7 +158,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while making point query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -218,12 +218,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating point query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Point query failed.");
 			}
 		});
 	}
@@ -246,7 +246,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while creating line query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -297,12 +297,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating line query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Line query failed.");
 			}
 		});
 	}
@@ -325,7 +325,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while creating polygon query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -375,12 +375,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating polygon query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Polygon query failed.");
 			}
 		});
 	}
@@ -403,7 +403,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while creating additional information.");
 				}
 				else {
 				bindings = result.results.bindings;
@@ -416,14 +416,14 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating additional information.");
 					}
 					//Create the tab for the additional information.
 					createTab('Additional Information', HTML);
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Creating additional information failed.");
 			}
 		});
 	}
@@ -433,7 +433,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		var query;
 		if(queryType == null)
 		{
-			alert("Error, No Query Selected");
+			notification_manager.addToNotificationQueue("Error", "No query selected.");
 			return null;
 		}
 		switch(queryType){
@@ -723,7 +723,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//If no results then throw an error
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results for IRI search.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -802,12 +802,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							grouping.addTo(map);
 						}
 					else { //0 results returned so do nothing.
-						alert("Error! #2");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating IRI search.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "IRI search failed.");
 			}
 		});	
 	}
@@ -903,7 +903,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while creating multi-polygon query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -945,12 +945,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating multi-polygon query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Multi-polygon query failed.");
 			}
 		});
 	}
@@ -958,7 +958,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	//This function performs a GeoSPARQL query to look-up and find nearby points
 	function nearbyPoints(inputGeometry,URI,namespace){
 		clearMap();
-		alert(inputGeometry);
+		notification_manager.addToNotificationQueue("Other", "Input geometry: " + inputGeometry + ".");
 		//Get the specified query
 		var query = 
 			'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
@@ -989,7 +989,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while creating nearby points query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -1031,12 +1031,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating nearby points query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Nearby points query failed.");
 			}
 		});
 	}
@@ -1045,7 +1045,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	//This function performs a GeoSPARQL query to look-up and find geometries withing the current geometry.
 	function entitiesWithin(inputGeometry,URI,namespace){
 		clearMap();
-		alert(inputGeometry);
+		notification_manager.addToNotificationQueue("Other", "Input geometry: " + inputGeometry + ".");
 		//Get the specified query
 		var query = 
 			'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
@@ -1075,7 +1075,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while creating entities within query.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -1116,12 +1116,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						grouping.addTo(map);
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating entities within query.");
 					}
 				}
 			},
 			error: function(result) {
-				alert("The Query Failed.");
+				notification_manager.addToNotificationQueue("Error", "Entities within query failed.");
 			}
 		});
 	}

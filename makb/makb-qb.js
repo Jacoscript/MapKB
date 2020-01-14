@@ -41,7 +41,7 @@ var max_queries = 6;
 				success: function(result) {
 					//If there are no results say so. Otherwise, visualize them.
 					if(!result) {
-						alert('No results!');
+						notification_manager.addToNotificationQueue("Warning", "No results.");
 					}
 					else {
 						bindings = result.results.bindings;
@@ -63,7 +63,7 @@ var max_queries = 6;
 							createTab('Query Builder', HTML);
 						}
 						else { //There was no results so do nothing.
-							alert("Error!");
+							notification_manager.addToNotificationQueue("Error", "No results for bindings while creating query tab.");
 						}
 					}
 				}
@@ -116,7 +116,7 @@ var max_queries = 6;
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					alert('No results!');
+					notification_manager.addToNotificationQueue("Warning", "No results while finding query predicates.");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -144,7 +144,7 @@ var max_queries = 6;
 						
 					}
 					else { //There was no results so do nothing.
-						alert("Error!");
+						notification_manager.addToNotificationQueue("Error", "No results for bindings while finding query predicates.");
 					}
 				}
 				//Whether we are successful or not, we should keep the same options selected
