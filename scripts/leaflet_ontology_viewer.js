@@ -8,40 +8,41 @@ toggle_viewer = false;
 function toggleOntologyViewer() {
     // A function that switches between displaying the leaflet map and the
     // ontology view
+
     if (toggle_viewer == false) {
         $("#mapid").css("display", "none");
         $(".svgGraph").css("display", "block");
         $("#example").css("display", "block");
         $("#graph").css("display", "block");
-        $("#policiesAndContributions").css("display", "block");
-        $("#resetViewOntologyOption").css("display", "block");
-        $("#sliderOntologyOption").css("display", "block");
+        $("#policies-and-contributions").css("display", "block");
+        $("#reset-view-ontology-option").css("display", "block");
+        $("#slider-ontology-option").css("display", "block");
         toggle_viewer = true;
     } else {
         $("#mapid").css("display", "block");
         $(".svgGraph").css("display", "none");
         $("#example").css("display", "none");
         $("#graph").css("display", "none");
-        $("#policiesAndContributions").css("display", "none");
-        $("#resetViewOntologyOption").css("display", "none");
-        $("#sliderOntologyOption").css("display", "none");
+        $("#policies-and-contributions").css("display", "none");
+        $("#reset-view-ontology-option").css("display", "none");
+        $("#slider-ontology-option").css("display", "none");
         toggle_viewer = false;
     }
 }
 
 $(document).ready(function() {
     // Create toggle buttons for leaflet and ontology views
-    $("#resetViewOntologyOption").append("<span class=\"btnOntology\" id=\"btnResetOntology\" onclick=\"resetGraph();\">Reset</span>")
-    $("#toggleLeafletOption").append("<span class=\"btnOntology\" id=\"btnToggleLeaflet\" onclick=\"toggleOntologyViewer();\">Toggle Leaflet Viewer</span>")
-    $("#toggleOntologyOption").append("<span class=\"btnLeaflet\" id=\"btnToggleOntology\" onclick=\"toggleOntologyViewer();\">Toggle Ontology Viewer</span>")
+    $("#reset-view-ontology-option").append("<span class=\"btn-ontology\" id=\"btn-reset-ontology\" onclick=\"resetGraph();\">Reset</span>")
+    $("#toggle-leaflet-option").append("<span class=\"btn-ontology\" id=\"btn-toggle-leaflet\" onclick=\"toggleOntologyViewer();\">Toggle Leaflet Viewer</span>")
+    $("#toggle-ontology-option").append("<span class=\"btn-leaflet\" id=\"btn-toggle-ontology\" onclick=\"toggleOntologyViewer();\">Toggle Ontology Viewer</span>")
 
     // Finish setting up leaflet view
-    $("#resetViewLeafletOption").append("<span class=\"btnLeaflet\" id=\"btnResetLeafletView\" onclick=\"zoomMapToLocation('Initial');\">Reset View</span>")
+    $("#reset-view-leaflet-option").append("<span class=\"btn-leaflet\" id=\"btn-reset-leaflet-view\" onclick=\"zoomMapToLocation('Initial');\">Reset View</span>")
 
     // Display leaflet/USGS info and policies from leaflet map onto ontology map as well
-    $("#policiesAndContributions").append("<a href=\"http://leafletjs.com\" target=\"_blank\" title=\"A JS library for interactive maps\">Leaflet</a> | ")
-    $("#policiesAndContributions").append("<a href=\"http://vowl.visualdataweb.org/webvowl.html\" target=\"_blank\">WebVOWL</a> | ")
-    $("#policiesAndContributions").append("<a href=\"http://doi.gov\" target=\"_blank\">U.S. Department of the Interior</a> | ")
-    $("#policiesAndContributions").append("<a href=\"http://usgs.gov\" target=\"_blank\">U.S. Geological Survey</a> | ")
-    $("#policiesAndContributions").append("<a href=\"http://usgs.gov/laws/policies_notices.html\" target=\"_blank\">Policies</a>")
+    $("#policies-and-contributions").append("<a href=\"http://leafletjs.com\" target=\"_blank\" title=\"A JS library for interactive maps\">Leaflet</a> | ")
+    $("#policies-and-contributions").append("<a href=\"http://vowl.visualdataweb.org/webvowl.html\" target=\"_blank\">WebVOWL</a> | ")
+    $("#policies-and-contributions").append("<a href=\"http://doi.gov\" target=\"_blank\">U.S. Department of the Interior</a> | ")
+    $("#policies-and-contributions").append("<a href=\"http://usgs.gov\" target=\"_blank\">U.S. Geological Survey</a> | ")
+    $("#policies-and-contributions").append("<a href=\"http://usgs.gov/laws/policies_notices.html\" target=\"_blank\">Policies</a>")
 });

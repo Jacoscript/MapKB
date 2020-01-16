@@ -11,9 +11,12 @@ it can be ported to other pages if need be.
 
 body {
 	background-color: #ffffff;
+	overflow: hidden;  /* temp fix to hide scrollbar for useless space */
 	/* 
 	Note: setting width: 100%; allows other content to extend past browser view. 
 	Not needed and also don't know what content does this yet
+	Note 2: Not sure why there's extra space at the bottom of the screen when
+	'overflow: hidden;' is disabled.
 	*/
 }
 
@@ -49,6 +52,7 @@ such as the font family and font size
 	padding: 0px;
 }
 
+/* Default all list items to be floated left */
 .css-menu li {
 	float: left;
 }

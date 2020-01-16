@@ -5,6 +5,60 @@ tfry@contractor.usgs.gov
 A file for the css design of all web page elements including svg graph,
 leaflet map, and more.
 */
+/* Leaflet map styles */
+#mapid {
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    margin-right: 3px;
+    margin-top: 9px;
+    z-index: 1;
+}
+.leaflet-interactive {
+    /* Used for filling in state lines when countyorequal or stateorequal layer is applied to leaflet map */
+    fill: #000000;
+    fill-opacity: 0.2;
+}
+#reset-view-leaflet-option {
+    position: absolute;
+    right: 155px;
+    top: 11px;
+    z-index: 401;  /* 400 is the map tile layers */
+}
+#toggle-ontology-option {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    z-index: 401;  /* 400 is the map tile layers */
+}
+
+/* Leaflet/Ontology buttons */
+.btn-leaflet {
+    background-color: #ffffff;
+    border: 1px solid #808080;
+    color: #000000;
+    cursor: default;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding: 5px 5px 5px 5px;
+}
+.btn-leaflet:hover {
+    background-color: #e6e6e6;
+    cursor: default;
+}
+.btn-ontology {
+    background-color: #d9d9d9;
+    border: 1px solid #a6a6a6;
+    color: #000000;
+    cursor: default;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding: 5px 5px 5px 5px;
+}
+.btn-ontology:hover {
+    background-color: #e6f2ff;
+    border: 1px solid #1a8cff;
+    cursor: default;
+}
+
 /*  Ontology graph styles */
 #example {
     display: none;
@@ -31,7 +85,7 @@ leaflet map, and more.
     width: 100%;
     z-index: 2;
 }
-#policiesAndContributions {
+#policies-and-contributions {
     bottom: -0.1%;
     color: #333333;
     display: none;
@@ -41,22 +95,22 @@ leaflet map, and more.
     right: 0.4%;
     z-index: 3;
 }
-#policiesAndContributions > a {
+#policies-and-contributions > a {
     color: #0078A8;
     font-size:  11px;
     text-decoration: none;
 }
-#policiesAndContributions > a:hover {
+#policies-and-contributions > a:hover {
     text-decoration: underline;
 }
-#resetViewOntologyOption {
+#reset-view-ontology-option {
     display: none;
     position: absolute;
     right: 145px;
     top: 10px;
     z-index: 3;
 }
-#sliderOntologyOption {
+#slider-ontology-option {
     background-color: #d9d9d9;
     border: 1px solid #808080;
     display: none;
@@ -69,63 +123,22 @@ leaflet map, and more.
     width: 193px;
     z-index: 3;
 }
-#toggleLeafletOption {
+#toggle-leaflet-option {
     position: absolute;
     right: 9px;
     top: 10px;
     z-index: 3;
 }
 
-/* Leaflet map styles */
-#mapid {
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-    margin-right: 3px;
-    margin-top: 9px;
-    z-index: 1;
-}
-.leaflet-interactive {
-    /* Used for filling in state lines when countyorequal or stateorequal layer is applied to leaflet map */
-    fill: #000000;
-    fill-opacity: 0.2;
-}
-#resetViewLeafletOption {
+/* Misc page styles */
+#loading-layer-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    cursor: wait;
+    display: none;
+    height: 100%;
+    left: 0;
     position: absolute;
-    right: 155px;
-    top: 11px;
-    z-index: 401;  /* 400 is the map tile layers */
-}
-#toggleOntologyOption {
-    position: absolute;
-    right: 10px;
-    top: 11px;
-    z-index: 401;  /* 400 is the map tile layers */
-}
-
-/* Leaflet/Ontology buttons */
-.btnLeaflet {
-    background-color: #ffffff;
-    border: 1px solid #808080;
-    color: #000000;
-    cursor: default;
-    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
-    padding: 5px 5px 5px 5px;
-}
-.btnLeaflet:hover {
-    background-color: #e6e6e6;
-    cursor: default;
-}
-.btnOntology {
-    background-color: #d9d9d9;
-    border: 1px solid #a6a6a6;
-    color: #000000;
-    cursor: default;
-    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
-    padding: 5px 5px 5px 5px;
-}
-.btnOntology:hover {
-    background-color: #e6f2ff;
-    border: 1px solid #1a8cff;
-    cursor: default;
+    top: 0;
+    width: 100%;
+    z-index: 50000;
 }

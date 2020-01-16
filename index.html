@@ -135,6 +135,8 @@
 						<ul class="dropdown-content">
 							<a href="#" onclick="clearMap();">Clear Map</a>
 							<a href="#" onclick="clearTabs();">Clear Tabs</a>
+							<a href="#" onclick="onLayerLoading();">Toggle Layer Loading On</a>
+							<a href="#" onclick="onLayerLoadingFinished();">Toggle Layer Loading Off</a>
 						</ul>
 					</li>
 				</div>
@@ -145,10 +147,10 @@
 			<!-- Ontology view -->
 			<section id="example">
 				<div id="graph">
-					<div id="resetViewOntologyOption"></div>
-					<div id="sliderOntologyOption"></div>
-					<div id="toggleLeafletOption"></div>
-					<div id="policiesAndContributions"></div>
+					<div id="reset-view-ontology-option"></div>
+					<div id="slider-ontology-option"></div>
+					<div id="toggle-leaflet-option"></div>
+					<div id="policies-and-contributions"></div>
 				</div>
 				<p id="browserCheck" class="hidden"></p>
 			</section>
@@ -156,8 +158,8 @@
 			<!-- leaflet map -->
 			<div id="mapid" style="height: 90.55%; width: 70%;">
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
-				<div id="resetViewLeafletOption"></div>
-				<div id="toggleOntologyOption"></div>
+				<div id="reset-view-leaflet-option"></div>
+				<div id="toggle-ontology-option"></div>
 			</div>
 			<div id="crosshair-position">
 				Crosshair Latitude: <input type="text" id="txtbox-Latitude" />
@@ -171,7 +173,7 @@
 					<legend>Advanced Feature Descriptions</legend>
 					<div id="afd-tabs" style="z-index: 1; width: 98%; float: left; margin-top: 5px;">
 						<ul id="afd-tabs-list">
-						   <!-- list is populated programmatically -->
+						<!-- list is populated programmatically -->
 						</ul>
 					</div>
 				</fieldset>
@@ -187,6 +189,9 @@
 		<script src="scripts/web-VOWL/spec_browser_warning.js"></script>
 		<script src="scripts/web-VOWL/spec_VOWL.js"></script>
 		<script src="scripts/web-VOWL/web_VOWL_graph.js"></script>
+
+		<!-- Overlay for disabled page -->
+		<div id="loading-layer-overlay"></div>
 	</body>
 </html>
 
