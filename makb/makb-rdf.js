@@ -140,6 +140,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 //Function to make a point query and visualize the results.
 	function makePointQuery(inputQuery){
+		onLayerLoading(inputQuery);  // Lock down browser while loading
 		//Check whether specific query has been applied
 		if (triggerLayers[inputQuery] == true) {
 			return;
@@ -216,6 +217,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//visualize the mapping layer when all the markers have been added.
 						grouping.addTo(map);
+						onLayerLoadingFinished(inputQuery);
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating point query.");
@@ -229,6 +231,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 	//Function to make a line query and visualize the results.
 	function makeLineQuery(inputQuery){
+		onLayerLoading(inputQuery);  // Lock down browser while loading
 		//Check whether specific query has been applied
 		if (triggerLayers[inputQuery] == true) {
 			return;
@@ -295,6 +298,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//visualize the mapping layer
 						grouping.addTo(map);
+						onLayerLoadingFinished(inputQuery);
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating line query.");
@@ -308,6 +312,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	}
 	//Function to make a line query and visualize the results.
 	function makePolygonQuery(inputQuery){
+		onLayerLoading(inputQuery);  // Lock down browser while loading
 		//Check whether specific query has been applied
 		if (triggerLayers[inputQuery] == true) {
 			return;
@@ -373,6 +378,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//visualize the mapping layer
 						grouping.addTo(map);
+						onLayerLoadingFinished(inputQuery);
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating polygon query.");
@@ -885,6 +891,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	
 	//This function maps PADUS data.
 	function makeMultiPolygonQuery(){
+		onLayerLoading("PADUS");  // Lock down browser while loading
 		//Check whether specific query has been applied
 		if (triggerLayers['padus'] == true) {
 			return;
@@ -943,6 +950,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//visualize the mapping layer
 						grouping.addTo(map);
+						onLayerLoadingFinished("PADUS")
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating multi-polygon query.");
