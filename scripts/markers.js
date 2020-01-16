@@ -47,7 +47,7 @@ function addLeafletMarker() {
     };
 
     // Log
-    console.log("New Marker '" + user_Info + "' at (lat: " + locale.lat + ", long: " + locale.lng + ")");
+    console.log("[Created]: Marker '" + user_Info + "' at (lat: " + locale.lat + ", long: " + locale.lng + ")");
     
     // Add marker to list for later deletion
     user_markers.push(user_markers_Builder);

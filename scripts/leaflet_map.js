@@ -38,8 +38,9 @@ map.addControl(zoom);
 
 function clearMap(){
 	// Function to clear the map of data
-
+	onLayerLoading();
 	grouping.clearLayers();
+	onLayerLoadingFinished();
 
 	// Set all triggers to false
 	for (key of Object.keys(triggerLayers)) {
@@ -68,7 +69,9 @@ function onLayerLoading(input_query) {
 	// A function to disable web page features while a specific layer is
 	// loaded
 
-	console.log("[Loading]: Layer - " + input_query);
+	if (input_query != "") {
+		console.log("[Loading]: Layer - " + input_query);
+	}
 	// Set loading cursor for all
 	$("#loading-layer-overlay").css("display", "block");
 }
@@ -76,7 +79,9 @@ function onLayerLoading(input_query) {
 function onLayerLoadingFinished(input_query) {
 	// A function to enable the web page after a specific layer is loaded.
 	
-	console.log("[Loading]: Layer - " + input_query + " finished.");
+	if (input_query != "") {
+		console.log("[Loading]: Layer - " + input_query + " finished.");
+	}
 	$("#loading-layer-overlay").css("display", "none");
 }
 
