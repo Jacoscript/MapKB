@@ -64,15 +64,17 @@ function insertAfter(el, referenceNode) {
 	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
-function onLayerLoad() {
-	// A function to disable web page features while a soecific layer is
+function onLayerLoading() {
+	// A function to disable web page features while a specific layer is
 	// loaded
-	
-	// Disable features
-	
 
 	// Set loading cursor for all
-	// $("*").css("cursor", "progress");
+	$("#loading-layer-overlay").css("display", "block");
+}
+
+function onLayerLoadingFinished() {
+	// A function to enable the web page after a specific layer is loaded.
+	$("#loading-layer-overlay").css("display", "none");
 }
 
 function onLocationError(e) {
@@ -136,5 +138,4 @@ function zoomMapToLocation(loc, lat, long, zoomLevel) {
 $(document).ready(function() {
 	// Update lat long on first onLoad of web page
 	onMapMove();
-	onLayerLoad();
 });
