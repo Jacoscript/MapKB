@@ -79,6 +79,10 @@ function onLayerLoading(input_query) {
 function onLayerLoadingFinished(input_query) {
 	// A function to enable the web page after a specific layer is loaded.
 	
+	if(input_query=="doSomething") {
+		triggerLayers["doSomething"] == false;
+	}
+
 	if (input_query != "") {
 		console.log("[Loading]: Layer - " + input_query + " finished.");
 	}
