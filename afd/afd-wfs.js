@@ -8,7 +8,7 @@
 
 // default geometry column name, base wfs url, feature type namespace & crs
 var GEOM_FLD = 'the_geom';
-var WFS_BASE_URL = 'http://144.47.161.52:8080/geoserver/wfs';
+//var WFS_BASE_URL = 'http://144.47.161.52:8080/geoserver/wfs';
 //var WFS_BASE_URL = 'https://cartowfs.nationalmap.gov:443/arcgis/services/structures/MapServer/WFSServer';
 var TYPE_NS = 'usgsns';
 //var TYPE_NS = 'structures';

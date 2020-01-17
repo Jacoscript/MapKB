@@ -2,10 +2,10 @@
  * Advanced Feature Description functions for RDF processing operations
  */
 
-var MARMOTTA_BASE_URL = 'http://144.47.161.52:8080/marmotta';
-var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
-var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
-var FEATURE_BASE_URL = 'http://data.usgs.gov/';
+//var MARMOTTA_BASE_URL = 'http://144.47.161.52:8080/marmotta';
+//var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
+//var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
+//var FEATURE_BASE_URL = 'http://data.usgs.gov/';
 
 var noFeatures = false;
 
