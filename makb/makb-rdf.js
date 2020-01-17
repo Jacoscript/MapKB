@@ -9,6 +9,7 @@
 
 var triggerLayers = {
 	countyorequivalent: false,
+	doSomething: false,
 	geonames: false,
 	gnis: false,
 	nhdflowline: false,
@@ -371,7 +372,8 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 							polygon = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							polygon.bindPopup("<br>Name: " +  name +'</a>' +
 									"<br>Purpose: " + purpose +
-									"<p> <a href='#' onClick=\"additionalInformation('"+subject+"');\">Additional Information</a><br>" 
+									"<p> <a href='#' onClick=\"additionalInformation('"+subject+"');\">Additional Information</a><br>" +
+									"<a href='#' onClick=\"entitiesWithin('"+geometry.replace("  ","")+"','"+subject+"','"+ftypeName[3]+"');\">Entities Within</a><br> </p>"
 									);
 							//add the polyline object to the mapping layer
 							grouping.addLayer(polygon);
@@ -1052,28 +1054,84 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	
 	//This function performs a GeoSPARQL query to look-up and find geometries withing the current geometry.
 	function entitiesWithin(inputGeometry,URI,namespace){
-		clearMap();
-		notification_manager.addToNotificationQueue("Other", "Input geometry: " + inputGeometry + ".");
+		//Check whether specific query has been applied
+		if (triggerLayers["doSomething"] == true) {
+			return;
+		} else {
+			triggerLayers["doSomething"] = true;
+			onLayerLoading("doSomething");  // Lock down browser while loading
+		}
+
+		//notification_manager.addToNotificationQueue("Other", "Input geometry: " + inputGeometry + ".");
 		//Get the specified query
-		var query = 
-			'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
-			'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
-			'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
-			'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
-			'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
-			'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
-			'FROM <http://localhost:8080/marmotta/context/'+namespace+'> ' +
-			'WHERE { ' +
-			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-			'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT . ' +
-			'BIND(CONCAT("SRID=4326;",STR(?gWKT),"") AS ?strWKT) . ' +
-			'BIND("SRID=4326;'+inputGeometry+'"^^geo:wktLiteral AS ?inputGeometry) . ' +
-			'FILTER( geof:sfWithin(?strWKT, ?inputGeometry) )' +
-			'} ';
+
+		if (namespace == "countyorequivalent")
+			var query = 
+				'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
+				'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
+				'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
+				'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
+				'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
+				'SELECT ?subject ?name ?purpose ?dimensions ?geometry ?flWKT ' +
+				'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
+				'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
+				'WHERE { ' +
+					'GRAPH ?g { ' +
+					'<'+URI+'> geo:hasGeometry ?gWB . ' +
+					'?gWB <http://www.opengis.net/ont/geosparql#asWKT> ?geo . ' +
+					'BIND(CONCAT("SRID=4326;", STR(?geo)) AS ?wbStrWKT) . ' +
+					'GRAPH ?h { ' +
+					'?subject geo:hasGeometry ?gFL . ' +
+					'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+					'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+					'?gFL geo:asWKT ?flWKT . ' +
+					'?gFL geo:asGML ?geometry . ' +
+					'?gFL geo:dimension ?dimensions . ' +
+					'BIND(CONCAT("SRID=4326;",STR(?flWKT),"") AS ?flStrWKT) . ' +
+					'} ' +
+				'FILTER (geof:sfWithin(?flStrWKT, ?wbStrWKT) && ?flStrWKT != ?wbStrWKT) ' +
+				'}} ';
+
+		else if (namespace == "stateorterritory")
+			var query = 
+				'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
+				'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
+				'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
+				'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
+				'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
+				'SELECT  ?subject ?name ?purpose ?dimensions ?geometry ?strWKT ' +
+				'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
+				'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
+				'WHERE { ' +
+  					'{ ' +
+					'SELECT * WHERE{ ' +
+    						'GRAPH ?h{ ' +
+      							'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+      							'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
+      							'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
+      							'OPTIONAL{ ?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . } ' +
+      							'OPTIONAL{ ?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . } ' +
+      							'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT . ' +
+      							'BIND(CONCAT("SRID=4326;",STR(?gWKT),"") AS ?strWKT) . ' +
+      							'} ' +
+	    					'Filter( regex(?strWKT, "POINT") ) ' +
+    						'} ' +
+  					'} ' +
+  					'{ ' +
+  					'SELECT ?gm (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=" ") AS ?inputGeometry) ' +
+					'(CONCAT("SRID=4326; MULTIPOLYGON(((", (REPLACE(STR(?inputGeometry), " -", ", -")) ,")))") AS ?step1) ' +
+  					'WHERE { ' +
+						'GRAPH ?g { ' +
+    							'<'+URI+'>  <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ' +
+    							'?gm <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+    							'?gm <http://www.opengis.net/ont/geosparql#asWKT> ?geo . ' +
+    							'} '+
+					'} ' +
+    					'GROUP BY ?gm ?dimensions' +
+  					'} ' +
+  					'FILTER( geof:sfWithin(?strWKT, ?step1) ) ' +
+				'}';
+
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
@@ -1122,6 +1180,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//visualize the mapping layer when all the markers have been added.
 						grouping.addTo(map);
+						onLayerLoadingFinished("doSomething");
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating entities within query.");
