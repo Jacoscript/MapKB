@@ -4,8 +4,12 @@
 // menu for the MAKB web page.
 
 function pageLoad() {
+	// A function to run once the web page loads.
+	
+	// NOTE: Make sure any new sub-tabs are added below
+	var sub_tab_list = ["markers", "del-marker"];
+	sub_tab_list.forEach(handleSubTabs);
 	handleDropDowns();
-	handleSubTabs();
 }
 
 // ########################################## //
@@ -14,9 +18,13 @@ function pageLoad() {
 
 function handleDropDowns(){
 	// A function to stylize dropdown-content moving towards menu bar.
-	$(".drop-btn").mouseenter(moveContentUp)
+
+	$(".drop-btn").mouseenter(moveContentUp);
 }
 function moveContentUp(){
+	// A function to give animation to the dropdowns by moving them upwards
+	// towards the menu.
+
 	$(".dropdown-content").css("top", "75px");
 	$(".dropdown-content").animate({"top": "58px"}, 200);
 }
@@ -25,31 +33,25 @@ function moveContentUp(){
 // ### Sub-tab code ### //
 // #################### //
 
-function handleSubTabs(){
+function handleSubTabs(sub_tab_name, index){
 	// A function that makes sure that sub-tabs are open only when they are
 	// interacted by their parent tab.
-	
-	// NOTE: Make sure any new sub-tabs are added below
-	
-	// Hover sub-tabs for markers
+
 	// Syntax: .mouseenter(eventData, function);
-	$("#markers").mouseenter("markers", showSubTabs);
-	$("#markers").mouseleave("markers", hideSubTabs);
-	$("#sub-markers").mouseenter("markers", showSubTabs);
-	$("#sub-markers").mouseleave("markers", hideSubTabs);
-	
-	// Hover sub-tabs for del marker
-	// Syntax: .mouseenter(eventData, function);
-	$("#del-marker").mouseenter("del-marker", showSubTabs);
-	$("#del-marker").mouseleave("del-marker", hideSubTabs);
-	$("#sub-del-marker").mouseenter("del-marker", showSubTabs);
-	$("#sub-del-marker").mouseleave("del-marker", hideSubTabs);
+	$("#" + sub_tab_name).mouseenter(sub_tab_name, showSubTabs);
+	$("#" + sub_tab_name).mouseleave(sub_tab_name, hideSubTabs);
+	$("#sub-" + sub_tab_name).mouseenter(sub_tab_name, showSubTabs);
+	$("#sub-" + sub_tab_name).mouseleave(sub_tab_name, hideSubTabs);
 }
 
 function showSubTabs(eventData) {
+	// A function to change css to show desired sub tabs.
+
 	$("#sub-" + eventData.data).css("display", "block");
 }
 function hideSubTabs(eventData) {
+	// A function to change css to hide desired sub tabs.
+
 	$("#sub-" + eventData.data).css("display", "none");
 }
 
