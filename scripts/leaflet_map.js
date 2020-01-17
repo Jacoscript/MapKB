@@ -38,9 +38,7 @@ map.addControl(zoom);
 
 function clearMap(){
 	// Function to clear the map of data
-	onLayerLoading();
 	grouping.clearLayers();
-	onLayerLoadingFinished();
 
 	// Set all triggers to false
 	for (key of Object.keys(triggerLayers)) {
@@ -78,8 +76,7 @@ function onLayerLoading(input_query) {
 
 function onLayerLoadingFinished(input_query) {
 	// A function to enable the web page after a specific layer is loaded.
-	
-	if(input_query=="doSomething") {
+	if(input_query == "doSomething") {
 		triggerLayers["doSomething"] == false;
 	}
 
