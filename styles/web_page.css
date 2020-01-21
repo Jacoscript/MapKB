@@ -5,6 +5,19 @@ tfry@contractor.usgs.gov
 A file for the css design of all web page elements including svg graph,
 leaflet map, and more.
 */
+
+/* AFD styles */
+.afd-widget {
+    float: right;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 80%;
+    margin-top: 7px;
+    width: 29%;
+}
+#afd-tabs {
+    overflow: hidden;
+}
+
 /* Leaflet map styles */
 #mapid {
     border-style: solid;

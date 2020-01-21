@@ -21,8 +21,8 @@ var max_queries = 6;
 			return;
 		} else {
 			current_queries += 1;
-			var HTML = '<p style="font-size:15px";>Choose what graphs you would like to query: <br></p>' +
-						'<select style="font-size:10px"; id="queryContextSelector">'; 
+			var HTML = '<p style="font-size:15px">Choose what graphs you would like to query: <br></p>' +
+						'<select style="font-size:10px; width: 100%;" id="queryContextSelector">'; 
 			
 			
 			//Get the specified query
@@ -83,8 +83,8 @@ var max_queries = 6;
 		var HTML = '';
 		
 		if( document.getElementById("queryPredicateSelector") == null) {
-			HTML = '<p style="font-size:15px";>Choose what predicates you would like to filter the selected graphs by: <br></p>' +
-						'<select style="font-size:10px"; id="queryPredicateSelector">'; 
+			HTML = '<p style="font-size:15px">Choose what predicates you would like to filter the selected graphs by: <br></p>' +
+						'<select style="font-size:10px" id="queryPredicateSelector">'; 
 		}
 		else 
 		{
@@ -164,8 +164,8 @@ var max_queries = 6;
 		selected_p = predicates.selectedIndex;
 		
 		if(document.getElementById("queryFilterSelector") == null) {
-			var HTML = '<p style="font-size:15px";>Choose how you want to filter the predicates: <br></p>' +
-						'<select style="font-size:10px"; id="queryFilterSelector">'; 
+			var HTML = '<p style="font-size:15px">Choose how you want to filter the predicates: <br></p>' +
+						'<select style="font-size:10px" id="queryFilterSelector">'; 
 		
 		/*if( predicates[0]=="http://dbpedia.org/ontology/zipCode"
 		http://www.opengis.net/ont/geosparql#dimension	
@@ -204,7 +204,7 @@ var max_queries = 6;
 			
 		HTML = HTML + '</select><br>'
 		+ '<p style="font-size:15px";>What do you want to compare the objects to? <br></p>'
-		+ '<textarea cols="50" rows="1" id="queryFilterObject" style="resize:none;font-size=:12px;"></textarea><br><br>'
+		+ '<textarea cols="50" rows="1" id="queryFilterObject" style="resize:none; font-size: 12px; width: 100%;"></textarea><br><br>'
 		+ '<button type="button" onclick="generateQuery();">Generate Query</button> <br> ';
 						
 		//append the content to the queryTab
@@ -309,10 +309,14 @@ var max_queries = 6;
 		
 		if( document.getElementById("generatedQuery") == null)
 		{
-			var HTML = '<br><textarea cols="50" rows="20" id="generatedQuery" style="resize:none;font-size=:12px;">'+query+'</textarea><br><br>'
+			var HTML = '<br><textarea cols="50" rows="20" id="generatedQuery" style="resize:none; font-size: 12px; width: 100%">'+query+'</textarea><br><br>'
 			+ '<button type="button" id="runQuery" onclick="getQueryField();">Run Query</button> ';
+			
+			// Set overflow for afd-tabs to scroll so that the user can see the query and run it
+			$("#afd-tabs").css("overflow", "scroll");
+
 			//append the content to the queryTab
-		queryTab.innerHTML += HTML;
+			queryTab.innerHTML += HTML;
 		}
 		else
 		{

@@ -55,6 +55,9 @@ function clearTabs(){
 	// Not sure if below line is depreciated or what. Tabs list seems to 
 	// refresh without it
 	// $("#afd-tabs").tabs("refresh");
+
+	// Reset afd-tabs overflow back to hidden
+	$("#afd-tabs").css("overflow", "hidden");
 }
 
 function insertAfter(el, referenceNode) {
