@@ -12,7 +12,7 @@ var selected_c = 0;
 var selected_p = 0;
 var selected_f = 0;
 var selected_comparison = '';
-var max_queries = 6;
+var max_queries = 1;
 
 	//Function to display the query as a tab
 	function createQueryTab(){
@@ -311,9 +311,6 @@ var max_queries = 6;
 		{
 			var HTML = '<br><textarea cols="50" rows="20" id="generatedQuery" style="resize:none; font-size: 12px; width: 100%">'+query+'</textarea><br><br>'
 			+ '<button type="button" id="runQuery" onclick="getQueryField();">Run Query</button> ';
-			
-			// Set overflow for afd-tabs to scroll so that the user can see the query and run it
-			$("#afd-tabs").css("overflow", "scroll");
 
 			//append the content to the queryTab
 			queryTab.innerHTML += HTML;

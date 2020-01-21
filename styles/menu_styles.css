@@ -11,7 +11,7 @@ it can be ported to other pages if need be.
 
 body {
 	background-color: #ffffff;
-	overflow: hidden;  /* temp fix to hide scrollbar for useless space */
+	/*overflow: hidden;  /* temp fix to hide scrollbar for useless space */
 	/* 
 	Note: setting width: 100%; allows other content to extend past browser view. 
 	Not needed and also don't know what content does this yet
