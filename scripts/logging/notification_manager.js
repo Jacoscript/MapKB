@@ -149,13 +149,13 @@ class ManagerNotification {
 		$(".notification-bar").css("display", "block");
 		this.modifyNotification(type, content);
 		if (type == "Error") {
-			console.error("[Notification]: " + type + " - " + content + ".");
+			console.error("[Notification]: " + type + " - " + content);
 		} else if (type == "Other") {
-			console.info("[Notification]: " + type + " - " + content + ".");
+			console.info("[Notification]: " + type + " - " + content);
 		} else if (type == "Success") {
-			console.info("[Notification]: " + type + " - " + content + ".");
+			console.info("[Notification]: " + type + " - " + content);
 		} else if (type == "Warning") {
-			console.warn("[Notification]: " + type + " - " + content + ".");
+			console.warn("[Notification]: " + type + " - " + content);
 		}
 	
 		// Slide bar into view after displaying it
