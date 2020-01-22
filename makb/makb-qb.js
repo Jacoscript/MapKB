@@ -7,20 +7,20 @@
 //var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
 //var FEATURE_BASE_URL = 'http://data.usgs.gov/';
 
-var current_queries = 0;
+var current_custom_queries = 0;
 var selected_c = 0;
 var selected_p = 0;
 var selected_f = 0;
 var selected_comparison = '';
-var max_queries = 1;
+var max_custom_queries = 3;
 
 	//Function to display the query as a tab
 	function createQueryTab(){
 		// Check whether query is already open
-		if (current_queries == max_queries) {
+		if (current_custom_queries == max_custom_queries) {
 			return;
 		} else {
-			current_queries += 1;
+			current_custom_queries += 1;
 			var HTML = '<p style="font-size:15px">Choose what graphs you would like to query: <br></p>' +
 						'<select style="font-size:10px; width: 100%;" id="queryContextSelector">'; 
 			

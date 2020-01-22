@@ -41,8 +41,8 @@
 		<script src="afd/afd-rdf.js"></script>
 
 		<!-- afd tabs (jquery-ui) -->
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="jquery-ui/jquery-ui.css" />
+		<script src="jquery-ui/jquery-ui.js"></script>
 
 		<!-- dbpedia js-->
 		<script src="ld/dbpedia.js"></script>
@@ -143,7 +143,6 @@
 				</div>
 			</ul>
 		</div>
-		
 		<div id="main-container">
 			<!-- Ontology view -->
 			<section id="example">
@@ -157,15 +156,15 @@
 			</section>
 
 			<!-- leaflet map -->
-			<div id="mapid" style="height: 90%; width: 70%;">
+			<div id="mapid">
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
 				<div id="reset-view-leaflet-option"></div>
 				<div id="toggle-ontology-option"></div>
 			</div>
-			<div id="crosshair-position">
-				Crosshair Latitude: <input type="text" id="txtbox-Latitude" />
+			<div id="txtbox-container">
+				<span id="txtbox-text-lat">Crosshair Latitude:</span><input type="text" id="txtbox-Latitude" />
 				<br /><br />
-				Crosshair Longitude: <input type="text" id="txtbox-Longitude" />
+				<span id="txtbox-text-long">Crosshair Longitude:</span><input type="text" id="txtbox-Longitude" />
 			</div>
 
 			<!-- advanced feature description tabs -->

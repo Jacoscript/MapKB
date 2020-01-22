@@ -26,7 +26,7 @@ function moveContentUp(){
 	// towards the menu.
 
 	$(".dropdown-content").css("top", "75px");
-	$(".dropdown-content").animate({"top": "58px"}, 200);
+	$(".dropdown-content").animate({"top": $(".css-menu").height()}, 200);
 }
 
 // #################### //

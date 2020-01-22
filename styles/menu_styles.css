@@ -129,32 +129,6 @@ such as the font family and font size
 	z-index: 10000;
 }
 
-/* Stylizing leaflet ids */
-#crosshair-position {
-	padding-top: 10px;
-}
-#txtbox-Latitude {
-	float: right;
-	margin-right: 3px;
-	text-align: center;
-}
-#txtbox-Longitude {
-	float: right;
-	margin-right: 3px;
-	text-align: center;
-}
-
-/* Place crosshair at the center of the leaflet map */
-#crosshair img {
-	position: absolute;
-	margin: 0;
-	top: 50%;
-	left: 50%;
-	margin-right: -50%;
-	transform: translate(-50%, -50%);
-	z-index: 1000;
-}
-
 /* Animations and other features */
 @keyframes light-to-dark-blues {
 	0% {background-color: #3db2e1;}

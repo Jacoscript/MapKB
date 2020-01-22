@@ -422,8 +422,7 @@ function createTab(name, content) {
     tabsList.appendChild(newTabDiv);
 
     $("#afd-tabs").tabs("refresh");
-	//document.getElementById(newTabDiv.id)[0].click();
-
+    //document.getElementById(newTabDiv.id)[0].click();
 }
 
 function testAddTab() {

@@ -62,6 +62,8 @@ function clearTabs(){
 	console.log("Clearing tabs.");
 	$('#afd-tabs ul li').remove();
 	$('#afd-tabs div').remove();
+	// Reset the tab count
+	max_custom_queries = 0;
 	// Not sure if below line is depreciated or what. Tabs list seems to 
 	// refresh without it
 	// $("#afd-tabs").tabs("refresh");
@@ -108,7 +110,7 @@ function onMapMove() {
 	$("#txtbox-Latitude").val(locale.lat);
 	$("#txtbox-Longitude").val(locale.lng);
 	// Set height of afd tabs to height of map
-	$('#afd-tabs').height($('#mapid').height() - 112);
+	$("#afd-tabs").height($("#mapid").height() - ($("#txtbox-container").height() + $("#main-container").offset().top) - 3);
 };
 
 function zoomMapToLocation(loc, lat, long, zoomLevel) {
