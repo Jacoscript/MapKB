@@ -28,7 +28,17 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 
 //Function to make a query that can understand how to visualize all the different geometries
 	function makeUniversalQuery(inputQuery){
-	//Get the specified query
+		// TODO: Add below into trigger mechanics. There's an issue on gitlab
+		//Check whether specific query has been applied
+		// if (triggerLayers[inputQuery] == true) {
+		// 	return;
+		// } else {
+		// 	triggerLayers[inputQuery] = true;
+		// 	onLayerLoading(inputQuery);  // Lock down browser while loading
+		// }
+		onLayerLoading("user created query");  // Lock down browser while loading
+
+		//Get the specified query
 		var query = getQuery(inputQuery);
 		//HTTP encode the query
 		query = encodeURIComponent(query);
@@ -128,6 +138,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//Visualize the map layer
 						grouping.addTo(map);
+						onLayerLoadingFinished("user created query");
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating universal query.");
