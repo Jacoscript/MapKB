@@ -32,6 +32,16 @@ var options = { position: "topleft" };
 var zoom = L.control.zoomBox(options);
 map.addControl(zoom);
 
+// ################################ //
+// ### Special Leaflet Handling ### //
+// ################################ //
+
+// When the map moves we run our function up above
+map.on('move', onMapMove);
+ 
+// Boilerplate
+map.on('locationerror', onLocationError);
+
 // ################################# //
 // ### Map Functions and Loading ### //
 // ################################# //
@@ -98,26 +108,8 @@ function onMapMove() {
 	$("#txtbox-Latitude").val(locale.lat);
 	$("#txtbox-Longitude").val(locale.lng);
 	// Set height of afd tabs to height of map
-	$('#afd-tabs').height($('#mapid').height() - /* minus map offset */ 108);
+	$('#afd-tabs').height($('#mapid').height() - 112);
 };
-
-// When the map moves we run our function up above
-map.on('move', onMapMove);
- 
-// Boilerplate
-map.on('locationerror', onLocationError);
-
-function qWrite_show(){
-	// Function to show query writing area
-
-	document.getElementById('qWritePopup').style.display = "block";
-}
-
-function qWrite_hide(){
-	// Function to Hide query writing area
-
-	document.getElementById('qWritePopup').style.display = "none";
-}
 
 function zoomMapToLocation(loc, lat, long, zoomLevel) {
 	// Function to zoom to pre-defined locations around the map
