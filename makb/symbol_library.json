@@ -1,4 +1,4 @@
-const symbolLibrary = {
+{
 	"ADM3": "Administration",
 	"ADMD": "Administration",
 	"AIRP": "Airport",
@@ -122,4 +122,4 @@ const symbolLibrary = {
 	"FRST": "Woods",
 	"Woods": "Woods",
 	"Unknown":"Unknown"
-    }
+}

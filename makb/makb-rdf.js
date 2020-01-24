@@ -2,8 +2,6 @@
  * Map As A Knowledge Base functions for RDF processing operations
  */
 
-
-
 var triggerLayers = {
 	countyorequivalent: false,
 	doSomething: false,
@@ -19,9 +17,9 @@ var triggerLayers = {
 	trails: false,
 };  // An object used to check whether a layer is in use or not
 
-// load the namespace IDs json from URL
-var nsids = {};
-$.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
+// load the symbol IDs json from URL
+var symbolLibrary = {};
+$.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; });
 
 //Function to make a query that can understand how to visualize all the different geometries
 	function makeUniversalQuery(inputQuery){
@@ -470,12 +468,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/gnis> ' +
 			'WHERE { ' +
-			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-			'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
+				'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
+				'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
+				'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
 			'} ';
 		break;
 			//This query is for the Geonames layer
@@ -483,12 +481,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/geonames> ' +
 			'WHERE { ' +
-			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-			'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
+				'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
+				'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
+				'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
 			'} ';
 		break;
 			//This query is for the Structures layer
@@ -496,12 +494,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
 			'FROM <http://localhost:8080/marmotta/context/structures> ' +
 			'WHERE { ' +
-			'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-			'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
+				'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
+				'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
+				'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+				'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
 			'} ';
 		break;
 			//This query is for the Trails layer
@@ -509,11 +507,11 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
 			//This query is for the NHDFlowline layer
@@ -521,12 +519,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt ' +
 		'FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
 			//This query is for the NHDLine layer
@@ -534,12 +532,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt ' +
 		'FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
 			//This query is for the NHDPoint layer
@@ -547,12 +545,12 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt ' +
 		'FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
 			//This query is for the county layer
@@ -560,11 +558,11 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
 			//This query is for the NHDWaterbody layer
@@ -572,24 +570,24 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		query = 'SELECT ?subject ?geom ?purpose ?name ?dimensions ?geometry ' + 
 		'FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ' +
 		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' ;
 		break;
 			//This query is for the State layer
 		case "stateorterritory":
 		query = 'SELECT ?subject ?gm ?dimensions ?purpose ?name ' + 
 		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=";") AS ?geometry) '+
-		'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-		'WHERE { GRAPH ?g { ' +
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ' +
-		'?gm <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-		'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
+			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
+			'WHERE { GRAPH ?g { ' +
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ' +
+			'?gm <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
+			'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
 		'}}' +
 		'GROUP BY ?subject ?gm ?purpose ?name ?dimensions';
 		break;
@@ -599,10 +597,10 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) '+
 		'FROM NAMED <http://localhost:8080/marmotta/context/padus> '+
 		'WHERE { GRAPH ?g { '+
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . '+
-		'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
-		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } '+
-		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } '+
+			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . '+
+			'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
+			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } '+
+			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } '+
 		'}} '+
 		'GROUP BY ?subject ?gm ?purpose ?name ';
 		break;
