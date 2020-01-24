@@ -33,7 +33,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 		// 	triggerLayers[inputQuery] = true;
 		// 	onLayerLoading(inputQuery);  // Lock down browser while loading
 		// }
-		onLayerLoading("user created query");  // Lock down browser while loading
+		onLayerLoading("doSomething");  // Lock down browser while loading
 
 		//Get the specified query
 		var query = getQuery(inputQuery);
@@ -47,6 +47,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while making universal query.");
+					onLayerLoadingFinished("doSomething");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -139,11 +140,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating universal query.");
+						onLayerLoadingFinished("doSomething");
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Universal query failed.");
+				onLayerLoadingFinished("doSomething");
 			}
 		});
 	}
@@ -169,6 +172,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while making point query.");
+					onLayerLoadingFinished(inputQuery);
 				}
 				else {
 					bindings = result.results.bindings;
@@ -230,11 +234,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating point query.");
+						onLayerLoadingFinished(inputQuery);
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Point query failed.");
+				onLayerLoadingFinished(inputQuery);
 			}
 		});
 	}
@@ -259,6 +265,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//if no results, throw an error
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while creating line query.");
+					onLayerLoadingFinished(inputQuery);
 				}
 				else {
 					bindings = result.results.bindings;
@@ -311,11 +318,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating line query.");
+						onLayerLoadingFinished(inputQuery);
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Line query failed.");
+				onLayerLoadingFinished(inputQuery);
 			}
 		});
 	}
@@ -340,6 +349,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//if no results, throw an error
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while creating polygon query.");
+					onLayerLoadingFinished(inputQuery);
 				}
 				else {
 					bindings = result.results.bindings;
@@ -392,11 +402,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating polygon query.");
+						onLayerLoadingFinished(inputQuery);
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Polygon query failed.");
+				onLayerLoadingFinished(inputQuery);
 			}
 		});
 	}
@@ -921,6 +933,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while creating multi-polygon query.");
+					onLayerLoadingFinished("PADUS")
 				}
 				else {
 					bindings = result.results.bindings;
@@ -964,11 +977,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating multi-polygon query.");
+						onLayerLoadingFinished("PADUS")
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Multi-polygon query failed.");
+				onLayerLoadingFinished("PADUS")
 			}
 		});
 	}
@@ -976,7 +991,15 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 	//This function performs a GeoSPARQL query to look-up and find nearby points
 	function nearbyPoints(inputGeometry,URI,namespace){
 		clearMap();
-		notification_manager.addToNotificationQueue("Other", "Input geometry: " + inputGeometry + ".");
+
+		//Check whether specific query has been applied
+		if (triggerLayers["doSomething"] == true) {
+			return;
+		} else {
+			triggerLayers["doSomething"] = true;
+			onLayerLoading("doSomething");  // Lock down browser while loading
+		}
+
 		//Get the specified query
 		var query = 
 			'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
@@ -1008,6 +1031,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while creating nearby points query.");
+					onLayerLoadingFinished("doSomething");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -1047,14 +1071,17 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 						}
 						//visualize the mapping layer when all the markers have been added.
 						grouping.addTo(map);
+						onLayerLoadingFinished("doSomething");
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating nearby points query.");
+						onLayerLoadingFinished("doSomething");
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Nearby points query failed.");
+				onLayerLoadingFinished("doSomething");
 			}
 		});
 	}
@@ -1070,7 +1097,6 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 			onLayerLoading("doSomething");  // Lock down browser while loading
 		}
 
-		//notification_manager.addToNotificationQueue("Other", "Input geometry: " + inputGeometry + ".");
 		//Get the specified query
 
 		if (namespace == "countyorequivalent")
@@ -1150,6 +1176,7 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
 					notification_manager.addToNotificationQueue("Warning", "No results while creating entities within query.");
+					onLayerLoadingFinished("doSomething");
 				}
 				else {
 					bindings = result.results.bindings;
@@ -1192,11 +1219,13 @@ $.getJSON('./afd/afd-nsids.json', function(data) { nsids = data; });
 					}
 					else { //There was no results so do nothing.
 						notification_manager.addToNotificationQueue("Warning", "No results for bindings while creating entities within query.");
+						onLayerLoadingFinished("doSomething");
 					}
 				}
 			},
 			error: function(result) {
 				notification_manager.addToNotificationQueue("Error", "Entities within query failed.");
+				onLayerLoadingFinished("doSomething");
 			}
 		});
 	}
