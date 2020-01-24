@@ -1,15 +1,6 @@
 /* 
  * Map As A Knowledge Base functions for dbpedia data retrieval
  */
-
-//var MARMOTTA_BASE_URL = 'http://144.47.161.52:8080/marmotta';
-//var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
-//var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
-//var FEATURE_BASE_URL = 'http://data.usgs.gov/';
-
-//var DBPEDIA_BASE_URL = 'https://dbpedia.org';
-//var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query=';
-
 	//Function to query to dbpedia SPARQL endpoint
 	
 	function createDBpediaQuery(
