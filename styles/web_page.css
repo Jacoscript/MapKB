@@ -175,6 +175,15 @@ html {
     z-index: 3;
 }
 
+/* Query builder styles */
+#qb-run-query {
+    float: left;
+    margin-left: 5px;
+}
+#qb-clear-map {
+    float: right;
+}
+
 /* Misc page styles */
 #loading-layer-overlay {
     background-color: rgba(0, 0, 0, 0.6);
