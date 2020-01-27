@@ -21,6 +21,14 @@ var triggerLayers = {
 var symbolLibrary = {};
 $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; });
 
+// load the query IDs json from URL
+var queryLibrary = {};
+$.getJSON('./makb/query_library.json', function(data) { queryLibrary = data; });
+
+// load the color IDs json from URL
+var colorLibrary = {};
+$.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
+
 //Function to make a query that can understand how to visualize all the different geometries
 	function makeUniversalQuery(inputQuery){
 		// TODO: Add below into trigger mechanics. There's an issue on gitlab
@@ -107,7 +115,7 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 							}
 							/*else if (ftypeName[3] == "countyorequivalent")
 							{
-								alert("HERE!");
+								("HERE!");
 								latlngs = makeLatLngs(geometry); 
 								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							}*/
@@ -454,181 +462,51 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 		});
 	}
 	//Function to return a query based on the input information
-	function getQuery(queryType, URI)
+	function getQuery(queryType, INPUT_STRING_1, INPUT_STRING_2, INPUT_STRING_3, INPUT_STRING_4,
+		INPUT_STRING_5, INPUT_STRING_6, INPUT_STRING_7 ,INPUT_STRING_8, INPUT_STRING_9, INPUT_STRING_10)
 	{
 		var query;
+		//Check if a query was passed in. If it wasn't, throw an error.
 		if(queryType == null)
 		{
 			notification_manager.addToNotificationQueue("Error", "No query selected.");
 			return null;
 		}
-		switch(queryType){
-			//This query is for the GNIS layer
-		case "gnis":
-			query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
-			'FROM <http://localhost:8080/marmotta/context/gnis> ' +
-			'WHERE { ' +
-				'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-				'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-				'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-			'} ';
-		break;
-			//This query is for the Geonames layer
-		case "geonames":
-		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
-			'FROM <http://localhost:8080/marmotta/context/geonames> ' +
-			'WHERE { ' +
-				'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-				'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-				'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-			'} ';
-		break;
-			//This query is for the Structures layer
-		case "structures":
-		query = 'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt ' +
-			'FROM <http://localhost:8080/marmotta/context/structures> ' +
-			'WHERE { ' +
-				'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-				'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-				'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-				'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-			'} ';
-		break;
-			//This query is for the Trails layer
-		case "trails":
-		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
-		'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
-		'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
-		break;
-			//This query is for the NHDFlowline layer
-		case "nhdflowline":
-		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt ' +
-		'FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ' +
-		'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
-		break;
-			//This query is for the NHDLine layer
-		case "nhdline":
-		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt ' +
-		'FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ' +
-		'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
-		break;
-			//This query is for the NHDPoint layer
-		case "nhdpoint":
-		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt ' +
-		'FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ' +
-		'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
-		break;
-			//This query is for the county layer
-		case "countyorequivalent":
-		query = 'SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ' + 
-		'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-		'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
-		break;
-			//This query is for the NHDWaterbody layer
-		case "nhdwaterbody":
-		query = 'SELECT ?subject ?geom ?purpose ?name ?dimensions ?geometry ' + 
-		'FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ' +
-		'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' ;
-		break;
-			//This query is for the State layer
-		case "stateorterritory":
-		query = 'SELECT ?subject ?gm ?dimensions ?purpose ?name ' + 
-		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=";") AS ?geometry) '+
-			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-			'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ' +
-			'?gm <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-		'}}' +
-		'GROUP BY ?subject ?gm ?purpose ?name ?dimensions';
-		break;
-			//This query is for the PADUS layer
-		case "padus":
-		query = 'SELECT ?subject ?gm ?purpose ?name '+
-		'(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) '+
-		'FROM NAMED <http://localhost:8080/marmotta/context/padus> '+
-		'WHERE { GRAPH ?g { '+
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . '+
-			'?gm <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } '+
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } '+
-		'}} '+
-		'GROUP BY ?subject ?gm ?purpose ?name ';
-		break;
-			//This query is for Custom queries. However, it is not currently in use
-		case "Custom":
+		//If it is a custom query, simply retrieve the contents of the query box.
+		if(queryType == "Custom")
+		{
 			query = document.getElementById('queryText').value;
-			break;
-			//This query is for the additional information link
-		case "moreInfo":
-			query = 'SELECT * FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/padus> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ' +
-			'WHERE { GRAPH ?g {<' + URI + '> ?property ?object }}';
-			break;
-			//If this function gets called without a query then there must have been an error.
-		default:
-			query = queryType;
 		}
+		//Pull in the correct query from the query library. replace the holders with the 
+		//	inputs if they exist.
+		else
+		{
+			query = (queryLibrary[queryType]).join(" ");
+			if (INPUT_STRING_1 != null)
+				query = query.replace("INPUT_STRING_1", INPUT_STRING_1);
+			if (INPUT_STRING_2 != null)
+				query = query.replace("INPUT_STRING_2", INPUT_STRING_2);
+			if (INPUT_STRING_3 != null)
+				query = query.replace("INPUT_STRING_3", INPUT_STRING_3);
+			if (INPUT_STRING_4 != null)
+				query = query.replace("INPUT_STRING_4", INPUT_STRING_4);
+			if (INPUT_STRING_5 != null)
+				query = query.replace("INPUT_STRING_5", INPUT_STRING_5);
+			if (INPUT_STRING_6 != null)
+				query = query.replace("INPUT_STRING_6", INPUT_STRING_6);
+			if (INPUT_STRING_7 != null)
+				query = query.replace("INPUT_STRING_7", INPUT_STRING_7);
+			if (INPUT_STRING_8 != null)
+				query = query.replace("INPUT_STRING_8", INPUT_STRING_8);
+			if (INPUT_STRING_9 != null)
+				query = query.replace("INPUT_STRING_9", INPUT_STRING_9);
+			if (INPUT_STRING_10 != null)
+				query = query.replace("INPUT_STRING_10", INPUT_STRING_10);
+		}
+
 		return query;
 	}
+
 	//Function to perform an IRI search for a user
 	function IRISearch(property, object){
 		//clear the map
@@ -654,92 +532,39 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 			filterProperty = '?tester';
 		} 
 		//Check if the user is looking up a URI. Otherwise, perform a query finding additional entities that have the same data for that field.
-		if(property != "http://www.opengis.net/ont/geosparql#hasGeometry" && property != "http://data.usgs.gov/ontology/structures/hasState" && property != "http://dbpedia.org/ontology/county" && property != "http://dbpedia.org/ontology/state")
+		/* 
+			ONCE THE OTHER TWO CONDITIONS ARE ADDED BACK IN, UNCOMMENT THE OTHER CONDITIONS
+		*/
+		if(property != "http://www.opengis.net/ont/geosparql#hasGeometry" //&& 
+		//property != "http://data.usgs.gov/ontology/structures/hasState" && 
+		//property != "http://dbpedia.org/ontology/county" && 
+		//property != "http://dbpedia.org/ontology/state"
+		)
 		{	
-			var query = 'SELECT ?subject ?geom ?name ?purpose '+queryData+' (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/padus> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ' +
-			'WHERE { GRAPH ?g { ' + 
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + queryFields + 
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-			' } ' +
-			'FILTER regex( '+filterProperty+' , "'+object+'")  } ' +
-			'GROUP BY ?subject ?geom ?name ?purpose '+queryData+' ' ;
+			var query = getQuery("IRI_Search_1", queryData, queryFields, filterProperty, object, queryData);
 		}
 		//Check if the user is asking for a geometry.
 		else if(property == "http://www.opengis.net/ont/geosparql#hasGeometry")
 		{	
-			var query = 'SELECT  ?subject ?geometry2 ?dimensions (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/padus> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ' +
-			'WHERE { GRAPH ?g { ' +
-			'?subject <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ' +
-			' } ' +
-			'FILTER regex( ?subject , "'+object+'")  } ' + 
-			'GROUP BY ?subject ?geometry2 ?dimensions';
+			var query = getQuery("IRI_Search_2", object);
 		}
-		//Check if the user is requesting a state attribute
-		else if(property == "http://data.usgs.gov/ontology/structures/hasState" || property == "http://dbpedia.org/ontology/state")
+		//Check if the user is requesting a state attribute. If so, navigate to that URI.
+
+		/* 
+			THIS CODE CHUNK IS CURRENTLY NOT BEING USED.
+			It is supposed to allow users to link between the IRIs of entities. However, the IRIs
+			are currently not in the prototype. Thus, these query do not function.
+		*/
+		/*else if(property == "http://data.usgs.gov/ontology/structures/hasState" || 
+		property == "http://dbpedia.org/ontology/state")
 		{
-			var query = 'SELECT (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ?geometry2 ?dimensions ?purpose ?name ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-			'WHERE { GRAPH ?g { ' + 
-			'<'+object+'> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . '+
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'OPTIONAL { ?geom <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ' +
-			'OPTIONAL { <'+object+'> <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { <'+object+'> <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-			' } ' +
-			' } ' +
-			'GROUP BY ?geom ?geometry2 ?dimensions ?purpose ?name';
+			var query = getQuery("IRI_Search_3", object, object, object);
 		}
 		//check if the user is requesting a county attribute
 		else if(property == "http://dbpedia.org/ontology/county")
 		{
-			var query = 'SELECT ?geometry ?dimensions ?purpose ?name ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/geonames> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/structures> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/trails> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-			'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-			'WHERE { GRAPH ?g { ' + 
-			'<'+object+'> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'OPTIONAL { <'+object+'> <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'OPTIONAL { <'+object+'> <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-			' } ' +
-			' }';
-		}
+			var query = getQuery("IRI_Search_4", object, object, object);
+		}*/
 		//Encode the query.
 		query = encodeURIComponent(query);
 		//Get the URL for the http query request
@@ -863,11 +688,8 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 		{
 			var multipolygon = geometry2.split(';');
 			for(var j=0; j < multipolygon.length; j++) {
-				//alert(multipolygon);
 				
 				coordinates = multipolygon[j].split(" ");
-				//alert(coordinates[0]);
-				//alert(coordinates[coordinates.length]);
 				var templatlngs = new Array();
 				for(var k = 2; k < coordinates.length-1; k+=2) 
 				{				
@@ -997,28 +819,8 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 			triggerLayers["doSomething"] = true;
 			onLayerLoading("doSomething");  // Lock down browser while loading
 		}
-
 		//Get the specified query
-		var query = 
-			'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
-			'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
-			'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
-			'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
-			'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
-			'SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ' +
-			'FROM <http://localhost:8080/marmotta/context/'+namespace+'> ' +
-			'WHERE { ' +
-			'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-			'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-			'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . ' +
-			'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT . ' +
-			'BIND(CONCAT("SRID=4326;",STR(?gWKT),"") AS ?strWKT) . ' +
-			'BIND("SRID=4326;'+inputGeometry+'"^^geo:wktLiteral AS ?inputPoint ) . ' +
-			'BIND( geof:buffer(?inputPoint, .02 , units:degree) AS ?area ) ' +
-			'FILTER( geof:sfWithin(?strWKT, ?area) )' +
-			'} ';
+		var query = getQuery("nearbyPoints", namespace, inputGeometry);
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
@@ -1096,73 +898,11 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 		}
 
 		//Get the specified query
-
 		if (namespace == "countyorequivalent")
-			var query = 
-				'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
-				'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
-				'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
-				'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
-				'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
-				'SELECT ?subject ?name ?purpose ?dimensions ?geometry ?flWKT ' +
-				'FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ' +
-				'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-				'WHERE { ' +
-					'GRAPH ?g { ' +
-					'<'+URI+'> geo:hasGeometry ?gWB . ' +
-					'?gWB <http://www.opengis.net/ont/geosparql#asWKT> ?geo . ' +
-					'BIND(CONCAT("SRID=4326;", STR(?geo)) AS ?wbStrWKT) . ' +
-					'GRAPH ?h { ' +
-					'?subject geo:hasGeometry ?gFL . ' +
-					'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-					'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-					'?gFL geo:asWKT ?flWKT . ' +
-					'?gFL geo:asGML ?geometry . ' +
-					'?gFL geo:dimension ?dimensions . ' +
-					'BIND(CONCAT("SRID=4326;",STR(?flWKT),"") AS ?flStrWKT) . ' +
-					'} ' +
-				'FILTER (geof:sfWithin(?flStrWKT, ?wbStrWKT) && ?flStrWKT != ?wbStrWKT) ' +
-				'}} ';
+			var query = getQuery("entitiesWithin_countyorequivalent",URI)
 
 		else if (namespace == "stateorterritory")
-			var query = 
-				'PREFIX geo: <http://www.opengis.net/ont/geosparql#> ' +
-				'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
-				'PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ' +
-				'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
-				'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ' +
-				'SELECT  ?subject ?name ?purpose ?dimensions ?geometry ?strWKT ' +
-				'FROM NAMED <http://localhost:8080/marmotta/context/gnis> ' +
-				'FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ' +
-				'WHERE { ' +
-  					'{ ' +
-					'SELECT * WHERE{ ' +
-    						'GRAPH ?h{ ' +
-      							'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' +
-      							'?subject <http://purl.org/dc/elements/1.1/title> ?name . ' +
-      							'?subject <http://dbpedia.org/ontology/purpose> ?purpose . ' +
-      							'OPTIONAL{ ?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . } ' +
-      							'OPTIONAL{ ?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry . } ' +
-      							'?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT . ' +
-      							'BIND(CONCAT("SRID=4326;",STR(?gWKT),"") AS ?strWKT) . ' +
-      							'} ' +
-	    					'Filter( regex(?strWKT, "POINT") ) ' +
-    						'} ' +
-  					'} ' +
-  					'{ ' +
-  					'SELECT ?gm (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=" ") AS ?inputGeometry) ' +
-					'(CONCAT("SRID=4326; MULTIPOLYGON(((", (REPLACE(STR(?inputGeometry), " -", ", -")) ,")))") AS ?step1) ' +
-  					'WHERE { ' +
-						'GRAPH ?g { ' +
-    							'<'+URI+'>  <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ' +
-    							'?gm <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ' +
-    							'?gm <http://www.opengis.net/ont/geosparql#asWKT> ?geo . ' +
-    							'} '+
-					'} ' +
-    					'GROUP BY ?gm ?dimensions' +
-  					'} ' +
-  					'FILTER( geof:sfWithin(?strWKT, ?step1) ) ' +
-				'}';
+			var query = getQuery("entitiesWithin_stateorterritory",URI)
 
 		//HTTP encode the query
 		query = encodeURIComponent(query);
@@ -1230,23 +970,7 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 	
 	//This function will return the color for a specific polygon/polyline object
 	function getColor(featureType){
-		var color;
-		switch(featureType){
-			case "trails":
-				color = '#228B22';
-				break;
-			case "stateorterritory":
-				color = '#000000';
-				break;
-			case "countyorequivalent":
-				color = '#696969';
-				break;
-			case "padus":
-				color = '#B22222';
-				break;
-			default:
-				color = '#000000';
-		}
+		var color = colorLibrary[featureType];
 		return color;
 	}
 	//This function will return the symbol that should be used for a particular feature type.
