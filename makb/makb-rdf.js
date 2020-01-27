@@ -842,7 +842,7 @@ $.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; }
 			else 
 			{
 				for(var j = 0; j < coordinates.length-1; j+=2) {
-					latlngs.push([coordinates[j+1], coordinates[j]]);
+					latlngs.push([coordinates[j], coordinates[j+1]]);
 				}
 			}
 		}
