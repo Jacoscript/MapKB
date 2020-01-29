@@ -390,13 +390,6 @@ function createTab(name, content) {
         var tmp = $(this).attr("href");
         queryTabID = tmp.substring(1, tmp.length);
     });
-
-	//We store the query builder tab id so that we can add to it later.
-	// if(name == 'Query Builder')
-	// {
-    //     queryTabID = newTabDiv.id
-    //     console.log(newTabDiv.id)
-	// }
 	
     // set additional attributes of div
     var divAriaLabelledBy = document.createAttribute('aria-labelledby');

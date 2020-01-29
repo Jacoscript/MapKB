@@ -8,16 +8,20 @@ var selected_p = 0;
 var selected_f = 0;
 var selected_comparison = '';
 var max_custom_queries = 3;
+//var queryTabID = 'tabs-';
 
 	//Function to display the query as a tab
 	function createQueryTab(){
+		alert(queryTabID);
 		// Check whether query is already open
 		if (current_custom_queries == max_custom_queries) {
 			return;
 		} else {
+
 			current_custom_queries += 1;
+			queryTabID='tabs-'+current_custom_queries;
 			var HTML = '<p style="font-size:15px">Choose what graphs you would like to query: <br></p>' +
-						'<select style="font-size:10px; width: 100%;" id="query-context-selector">'; 
+						'<select style="font-size:10px; width: 100%;" id="'+queryTabID+'-query-context-selector">'; 
 			
 			
 			//Get the specified query
@@ -63,6 +67,7 @@ var max_custom_queries = 3;
 					}
 				}
 			});
+			alert(queryTabID);
 		}
 	}
 	
@@ -71,20 +76,20 @@ var max_custom_queries = 3;
 		
 		var queryTab = document.getElementById(queryTabID);
 		//var values = $('#query-context-selector').val();
-		var context = document.getElementById('query-context-selector');
+		var context = document.getElementById(queryTabID+'-query-context-selector');
 		var value = context.options[context.selectedIndex].value;
 		selected_c = context.selectedIndex;
 		
 		var HTML = '';
 		
-		if(document.getElementById("query-predicate-selector") == null) {
+		if(document.getElementById(queryTabID+'-query-predicate-selector') == null) {
 			HTML = '<p style="font-size:15px">Choose what predicates you would like to filter the selected graphs by: <br></p>' +
-						'<select style="font-size:10px" id="query-predicate-selector">'; 
+						'<select style="font-size:10px" id="'+queryTabID+'-query-predicate-selector">'; 
 		}
 		else 
 		{
-			for(var i = 0; i < document.getElementById("query-predicate-selector").length; i++)
-				document.getElementById("query-predicate-selector").remove(i);
+			for(var i = 0; i < document.getElementById(queryTabID+'-query-predicate-selector').length; i++)
+				document.getElementById(queryTabID+'-query-predicate-selector').remove(i);
 		}
 		var selectedGraphs = "";
 		//for(var i = 0; i<values.length; i++)
@@ -124,7 +129,7 @@ var max_custom_queries = 3;
 							var tempString = '<option value="'+context+'">'+context+'</option>';
 							HTML = HTML + tempString;
 						}
-						if( document.getElementById("query-predicate-selector") == null) {
+						if( document.getElementById(queryTabID+'-query-predicate-selector') == null) {
 							HTML = HTML + '</select><br><br>'
 										+ '<button type="button" onclick="findQueryFilters();">Find Filter Options</button> ';
 							
@@ -133,7 +138,7 @@ var max_custom_queries = 3;
 						}
 						else
 						{
-							document.getElementById("query-predicate-selector").innerHTML=HTML;
+							document.getElementById(queryTabID+'-query-predicate-selector').innerHTML=HTML;
 						}
 						
 					}
@@ -152,14 +157,15 @@ var max_custom_queries = 3;
 	//Function to gets filters for the given predicate
 	function findQueryFilters(){
 		
+		alert(queryTabID);
 		var queryTab = document.getElementById(queryTabID);
-		var predicates = document.getElementById('query-predicate-selector');
+		var predicates = document.getElementById(queryTabID+'-query-predicate-selector');
 		var selected = predicates.options[predicates.selectedIndex].value;
 		selected_p = predicates.selectedIndex;
 		
-		if(document.getElementById("query-filter-selector") == null) {
+		if(document.getElementById(queryTabID+'-query-filter-selector') == null) {
 			var HTML = '<p style="font-size:15px">Choose how you want to filter the predicates: <br></p>' +
-						'<select style="font-size:10px" id="query-filter-selector">'; 
+						'<select style="font-size:10px" id="'+queryTabID+'-query-filter-selector">'; 
 		
 		/*if( predicates[0]=="http://dbpedia.org/ontology/zipCode"
 		http://www.opengis.net/ont/geosparql#dimension	
@@ -198,7 +204,7 @@ var max_custom_queries = 3;
 			
 		HTML = HTML + '</select><br>'
 		+ '<p style="font-size:15px";>What do you want to compare the objects to? <br></p>'
-		+ '<textarea cols="50" rows="1" id="query-filter-object" style="resize:none; font-size: 12px; width: 100%;"></textarea><br><br>'
+		+ '<textarea cols="50" rows="1" id="'+queryTabID+'-query-filter-object" style="resize:none; font-size: 12px; width: 100%;"></textarea><br><br>'
 		+ '<button type="button" onclick="generateQuery();">Generate Query</button> <br> ';
 						
 		//append the content to the queryTab
@@ -217,16 +223,16 @@ var max_custom_queries = 3;
 		
 		var queryTab = document.getElementById(queryTabID);
 		//var contexts = $('#query-context-selector').val();
-		var context = document.getElementById('query-context-selector');
+		var context = document.getElementById(queryTabID+'-query-context-selector');
 		var select_c = context.options[context.selectedIndex].value;
 		
-		var predicates = document.getElementById('query-predicate-selector');
+		var predicates = document.getElementById(queryTabID+'-query-predicate-selector');
 		var select_p = predicates.options[predicates.selectedIndex].value;
 		
-		var filters = document.getElementById('query-filter-selector');
+		var filters = document.getElementById(queryTabID+'-query-filter-selector');
 		var select_f = filters.options[filters.selectedIndex].value;
 		
-		var filterObject = document.getElementById('query-filter-object').value;
+		var filterObject = document.getElementById(queryTabID+'-query-filter-object').value;
 		
 		selected_f = filters.selectedIndex;
 		selected_comparison = filterObject;
@@ -301,9 +307,9 @@ var max_custom_queries = 3;
 			' } ' +
 			'GROUP BY ?subject ?geom ?name ?purpose '+predicateObjects+' ' ;
 		
-		if( document.getElementById("qb-generated-query") == null)
+		if( document.getElementById(queryTabID+'-qb-generated-query') == null)
 		{
-			var HTML = '<br><textarea cols="50" rows="20" id="qb-generated-query" style="resize:none; font-size: 12px; width: 100%">'+query+'</textarea><br><br>'
+			var HTML = '<br><textarea cols="50" rows="20" id="'+queryTabID+'-qb-generated-query" style="resize:none; font-size: 12px; width: 100%">'+query+'</textarea><br><br>'
 			+ '<button type="button" id="qb-run-query" onclick="getQueryField()">Run Query</button>'
 			+ '<button type="button" id="qb-clear-map" onclick="clearMap()">Clear Map</button>';
 
@@ -312,7 +318,7 @@ var max_custom_queries = 3;
 		}
 		else
 		{
-			document.getElementById("qb-generated-query").value = query;
+			document.getElementById(queryTabID+'-qb-generated-query').value = query;
 		}
 
 		set_Select();
@@ -321,22 +327,22 @@ var max_custom_queries = 3;
 	//Function to reset the selected after every button press.
 	function set_Select(){
 		
-		if( document.getElementById("query-context-selector") != null)
-			document.getElementById("query-context-selector").selectedIndex = selected_c;
-		if( document.getElementById("query-predicate-selector") != null)
-			document.getElementById("query-predicate-selector").selectedIndex = selected_p;
-		if( document.getElementById("query-filter-selector") != null)
-			document.getElementById("query-filter-selector").selectedIndex = selected_f;
-		if( document.getElementById("query-filter-object") != null)
-			document.getElementById("query-filter-object").value = selected_comparison
+		if( document.getElementById(queryTabID+'-query-context-selector') != null)
+			document.getElementById(queryTabID+'-query-context-selector').selectedIndex = selected_c;
+		if( document.getElementById(queryTabID+'-query-predicate-selector') != null)
+			document.getElementById(queryTabID+'-query-predicate-selector').selectedIndex = selected_p;
+		if( document.getElementById(queryTabID+'-query-filter-selector') != null)
+			document.getElementById(queryTabID+'-query-filter-selector').selectedIndex = selected_f;
+		if( document.getElementById(queryTabID+'-query-filter-object') != null)
+			document.getElementById(queryTabID+'-query-filter-object').value = selected_comparison;
 		
 	}
 	
 	//Function to get the query from the query field and then run the universal query functon
 	function getQueryField(){
 		
-		var query = document.getElementById('qb-generated-query').value;
-		makeUniversalQuery(query);
+		
+		makeUniversalQuery("Custom");
 		
 	}
 	

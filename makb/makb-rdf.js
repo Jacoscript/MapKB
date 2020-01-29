@@ -482,7 +482,7 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//If it is a custom query, simply retrieve the contents of the query box.
 		if(queryType == "Custom")
 		{
-			query = document.getElementById('queryText').value;
+			query = document.getElementById(queryTabID+'-qb-generated-query').value;
 		}
 		//Pull in the correct query from the query library. replace the holders with the 
 		//	inputs if they exist.
