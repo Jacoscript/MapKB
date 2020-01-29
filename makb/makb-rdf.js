@@ -445,8 +445,15 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 					if(bindings.length > 0) {
 						//go through all of the results and add them to the tab.
 						for(var i=0; i < bindings.length; i++) {
-							HTML+=
-							"<b>" + bindings[i].property.value + ": &nbsp; </b> <a href='#' onClick=\"IRISearch('"+bindings[i].property.value+"','"+ bindings[i].object.value + "');\">" + bindings[i].object.value + "</a><br>";
+							if (bindings[i].property.value!="http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+								HTML+=
+								"<b>" + bindings[i].property.value + ": &nbsp; </b> <a href='#' onClick=\"IRISearch('"+
+								bindings[i].property.value+"','"+ bindings[i].object.value + "');\">" + 
+								bindings[i].object.value + "</a><br>";
+							else 
+								HTML+=
+								"<b>" + bindings[i].property.value + ": &nbsp; </b> <a>" + 
+								bindings[i].object.value + "</a><br>";
 						}
 					}
 					else { //There was no results so do nothing.
