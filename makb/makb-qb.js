@@ -133,7 +133,6 @@ var max_custom_queries = 3;
 						}
 						else
 						{
-							console.log(document.getElementById("query-predicate-selector"))
 							document.getElementById("query-predicate-selector").innerHTML=HTML;
 						}
 						
