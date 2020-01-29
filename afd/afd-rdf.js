@@ -386,11 +386,17 @@ function createTab(name, content) {
     newTabDiv.style.display = 'none';
 	newTabDiv.style.fontSize = '10px';
 
+    $("#afd-tabs ul li a").click(function() {
+        var tmp = $(this).attr("href");
+        queryTabID = tmp.substring(1, tmp.length);
+    });
+
 	//We store the query builder tab id so that we can add to it later.
-	if(name == 'Query Builder')
-	{
-		queryTabID = newTabDiv.id
-	}
+	// if(name == 'Query Builder')
+	// {
+    //     queryTabID = newTabDiv.id
+    //     console.log(newTabDiv.id)
+	// }
 	
     // set additional attributes of div
     var divAriaLabelledBy = document.createAttribute('aria-labelledby');
@@ -416,7 +422,6 @@ function createTab(name, content) {
     tabsList.appendChild(newTabDiv);
 
     $("#afd-tabs").tabs("refresh");
-    //document.getElementById(newTabDiv.id)[0].click();
 }
 
 function testAddTab() {

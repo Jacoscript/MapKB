@@ -77,7 +77,7 @@ var max_custom_queries = 3;
 		
 		var HTML = '';
 		
-		if( document.getElementById("query-predicate-selector") == null) {
+		if(document.getElementById("query-predicate-selector") == null) {
 			HTML = '<p style="font-size:15px">Choose what predicates you would like to filter the selected graphs by: <br></p>' +
 						'<select style="font-size:10px" id="query-predicate-selector">'; 
 		}
@@ -86,7 +86,6 @@ var max_custom_queries = 3;
 			for(var i = 0; i < document.getElementById("query-predicate-selector").length; i++)
 				document.getElementById("query-predicate-selector").remove(i);
 		}
-		
 		var selectedGraphs = "";
 		//for(var i = 0; i<values.length; i++)
 		//{
@@ -134,6 +133,7 @@ var max_custom_queries = 3;
 						}
 						else
 						{
+							console.log(document.getElementById("query-predicate-selector"))
 							document.getElementById("query-predicate-selector").innerHTML=HTML;
 						}
 						
