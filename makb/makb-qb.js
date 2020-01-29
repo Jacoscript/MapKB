@@ -12,7 +12,6 @@ var max_custom_queries = 3;
 
 	//Function to display the query as a tab
 	function createQueryTab(){
-		alert(queryTabID);
 		// Check whether query is already open
 		if (current_custom_queries == max_custom_queries) {
 			return;
@@ -67,7 +66,6 @@ var max_custom_queries = 3;
 					}
 				}
 			});
-			alert(queryTabID);
 		}
 	}
 	
@@ -157,7 +155,6 @@ var max_custom_queries = 3;
 	//Function to gets filters for the given predicate
 	function findQueryFilters(){
 		
-		alert(queryTabID);
 		var queryTab = document.getElementById(queryTabID);
 		var predicates = document.getElementById(queryTabID+'-query-predicate-selector');
 		var selected = predicates.options[predicates.selectedIndex].value;
