@@ -386,6 +386,7 @@ function createTab(name, content) {
     newTabDiv.style.display = 'none';
 	newTabDiv.style.fontSize = '10px';
 
+    // Update queryTabID when a user clicks a different tab
     $("#afd-tabs ul li a").click(function() {
         var tmp = $(this).attr("href");
         queryTabID = tmp.substring(1, tmp.length);

@@ -128,7 +128,7 @@ class ManagerNotification {
 			notif_web_address: current_web_address.toString()
 		};
 		
-		// TODO: Finish setting up java servlet to connect and update postgres DB
+		// Send information to servlet
 		$.ajax({
 			type: "POST",
 			url: "/loggingservlet/Servlet",
