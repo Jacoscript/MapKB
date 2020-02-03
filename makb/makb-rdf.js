@@ -1,6 +1,6 @@
-/* 
- * Map As A Knowledge Base functions for RDF processing operations
- */
+// Matthew Wagner & Tanner Fry
+// mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
+// Map As A Knowledge Base functions for RDF processing operations.
 
 var triggerLayers = {
 	countyorequivalent: false,
@@ -46,9 +46,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
@@ -171,9 +171,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
@@ -264,9 +264,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
 		//get the http requuest URL
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
@@ -348,9 +348,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
 		//get the http requuest URL
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
@@ -429,11 +429,11 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		var query = getQuery("moreInfo",URI);
 		query = encodeURIComponent(query);
 		//Get the http request url.
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		//create an object to store the HTML for the additional information tab and declare the first line
 		var HTML = "<b>Universal Resource Identifier: &nbsp; </b> "+URI+"<br>";
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
@@ -482,7 +482,7 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//If it is a custom query, simply retrieve the contents of the query box.
 		if(queryType == "Custom")
 		{
-			query = document.getElementById(queryTabID+'-qb-generated-query').value;
+			query = document.getElementById(query_tab_id+'-qb-generated-query').value;
 		}
 		//Pull in the correct query from the query library. replace the holders with the 
 		//	inputs if they exist.
@@ -575,9 +575,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//Encode the query.
 		query = encodeURIComponent(query);
 		//Get the URL for the http query request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//If no results then throw an error
 				if(!result) {
@@ -753,9 +753,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
@@ -831,9 +831,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
@@ -914,9 +914,9 @@ $.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
 		//HTTP encode the query
 		query = encodeURIComponent(query);
 		//Create the URL for the HTTP request
-		var httpGet = MARMOTTA_SPARQL_URL + query;
+		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
-		$.get({url: httpGet, 
+		$.get({url: http_get, 
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {

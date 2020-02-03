@@ -1,10 +1,10 @@
-/* Advanced Feature Descriptions Functions for OGC WFS operations.
- *
- * Dependencies:
- *
- * Leaflet
- * Leaflet-WFST
- */
+// Matthew Wagner
+// mewagner@contractor.usgs.gov
+// Advanced Feature Descriptions Functions for OGC WFS operations.
+//
+// Dependencies
+//   - Leaflet
+//   - Leaflet-WFST
 
 // default geometry column name, base wfs url, feature type namespace & crs
 var GEOM_FLD = 'the_geom';

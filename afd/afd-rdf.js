@@ -1,6 +1,7 @@
-/* 
- * Advanced Feature Description functions for RDF processing operations
- */
+// Matthew Wagner
+// mewagner@contractor.usgs.gov
+// Advanced Feature Description functions for RDF processing operations.
+
 var noFeatures = false;
 
 // load the namespace IDs json from URL
@@ -83,10 +84,10 @@ function getAdvFtrDesc(datasetName, uri) {
 function executeAFDQuery(uri, query, useSrcName, datasetName) {
 
    // create full HTTP GET request URL
-   var httpGet = MARMOTTA_SPARQL_URL + query;
+   var http_get = MARMOTTA_SPARQL_URL + query;
    
    // execute sparql query in marmotta
-   $.get({url: httpGet, 
+   $.get({url: http_get, 
 	   success: function(result) {
 	   	// if NO RESULTS, then just dereference feature URI
 		if(!result) {
@@ -163,10 +164,10 @@ function followSameAsLink(uri, filterUri, datasetName) {
 function followSameAsLinkQuery(uri, query, useSrcName, datasetName) {
 
     // create full HTTP GET request URL
-    var httpGet = MARMOTTA_SPARQL_URL + query;
+    var http_get = MARMOTTA_SPARQL_URL + query;
 
     // execute sparql query in marmotta
-    $.get({url: httpGet, 
+    $.get({url: http_get, 
 	   success: function(result, uri) {
 	   	// if NO RESULTS, then just dereference feature URI
 		if(!result) {
@@ -386,10 +387,10 @@ function createTab(name, content) {
     newTabDiv.style.display = 'none';
 	newTabDiv.style.fontSize = '10px';
 
-    // Update queryTabID when a user clicks a different tab
+    // Update query_tab_id when a user clicks a different tab
     $("#afd-tabs ul li a").click(function() {
         var tmp = $(this).attr("href");
-        queryTabID = tmp.substring(1, tmp.length);
+        query_tab_id = tmp.substring(1, tmp.length);
     });
 	
     // set additional attributes of div
