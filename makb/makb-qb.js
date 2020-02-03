@@ -2,31 +2,43 @@
 // mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
 // Map As A Knowledge Base functions for custom query builder operations.
 
+const MAX_CUSTOM_QUERIES = 3;
+const MAX_CUSTOM_GRAPHS = 10;
+var current_custom_graphs = 0;
 var current_custom_queries = 0;
 var selected_c = 0;
 var selected_p = 0;
 var selected_f = 0;
 var selected_comparison = '';
-var max_custom_queries = 3;
 
 	//Function to display the query as a tab
 	function createQueryTab(){
-		// Check whether query is already open
-		if (current_custom_queries == max_custom_queries) {
+		// Check whether max queries are already open
+		if (current_custom_queries == MAX_CUSTOM_QUERIES) {
 			return;
 		} else {
 			current_custom_queries += 1;
 			query_tab_id = 'tabs-' + current_custom_queries;
-			var HTML = '<p style="font-size:15px">How many graphs would you like:</p>'
-					   + '<input id="' + query_tab_id + '-query-input-graph-number" title="Number between 1-10" type="text"/>'
-					   + '<button type="button" onclick="checkQueryValidity(\'Graph Number\');">Submit</button>'
-					   
+			var HTML = '<p style="font-size:15px; margin: 0px;">How many graphs would you like:</p>'
+					   + '<input id="' + query_tab_id + '-query-input-graph-number" title="Number between 1-10" type="text"/><br/>'
+					   + '<button type="button" onclick="checkUserQueryValidity(\'Graph Number\');">Submit</button>'
 			createTab('Query Builder', HTML);
 		}
 	}
 
 	//Function to return the specific graphs the user wants to use
-	function chooseQueryGraphs() {
+	function chooseQueryGraphs(number_of_graphs) {
+		// TODO: Use number_of_graphs to create the user specified number of graph lookups
+
+		// TODO: Check if graph count has been changed.
+		// TODO: ^ If so, we need to make sure html doesn't repeat on reselection of graphs
+		if(current_custom_graphs == number_of_graphs) {
+			// Don't need to change the html
+			return;
+		} else {
+			// TODO: Make sure html is changed to have specified number_of_graphs but also
+			// TODO: ^ make sure it isn't added on
+		}
 		var query_tab = document.getElementById(query_tab_id);
 		var HTML = '<p style="font-size:15px">Choose what graphs you would like to query: <br></p>'
 				   + '<select style="font-size:10px; width: 100%;" id="'+ query_tab_id +'-query-context-selector">'; 
@@ -47,7 +59,7 @@ var max_custom_queries = 3;
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					notification_manager.addToNotificationQueue("Warning", "No results.");
+					notification_manager.addToNotificationQueue('Warning', 'No results while finding graphs.');
 				}
 				else {
 					bindings = result.results.bindings;
@@ -69,7 +81,7 @@ var max_custom_queries = 3;
 						query_tab.innerHTML += HTML						
 					}
 					else { //There was no results so do nothing.
-						notification_manager.addToNotificationQueue("Error", "No results for bindings while creating query tab.");
+						notification_manager.addToNotificationQueue('Error', 'No results for bindings while modifying query tab.');
 					}
 				}
 			}
@@ -120,7 +132,7 @@ var max_custom_queries = 3;
 			success: function(result) {
 				//If there are no results say so. Otherwise, visualize them.
 				if(!result) {
-					notification_manager.addToNotificationQueue("Warning", "No results while finding query predicates.");
+					notification_manager.addToNotificationQueue('Warning', 'No results while finding query predicates.');
 				}
 				else {
 					bindings = result.results.bindings;
@@ -148,7 +160,7 @@ var max_custom_queries = 3;
 						
 					}
 					else { //There was no results so do nothing.
-						notification_manager.addToNotificationQueue("Error", "No results for bindings while finding query predicates.");
+						notification_manager.addToNotificationQueue('Error', 'No results for bindings while finding query predicates.');
 					}
 				}
 				//Whether we are successful or not, we should keep the same options selected
@@ -350,20 +362,28 @@ var max_custom_queries = 3;
 		
 	}
 	
-	function checkQueryValidity(type_of_input) {
+	function checkUserQueryValidity(type_of_input) {
+		// A function that checks the validy of different inputs from the user
+
 		if(type_of_input == 'Graph Number') {
-			const pattern = new RegExp('[0-9]{1,2}');
+			const pattern = new RegExp('^[0-9]{1,2}$');  // Accepts 1 or 2 numbers
 			let arr;
-			if(arr !== null) {
-				while((arr = pattern.exec(type_of_input)) !== null) {
-					console.log(`Found ${arr[0]}. Next starts at ${pattern.lastIndex}.`);
+			let input_field = $('#' + query_tab_id + '-query-input-graph-number');
+			let input_value = input_field.val();
+
+			if((arr = pattern.exec(input_value)) !== null) {
+				if(arr[0] <= MAX_CUSTOM_GRAPHS) {
+					// If validy succeeds
+					current_custom_graphs = parseInt(arr[0]);
+					chooseQueryGraphs(arr[0]);
+				} else {
+					alert(`Input is more than max graphs: ${arr[0]}/${MAX_CUSTOM_GRAPHS}.`);
+					return;
 				}
 			} else {
+				console.log('Regex denied submission.');
 				return;
 			}
-
-			// If validy succeeds
-			chooseQueryGraphs();
 		}
 	}
 	
