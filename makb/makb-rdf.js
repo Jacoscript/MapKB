@@ -19,15 +19,15 @@ var triggerLayers = {
 
 // load the symbol IDs json from URL
 var symbolLibrary = {};
-$.getJSON('./makb/symbol_library.json', function(data) { symbolLibrary = data; });
+$.getJSON('./makb/symbol-library.json', function(data) { symbolLibrary = data; });
 
 // load the query IDs json from URL
 var queryLibrary = {};
-$.getJSON('./makb/query_library.json', function(data) { queryLibrary = data; });
+$.getJSON('./makb/query-library.json', function(data) { queryLibrary = data; });
 
 // load the color IDs json from URL
 var colorLibrary = {};
-$.getJSON('./makb/color_library.json', function(data) { colorLibrary = data; });
+$.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 
 //Function to make a query that can understand how to visualize all the different geometries
 	function makeUniversalQuery(inputQuery){

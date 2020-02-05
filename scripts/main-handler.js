@@ -30,16 +30,13 @@ function testQuery() {
     // Get query and encode it
     // TODO: Ask Matthew why the below PREFIX doesn't work
     var query = `
-    PREFIX gnis: <http://localhost:8080/marmotta/context/gnis> 
-    SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ?wkt
-    FROM <http://localhost:8080/marmotta/context/geonames>
+    PREFIX feat: <http://www.opengis.net/ont/geosparql#Feature>
+
+    SELECT DISTINCT ?predicate ?publisher
+    
     WHERE {
-        ?subject <http://purl.org/dc/elements/1.1/title> ?name .
-        ?subject <http://dbpedia.org/ontology/purpose> ?purpose .
-        ?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom .
-        ?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions .
-        ?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry .
-        ?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt .
+        ?s ?predicate ?o .
+        ?s <http://purl.org/dc/terms/publisher> ?publisher
     }`
     query = encodeURIComponent(query);
 
@@ -59,9 +56,9 @@ function testQuery() {
                         //go through all of the results and add them to the tab.
                         var tmp = '';
 						for(var i = 0; i < bindings.length; i++) {
-                            tmp += bindings[i].name.value + '\n';
+                            tmp += bindings[i].predicate.value + '\n';
                         }
-                        alert(tmp);
+                        //alert(tmp);
 					}
 					else { //There was no results so do nothing.
 						alert("No results for bindings while creating additional information.");
