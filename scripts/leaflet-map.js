@@ -8,7 +8,7 @@ var grouping = L.markerClusterGroup({
 	disableClusteringAtZoom: 15,
 	spiderfyOnMaxZoom: false
 });
-var queryTabID = '';
+var query_tab_id;
 
 // ######################### //
 // ### Leaflet Map Setup ### //
