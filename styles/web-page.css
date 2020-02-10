@@ -176,12 +176,29 @@ html {
 }
 
 /* Query builder styles */
-#qb-run-query {
+.qb-clear-map {
+    float: right;
+}
+.qb-input-graph-number {
+    text-align: center;
+    width: 50%;
+}
+.qb-run-query {
     float: left;
     margin-left: 5px;
 }
-#qb-clear-map {
-    float: right;
+.qb-select-dropdown {
+    font-size: 10px; 
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 95%;
+}
+.qb-text {
+    font-size:15px; 
+    margin: 0px;
+}
+#tabs-1, #tabs-2, #tabs-3 {  /* Max 3 tabs */
+    text-align: center;
 }
 
 /* Misc page styles */
