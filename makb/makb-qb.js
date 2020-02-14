@@ -4,14 +4,21 @@
 
 const MAX_CUSTOM_QUERIES = 3;
 const MAX_CUSTOM_GRAPHS = 15;
-// TODO: Tab id fix could be fixed by updating the specific
-var current_custom_graphs = 0;  // TODO: Fix for tab id
-var current_custom_predicates = 0;  // TODO: Fix for tab id
-var current_custom_queries = 0;  // TODO: Fix for tab id
-var graph_context_values = [];  // TODO: Add a tab id to list
-var graph_predicate_values = [];  // TODO: Add a tab id to list
+
+var current_custom_queries = 0;
+var query_tab_list = [];
 var selected_f = 0;
 var selected_comparison = '';
+
+class QueryTab {
+	constructor(id) {
+		this.tab_id = id;
+		this.current_custom_graphs = 0;  // 
+		this.current_custom_predicates = 0;  // 
+		this.graph_context_values = [];  // Used to hold all graphs for each tab
+		this.graph_predicate_values = [];  // Used to hold all predicates for each tab
+	}
+}
 
 //Function to display the query as a tab
 function createQueryTab(){
@@ -20,6 +27,7 @@ function createQueryTab(){
 		return;
 	} else {
 		current_custom_queries += 1;
+		query_tab_list.push(new QueryTab(current_custom_queries));
 		query_tab_id = 'tabs-' + current_custom_queries;
 		var HTML = '<span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many graphs would you like:</span>'
 					+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
@@ -71,17 +79,18 @@ function checkUserQueryValidity(type_of_input) {
 function chooseQueryGraphs(number_of_graphs) {
 	var HTML = '';
 	var query_tab = document.getElementById(query_tab_id);
+	var id_sliced = query_tab_id.slice(5, 6);
 
-	if(current_custom_graphs == number_of_graphs) {
+	if(query_tab_list[id_sliced - 1].current_custom_graphs == number_of_graphs) {
 		// Don't need to change the html
 		return;
-	} else if (current_custom_graphs == 0) {
+	} else if (query_tab_list[id_sliced - 1].current_custom_graphs == 0) {
 		// Create new section based
-		current_custom_graphs = number_of_graphs;
+		query_tab_list[id_sliced - 1].current_custom_graphs = number_of_graphs;
 		var HTML = '<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>'
 	} else {
 		// Update new section if graph number was changed
-		current_custom_graphs = number_of_graphs;
+		query_tab_list[id_sliced - 1].current_custom_graphs = number_of_graphs;
 		for(var i = 1; i <= MAX_CUSTOM_GRAPHS; i++) {
 			$('#' + query_tab_id + '-qb-context-selector-' + i).remove();
 		}
@@ -129,7 +138,7 @@ function chooseQueryGraphs(number_of_graphs) {
 				//Check how many results there are. If 0 through an error. Otherwise, visualize them.
 				if(bindings.length > 0) {
 					//go through all of the results.
-					for(var i = 1; i <= current_custom_graphs; i++) {
+					for(var i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
 						HTML += '<select class="qb-select-dropdown" id="' + query_tab_id + '-qb-context-selector-'+ i +'">';
 						// Get Options
 						for(var j = 0; j < bindings.length; j++) {
@@ -158,31 +167,33 @@ function chooseQueryGraphs(number_of_graphs) {
 //Function to return the predicates for the given context
 function findQueryPredicates(){
 	var query_tab = document.getElementById(query_tab_id);
+	var id_sliced = query_tab_id.slice(5, 6);
 	// Get all values of the chosen graphs
-	graph_context_values = [];
-	for(i = 1; i <= current_custom_graphs; i++) {
-		// TODO: Maybe? --> graph_context_values.push({id : query_tab_id, value : $('#' + query_tab_id + '-query-context-selector-' + i).val()})
-		graph_context_values.push({value : $('#' + query_tab_id + '-qb-context-selector-' + i).val()})
+	for(i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+		query_tab_list[id_sliced - 1].graph_context_values.push($('#' + query_tab_id + '-qb-context-selector-' + i).val());
 	}
 
+
 	// Check whether we need to build elements
-	if(current_custom_predicates == current_custom_graphs) {
+	if(query_tab_list[id_sliced - 1].current_custom_predicates == query_tab_list[id_sliced - 1].current_custom_graphs) {
 		// Don't need to change the html
 		return;
-	} else if (current_custom_predicates == 0) {
+	} else if (query_tab_list[id_sliced - 1].current_custom_predicates == 0) {
 		// Create new section based
-		current_custom_predicates = current_custom_graphs;
-		query_tab.innerHTML += '<p class="qb-text" id="' + query_tab_id + '-qb-text-predicate-info" style="font-size:15px">Choose what predicates you would like to filter the selected graphs by:</p>' 
+		query_tab_list[id_sliced - 1].current_custom_predicates = query_tab_list[id_sliced - 1].current_custom_graphs;
+		query_tab.innerHTML += '<p class="qb-text" id="' + query_tab_id + '-qb-text-predicate-info">Choose what predicates you would like to filter the selected graphs by:</p>' 
+	} else {
+		query_tab_list[id_sliced - 1].current_custom_predicates = query_tab_list[id_sliced - 1].current_custom_graphs;
 	}
-	graph_context_values.forEach(function(item, index) {
+	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
 		// Build divs to put predicate selections into
 		query_tab.innerHTML += '<div id="' + query_tab_id + '-qb-div-predicate-' + (index + 1) + '"></div>'
 	});
 
 	var selected_graph = "";
 	// Loop through user desired graphs and create predicates to choose from
-	graph_context_values.forEach(function(item, index) {
-		selected_graph = 'FROM NAMED <' + item.value + '> ';
+	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
+		selected_graph = 'FROM NAMED <' + item + '> ';
 		index_updated = index + 1
 		createPredicateSelections(index_updated, query_tab, selected_graph);
 	});
@@ -244,14 +255,15 @@ function createPredicateSelections(index, query_tab, selected_graph) {
 //Function to gets filters for the given predicate
 function findQueryFilters(){
 	var query_tab = document.getElementById(query_tab_id);
+	var id_sliced = query_tab_id.slice(5, 6);
+
 	// Get all predicates of the chosen graphs
-	graph_predicate_values = [];
-	for(i = 1; i <= current_custom_graphs; i++) {
-		graph_predicate_values.push({value : $('#' + query_tab_id + '-qb-predicate-selector-' + i).val()})
+	for(i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+		query_tab_list[id_sliced - 1].graph_predicate_values.push($('#' + query_tab_id + '-qb-predicate-selector-' + i).val());
 	}
 	
 	if(document.getElementById(query_tab_id + '-qb-filter-selector') == null) {
-		var HTML = '<p class="qb-text" id="' + query_tab_id + '-qb-text-filter-info" style="font-size:15px">Choose how you want to filter the predicates:</p>'
+		var HTML = '<p class="qb-text" id="' + query_tab_id + '-qb-text-filter-info">Choose how you want to filter the predicates:</p>'
 					+ '<select class="qb-select-dropdown" id="'+ query_tab_id +'-qb-filter-selector">';
 	
 	/*if( predicates[0]=="http://dbpedia.org/ontology/zipCode"
@@ -290,8 +302,8 @@ function findQueryFilters(){
 	HTML += '<option value="none">None</option>';
 		
 	HTML = HTML + '</select>'
-	+ '<p class="qb-text" id="' + query_tab_id + '-qb-text-filter-compare-info" style="font-size:15px";>What do you want to compare the objects to?</p>'
-	+ '<textarea cols="50" rows="1" id="' + query_tab_id + '-qb-filter-object" style="resize:none; font-size: 12px; width: 100%;"></textarea>'
+	+ '<p class="qb-text" id="' + query_tab_id + '-qb-text-filter-compare-info">What do you want to compare the objects to?</p>'
+	+ '<textarea class="qb-text-area" cols="50" rows="1" id="' + query_tab_id + '-qb-filter-object"></textarea>'
 	+ '<button class="btn-generate-query" id="' + query_tab_id + '-qb-btn-generate-query" type="button" onclick="generateQuery();">Generate Query</button>';
 					
 	//append the content to the query_tab
@@ -308,6 +320,7 @@ function findQueryFilters(){
 //This function generates the sparql query and shows it in the sparql textarea.
 function generateQuery(){
 	var query_tab = document.getElementById(query_tab_id);
+	var id_sliced = query_tab_id.slice(5, 6);
 	
 	// var predicates = document.getElementById(query_tab_id + '-qb-predicate-selector');
 	// var select_p = predicates.options[predicates.selectedIndex].value;
@@ -322,8 +335,8 @@ function generateQuery(){
 	
 	//Generate the selected graphs
 	var selected_graphs = '';
-	graph_context_values.forEach(function(item, index) {
-		selected_graphs += 'FROM NAMED <' + item.value + '> ';
+	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
+		selected_graphs += 'FROM NAMED <' + item + '> ';
 	});
 	
 	//Generate the predicate and filter statements
@@ -347,8 +360,8 @@ function generateQuery(){
 	// else
 	// {
 	predicate_objects += '?predicate1 ';
-	graph_predicate_values.forEach(function(item, index) {
-		selected_predicates += '?subject <' + item.value + '> ?predicate1 . ';
+	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
+		selected_predicates += '?subject <' + item + '> ?predicate1 . ';
 	});
 	// selected_predicates += '?subject <'+ select_p +'> ?predicate1 . ';
 	// }
@@ -383,7 +396,7 @@ function generateQuery(){
 	
 	if(document.getElementById(query_tab_id + '-qb-generated-query') == null)
 	{
-		var HTML = '<textarea cols="50" rows="20" id="' + query_tab_id + '-qb-generated-query" style="resize:none; font-size: 12px; width: 100%">' + query + '</textarea>'
+		var HTML = '<textarea class="qb-text-area" cols="50" rows="20" id="' + query_tab_id + '-qb-generated-query">' + query + '</textarea>'
 					+ '<button class="qb-run-query" id="' + query_tab_id + '-qb-run-query" type="button" onclick="getQueryField()">Run Query</button>'
 					+ '<button class="qb-clear-map" id="' + query_tab_id + '-qb-clear-map" type="button" onclick="clearMap()">Clear Map</button>';
 
@@ -403,16 +416,18 @@ function generateQuery(){
 
 // Function to keep the old selection whether the query is successful or not
 function set_Select(){
+	var id_sliced = query_tab_id.slice(5, 6);
+
 	// TODO: Make sure all selected_ are replaced with loops over all context, predicate, and filter selectors
-	graph_context_values.forEach(function(item, index) {
+	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
 		new_index = index + 1;
 		if($('#' + query_tab_id + '-qb-context-selector-' + new_index) != null)
-			$('#' + query_tab_id + '-qb-context-selector-' + new_index).val(item.value);
+			$('#' + query_tab_id + '-qb-context-selector-' + new_index).val(item);
 	});
-	graph_predicate_values.forEach(function(item, index) {
+	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
 		new_index = index + 1;
 		if($('#' + query_tab_id + '-qb-predicate-selector-' + new_index) != null)
-			$('#' + query_tab_id + '-qb-predicate-selector-' + new_index).val(item.value);
+			$('#' + query_tab_id + '-qb-predicate-selector-' + new_index).val(item);
 	});
 	if( document.getElementById(query_tab_id + '-qb-filter-selector') != null)
 		document.getElementById(query_tab_id + '-qb-filter-selector').selectedIndex = selected_f;
