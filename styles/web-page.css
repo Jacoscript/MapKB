@@ -194,8 +194,15 @@ html {
     width: 95%;
 }
 .qb-text {
+    font-family: Arial, Helvetica, sans-serif !important;
     font-size:15px; 
     margin: 0px;
+}
+.qb-text-area {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 15px !important;
+    resize: none;
+    width: 100%;
 }
 #tabs-1, #tabs-2, #tabs-3 {  /* Max 3 tabs */
     text-align: center;
