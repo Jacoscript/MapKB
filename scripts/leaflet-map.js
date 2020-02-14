@@ -62,11 +62,12 @@ function clearTabs(){
 	console.log("Clearing tabs.");
 	$('#afd-tabs ul li').remove();
 	$('#afd-tabs div').remove();
+	
 	// Reset the tab count
-	max_custom_queries = 0;
-	// Not sure if below line is depreciated or what. Tabs list seems to 
-	// refresh without it
-	// $("#afd-tabs").tabs("refresh");
+	current_custom_queries = 0;
+	
+	// Refresh allows for proper query builder repopulation
+	$("#afd-tabs").tabs("refresh");
 }
 
 function insertAfter(el, referenceNode) {
