@@ -40,6 +40,7 @@ $(document).ready(function() {
     $("#reset-view-leaflet-option").append("<span class=\"btn-leaflet\" id=\"btn-reset-leaflet-view\" onclick=\"zoomMapToLocation('Initial');\">Reset View</span>")
 
     // Display leaflet/USGS info and policies from leaflet map onto ontology map as well
+    // NOTE: All below html elements are hidden at the time of creation. Only when switched to the ontology view will these elements popup.
     $("#policies-and-contributions").append("<a href=\"http://leafletjs.com\" target=\"_blank\" title=\"A JS library for interactive maps\">Leaflet</a> | ")
     $("#policies-and-contributions").append("<a href=\"http://vowl.visualdataweb.org/webvowl.html\" target=\"_blank\">WebVOWL</a> | ")
     $("#policies-and-contributions").append("<a href=\"http://doi.gov\" target=\"_blank\">U.S. Department of the Interior</a> | ")

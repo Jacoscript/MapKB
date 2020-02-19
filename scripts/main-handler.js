@@ -18,7 +18,7 @@ function checkUserDevice() {
     }
 }
 
-function performBasicCheck() {
+function performBasicDeviceCheck() {
     if (checkUserDevice() == true) {
         alert('Mobile device detected.');
     } else {
@@ -74,6 +74,7 @@ function testQuery() {
 $(document).ready(function() {
     // Perform basic checks against new user
     // TODO: Wait for Dalia's phone so we can test that a basic version works.
-    // performBasicCheck();
-    testQuery();
+    // performBasicDeviceCheck();
+    
+    //testQuery();
 });

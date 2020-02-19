@@ -48,7 +48,7 @@ class ManagerNotification {
 				that.loopNotificationQueue();
 			}
 		}, 2000);
-		console.log("Notification queue time: (" + this.loop_notification_index + "/" + this.loop_time * 3600 + ")");
+		//console.log("Notification queue time: (" + this.loop_notification_index + "/" + this.loop_time * 3600 + ")");
 	}
 	
 	modifyNotification(typeOfMessage, messageContent){        
