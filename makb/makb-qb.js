@@ -233,6 +233,8 @@ function findQueryPredicates(){
 function createPredicateSelections(index, selected_graph) {
 	var div_html = '';
 	var HTML = '';
+	var id_sliced = query_tab_id.slice(5, 6);
+
 	//Get the specified query
 	var query = 'SELECT DISTINCT ?p '+ selected_graph +
 	'WHERE { ' +
@@ -361,6 +363,7 @@ function generateQuery(){
 	//Generate the predicate and filter statements
 	var selected_predicates = '';
 	var predicate_objects = '';
+	var predicate_objects_list = []
 	var selected_filters = '';
 	//for(var i = 0; i<predicates.length; i++)
 	//{	
@@ -378,33 +381,39 @@ function generateQuery(){
 	// }
 	// else
 	// {
-	predicate_objects += '?predicate1 ';
 	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
-		selected_predicates += '?subject <' + item + '> ?predicate1 . ';
+		predicate_objects += '?predicate' + (index + 1) + ' ';
+		predicate_objects_list.push('?predicate' + (index + 1));
+	});
+	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
+		selected_predicates += '?subject <' + item + '> ' + predicate_objects_list[index] + ' . ';
 	});
 	// selected_predicates += '?subject <'+ select_p +'> ?predicate1 . ';
 	// }
 	
-	if(select_f == "regex")
-		selected_filters += 'FILTER regex(?predicate1 , "' + filter_object + '")  ';
-	else if (select_f == "lessthan")
-		selected_filters += 'FILTER (?predicate1 < ' + filter_object + ') ';
-	else if (select_f == "lessthanorequal")
-		selected_filters += 'FILTER (?predicate1 <= ' + filter_object + ') ';
-	else if (select_f == "greaterthan")
-		selected_filters += 'FILTER (?predicate1 > ' + filter_object + ') ';
-	else if (select_f == "greaterthanorequal")
-		selected_filters += 'FILTER (?predicate1 >= ' + filter_object + ') ';
-	else if (select_f == "equalto")
-		selected_filters += 'FILTER (?predicate1 = ' + filter_object + ') ';
-	else if (select_f == "notequalto")
-		selected_filters += 'FILTER (?predicate1 != ' + filter_object + ') ';
+	predicate_objects_list.forEach(function(item, index) {
+		if(select_f == "regex")
+			selected_filters += 'FILTER regex(' + item + ', "' + filter_object + '")  ';
+		else if (select_f == "lessthan")
+			selected_filters += 'FILTER (' + item + ' < ' + filter_object + ') ';
+		else if (select_f == "lessthanorequal")
+			selected_filters += 'FILTER (' + item + ' <= ' + filter_object + ') ';
+		else if (select_f == "greaterthan")
+			selected_filters += 'FILTER (' + item + ' > ' + filter_object + ') ';
+		else if (select_f == "greaterthanorequal")
+			selected_filters += 'FILTER (' + item + ' >= ' + filter_object + ') ';
+		else if (select_f == "equalto")
+			selected_filters += 'FILTER (' + item + ' = ' + filter_object + ') ';
+		else if (select_f == "notequalto")
+			selected_filters += 'FILTER (' + item + ' != ' + filter_object + ') ';
+	});
 	
 	//Get the specified query
 	var query = 'SELECT ?subject ?geom ?name ?purpose ' + predicate_objects + ' (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' 
 				+ selected_graphs +
 		'WHERE { GRAPH ?g { ' + 
-		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + selected_predicates + 
+		'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + 
+		selected_predicates + 
 		'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' +
 		'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
 		'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
