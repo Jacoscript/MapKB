@@ -54,8 +54,8 @@ html {
 }
 .leaflet-interactive { /* TODO: May not need this */
     /* Used for filling in state lines when countyorequal or stateorequal layer is applied to leaflet map */
-    fill: #000000;
-    fill-opacity: 0.2;
+    /* fill: #000000;
+    fill-opacity: 0.2; */
 }
 #reset-view-leaflet-option {
     position: absolute;
