@@ -160,6 +160,7 @@ function chooseQueryGraphs(number_of_graphs) {
 					notification_manager.addToNotificationQueue('Error', 'No results for bindings while modifying query tab.');
 				}
 			}
+			set_Select();
 		}
 	});
 }
@@ -185,6 +186,7 @@ function findQueryPredicates(){
 	} else {
 		query_tab_list[id_sliced - 1].current_custom_predicates = query_tab_list[id_sliced - 1].current_custom_graphs;
 	}
+	
 	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
 		// Build divs to put predicate selections into
 		query_tab.innerHTML += '<div id="' + query_tab_id + '-qb-div-predicate-' + (index + 1) + '"></div>'
@@ -199,6 +201,8 @@ function findQueryPredicates(){
 	});
 	// Create find filter options button
 	query_tab.innerHTML += '<button id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button>';
+	//Whether we are successful or not, we should keep the same options selected
+	set_Select();
 }
 
 function createPredicateSelections(index, query_tab, selected_graph) {
@@ -246,8 +250,6 @@ function createPredicateSelections(index, query_tab, selected_graph) {
 					notification_manager.addToNotificationQueue('Error', 'No results for bindings while finding query predicates.');
 				}
 			}
-			//Whether we are successful or not, we should keep the same options selected
-			set_Select();
 		}
 	});
 }
@@ -421,8 +423,13 @@ function set_Select(){
 	// TODO: Make sure all selected_ are replaced with loops over all context, predicate, and filter selectors
 	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
 		new_index = index + 1;
-		if($('#' + query_tab_id + '-qb-context-selector-' + new_index) != null)
+		alert($('#' + query_tab_id + '-qb-context-selector-' + new_index).val())
+		if($('#' + query_tab_id + '-qb-context-selector-' + new_index) != null) {
+			var test1 = $('#' + query_tab_id + '-qb-context-selector-' + new_index).val()
 			$('#' + query_tab_id + '-qb-context-selector-' + new_index).val(item);
+			var test = $('#' + query_tab_id + '-qb-context-selector-' + new_index).val()
+			debugger;
+		}
 	});
 	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
 		new_index = index + 1;
@@ -433,7 +440,6 @@ function set_Select(){
 		document.getElementById(query_tab_id + '-qb-filter-selector').selectedIndex = selected_f;
 	if( document.getElementById(query_tab_id + '-qb-filter-object') != null)
 		document.getElementById(query_tab_id + '-qb-filter-object').value = selected_comparison;
-	
 }
 
 //Function to get the query from the query field and then run the universal query functon
