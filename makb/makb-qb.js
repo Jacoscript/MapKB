@@ -45,7 +45,7 @@ class QueryTab {
 			var id_sliced = query_tab_id.slice(5, 6);
 			this.old_graph_predicate_values = this.graph_predicate_values;
 			this.graph_predicate_values = [];
-
+			
 			for(var i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
 				query_tab_list[id_sliced - 1].graph_predicate_values.push($('#' + query_tab_id + '-qb-predicate-selector-' + i).val());
 			}
@@ -208,7 +208,7 @@ function chooseQueryGraphs(number_of_graphs) {
 					HTML += '<button id="' + query_tab_id + '-qb-btn-find-query-predicates" type="button" onclick="findQueryPredicates();">Find Predicates</button><hr/>';				
 					// Append to specific section inside query tab
 					$('#' + query_tab_id + '-section-graph-selection').append(HTML);
-					$('#' + query_tab_id + '-section-graph-selection > .qb-select-dropdown').change(function() {
+					$('#' + query_tab_id + '-section-graph-selection .qb-select-dropdown').change(function() {
 						query_tab_list[id_sliced - 1].recalculateGraphValues();
 					});
 
@@ -245,6 +245,12 @@ function findQueryPredicates(){
 
 	// Check whether we need to build elements
 	if(query_tab_list[id_sliced - 1].current_custom_predicates == query_tab_list[id_sliced - 1].current_custom_graphs) {
+		// Delete old information that will be rewritten
+		for(var i = 0; i < query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+			$('#' + query_tab_id + '-qb-div-predicate-' + (i + 1)).remove();
+		}
+		$('#' + query_tab_id + '-section-predicate-selection hr').remove();
+
 		// Check whether a selector for graph was changed. If so, graph_context_values will be different from the stored version old_graph_context_values
 		if (query_tab_list[id_sliced - 1].old_graph_context_values == query_tab_list[id_sliced - 1].graph_context_values) {
 			// Don't need to change the html
@@ -363,7 +369,7 @@ function createPredicateSelections(index, selected_graph) {
 					div_element.append(div_html);
 					// Append the content to the query_tab
 					$('#' + query_tab_id).append(HTML);
-					$('#' + query_tab_id + '-section-predicate-selection > .qb-select-dropdown').change(function() {
+					$('#' + query_tab_id + '-section-predicate-selection .qb-select-dropdown').change(function() {
 						query_tab_list[id_sliced - 1].recalculatePredicateValues();
 					});
 				}
@@ -480,8 +486,8 @@ function generateQuery(){
 	// else
 	// {
 	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
-		predicate_objects += '?predicate' + (index + 1) + ' ';
-		predicate_objects_list.push('?predicate' + (index + 1));
+		predicate_objects += '?predicate_obj' + (index + 1) + ' ';
+		predicate_objects_list.push('?predicate_obj' + (index + 1));
 	});
 	query_tab_list[id_sliced - 1].graph_predicate_values.forEach(function(item, index) {
 		selected_predicates += '?subject <' + item + '> ' + predicate_objects_list[index] + ' . ';
@@ -531,7 +537,6 @@ function generateQuery(){
 	}
 	else
 	{
-		// TODO: ????
 		$('#' + query_tab_id + '-qb-generated-query').val(query);
 	}
 }
