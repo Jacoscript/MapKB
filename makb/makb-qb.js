@@ -16,14 +16,16 @@ class QueryTab {
 		this.current_custom_graphs = 0;
 		this.current_custom_predicates = 0;
 		this.graph_context_values = [];  // Used to hold all graphs for each tab
-		this.graph_predicate_values = [];  // Used to hold all predicates for each tab
+		this.graph_predicate_values = [];  // Used to hold selected predicates for each tab
 		this.old_graph_context_values = [];
 		this.old_graph_predicate_values = [];
+		this.show_common_predicates = false;  // When true, will allow the system to look for common predicates to display
 	}
 
 	recalculateGraphValues() {
 		try {
 			var id_sliced = query_tab_id.slice(5, 6);
+			this.old_graph_context_values = this.graph_context_values;
 			this.graph_context_values = [];
 
 			for(var i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
@@ -37,9 +39,11 @@ class QueryTab {
 		}
 	}
 
+	// A function to dynamically update the predicates for a query tab whenever the selection is changed.
 	recalculatePredicateValues() {
 		try {
 			var id_sliced = query_tab_id.slice(5, 6);
+			this.old_graph_predicate_values = this.graph_predicate_values;
 			this.graph_predicate_values = [];
 
 			for(var i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
@@ -53,6 +57,7 @@ class QueryTab {
 
 //Function to display the query as a tab
 function createQueryTab(){
+	var HTML = '';
 	// Check whether max queries are already open
 	if (current_custom_queries == MAX_CUSTOM_QUERIES) {
 		return;
@@ -60,16 +65,18 @@ function createQueryTab(){
 		current_custom_queries += 1;
 		query_tab_list.push(new QueryTab(current_custom_queries));
 		query_tab_id = 'tabs-' + current_custom_queries;
-		var HTML = '<div class="section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many graphs would you like:</span>'
-					+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
-					+ '<button id="' + query_tab_id + '-qb-btn-graph-number-submit" type="button" onclick="checkUserQueryValidity(\'Graph Number\');">Submit</button></div>'
-					+ '<div class="section-graph-selection"></div>'
-					+ '<div class="section-predicate-selection"></div>'
-					+ '<div class="section-filter-selection"></div>'
-					+ '<div class="section-query-selection"></div>'
 		createTab('Query Builder', HTML);
 
-		// Allow full value selection on click <-- seems to not work after hitting submit btn
+		$('#' + query_tab_id + ' p').remove();
+		var HTML = '<div class="qb-content-container" id="' + query_tab_id +'-section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many graphs would you like:</span>'
+					+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
+					+ '<button id="' + query_tab_id + '-qb-btn-graph-number-submit" type="button" onclick="checkUserQueryValidity(\'Graph Number\');">Submit</button></div>'
+					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div>'
+					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-predicate-selection"></div>'
+					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-filter-selection"></div>'
+					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-query-selection"></div>'
+		$('#' + query_tab_id).append(HTML);
+		// Allow full value selection on click
 		$('#' + query_tab_id + '-qb-input-graph-number').focus(function() {
 			$(this).on("click.a keyup.a", function(e){      
 				$(this).off("click.a keyup.a").select();
@@ -78,7 +85,8 @@ function createQueryTab(){
 	}
 }
 
-// A function that checks the validy of different inputs from the user.
+// A function that checks the validy of different inputs from the user for the
+// number of graphs they'll be using.
 function checkUserQueryValidity(type_of_input) {
 	// Check whether user submits an integer and is less than max graphs
 	if(type_of_input == 'Graph Number') {
@@ -116,26 +124,44 @@ function chooseQueryGraphs(number_of_graphs) {
 	var id_sliced = query_tab_id.slice(5, 6);
 
 	if(query_tab_list[id_sliced - 1].current_custom_graphs == number_of_graphs) {
-		// Don't need to change the html
-		return;
+		// Reload if user hits submit again
+		// Update new section if graph number was changed
+		query_tab_list[id_sliced - 1].current_custom_graphs = number_of_graphs;
+		for(var i = 1; i <= MAX_CUSTOM_GRAPHS; i++) {
+			$('#' + query_tab_id + '-qb-context-selector-' + i).remove();
+		}
+		$('#' + query_tab_id + '-section-graph-selection').remove();
+		$('#' + query_tab_id + '-section-predicate-selection').remove();
+		$('#' + query_tab_id + '-section-filter-selection').remove();
+		$('#' + query_tab_id + '-section-query-selection').remove();
+
+		$('#' + query_tab_id).append('<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-predicate-selection"></div>'
+									 + '<div class="qb-content-container" id="' + query_tab_id + '-section-filter-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-query-selection"></div>')
+		$('#' + query_tab_id + '-section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
+		// Update class variables
+		query_tab_list[id_sliced - 1].graph_context_values = [];
+		query_tab_list[id_sliced - 1].graph_predicate_values = [];
 	} else if (query_tab_list[id_sliced - 1].current_custom_graphs == 0) {
 		// Create new section based
 		query_tab_list[id_sliced - 1].current_custom_graphs = number_of_graphs;
-		$('.section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
+		$('#' + query_tab_id + '-section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
 	} else {
 		// Update new section if graph number was changed
 		query_tab_list[id_sliced - 1].current_custom_graphs = number_of_graphs;
 		for(var i = 1; i <= MAX_CUSTOM_GRAPHS; i++) {
 			$('#' + query_tab_id + '-qb-context-selector-' + i).remove();
 		}
-		$('.section-graph-selection').remove();
-		$('.section-predicate-selection').remove();
-		$('.section-filter-selection').remove();
-		$('.section-query-selection').remove();
+		$('#' + query_tab_id + '-section-graph-selection').remove();
+		$('#' + query_tab_id + '-section-predicate-selection').remove();
+		$('#' + query_tab_id + '-section-filter-selection').remove();
+		$('#' + query_tab_id + '-section-query-selection').remove();
 
-		$('#' + query_tab_id).append('<div class="section-graph-selection"></div><div class="section-predicate-selection"></div>'
-									 + '<div class="section-filter-selection"></div><div class="section-query-selection"></div>')
-		$('.section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
+		$('#' + query_tab_id).append('<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-predicate-selection"></div>'
+									 + '<div class="qb-content-container" id="' + query_tab_id + '-section-filter-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-query-selection"></div>')
+		$('#' + query_tab_id + '-section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
+		// Update class variables
+		query_tab_list[id_sliced - 1].graph_context_values = [];
+		query_tab_list[id_sliced - 1].graph_predicate_values = [];
 	}
 
 	//Get the specified query
@@ -175,10 +201,27 @@ function chooseQueryGraphs(number_of_graphs) {
 						}
 						HTML += '</select>'
 					}
-					HTML += '<button id="' + query_tab_id + '-qb-btn-find-query-predicates" type="button" onclick="findQueryPredicates();">Find Predicates</button>';				
-					$('.section-graph-selection').append(HTML);
-					$('.section-graph-selection .qb-select-dropdown').change(function() {
+					if(query_tab_list[id_sliced - 1].current_custom_graphs > 1) {
+						HTML += '<span class="qb-text" id="' + query_tab_id + '-qb-text-common-predicates">Would you like to show common predicates between the multiple graphs?</span>'
+						HTML += '<input id="' + query_tab_id + '-qb-radio-predicates-yes" name="predicates" type="radio" value="Yes"/>Yes<input checked id="' + query_tab_id + '-qb-radio-predicates-no" name="predicates" type="radio" value="No"/>No<br/>';
+					}
+					HTML += '<button id="' + query_tab_id + '-qb-btn-find-query-predicates" type="button" onclick="findQueryPredicates();">Find Predicates</button><hr/>';				
+					// Append to specific section inside query tab
+					$('#' + query_tab_id + '-section-graph-selection').append(HTML);
+					$('#' + query_tab_id + '-section-graph-selection > .qb-select-dropdown').change(function() {
 						query_tab_list[id_sliced - 1].recalculateGraphValues();
+					});
+
+					// Setup checks for radio buttons (radio btns for common predicates only show if there's more than 1 graph)
+					$('#' + query_tab_id + '-qb-radio-predicates-yes').click(function() {
+						if($('#' + query_tab_id + '-qb-radio-predicates-yes').is(':checked')) {
+							query_tab_list[id_sliced - 1].show_common_predicates = true;
+						}
+					});
+					$('#' + query_tab_id + '-qb-radio-predicates-no').click(function() {
+						if($('#' + query_tab_id + '-qb-radio-predicates-no').is(':checked')) {
+							query_tab_list[id_sliced - 1].show_common_predicates = false;
+						}
 					});
 				}
 				else { //There was no results so do nothing.
@@ -193,13 +236,21 @@ function chooseQueryGraphs(number_of_graphs) {
 function findQueryPredicates(){
 	var id_sliced = query_tab_id.slice(5, 6);
 
+	// Set default values for the class if nothing was changed before pressing Find Predicates
+	if (query_tab_list[id_sliced - 1].graph_context_values === undefined || query_tab_list[id_sliced - 1].graph_context_values.length == 0) {
+		for(var i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+			query_tab_list[id_sliced - 1].graph_context_values.push($('#' + query_tab_id + '-qb-context-selector-' + i).val());
+		}
+	}
+
 	// Check whether we need to build elements
 	if(query_tab_list[id_sliced - 1].current_custom_predicates == query_tab_list[id_sliced - 1].current_custom_graphs) {
+		// Check whether a selector for graph was changed. If so, graph_context_values will be different from the stored version old_graph_context_values
 		if (query_tab_list[id_sliced - 1].old_graph_context_values == query_tab_list[id_sliced - 1].graph_context_values) {
 			// Don't need to change the html
 			return;
 		} else {
-			// Remove old graph predicates if there are new ones
+			// Remove old graph predicates
 			for(var i = 1; i <= MAX_CUSTOM_GRAPHS; i++) {
 				$('#' + query_tab_id + '-qb-predicate-selector-' + i).remove();
 			}
@@ -208,26 +259,66 @@ function findQueryPredicates(){
 	} else if (query_tab_list[id_sliced - 1].current_custom_predicates == 0) {
 		// Create new section based
 		query_tab_list[id_sliced - 1].current_custom_predicates = query_tab_list[id_sliced - 1].current_custom_graphs;
-		$('.section-predicate-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-predicate-info">Choose what predicates you would like to filter the selected graphs by:</p>');
+		$('#' + query_tab_id + '-section-predicate-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-predicate-info">Choose what predicates you would like to filter the selected graphs by:</p>');
 	} else {
 		query_tab_list[id_sliced - 1].current_custom_predicates = query_tab_list[id_sliced - 1].current_custom_graphs;
 	}
 	
+	// Build divs to put predicate selections into
 	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
-		// Build divs to put predicate selections into
-		$('.section-predicate-selection').append('<div id="' + query_tab_id + '-qb-div-predicate-' + (index + 1) + '"></div>');
+		$('#' + query_tab_id + '-section-predicate-selection').append('<div id="' + query_tab_id + '-qb-div-predicate-' + (index + 1) + '"></div>');
 	});
 
 	var selected_graph = "";
 	// Loop through user desired graphs and create predicates to choose from
-	query_tab_list[id_sliced - 1].old_graph_context_values = query_tab_list[id_sliced - 1].graph_context_values;
 	query_tab_list[id_sliced - 1].graph_context_values.forEach(function(item, index) {
 		selected_graph = 'FROM NAMED <' + item + '> ';
 		index_updated = index + 1
 		createPredicateSelections(index_updated, selected_graph);
 	});
+
+	// Delete options that are not common among multiple graphs if user specifies
+	if(query_tab_list[id_sliced - 1].current_custom_graphs > 1 && query_tab_list[id_sliced - 1].show_common_predicates === true) {
+		var predicates = [];
+		setTimeout(function() {
+			// Grab all predicates
+			for(var i = 0; i < query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+				var new_list = [];
+				$('#' + query_tab_id + '-qb-predicate-selector-' + (i + 1) + ' option').each(function() {
+					new_list.push(this.value);
+				});
+				predicates.push(new_list);
+			}
+
+			// Find common elements
+			var common_predicates = predicates.shift().reduce(function(res, v) {
+				if (res.indexOf(v) === -1 && predicates.every(function(a) {
+					return a.indexOf(v) !== -1;
+				})) res.push(v);
+				return res;
+			}, []);
+
+			// Compare options for each dropdown to the common elements list
+			for(var i = 0; i < query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+				$('#' + query_tab_id + '-qb-predicate-selector-' + (i + 1) + ' option').each(function() {
+					var is_found = false;
+					var option = this.value;
+					common_predicates.forEach(function(item, index) {
+						if(item == option) {
+							is_found = true;
+						}
+					});
+					// If dropdown option not found in common elements, delete it
+					if(is_found == false) {
+						$('#' + query_tab_id + '-qb-predicate-selector-' + (i + 1) + ' option[value="' + option + '"]').remove();
+					}
+				});
+			}
+		}, 500);  // 500 gives enough time for asynch callback of predicates before parsing predicates
+	}
+
 	// Create find filter options button
-	$('.section-predicate-selection').append('<button id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button>');
+	$('#' + query_tab_id + '-section-predicate-selection').append('<button id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button><hr/>');
 }
 
 function createPredicateSelections(index, selected_graph) {
@@ -270,9 +361,9 @@ function createPredicateSelections(index, selected_graph) {
 					}
 					div_html += '</select>'
 					div_element.append(div_html);
-					//append the content to the query_tab
+					// Append the content to the query_tab
 					$('#' + query_tab_id).append(HTML);
-					$('.section-predicate-selection .qb-select-dropdown').change(function() {
+					$('#' + query_tab_id + '-section-predicate-selection > .qb-select-dropdown').change(function() {
 						query_tab_list[id_sliced - 1].recalculatePredicateValues();
 					});
 				}
@@ -285,11 +376,19 @@ function createPredicateSelections(index, selected_graph) {
 }
 
 //Function to gets filters for the given predicate
-function findQueryFilters(){	
+function findQueryFilters(){
+	var id_sliced = query_tab_id.slice(5, 6);	
+
+	// Set default values for the class since we only update when it's changed
+	if (query_tab_list[id_sliced - 1].graph_predicate_values === undefined || query_tab_list[id_sliced - 1].graph_predicate_values.length == 0) {
+		for(var i = 1; i <= query_tab_list[id_sliced - 1].current_custom_graphs; i++) {
+			query_tab_list[id_sliced - 1].graph_predicate_values.push($('#' + query_tab_id + '-qb-predicate-selector-' + i).val());
+		}
+	}
+
 	if(document.getElementById(query_tab_id + '-qb-filter-selector') == null) {
 		var HTML = '<p class="qb-text" id="' + query_tab_id + '-qb-text-filter-info">Choose how you want to filter the predicates:</p>'
 					+ '<select class="qb-select-dropdown" id="'+ query_tab_id +'-qb-filter-selector">';
-		
 		/*if( predicates[0]=="http://dbpedia.org/ontology/zipCode"
 		http://www.opengis.net/ont/geosparql#dimension	
 		http://dbpedia.org/ontology/dateLastUpdated
@@ -328,14 +427,14 @@ function findQueryFilters(){
 		HTML = HTML + '</select>'
 		+ '<p class="qb-text" id="' + query_tab_id + '-qb-text-filter-compare-info">What do you want to compare the objects to?</p>'
 		+ '<textarea class="qb-text-area" cols="50" rows="1" id="' + query_tab_id + '-qb-filter-object"></textarea>'
-		+ '<button class="btn-generate-query" id="' + query_tab_id + '-qb-btn-generate-query" type="button" onclick="generateQuery();">Generate Query</button>';
+		+ '<button class="btn-generate-query" id="' + query_tab_id + '-qb-btn-generate-query" type="button" onclick="generateQuery();">Generate Query</button><hr/>';
 						
 		//append the content to the query_tab
-		$('.section-filter-selection').append(HTML);
+		$('#' + query_tab_id + '-section-filter-selection').append(HTML);
 	}
 	else 
 	{
-		//we will update the select once this becomes dynamic.
+		// We will update the select once this becomes dynamic.
 	}			
 }
 
@@ -346,12 +445,11 @@ function generateQuery(){
 	// var predicates = document.getElementById(query_tab_id + '-qb-predicate-selector');
 	// var select_p = predicates.options[predicates.selectedIndex].value;
 	
-	var filters = document.getElementById(query_tab_id + '-qb-filter-selector');
-	var select_f = filters.options[filters.selectedIndex].value;
+	var filters = $('#' + query_tab_id + '-qb-filter-selector');
+	var selected_filter = filters.val();
 	
 	var filter_object = document.getElementById(query_tab_id + '-qb-filter-object').value;
 	
-	selected_f = filters.selectedIndex;
 	selected_comparison = filter_object;
 	
 	//Generate the selected graphs
@@ -392,19 +490,19 @@ function generateQuery(){
 	// }
 	
 	predicate_objects_list.forEach(function(item, index) {
-		if(select_f == "regex")
+		if(selected_filter == "regex")
 			selected_filters += 'FILTER regex(' + item + ', "' + filter_object + '")  ';
-		else if (select_f == "lessthan")
+		else if (selected_filter == "lessthan")
 			selected_filters += 'FILTER (' + item + ' < ' + filter_object + ') ';
-		else if (select_f == "lessthanorequal")
+		else if (selected_filter == "lessthanorequal")
 			selected_filters += 'FILTER (' + item + ' <= ' + filter_object + ') ';
-		else if (select_f == "greaterthan")
+		else if (selected_filter == "greaterthan")
 			selected_filters += 'FILTER (' + item + ' > ' + filter_object + ') ';
-		else if (select_f == "greaterthanorequal")
+		else if (selected_filter == "greaterthanorequal")
 			selected_filters += 'FILTER (' + item + ' >= ' + filter_object + ') ';
-		else if (select_f == "equalto")
+		else if (selected_filter == "equalto")
 			selected_filters += 'FILTER (' + item + ' = ' + filter_object + ') ';
-		else if (select_f == "notequalto")
+		else if (selected_filter == "notequalto")
 			selected_filters += 'FILTER (' + item + ' != ' + filter_object + ') ';
 	});
 	
@@ -429,12 +527,12 @@ function generateQuery(){
 					+ '<button class="qb-clear-map" id="' + query_tab_id + '-qb-clear-map" type="button" onclick="clearMap()">Clear Map</button>';
 
 		//append the content to the query_tab
-		$('.section-filter-selection').append(HTML);
+		$('#' + query_tab_id + '-section-filter-selection').append(HTML);
 	}
 	else
 	{
 		// TODO: ????
-		document.getElementById(query_tab_id + '-qb-generated-query').value = query;
+		$('#' + query_tab_id + '-qb-generated-query').val(query);
 	}
 }
 
