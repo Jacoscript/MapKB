@@ -26,19 +26,49 @@ function performBasicDeviceCheck() {
     }
 }
 
+
+// SELECT DISTINCT ?predicate ?publisher
+//     WHERE {
+//         ?s <http://purl.org/dc/terms/publisher> ?publisher
+
+// SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry 
+// FROM NAMED <http://localhost:8080/marmotta/context/trails>
+// WHERE { 
+//     GRAPH ?g {
+//         ?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom .
+//         ?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions .
+//         ?geom <http://www.opengis.net/ont/geosparql#asGML> ?geometry
+//         OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . }
+//         OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . }
+//     }
+// }
+
+// SELECT DISTINCT ?predicate
+//     FROM <http://localhost:8080/marmotta/context/trails>
+//     WHERE {
+//         ?s ?predicate ?o 
+//     }
+
 function testQuery() {
     // Get query and encode it
     // TODO: Ask Matthew why the below PREFIX doesn't work
-    var query = `
-    PREFIX feat: <http://www.opengis.net/ont/geosparql#Feature>
-
-    SELECT DISTINCT ?predicate ?publisher
-    
+    var query_info = `
+    SELECT DISTINCT ?subject ?predicate
+    FROM <http://localhost:8080/marmotta/context/trails>
     WHERE {
-        ?s ?predicate ?o .
-        ?s <http://purl.org/dc/terms/publisher> ?publisher
-    }`
-    query = encodeURIComponent(query);
+        ?subject ?predicate ?o 
+    }
+    `
+    var query_run = `
+    SELECT ?subject ?length
+    FROM NAMED <http://localhost:8080/marmotta/context/trails>
+    WHERE { 
+        GRAPH ?g {
+            ?subject <http://dbpedia.org/ontology/length> ?length
+        }
+    }
+    `
+    query = encodeURIComponent(query_info);
 
     //Get the http request url.
     var httpGet = MARMOTTA_SPARQL_URL + query;
@@ -56,9 +86,9 @@ function testQuery() {
                         //go through all of the results and add them to the tab.
                         var tmp = '';
 						for(var i = 0; i < bindings.length; i++) {
-                            tmp += bindings[i].predicate.value + '\n';
+                            tmp += bindings[i].subject.value + '\n';
                         }
-                        //alert(tmp);
+                        alert(tmp);
 					}
 					else { //There was no results so do nothing.
 						alert("No results for bindings while creating additional information.");
