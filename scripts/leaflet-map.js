@@ -47,6 +47,7 @@ map.on('locationerror', onLocationError);
 // ################################# //
 
 function clearMap(){
+	console.log("Clearing map.");
 	// Function to clear the map of data
 	grouping.clearLayers();
 
@@ -63,8 +64,9 @@ function clearTabs(){
 	$('#afd-tabs ul li').remove();
 	$('#afd-tabs div').remove();
 	
-	// Reset the tab count
+	// Reset query vars
 	current_custom_queries = 0;
+	query_tab_list = [];
 	
 	// Refresh allows for proper query builder repopulation
 	$("#afd-tabs").tabs("refresh");
