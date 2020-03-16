@@ -15,13 +15,13 @@ function addLeafletMarker() {
     // Note: Marker lat/long may be referenced by user input or a reticle
     //       on the map. Not sure which approach will be taken yet.
     var lat, long;
-    var ref_name = "";
+    var ref_name = '';
     var zoom_level = 12;  // Default is 12
 
     // Get information and error check
-    var user_Info = prompt("Please give the marker a name:", "Marker name");
-    while (user_Info == "" || user_Info == "Marker name") {
-        user_Info = prompt("Please give the marker a name:", "Marker name");
+    var user_Info = prompt('Please give the marker a name:', 'Marker name');
+    while (user_Info == '' || user_Info == 'Marker name') {
+        user_Info = prompt('Please give the marker a name:', 'Marker name');
     }
     if (user_Info == null) {
         // User cancelled adding a marker
@@ -47,20 +47,22 @@ function addLeafletMarker() {
     };
 
     // Log
-    console.log("[Created]: Marker '" + user_Info + "' at (lat: " + locale.lat + ", long: " + locale.lng + ")");
+    console.log('[Created]: Marker "' + user_Info + '" at (lat: ' + locale.lat + ', long: ' + locale.lng + ')');
     
     // Add marker to list for later deletion
     user_markers.push(user_markers_Builder);
     
-    // Add marker to the html ul, sub-del-marker, as well as sub-markers
+    // Add marker to the html ul, sub-del-marker, as well as dropdown-menu-2-markers
     // Note: Marker name is passed to the del-marker function so that the 
     // Note: function can know which marker to delete when selected.
-    $("#sub-del-marker").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"delLeafletMarker('" 
-    + user_markers_Builder.markerID + "');\">" + user_markers_Builder.markerName + "</a>");
+    $("#dropdown-menu-2-del-marker-list").append('<a class="dropdown-item" id="user-created-marker-' + user_markers_Builder.markerID 
+                                                 + '" href="#" onclick="delLeafletMarker(' + user_markers_Builder.markerID + ');">' 
+                                                 + user_markers_Builder.markerName + '</a>');
 
-    $("#sub-markers").append("<a id=\"marker-" + user_markers_Builder.markerID + "\" href=\"#\" onclick=\"zoomMapToLocation('User Marker', '" 
-    + user_markers_Builder.markerLat + "', '" + user_markers_Builder.markerLong 
-    + "', '" + user_markers_Builder.markerZoom +"');\">" + user_markers_Builder.markerName + "</a>");
+    $("#dropdown-menu-2-markers-list").append('<a class="dropdown-item" id="user-created-marker-' + user_markers_Builder.markerID 
+                                              + '" href="#" onclick="zoomMapToLocation(\'User Marker\', ' + user_markers_Builder.markerLat 
+                                              + ', ' + user_markers_Builder.markerLong + ', ' + user_markers_Builder.markerZoom + ');">' 
+                                              + user_markers_Builder.markerName + '</a>');
 }
 
 function clrLeafletMarkers() {
@@ -72,8 +74,8 @@ function clrLeafletMarkers() {
     }
     user_markers = [];
 	// Remove html of sub-tabs for add-markers and del-markers
-    $('#sub-del-marker a').remove();
-    $('#sub-markers a').remove();
+    $('#dropdown-menu-2-del-marker-list a').remove();
+    $('#dropdown-menu-2-markers-list a').remove();
 }
 
 function delLeafletMarker(markerID) {
@@ -88,8 +90,8 @@ function delLeafletMarker(markerID) {
         }
     }
     // Delete specifc dropdowns
-    $("#marker-" + markerID).remove();
-    $("#marker-" + markerID).remove();
+    $("#user-created-marker-" + markerID).remove();
+    $("#user-created-marker-" + markerID).remove();
 }
 
 

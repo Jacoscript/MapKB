@@ -118,7 +118,6 @@ function onMapMove() {
 
 function zoomMapToLocation(loc, lat, long, zoomLevel) {
 	// Function to zoom to pre-defined locations around the map
-
 	if (loc == 'Initial'){
 		map.setView([38.8897547, -77.0089138], 12);
 	} else if (loc == 'US Capitol') {
