@@ -383,7 +383,7 @@ function createTab(name, content) {
     // set id and style attributes of div
     newTabDiv.id = 'tabs-' + (numTabs+1);
     newTabDiv.style.height = '100%';
-    newTabDiv.style.width = '90%';
+    newTabDiv.style.width = '100%';
     newTabDiv.style.display = 'none';
 	newTabDiv.style.fontSize = '10px';
 
@@ -499,7 +499,7 @@ function testAddTab() {
     // set id and style attributes of div
     newTabDiv.id = 'tabs-' + (numTabs+1);
     newTabDiv.style.height = '100%';
-    newTabDiv.style.width = '90%';
+    newTabDiv.style.width = '100%';
     newTabDiv.style.display = 'none';
 
     // set additional attributes of div
