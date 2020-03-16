@@ -113,7 +113,7 @@ function onMapMove() {
 	$("#txtbox-Latitude").val(locale.lat);
 	$("#txtbox-Longitude").val(locale.lng);
 	// Set height of afd tabs to height of map
-	$("#afd-tabs").height($("#mapid").height() - ($("#txtbox-container").height() + $("#main-container").offset().top) - 3);
+	$("#afd-tabs").height($("#mapid").height() - ($("#txtbox-container").height() + $("#main-container").offset().top) - 5);
 };
 
 function zoomMapToLocation(loc, lat, long, zoomLevel) {
