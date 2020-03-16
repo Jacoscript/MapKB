@@ -5,10 +5,8 @@ tfry@contractor.usgs.gov
 A file for the css design of the notification system.
 */
 .notification-bar {
-    background-color: #4d4d4d;
     bottom: -30%;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 #242424, 0 6px 20px 0 #242424;
     display: none;
     left: 35%;
     max-width: 30%;

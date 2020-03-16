@@ -4,6 +4,12 @@ tfry@contractor.usgs.gov
 
 A file for the css design of all web page elements including svg graph,
 leaflet map, and more.
+
+Old USGS RGB: 0, 112, 66
+Old USGS Hex: #007042
+New USGS RGB: 0, 38, 76
+New USGS Hex: #00264c
+
 */
 
 /* Main styles */
@@ -16,11 +22,58 @@ body {
 	Note 2: Not sure why there's extra space at the bottom of the screen when
 	'overflow: hidden;' is disabled.
     */
+    font-size: 16px;
     height: 100%;
     margin: 0px 5px 0px 5px;
 }
 html {
     height: 100%;
+}
+.a-help:hover {
+    text-decoration: underline;
+}
+.a-help {
+    color: #5a5353;
+    text-decoration: none;
+}
+.a-license:hover {
+    text-decoration: underline;
+}
+.a-license {
+    color: #0078A8;
+    text-decoration: none;
+}
+.help-block {
+    display: inline-block;
+    padding: 0px 10px 0px 10px;
+}
+.help-block-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.help-container {
+    height: 90%;
+    padding: 0px 30px 0px 30px;
+}
+.help-header {
+    color: #5a5353;
+    display: block;
+    font-size: 32px;
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+}
+.help-sub-header {
+    color: #21a1d4;
+    display: block;
+    font-size: 20px;
+    padding: 5px 0px 5px 0px;
+}
+.licenses {
+    margin: auto;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    width: 70%;
 }
 
 #main-container {
@@ -84,16 +137,15 @@ html {
     cursor: default;
 }
 .btn-ontology {
-    background-color: #d9d9d9;
-    border: 1px solid #a6a6a6;
+    background-color: #ffffff;
+    border: 1px solid #808080;
     color: #000000;
     cursor: default;
     font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
     padding: 5px 5px 5px 5px;
 }
 .btn-ontology:hover {
-    background-color: #e6f2ff;
-    border: 1px solid #1a8cff;
+    background-color: #e6e6e6;
     cursor: default;
 }
 /* Place crosshair at the center of the leaflet map */
@@ -180,9 +232,13 @@ html {
 .qb-clear-map {
     float: right;
 }
-.qb-input-graph-number {
+.qb-content-container {
     text-align: center;
-    width: 50%;
+}
+.qb-input-graph-number, .qb-input-graph-filter{
+    text-align: center;
+    width: 80%;
+    margin: 5px;
 }
 .qb-run-query {
     float: left;
@@ -204,9 +260,6 @@ html {
     font-size: 15px !important;
     resize: none;
     width: 100%;
-}
-#tabs-1, #tabs-2, #tabs-3 {  /* Max 3 tabs */
-    text-align: center;
 }
 
 /* Misc page styles */

@@ -4,108 +4,16 @@ mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
 
 A file for the css design of the maps web page. Since cssmenu is a class,
 it can be ported to other pages if need be.
+
+Old USGS RGB: 0, 112, 66
+Old USGS Hex: #007042
+New USGS RGB: 0, 38, 76
+New USGS Hex: #00264c
+
 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
-/* 
-Sets up background of nav bar and standards for elements inside
-such as the font family and font size
-*/
-.css-menu {
-	background: #3db2e1;
-	background: -o-linear-gradient(top, #69c4e8, #21a1d4);
-	background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
-	background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
-	background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
-	background: linear-gradient(to bottom, #69c4e8, #21a1d4);
-	border-radius: 5px;
-	box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 
-	2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px 
-	rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 
-	0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
-	font-family: 'Open Sans';
-	padding: 0px 20px 0px 20px;
-	width: auto;
-}
-/* Modify all headers to be in a row */
-.css-menu ul li {
-	font-size: 15px;
-	font-weight: bold;
-}
-.css-menu ul {
-	list-style-type: none;
-	margin: 0px;
-	overflow: hidden;
-	padding: 0px;
-}
-
-/* Default all list items to be floated left */
-.css-menu li {
-	float: left;
-}
-
-/* Customize arrow down images and specific dropdown/dropdown btns*/
-/* 
-.arrow-down {
-	height: 16px;
-	position: absolute;
-	width: 16px;
-}
-*/
-.drop-btn, .no-drop-btn {
-	color: #ffffff;
-	display: inline-block;
-	padding: 15px;
-	text-align: center;
-	text-decoration: none;
-}
-.dropdown:hover .drop-btn, .no-drop-btn:hover {
-	/* Change drop-btn to gray on hover of entire dropdown */
-	color: #88d0ed;
-}
-.dropdown:hover .dropdown-content {
-	display: block;
-}
-/* Moves any nav items to the right side of the nav bar */
-.move-right-side {
-	float: right;
-}
-
-/* Stylizing background of dropdowns */
-.dropdown-content, #sub-del-marker, #sub-markers {
-	background: #3db2e1;
-	background: -o-linear-gradient(top, #69c4e8, #21a1d4);
-	background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
-	background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
-	background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
-	background: linear-gradient(to bottom, #69c4e8, #21a1d4);
-	border-radius: 5px;
-	box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
-	display: none;
-	position: absolute;
-	z-index: 1000; /* Allows menu items to show in front of leaflet map */
-}
-
-/* Stylizing right side content to show all items */
-.nav-notifications .dropdown-content {
-	overflow: visible;
-}
-.nav-options .dropdown-content {
-	overflow: visible;
-}
-
-/* Stylizing links inside dropdowns */
-.dropdown-content a, #sub-del-marker a, #sub-markers a {
-	color: #ffffff;
-	display: block;
-	padding: 12px 16px;
-	text-align: left;
-	text-decoration: none;
-}
-.dropdown-content a:hover, #sub-del-marker a:hover, #sub-markers a:hover {
-	border-radius: 5px;
-	color: #88d0ed;
-	font-family: 'Open Sans';
+.dropdown-item a:hover, #sub-del-marker a:hover, #sub-markers a:hover {
 	animation-name: light-to-dark-blues;
 	animation-duration: 3s;
 	animation-iteration-count: infinite;
@@ -114,19 +22,20 @@ such as the font family and font size
 	-webkit-animation-iteration-count: infinite;
 }
 
-/* Stylizing sub menus */
-#sub-markers {
-	display: none;
-	margin-left: 139px;
-	margin-top: 0px; /* 44px from top for each tab between marker and menu */
-	z-index: 10000;
+.dropdown-submenu {
+	position: relative;
 }
 
-#sub-del-marker {
-	display: none;
-	margin-left: 139px;
-	margin-top: 88px; /* 44px from top for each tab between marker and menu */
-	z-index: 10000;
+.dropdown-submenu>a:after {
+	content: "\f0da";
+	border: none;
+}
+
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: 0px;
+	margin-left: 0px;
 }
 
 /* Animations and other features */
