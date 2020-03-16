@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset = "utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Main CSS styles and webpage js -->
 		<link rel="stylesheet" href="styles/menu-styles.css" />
@@ -12,6 +12,11 @@
 		<script src="scripts/main-handler.js"></script>
 		<script src="scripts/menu-styles.js"></script>
 		<script src="scripts/logging/notification-manager.js"></script>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 		<!-- leaflet map css -->
 		<link rel="stylesheet" href="leaflet/leaflet.css" />
@@ -68,81 +73,118 @@
 		</script>
 	</head>
 	<body>
-		<div class="css-menu">
-			<ul>
-				<li>
-					<a class="no-drop-btn" href="#" onclick="createQueryTab();">Custom Query Builder</a>
-				</li>
-				<li class="dropdown">
-					<a class="drop-btn" href="#">Layers</a>
-					<ul class="dropdown-content">
-						<a href="#" onclick="makePointQuery('gnis');">USGS GNIS - DC</a>
-						<a href="#" onclick="makePointQuery('structures');">USGS Structures - DC</a>
-						<a href="#" onclick="makePointQuery('geonames');">GeoNames.org - DC</a>
-						<a href="#" onclick="makeLineQuery('trails');">Trails - DC</a>
-						<a href="#" onclick="makePolygonQuery('countyorequivalent');">CountyOrEqual - DC</a>
-						<a href="#" onclick="makePolygonQuery('stateorterritory');">StateOrEqual - DC</a>
-						<a href="#" onclick="makeMultiPolygonQuery();">PADUS - DC</a>
-						<a href="#" onclick="makePointQuery('nhdpoint');">NHD Point - DC</a>
-						<a href="#" onclick="makeLineQuery('nhdflowline');">NHD Flowline - DC</a>
-						<a href="#" onclick="makeLineQuery('nhdline');">NHD Line - DC</a>
-						<a href="#" onclick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="drop-btn" href="#">Ontologies</a>
-					<ul class="dropdown-content">
-						<a href="http://144.47.161.52:8080/webvowl_1.1.7/#url=http://144.47.161.52:8080/MAKB_Fry/makb/ontologies/examples/Example-1.json" target="_blank">Open Full Ontology Viewer</a>
-						<a href="#" onclick="toggleOntologyViewer();">Toggle Small Ontology Viewer</a>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="drop-btn" href="#">Markers</a>
-					<ul class="dropdown-content">
-						<a id="markers" href="#">Markers</a>
-						<a id="add-marker" href="#" onclick="addLeafletMarker();">Add Marker</a>
-						<a id="del-marker" href="#" >Delete Marker</a>
-						<a id="clr-marker" href="#" onclick="clrLeafletMarkers();">Clear Markers</a>
-					</ul>
-					<!-- Note: jQuery is used on the sub-tabs to display them -->
-					<ul id="sub-del-marker">
-						<!-- Populated by markers.js addMarker() function -->
-					</ul>
-					<ul id="sub-markers">
-						<!-- Populated by markers.js addMarker() function -->
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="drop-btn" href="#">Set View</a>
-					<ul class="dropdown-content">
-						<a href="#" onclick="zoomMapToLocation('Initial');">Reset to Initial</a>
-						<a href="#" onclick="zoomMapToLocation('US Capitol');">US Capitol</a>
-						<a href="#" onclick="zoomMapToLocation('Reflecting Pool');">Reflecting Pool</a>
-						<a href="#" onclick="zoomMapToLocation('McMillan Reservoir');">McMillan Reservoir</a>
-						<a href="#" onclick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a>
-					</ul>
-				</li>
-				<div class="move-right-side">
-					<li class="dropdown nav-notifications">
-						<a class="drop-btn" href="#">Notifications</a>
-						<ul class="dropdown-content">
-							<a href="#" id="notification-in-queue">In Queue (0)</a>
-							<a href="#" onclick="notification_manager.addToNotificationQueue('Error');">Error Message</a>
-							<a href="#" onclick="notification_manager.addToNotificationQueue('Other');">Other Message</a>
-							<a href="#" onclick="notification_manager.addToNotificationQueue('Success');">Success Message</a>
-							<a href="#" onclick="notification_manager.addToNotificationQueue('Warning');">Warning Message</a>
+		<!-- Menu help: https://bootstrapious.com/p/bootstrap-multilevel-dropdown-->
+		<div class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">MAKB</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="createQueryTab();">Custom Query Builder</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Layers
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" onclick="makePointQuery('gnis');">USGS GNIS - DC</a>
+							<a class="dropdown-item" href="#" onclick="makePointQuery('structures');">USGS Structures - DC</a>
+							<a class="dropdown-item" href="#" onclick="makePointQuery('geonames');">GeoNames.org - DC</a>
+							<a class="dropdown-item" href="#" onclick="makeLineQuery('trails');">Trails - DC</a>
+							<a class="dropdown-item" href="#" onclick="makePolygonQuery('countyorequivalent');">CountyOrEqual - DC</a>
+							<a class="dropdown-item" href="#" onclick="makePolygonQuery('stateorterritory');">StateOrEqual - DC</a>
+							<a class="dropdown-item" href="#" onclick="makeMultiPolygonQuery();">PADUS - DC</a>
+							<a class="dropdown-item" href="#" onclick="makePointQuery('nhdpoint');">NHD Point - DC</a>
+							<a class="dropdown-item" href="#" onclick="makeLineQuery('nhdflowline');">NHD Flowline - DC</a>
+							<a class="dropdown-item" href="#" onclick="makeLineQuery('nhdline');">NHD Line - DC</a>
+							<a class="dropdown-item" href="#" onclick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="help/">Help?</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Ontologies
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="http://144.47.161.52:8080/webvowl_1.1.7/#url=http://144.47.161.52:8080/MAKB_Fry/makb/ontologies/examples/Example-1.json" target="_blank">Open Full Ontology Viewer</a>
+							<a class="dropdown-item" href="#" onclick="toggleOntologyViewer();">Toggle Small Ontology Viewer</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="help/">Help?</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a id="dropdown-menu-1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+							Markers
+						</a>
+						<ul aria-labelledby="dropdown-menu-1" class="dropdown-menu dropright border-0 shadow">
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-markers" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Markers
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-markers" class="dropdown-menu border-0 shadow">
+									<!-- Populated by markers.js -->
+								</ul>
+							</li>
+							<li><a class="dropdown-item" id="add-marker" href="#" onclick="addLeafletMarker();">Add Marker</a></li>
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-del-marker" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Delete Marker
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-del-marker" class="dropdown-menu border-0 shadow">
+									<!-- Populated by markers.js -->
+								</ul>
+							</li>
+							<li><a class="dropdown-item" id="clr-marker" href="#" onclick="clrLeafletMarkers();">Clear Markers</a></li>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="help/">Help?</a>
 						</ul>
 					</li>
-					<li class="dropdown nav-options">
-						<a class="drop-btn" href="#">Options</a>
-						<!--<img class="arrow-down" src="webpage-icons/arrow-down-light.svg"/>-->
-						<ul class="dropdown-content">
-							<a href="#" onclick="clearMap();">Clear Map</a>
-							<a href="#" onclick="clearTabs();">Clear Tabs</a>
-						</ul>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Set View
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" onclick="zoomMapToLocation('Initial');">Reset to Initial</a>
+							<a class="dropdown-item" href="#" onclick="zoomMapToLocation('US Capitol');">US Capitol</a>
+							<a class="dropdown-item" href="#" onclick="zoomMapToLocation('Reflecting Pool');">Reflecting Pool</a>
+							<a class="dropdown-item" href="#" onclick="zoomMapToLocation('McMillan Reservoir');">McMillan Reservoir</a>
+							<a class="dropdown-item" href="#" onclick="zoomMapToLocation('DC FEMS Engine 19');">DC FEMS Engine 19</a>
+						</div>
 					</li>
-				</div>
-			</ul>
+					<li class="nav-item">
+						<a class="nav-link" href="help/">Need Help?</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav ml-auto justify-content-end">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Notifications
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" id="notification-in-queue">In Queue (0)</a>
+							<a class="dropdown-item" href="#" onclick="notification_manager.addToNotificationQueue('Error');">Error Message</a>
+							<a class="dropdown-item" href="#" onclick="notification_manager.addToNotificationQueue('Other');">Other Message</a>
+							<a class="dropdown-item" href="#" onclick="notification_manager.addToNotificationQueue('Success');">Success Message</a>
+							<a class="dropdown-item" href="#" onclick="notification_manager.addToNotificationQueue('Warning');">Warning Message</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Options
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" onclick="clearMap();">Clear Map</a>
+							<a class="dropdown-item" href="#" onclick="clearTabs();">Clear Tabs</a>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div id="main-container">
 			<!-- Ontology view -->
@@ -180,6 +222,19 @@
 				</fieldset>
 				<!-- tab div content populated programmatically -->
 			</div>
+		</div>
+		<div class="licenses">
+			<span>
+				The in-browser VOWL is licensed under the <a class="a-license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> license. You are free to copy,
+				distribute, transmit, remix, or adapt the work, as long as you reference the work and its authors. There are slight changes made to the in-browser WebVOWL version
+				that allows for us to import our ontologies properly. Note: there weren't any changes made to the full window browser WebVOWL version.
+			</span>
+			<h3 style="margin: 0px;">Work:</h5>
+			<a class="a-license" href="http://vowl.visualdataweb.org/v2/">VOWL: Visual Notation for OWL Ontologies</a>
+			<h3 style="margin: 0px;">VOWL Authors:</h5>
+			<a class="a-license" href="http://www.blankdots.com/">Stefan Negru</a>, Alexandru Ioan Cuza University | 
+			<a class="a-license" href="http://steffen-lohmann.de/">Steffen Lohmann</a>, University of Stuttgart | 
+			<a class="a-license" href="https://www.vis.uni-stuttgart.de/en/institute/people/florian-haag.html">Florian Haag</a>, University of Stuttgart
 		</div>
 		<!-- Initialize leaflet map, note: must run script after leaflet map is created -->
 		<script src="scripts/leaflet-map.js"></script>
