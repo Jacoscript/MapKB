@@ -95,7 +95,6 @@ class ManagerNotification {
 		}
 
 		// Log notification to database
-		// TODO: Notifications need a web address at notification time, timestamp, and user agent
 		// Time zone help: https://www.toptal.com/software/definitive-guide-to-datetime-manipulation
 		var date = new Date();
 		var day = date.getUTCDate();
@@ -108,8 +107,8 @@ class ManagerNotification {
 		// Convert client time to UTC time
 		var sign = tz_offset > 0 ? '-' : '+';
 
-		var tz_offset_hours = this.date_pad(Math.floor(Math.abs(tz_offset)/60));
-		var tz_offset_minutes = this.date_pad(Math.abs(tz_offset)%60);
+		var tz_offset_hours = this.date_pad(Math.floor(Math.abs(tz_offset) / 60));
+		var tz_offset_minutes = this.date_pad(Math.abs(tz_offset) % 60);
 
 		var tz_complete_offset = sign + tz_offset_hours + ':' + tz_offset_minutes + ':00';
 		var full_date = this.date_pad((month + 1)) + '/' + this.date_pad(day) 
@@ -137,7 +136,7 @@ class ManagerNotification {
 			url: '/loggingservlet/Servlet',
 			data: JSON.stringify(data),
 			dataType: 'json',
-			success: function(){console.log('Notification logged to node server.');},
+			success: function(){console.log('Notification logged to the server.');},
 			contentType: 'application/json'
 		});
 	}	
