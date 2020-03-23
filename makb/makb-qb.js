@@ -67,7 +67,7 @@ function createQueryTab(){
 		createTab('Query Builder', HTML);
 
 		$('#' + query_tab_id + ' p').remove();
-		var HTML = '<div class="qb-content-container" id="' + query_tab_id +'-section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many graphs would you like:</span>'
+		var HTML = '<div class="qb-content-container" id="' + query_tab_id +'-section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many layers would you like:</span>'
 					+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
 					+ '<button id="' + query_tab_id + '-qb-btn-graph-number-submit" type="button" onclick="checkUserQueryValidity(\'Graph Number\');">Submit</button></div>'
 					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div>'
@@ -509,65 +509,75 @@ function generateQuery(){
 	
 	// Generate the subject, predicate, object, and filter statements
 	var selected_filters_qb_text = [];
-	
 	for(var i = 0; i < query_tab_list[id_sliced].current_custom_predicates; i++) {
-		if(selected_filters[i] == "regex")
-			selected_filters_qb_text.push('FILTER regex(?filter_obj' + i + ', "' + filter_objects_list[i] + '") ');
-		else if (selected_filters[i] == "lessthan")
-			selected_filters_qb_text.push('FILTER (?filter_obj' + i + ' < ' + filter_objects_list[i] + ')');
-		else if (selected_filters[i] == "lessthanorequal")
-			selected_filters_qb_text.push('FILTER (?filter_obj' + i + ' <= ' + filter_objects_list[i] + ')');
-		else if (selected_filters[i] == "greaterthan")
-			selected_filters_qb_text.push('FILTER (?filter_obj' + i + ' > ' + filter_objects_list[i] + ')');
-		else if (selected_filters[i] == "greaterthanorequal")
-			selected_filters_qb_text.push('FILTER (?filter_obj' + i + ' >= ' + filter_objects_list[i] + ')');
-		else if (selected_filters[i] == "equalto")
-			selected_filters_qb_text.push('FILTER (?filter_obj' + i + ' = ' + filter_objects_list[i] + ')');
-		else if (selected_filters[i] == "notequalto")
-			selected_filters_qb_text.push('FILTER (?filter_obj' + i + ' != ' + filter_objects_list[i] + ')');
+		if(selected_filters[i] == 'regex')
+			selected_filters_qb_text.push('regex(?filter_obj' + i + ', "' + filter_objects_list[i] + '") ');
+		else if (selected_filters[i] == 'lessthan')
+			selected_filters_qb_text.push('(?filter_obj' + i + ' < ' + filter_objects_list[i] + ')');
+		else if (selected_filters[i] == 'lessthanorequal')
+			selected_filters_qb_text.push('(?filter_obj' + i + ' <= ' + filter_objects_list[i] + ')');
+		else if (selected_filters[i] == 'greaterthan')
+			selected_filters_qb_text.push('(?filter_obj' + i + ' > ' + filter_objects_list[i] + ')');
+		else if (selected_filters[i] == 'greaterthanorequal')
+			selected_filters_qb_text.push('(?filter_obj' + i + ' >= ' + filter_objects_list[i] + ')');
+		else if (selected_filters[i] == 'equalto')
+			selected_filters_qb_text.push('(?filter_obj' + i + ' = ' + filter_objects_list[i] + ')');
+		else if (selected_filters[i] == 'notequalto')
+			selected_filters_qb_text.push('(?filter_obj' + i + ' != ' + filter_objects_list[i] + ')');
+		else if (selected_filters[i] == 'none') {
+			// Pass
+		}
 	}
 	
 	// Build the query based on single/multiple graphs
-	// TODO: Fix more than 2 graphs not working with the query
 	var query = '';
 	var query_intro = '';
 	var query_graph = '';
 	var query_outro = '';
-	var query_intro = 'PREFIX graph: <http://localhost:8080/marmotta/context/> ' + 
-		'SELECT ?subject ?geom ?name ?purpose (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
-		selected_graphs +
-		'WHERE { { ';
-	for(var i = 0; i < query_tab_list[id_sliced].current_custom_graphs; i++) {
-		var specific_graph = query_tab_list[id_sliced].graph_context_values[i];
-		// Check whether filter is on geometry predicate or not
-		if(selected_filters[i] == 'regex') {
-		query_graph += 'GRAPH graph:' + specific_graph.substring(specific_graph.lastIndexOf('/') + 1, specific_graph.length) + ' { ' +
-					   '?subject <' + query_tab_list[id_sliced].graph_predicate_values[i] + '> ?filter_obj' + i + ' . ' +
-					   '?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + 
-					   '?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ';
-		} else{
-			// If on geomtry predicate, we need to reformat the query so that the filter works on the geom not the subject
-			var geom_predicates = ['http://www.opengis.net/ont/geosparql#asGML', 'http://www.opengis.net/ont/geosparql#asWKT', 'http://www.opengis.net/ont/geosparql#dimension'];
-			for(var j = 0; j < geom_predicates.length; j++) {
-				if(query_tab_list[id_sliced].graph_predicate_values[i] == geom_predicates[j]) {
-					query_graph += 'GRAPH graph:' + specific_graph.substring(specific_graph.lastIndexOf('/') + 1, specific_graph.length) + ' { ' +
-						'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + 
-						'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ' + 
-						'?geom <' + query_tab_list[id_sliced].graph_predicate_values[i] + '> ?filter_obj' + i + ' . ';
-				}
+	var query_intro = 'SELECT ?subject ?geom ?name ?purpose (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
+					  selected_graphs + 'WHERE { ';
+					  
+	query_graph += 'GRAPH ?g { ' +
+					'?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ' + 
+					'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ';
+	
+	// Add specific geometry statements
+	var geom_predicates = ['http://www.opengis.net/ont/geosparql#asGML', 'http://www.opengis.net/ont/geosparql#asWKT', 'http://www.opengis.net/ont/geosparql#dimension'];
+	var is_geom = false;
+	for(var i = 0; i < query_tab_list[id_sliced].current_custom_predicates; i++) {
+		// Check against geom predicates
+		for(var j = 0; j < geom_predicates.length; j++) {
+			if(query_tab_list[id_sliced].graph_predicate_values[i] == geom_predicates[j]) {
+				query_graph += 'OPTIONAL { ?geom <' + query_tab_list[id_sliced].graph_predicate_values[i] + '> ?filter_obj' + i + ' . } ';
+				is_geom = true;
 			}
 		}
-		// Add specific geometry statements
-
-		// Add optional statements
-		query_graph += 'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
-					   'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' +
-					   ' } ' + selected_filters_qb_text[i] + '} ';
-		if ((i + 1) != query_tab_list[id_sliced].current_custom_graphs) {
-			query_graph += 'UNION { ';
+		// If not geom, attach as regular triple
+		if(is_geom == false) {
+			query_graph += 'OPTIONAL { ?subject <' + query_tab_list[id_sliced].graph_predicate_values[i] + '> ?filter_obj' + i + ' . } ';
+		} else {
+			is_geom = false;
 		}
 	}
-	query_outro = ' } GROUP BY ?subject ?geom ?name ?purpose ' ;
+
+	// Add optional statements
+	query_graph += 'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+				   'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ';
+	
+	// Make sure we want filters
+	if(selected_filters_qb_text.length >= 1) {
+		query_graph += 'FILTER (';
+		// Add filter statements
+		for(var i = 0; i < selected_filters_qb_text.length; i++) {
+			query_graph += '(' + selected_filters_qb_text[i] + ' && ?g = <' + query_tab_list[id_sliced].graph_context_values[i] + '>)';
+			// Make sure we only add boolean 'or' if it's not the last filter option, otherwise it'll fail the query
+			if((i + 1) != selected_filters_qb_text.length) {
+				query_graph += ' || ';
+			}
+		}
+		query_graph += ')';
+	}
+	query_outro = '} } GROUP BY ?subject ?geom ?name ?purpose ' ;
 	
 	// Combine, send it!
 	query = query_intro + query_graph + query_outro
