@@ -1,7 +1,10 @@
 {
-    "trails":"#228B22",
-	"stateorterritory":"#000000",
 	"countyorequivalent":"#696969",
+	"nhdflowline": "#0066ff",
+	"nhdline": "#0066ff",
+	"nhdwaterbody": "#0066ff",
 	"padus":"#B22222",
+	"stateorterritory":"#000000",
+    "trails":"#228B22",
 	"default": "#000000"
 }
