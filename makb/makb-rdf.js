@@ -282,6 +282,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 							//declare the variables given the results
 							geometry = bindings[i].geometry.value;
 							subject = bindings[i].subject.value;
+							
 							//dimensions = bindings[i].dimensions.value;
 							var ftypeName = subject.split("/");
 							//Check if there is a dimensions. Otherwise name will be "Unknown"
@@ -978,6 +979,9 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 	//This function will return the color for a specific polygon/polyline object
 	function getColor(featureType){
 		var color = colorLibrary[featureType];
+		if(color == null) {
+			color = colorLibrary["default"];
+		}
 		return color;
 	}
 	//This function will return the symbol that should be used for a particular feature type.
