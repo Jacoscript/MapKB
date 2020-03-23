@@ -107,4 +107,28 @@ $(document).ready(function() {
     // performBasicDeviceCheck();
     
     //testQuery();
+
+    // Displaying information for help dynamically based on how many help items are in a block
+    var categories = ['general', 'known-issues', 'layers', 'legal-and-privacy', 'markers', 'notifications', 'ontologies', 'query-builder']
+    for(var i = 0; i < categories.length - 1; i++) {
+        if ($('#faq-' + categories[i] + ' > span').length > 3) {
+            $('#display-more-faq-' + categories[i]).show();
+            $('#display-less-faq-' + categories[i]).hide();
+            $('#faq-' + categories[i] + ' > span > a').hide();
+        }
+    }
+
+    $('.display-help-more').click(function () {
+        // Find parent div so we know which help block we're in
+        var parent_id = $(this).parent().attr("id");
+        $('#display-more-' + parent_id).hide();
+        $('#display-less-' + parent_id).show();
+        $('#' + parent_id + ' > span > a').slideToggle();
+    });
+    $('.display-help-less').click(function () {
+        var parent_id = $(this).parent().attr("id");
+        $('#display-more-' + parent_id).show();
+        $('#display-less-' + parent_id).hide();
+        $('#' + parent_id + ' > span > a').slideToggle();
+    });
 });
