@@ -8,7 +8,8 @@ var MARMOTTA_IP = '144.47.161.52:8080';
 /*
 * These variables are describe the rest endpoints for marmotta.
 */
-var MARMOTTA_BASE_URL = 'http://'+MARMOTTA_IP+'/marmotta';
+//var MARMOTTA_BASE_URL = 'http://'+MARMOTTA_IP+'/marmotta';
+var MARMOTTA_BASE_URL = '/marmotta';
 var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
 var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
 var FEATURE_BASE_URL = 'http://data.usgs.gov/';
