@@ -8,12 +8,12 @@ A file for the css design of the notification system.
     bottom: -30%;
     border-radius: 5px;
     display: none;
-    left: 35%;
+    left: 40%;
     max-width: 30%;
     padding: 5px 5px 5px 5px;
     position: fixed;
     text-align: center;
-    width: 30%;
+    width: 20%;
     z-index: 9998;
 }
 

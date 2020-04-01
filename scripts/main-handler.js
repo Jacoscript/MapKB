@@ -2,20 +2,22 @@
 // tfry@contractor.usgs.gov
 // This script is used for handling basic information and other misc issues.
 
-function checkUserDevice() {
-    if(navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/iPad/i)
-        || navigator.userAgent.match(/iPod/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i)
-    ){
-        return true;
-    }
-    else {
-        return false;
-    }
+function closeAFDWidget() {
+    $('.afd-widget').css('display', 'none');
+}
+
+function closeQBWidget() {
+    $('.qb-widget').css('display', 'none');
+};
+
+function displayUpdateQBWidget() {
+	// Make sure widget is showing
+    $('.qb-widget').css('display', 'block');
+};
+
+function displayUpdateAFDWidget() {
+    // Make sure widget is showing
+    $('.afd-widget').css('display', 'block');
 }
 
 function performBasicDeviceCheck() {
@@ -77,7 +79,7 @@ function testQuery() {
 			success: function(result) {
 				//if no results, throw an error
 				if(!result) {
-					alert("No results while creating additional information.");
+					alert('No results while creating additional information.');
 				}
 				else {
 				    bindings = result.results.bindings;
@@ -91,20 +93,18 @@ function testQuery() {
                         alert(tmp);
 					}
 					else { //There was no results so do nothing.
-						alert("No results for bindings while creating additional information.");
+						alert('No results for bindings while creating additional information.');
 					}
 				}
 			},
 			error: function(result) {
-				alert("Creating query failed.");
+				alert('Creating query failed.');
 			}
 		});
 }
 
 $(document).ready(function() {
     // Perform basic checks against new user
-    // TODO: Wait for Dalia's phone so we can test that a basic version works.
-    // performBasicDeviceCheck();
     
     //testQuery();
 
@@ -120,13 +120,13 @@ $(document).ready(function() {
 
     $('.display-help-more').click(function () {
         // Find parent div so we know which help block we're in
-        var parent_id = $(this).parent().attr("id");
+        var parent_id = $(this).parent().attr('id');
         $('#display-more-' + parent_id).hide();
         $('#display-less-' + parent_id).show();
         $('#' + parent_id + ' > span > a').slideToggle();
     });
     $('.display-help-less').click(function () {
-        var parent_id = $(this).parent().attr("id");
+        var parent_id = $(this).parent().attr('id');
         $('#display-more-' + parent_id).show();
         $('#display-less-' + parent_id).hide();
         $('#' + parent_id + ' > span > a').slideToggle();

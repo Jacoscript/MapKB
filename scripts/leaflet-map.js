@@ -8,6 +8,7 @@ var grouping = L.markerClusterGroup({
 	disableClusteringAtZoom: 15,
 	spiderfyOnMaxZoom: false
 });
+var height_main_container = $('#main-container').height();
 var query_tab_id;
 
 // ######################### //
@@ -20,7 +21,8 @@ map.options.minZoom = 2;
 
 L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
 	maxZoom: 16,
-	attribution: '<a href="https://www.doi.gov">U.S. Department of the Interior</a> | <a href="https://www.usgs.gov">U.S. Geological Survey</a> | <a href="https://www.usgs.gov/laws/policies_notices.html">Policies</a>',
+	attribution: '<a href="https://www.doi.gov">U.S. Department of the Interior</a> | <a href="https://www.usgs.gov">U.S. Geological Survey</a> '
+				 + '| <a href="https://www.usgs.gov/laws/policies_notices.html">Policies</a> | <a href="http://vowl.visualdataweb.org/v2/">VOWL</a>',
 	id: 'USGSTopo'
 }).addTo(map);
 
@@ -61,15 +63,11 @@ function clearTabs(){
 	// Function to clear all current tabs
 
 	console.log("Clearing tabs.");
-	$('#afd-tabs ul li').remove();
-	$('#afd-tabs div').remove();
+	$('.qb-widget-tab').remove();
 	
 	// Reset query vars
 	current_custom_queries = 0;
 	query_tab_list = [];
-	
-	// Refresh allows for proper query builder repopulation
-	$("#afd-tabs").tabs("refresh");
 }
 
 function insertAfter(el, referenceNode) {
@@ -112,8 +110,10 @@ function onMapMove() {
 	var locale = map.getCenter();
 	$("#txtbox-Latitude").val(locale.lat);
 	$("#txtbox-Longitude").val(locale.lng);
-	// Set height of afd tabs to height of map
-	$("#afd-tabs").height($("#mapid").height() - ($("#txtbox-container").height() + $("#main-container").offset().top) - 5);
+	
+	// Set height of main container to negate the navbar
+	// NOTE: fix below line for mobile.
+	$('#main-container').height(height_main_container - ($('.navbar').height() + 16));  // 16 = navbar padding
 };
 
 function zoomMapToLocation(loc, lat, long, zoomLevel) {
