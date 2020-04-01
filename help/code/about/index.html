@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset = "utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Main CSS styles and webpage js -->
+		<link rel="stylesheet" href="/MAKB_Fry/makb/styles/menu-styles.css" />
+		<link rel="stylesheet" href="/MAKB_Fry/makb/styles/notification.css" />
+		<link rel="stylesheet" href="/MAKB_Fry/makb/styles/web-page.css" />
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="/MAKB_Fry/makb/scripts/main-handler.js"></script>
+		<script src="/MAKB_Fry/makb/scripts/menu-styles.js"></script>
+		<script src="/MAKB_Fry/makb/scripts/logging/notification-manager.js"></script>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	</head>
+	<body class="help-main-container">
+		<div class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">MAKB</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/MAKB_Fry/makb/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/MAKB_Fry/makb/help/">Need Help?</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="help-container">
+			<span class="help-header">Frequently Asked Questions (FAQ): About the Code/Project</span>
+			<div class="help-block-container-1-col">
+				<div class="help-block-1-col">
+					<span class="help-sub-header">The Project</span>
+					<span class="help-text">
+						CEGIS Linked Open Data (LOD) Semantic Technology System is a system for exploring topographic data of The National Map as Resource Description Framework (RDF), a World-Wide Web Consortium (W3C) standard. The central concept of the CEGIS project is: 'The National Map as Knowledge Base'.
+					</span>
+                </div>
+				<div class="help-block-1-col">
+					<span class="help-sub-header">Code Overview</span>
+					<span class="help-text">
+						The code base consists of two branches at the moment, the development branch (up-to-date branch) and the master branch (last major working branch).
+					</span>
+                </div>
+                <div class="help-block-1-col">
+					<span class="help-sub-header">Components</span>
+					<ul>
+						<li>Apache Tomcat - A tool that manages the user interface and allows others to connect to our server. (Version 8.5.8)</li>
+						<li>Apache Marmotta - A database tool with RDF querying capabilities via SPARQL. The .war version of Tomcat needs to be used. (<a href="https://marmotta.apache.org/download.html">https://marmotta.apache.org/download.html</a>) (Version 3.4.0 SNAPSHOT)</li>
+						<li>Apache Maven - A tool that runs the Karma Web App. (<a href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a>) (Version 3.6.0)</li>
+						<li>GeoServer - A server that allows us to manage WFS endpoints and data. The .war version of this needs to be used for Tomcat. (<a href="http://geoserver.org/download/">http://geoserver.org/download/</a>) (Version 2.16.0)</li>
+						<li>Karma-As-A-Service - A tool used in coordination with Marmotta to act as an endpoint for its queries. This may all come together as a single download with the Karma Web App. (<a href="https://github.com/usc-isi-i2/Web-Karma">https://github.com/usc-isi-i2/Web-Karma</a>) (Version 0.0.1 SNAPSHOT)</li>
+						<li>Karma Web App -  A tool used to perform data manipulation when pulling data from the GeoServer. (<a href="https://github.com/usc-isi-i2/Web-Karma">https://github.com/usc-isi-i2/Web-Karma</a>) (Version 2.051)</li>
+						<li>MAKB Web Tool - A user interface for the project that needs to be deployed on Tomcat. This user interface is within the current repository. (<a href="https://code.chs.usgs.gov/cegis/makb/tree/master">https://code.chs.usgs.gov/cegis/makb/tree/master</a>) (Version 1.0)</li>
+						<li>PostgreSQL - A tool used for the LD (linked data) project. (<a href="https://www.postgresql.org/download/">https://www.postgresql.org/download/</a>) (Version 9.6)</li>
+					</ul>
+					<span class="help-sub-header">Not Actively Used Components</span>
+					<ul>
+						<li>GDAL - A tool used to convert data between multiple formats in bulk. Such formats are .txt to .shapefile conversion. (<a href="https://gdal.org/download.html">https://gdal.org/download.html</a>) (Version 3.0.0)</li>
+						<li>LIMES - A tool used to create sameAs relations. (<a href="https://github.com/dice-group/LIMES">https://github.com/dice-group/LIMES</a>) (Version 1.4.0 and 1.5.0?)</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Overlay for disabled page -->
+		<div id="loading-layer-overlay"></div>
+	</body>
+</html>
+
+
