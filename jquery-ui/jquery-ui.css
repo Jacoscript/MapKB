@@ -29,9 +29,7 @@
 	font-size: 100%;
 	list-style: none;
 }
-.ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
-	content: "";
 	display: table;
 	border-collapse: collapse;
 }
@@ -843,7 +841,6 @@ button.ui-button::-moz-focus-inner {
 	float: left;
 	position: relative;
 	top: 0;
-	margin: 1px .2em 0 0;
 	border-bottom-width: 0;
 	padding: 0;
 	white-space: nowrap;
@@ -941,8 +938,8 @@ a.ui-button,
 a:link.ui-button,
 a:visited.ui-button,
 .ui-button {
-	background: linear-gradient(to bottom, #69c4e8, #21a1d4);
-    border: 1px solid #21a1d4;
+	background: linear-gradient(to bottom, #6c757d, #343a40);
+    border: 1px solid #343a40;
     color: #ffffff;
 	text-decoration: none;
 }

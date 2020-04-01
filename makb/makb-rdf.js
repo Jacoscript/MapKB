@@ -462,6 +462,9 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 					}
 					//Create the tab for the additional information.
 					createTab('Additional Information', HTML);
+
+					// Display/Update the afd tab section after everything is created
+					displayUpdateAFDWidget();
 				}
 			},
 			error: function(result) {

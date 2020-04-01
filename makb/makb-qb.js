@@ -2,7 +2,7 @@
 // mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
 // Map As A Knowledge Base functions for custom query builder operations.
 
-const MAX_CUSTOM_QUERIES = 3;
+const MAX_CUSTOM_QUERIES = 1;
 const MAX_CUSTOM_GRAPHS = 15;
 
 var current_custom_queries = 0;
@@ -57,23 +57,27 @@ class QueryTab {
 //Function to display the query as a tab
 function createQueryTab(){
 	var HTML = '';
+
 	// Check whether max queries are already open
 	if (current_custom_queries == MAX_CUSTOM_QUERIES) {
+		// Still need to display the qb widget
+		displayUpdateQBWidget();
 		return;
 	} else {
 		current_custom_queries += 1;
 		query_tab_list.push(new QueryTab(current_custom_queries));
 		query_tab_id = 'tabs-' + current_custom_queries;
-		createTab('Query Builder', HTML);
+		//createTab('Query Builder', HTML);
+		createTab('Query Builder');
 
 		$('#' + query_tab_id + ' p').remove();
-		var HTML = '<div class="qb-content-container" id="' + query_tab_id +'-section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many layers would you like:</span>'
+		var HTML = '<div class="" id="' + query_tab_id +'-section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many layers would you like:</span>'
 					+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
-					+ '<button id="' + query_tab_id + '-qb-btn-graph-number-submit" type="button" onclick="checkUserQueryValidity(\'Graph Number\');">Submit</button></div>'
-					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div>'
-					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-predicate-selection"></div>'
-					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-filter-selection"></div>'
-					+ '<div class="qb-content-container" id="' + query_tab_id + '-section-query-selection"></div>'
+					+ '<button class="qb-button" id="' + query_tab_id + '-qb-btn-graph-number-submit" type="button" onclick="checkUserQueryValidity(\'Graph Number\');">Submit</button></div>'
+					+ '<div class="" id="' + query_tab_id + '-section-graph-selection"></div>'
+					+ '<div class="" id="' + query_tab_id + '-section-predicate-selection"></div>'
+					+ '<div class="" id="' + query_tab_id + '-section-filter-selection"></div>'
+					+ '<div class="" id="' + query_tab_id + '-section-query-selection"></div>'
 		$('#' + query_tab_id).append(HTML);
 		// Allow full value selection on click
 		$('#' + query_tab_id + '-qb-input-graph-number').focus(function() {
@@ -82,6 +86,8 @@ function createQueryTab(){
 			});
 		});
 	}
+	// Display/Update the afd tab section after everything is created
+	displayUpdateQBWidget();
 }
 
 // A function that checks the validy of different inputs from the user for the
@@ -158,8 +164,8 @@ function chooseQueryGraphs(number_of_graphs) {
 						$('#' + query_tab_id + '-section-filter-selection').remove();
 						$('#' + query_tab_id + '-section-query-selection').remove();
 				
-						$('#' + query_tab_id).append('<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-predicate-selection"></div>'
-													 + '<div class="qb-content-container" id="' + query_tab_id + '-section-filter-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-query-selection"></div>')
+						$('#' + query_tab_id).append('<div class="" id="' + query_tab_id + '-section-graph-selection"></div><div class="" id="' + query_tab_id + '-section-predicate-selection"></div>'
+													 + '<div class="" id="' + query_tab_id + '-section-filter-selection"></div><div class="" id="' + query_tab_id + '-section-query-selection"></div>')
 						$('#' + query_tab_id + '-section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
 						// Update class variables
 						query_tab_list[id_sliced].graph_context_values = [];
@@ -179,8 +185,8 @@ function chooseQueryGraphs(number_of_graphs) {
 						$('#' + query_tab_id + '-section-filter-selection').remove();
 						$('#' + query_tab_id + '-section-query-selection').remove();
 				
-						$('#' + query_tab_id).append('<div class="qb-content-container" id="' + query_tab_id + '-section-graph-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-predicate-selection"></div>'
-													 + '<div class="qb-content-container" id="' + query_tab_id + '-section-filter-selection"></div><div class="qb-content-container" id="' + query_tab_id + '-section-query-selection"></div>')
+						$('#' + query_tab_id).append('<div class="" id="' + query_tab_id + '-section-graph-selection"></div><div class="" id="' + query_tab_id + '-section-predicate-selection"></div>'
+													 + '<div class="" id="' + query_tab_id + '-section-filter-selection"></div><div class="" id="' + query_tab_id + '-section-query-selection"></div>')
 						$('#' + query_tab_id + '-section-graph-selection').append('<p class="qb-text" id="' + query_tab_id + '-qb-text-graph-info">Choose what graphs you would like to query:</p>');
 						// Update class variables
 						query_tab_list[id_sliced].graph_context_values = [];
@@ -207,7 +213,7 @@ function chooseQueryGraphs(number_of_graphs) {
 						HTML += '<span class="qb-text" id="' + query_tab_id + '-qb-text-common-predicates">Would you like to show common predicates between the multiple graphs?</span>'
 						HTML += '<input checked="true" id="' + query_tab_id + '-qb-radio-predicates-yes" name="predicates" type="radio" value="Yes"/>Yes<input id="' + query_tab_id + '-qb-radio-predicates-no" name="predicates" type="radio" value="No"/>No<br/>';
 					}
-					HTML += '<button id="' + query_tab_id + '-qb-btn-find-query-predicates" type="button" onclick="findQueryPredicates();">Find Predicates</button><hr/>';				
+					HTML += '<button class="qb-button" id="' + query_tab_id + '-qb-btn-find-query-predicates" type="button" onclick="findQueryPredicates();">Find Predicates</button><hr/>';				
 					
 					// Append to specific section inside query tab
 					$('#' + query_tab_id + '-section-graph-selection').append(HTML);
@@ -314,11 +320,17 @@ function findQueryPredicates(){
 				return res;
 			}, []);
 
+			if (jQuery.isEmptyObject(common_predicates)) {
+				predicates = [];
+			}
+
+			// TODO: Fix, doesn't work on 3 or more graphs. I believe it has to do with how common predicates
+			// 		 is used
 			// Compare options for each dropdown to the common elements list
 			for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
 				$('#' + query_tab_id + '-qb-predicate-selector-' + i + ' option').each(function() {
 					var is_found = false;
-					var option = this.value;  // have to set option to get the value of 'this' since scope wold be an issue
+					var option = this.value;  // have to set option to get the value of 'this' since scope would be an issue
 					common_predicates.forEach(function(item, index) {
 						if(item == option) {
 							is_found = true;
@@ -330,6 +342,10 @@ function findQueryPredicates(){
 					}
 				});
 			}
+		
+		if(jQuery.isEmptyObject(predicates)) {
+			notification_manager.addToNotificationQueue('Warning', 'Query builder failed to find common predicates among the selected graphs.');
+		}
 
 			// TODO: Rearrange all options into alphabetical order
 			// NOTE: May have to put options in a list, sort list, and then build the options again
@@ -343,7 +359,7 @@ function findQueryPredicates(){
 	}
 
 	// Create find filter options button
-	$('#' + query_tab_id + '-section-predicate-selection').append('<button id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button><hr/>');
+	$('#' + query_tab_id + '-section-predicate-selection').append('<button class="qb-button" id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button><hr/>');
 }
 
 function createPredicateSelections(index, selected_graph) {
@@ -463,7 +479,7 @@ function findQueryFilters(){
 		for(var i = 0; i < query_tab_list[id_sliced].current_custom_graphs; i++) {
 			HTML += '<input class="qb-input-graph-filter" id="' + query_tab_id + '-qb-input-graph-filter-' + (i + 1) + '" name="graph-filter" title="Text to filter for graph ' + (i + 1) + '" type="text" value=""/>'
 		}
-		HTML += '<button class="btn-generate-query" id="' + query_tab_id + '-qb-btn-generate-query" type="button" onclick="checkUserQueryValidity(\'Graph Filter\');">Generate Query</button><hr/>';
+		HTML += '<button class="qb-button" id="' + query_tab_id + '-qb-btn-generate-query" type="button" onclick="checkUserQueryValidity(\'Graph Filter\');">Generate Query</button><hr/>';
 						
 		//append the content to the query_tab
 		$('#' + query_tab_id + '-section-filter-selection').append(HTML);
@@ -585,8 +601,8 @@ function generateQuery(){
 	if(document.getElementById(query_tab_id + '-qb-generated-query') == null)
 	{
 		var HTML = '<textarea class="qb-text-area" cols="50" rows="20" id="' + query_tab_id + '-qb-generated-query"></textarea>'
-					+ '<button class="qb-run-query" id="' + query_tab_id + '-qb-run-query" type="button" onclick="getQueryField()">Run Query</button>'
-					+ '<button class="qb-clear-map" id="' + query_tab_id + '-qb-clear-map" type="button" onclick="clearMap()">Clear Map</button>';
+					+ '<button class="qb-run-query qb-button" id="' + query_tab_id + '-qb-run-query" type="button" onclick="getQueryField()">Run Query</button>'
+					+ '<button class="qb-clear-map qb-button" id="' + query_tab_id + '-qb-clear-map" type="button" onclick="clearMap()">Clear Map</button>';
 
 		//append the content to the query_tab
 		$('#' + query_tab_id + '-section-filter-selection').append(HTML);
@@ -621,7 +637,7 @@ function setSelect(){
 		});
 	} catch (err) {
 		notification_manager.addToNotificationQueue('Error', 'With setSelect(): ' + err);
-	}
+}
 }
 
 //Function to get the query from the query field and then run the universal query functon

@@ -74,7 +74,7 @@
 	</head>
 	<body>
 		<!-- Menu help: https://bootstrapious.com/p/bootstrap-multilevel-dropdown-->
-		<div class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+		<div class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="bootstrap-navbar">
 			<a class="navbar-brand" href="#">MAKB</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -214,41 +214,26 @@
 
 			<!-- leaflet map -->
 			<div id="mapid">
+				<div id="txtbox-container">
+					<span id="txtbox-text-lat">Crosshair Latitude:</span><input type="text" id="txtbox-Latitude" />
+					<span id="txtbox-text-long">Crosshair Longitude:</span><input type="text" id="txtbox-Longitude" />
+				</div>
 				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
 				<div id="reset-view-leaflet-option"></div>
 				<div id="toggle-ontology-option"></div>
 			</div>
-			<div id="txtbox-container">
-				<span id="txtbox-text-lat">Crosshair Latitude:</span><input type="text" id="txtbox-Latitude" />
-				<br /><br />
-				<span id="txtbox-text-long">Crosshair Longitude:</span><input type="text" id="txtbox-Longitude" />
+			<!-- Query builder tabs -->
+			<div class="qb-widget">
+				<button class="close" type="button" onclick="closeQBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="qb-btn-widget-exit"><a href="#">&times;</a></span></button>
+				<span class="qb-widget-title">Custom Query Builder</span>
+				<hr/>
 			</div>
-
-			<!-- advanced feature description tabs -->
+			<!-- AFD Tabs tabs -->
 			<div class="afd-widget">
-				<fieldset>
-					<legend>Advanced Feature Descriptions</legend>
-					<div id="afd-tabs" style="z-index: 1; width: 98%; float: left; margin-top: 5px;">
-						<ul id="afd-tabs-list">
-						<!-- list is populated programmatically -->
-						</ul>
-					</div>
-				</fieldset>
-				<!-- tab div content populated programmatically -->
+				<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>
+				<span class="afd-widget-title">Advanced Feature Description</span>
+				<hr/>
 			</div>
-		</div>
-		<div class="licenses">
-			<span>
-				The in-browser VOWL is licensed under the <a class="a-license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> license. You are free to copy,
-				distribute, transmit, remix, or adapt the work, as long as you reference the work and its authors. There are slight changes made to the in-browser WebVOWL version
-				that allows for us to import our ontologies properly. Note: there weren't any changes made to the full window browser WebVOWL version.
-			</span>
-			<h3 style="margin: 0px;">Work:</h5>
-			<a class="a-license" href="http://vowl.visualdataweb.org/v2/">VOWL: Visual Notation for OWL Ontologies</a>
-			<h3 style="margin: 0px;">VOWL Authors:</h5>
-			<a class="a-license" href="http://www.blankdots.com/">Stefan Negru</a>, Alexandru Ioan Cuza University | 
-			<a class="a-license" href="http://steffen-lohmann.de/">Steffen Lohmann</a>, University of Stuttgart | 
-			<a class="a-license" href="https://www.vis.uni-stuttgart.de/en/institute/people/florian-haag.html">Florian Haag</a>, University of Stuttgart
 		</div>
 		<!-- Initialize leaflet map, note: must run script after leaflet map is created -->
 		<script src="scripts/leaflet-map.js"></script>

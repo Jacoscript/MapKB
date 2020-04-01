@@ -1,6 +1,6 @@
-// Matthew Wagner
-// mewagner@contractor.usgs.gov
-// Advanced Feature Description functions for RDF processing operations.
+// Matthew Wagner & Tanner Fry
+// mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
+// Advanced Feature Description/Query builder functions for RDF processing operations.
 
 var noFeatures = false;
 
@@ -36,49 +36,51 @@ function getNsId(datasetName) {
  * Aggregate additional attributes of given feature via Marmotta.
  */
 function getAdvFtrDesc(datasetName, uri) {
-	noFeatures = false;
-   // first clear tabs/data from previous features displayed
-   $('#afd-tabs ul li').remove();
-   $('#afd-tabs div').remove();
-   $("#afd-tabs").tabs("refresh");
+    noFeatures = false;
+    // first clear tabs/data from previous features displayed
+    $('#afd-tabs ul li').remove();
+    $('#afd-tabs div').remove();
+    $("#afd-tabs").tabs("refresh");
 
-   // build feature's uri in marmotta
-   //var uri = FEATURE_BASE_URL + getNsId(datasetName) + fid;
+    // build feature's uri in marmotta
+    //var uri = FEATURE_BASE_URL + getNsId(datasetName) + fid;
 
-   // TEST URIs
-   //uri = "http://data.usgs.gov/gnis/GNIS_DC_Features_20180401.1";
-   //uri = "http://data.usgs.gov/structures/usgs_structures.52";
+    // TEST URIs
+    //uri = "http://data.usgs.gov/gnis/GNIS_DC_Features_20180401.1";
+    //uri = "http://data.usgs.gov/structures/usgs_structures.52";
 
-   /*
+    /*
     * find corefs that link **TO** this uri
     */
-   var query1 = 'PREFIX owl: <http://www.w3.org/2002/07/owl#> ' +
-	   'SELECT DISTINCT ?coref ?dsuri ' +
-	   'WHERE ' +
-	   '{ ' +
-  	   '  { GRAPH ?dsuri ' +
-    	   '    { ?coref owl:sameAs <' + uri + '> . } ' +
-  	   '  } ' +
-	   '}';
+    var query1 = 'PREFIX owl: <http://www.w3.org/2002/07/owl#> ' +
+        'SELECT DISTINCT ?coref ?dsuri ' +
+        'WHERE ' +
+        '{ ' +
+        '  { GRAPH ?dsuri ' +
+            '    { ?coref owl:sameAs <' + uri + '> . } ' +
+        '  } ' +
+        '}';
 
-   query1 = encodeURIComponent(query1);
-   executeAFDQuery(uri, query1, true, datasetName);
-   
-   /*
+    query1 = encodeURIComponent(query1);
+    executeAFDQuery(uri, query1, true, datasetName);
+
+    /*
     * find corefs that have links **FROM** this uri
     */
-   var query2 = 'PREFIX owl: <http://www.w3.org/2002/07/owl#> ' +
-	   'SELECT DISTINCT ?coref ?dsuri ' +
-	   'WHERE ' +
-	   '{ ' +
-  	   '  { GRAPH ?dsuri ' +
-    	   '    { <' + uri + '> owl:sameAs ?coref . }' +
-    	   '  } ' +
-	   '}';
+    var query2 = 'PREFIX owl: <http://www.w3.org/2002/07/owl#> ' +
+        'SELECT DISTINCT ?coref ?dsuri ' +
+        'WHERE ' +
+        '{ ' +
+        '  { GRAPH ?dsuri ' +
+            '    { <' + uri + '> owl:sameAs ?coref . }' +
+            '  } ' +
+        '}';
 
-   query2 = encodeURIComponent(query2);
-   executeAFDQuery(uri, query2, false, datasetName);
-
+    query2 = encodeURIComponent(query2);
+    executeAFDQuery(uri, query2, false, datasetName);
+    
+    // Display/Update the afd tab section after everything is created
+	displayUpdateAFDWidget();
 }
 
 function executeAFDQuery(uri, query, useSrcName, datasetName) {
@@ -216,7 +218,7 @@ function getFtrDescByUri(uri, dsuri, useSrcName) {
    $.get({url: MARMOTTA_DEREF_URL + urlEncoded, success: function(result) {
 	// create results html from sparql select json results and render as a new AFD tab in UI
 	if(result) {
-	    var attsHtml = buildFeatureHtml(result);
+        var attsHtml = buildFeatureHtml(result);
 	    createTab(dsname, attsHtml);
 	}
 	else { // NO RESULTS! render as a new tab in UI and state couldn't load results
@@ -299,244 +301,27 @@ function buildFeatureHtml(resultRecs) {
     return html;
 }
 
-/*
- * Create a new advanced feature description tab.
- * Populate the tab with attributes of the feature (html).
- * The name of the tab is the name of the data source of the feature.
- */
 function createTab(name, content) {
- 
-    // get tabs list and append a new line item for a new tab
-    var tabsList = document.getElementById('afd-tabs-list');
-    var numTabs = tabsList.children.length;
-    var lineItem = document.createElement('li');
-    var lineItemAnchor = document.createElement('a');
-
-    /*
-     * create attributes for line item
-     */
-
-    var role = document.createAttribute('role');
-    role.value = 'tab';
-    lineItem.setAttributeNode(role);
-
-    var tabIndex = document.createAttribute('tabindex');
-    tabIndex.value = '-1';
-    lineItem.setAttributeNode(tabIndex);
-
-    var cls = document.createAttribute('class');
-    cls.value = 'ui-tabs-tab ui-corner-top ui-state-default ui-tab';
-    lineItem.setAttributeNode(cls);
-
-    var ariaControls = document.createAttribute('aria-controls');
-    ariaControls.value = 'tabs-' + (numTabs+1);
-    lineItem.setAttributeNode(ariaControls);
-
-    var ariaLabelledBy = document.createAttribute('aria-labelledby');
-    ariaLabelledBy.value = 'ui-id-' + (numTabs+1);
-    lineItem.setAttributeNode(ariaLabelledBy);
-
-    var ariaSelected = document.createAttribute('aria-selected');
-    ariaSelected.value = 'false';
-    lineItem.setAttributeNode(ariaSelected);
-
-    var ariaExpanded = document.createAttribute('aria-expanded');
-    ariaExpanded.value = 'false';
-    lineItem.setAttributeNode(ariaExpanded);
-
-    /*
-     * create attributes for line item
-     */
-
-    lineItemAnchor.href = '#tabs-' + (numTabs+1);
-
-    var anchorRole = document.createAttribute('role');
-    anchorRole.value = 'presentation';
-    lineItemAnchor.setAttributeNode(anchorRole);
-
-    var anchorTabIndex = document.createAttribute('tabindex');
-    anchorTabIndex.value = '-1';
-    lineItemAnchor.setAttributeNode(anchorTabIndex);
-
-    var anchorCls = document.createAttribute('class');
-    anchorCls.value = 'ui-tabs-anchor';
-    lineItemAnchor.setAttributeNode(anchorCls);
-
-    var anchorId = document.createAttribute('id');
-    anchorId.value = 'ui-id-' + (numTabs+1);
-    lineItemAnchor.setAttributeNode(anchorId);
-
-    // set the name of the tab
-    lineItemAnchor.innerHTML = '<b>' + name + '</b>';
-
-    // append elements
-    lineItem.appendChild(lineItemAnchor);
-    tabsList.appendChild(lineItem);
-    
-    /*
-     * create new div to hold tab's content
-     */
-
-    var tabsList = document.getElementById('afd-tabs');
-    var newTabDiv = document.createElement('div');    
-
-    // set id and style attributes of div
-    newTabDiv.id = 'tabs-' + (numTabs+1);
-    newTabDiv.style.height = '100%';
-    newTabDiv.style.width = '100%';
-    newTabDiv.style.display = 'none';
-	newTabDiv.style.fontSize = '10px';
-
-    // Update query_tab_id when a user clicks a different tab
-    $("#afd-tabs ul li a").click(function() {
-        var tmp = $(this).attr("href");
-        query_tab_id = tmp.substring(1, tmp.length);
-    });
-	
-    // set additional attributes of div
-    var divAriaLabelledBy = document.createAttribute('aria-labelledby');
-    divAriaLabelledBy.value = 'ui-id-' + (numTabs+1);
-    newTabDiv.setAttributeNode(divAriaLabelledBy);    
-
-    divRole = document.createAttribute('role');
-    divRole.value = 'tabpanel';
-    newTabDiv.setAttributeNode(divRole);    
-
-    var divCls = document.createAttribute('class');
-    divCls.value = 'ui-tabs-panel ui-corner-bottom ui-widget-content';
-    newTabDiv.setAttributeNode(divCls);    
-
-    var divAriaHidden = document.createAttribute('aria-hidden');
-    divAriaHidden.value = 'true';
-    newTabDiv.setAttributeNode(divAriaHidden);
-
-    // set div content
-    var paragraph = document.createElement('p');
-    paragraph.innerHTML = content;
-    newTabDiv.appendChild(paragraph);
-    tabsList.appendChild(newTabDiv);
-
-    $("#afd-tabs").tabs("refresh");
+    // A function that creates a tab inside the qb-widget/afd-widget so that information
+    // can be propagated into the tab from other function calls at a later date.
+    // Construct popup container 
+    var HTML = '';
+    if(name == 'Query Builder') {
+        HTML += '<div class="qb-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.qb-widget').append(HTML);
+    } else if(name == 'AFD') {
+        $('.afd-widget').empty();
+        HTML += '<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>'
+                + '<span class="afd-widget-title">Advanced Feature Description</span>'
+                + '<hr/>'
+        HTML += '<div class="afd-widget-tab afd-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.afd-widget').append(HTML);
+    } else {
+        $('.afd-widget').empty();
+        HTML += '<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>'
+                + '<span class="afd-widget-title">Advanced Feature Description</span>'
+                + '<hr/>'
+        HTML += '<div class="afd-widget-tab afd-content-container" id="tabs-' + current_custom_queries + '">' + content + '</div>';
+        $('.afd-widget').append(HTML);
+    }
 }
-
-function testAddTab() {
-
-    // get tabs list and append a new line item for a new tab
-    var tabsList = document.getElementById('afd-tabs-list');
-    var numTabs = tabsList.children.length;
-    var lineItem = document.createElement('li');
-    var lineItemAnchor = document.createElement('a');
-
-    /*
-     * create attributes for line item
-     */
-
-    var role = document.createAttribute('role');
-    role.value = 'tab';
-    lineItem.setAttributeNode(role);
-
-    var tabIndex = document.createAttribute('tabindex');
-    tabIndex.value = '-1';
-    lineItem.setAttributeNode(tabIndex);
-
-    var cls = document.createAttribute('class');
-    //cls.value = 'ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active';
-    cls.value = 'ui-tabs-tab ui-corner-top ui-state-default ui-tab';
-    lineItem.setAttributeNode(cls);
-
-    var ariaControls = document.createAttribute('aria-controls');
-    ariaControls.value = 'tabs-' + (numTabs+1);
-    lineItem.setAttributeNode(ariaControls);
-
-    var ariaLabelledBy = document.createAttribute('aria-labelledby');
-    ariaLabelledBy.value = 'ui-id-' + (numTabs+1);
-    lineItem.setAttributeNode(ariaLabelledBy);
-
-    var ariaSelected = document.createAttribute('aria-selected');
-    ariaSelected.value = 'false';
-    lineItem.setAttributeNode(ariaSelected);
-
-    var ariaExpanded = document.createAttribute('aria-expanded');
-    ariaExpanded.value = 'false';
-    lineItem.setAttributeNode(ariaExpanded);
-
-    /*
-     * create attributes for line item
-     */
-
-    lineItemAnchor.href = '#tabs-' + (numTabs+1);
-
-    var anchorRole = document.createAttribute('role');
-    anchorRole.value = 'presentation';
-    lineItemAnchor.setAttributeNode(anchorRole);
-
-    var anchorTabIndex = document.createAttribute('tabindex');
-    anchorTabIndex.value = '-1';
-    lineItemAnchor.setAttributeNode(anchorTabIndex);
-
-    var anchorCls = document.createAttribute('class');
-    anchorCls.value = 'ui-tabs-anchor';
-    lineItemAnchor.setAttributeNode(anchorCls);
-
-    var anchorId = document.createAttribute('id');
-    anchorId.value = 'ui-id-' + (numTabs+1);
-    lineItemAnchor.setAttributeNode(anchorId);
-
-    // set the name of the tab
-    lineItemAnchor.innerHTML = 'Tab ' + (numTabs+1);
-
-    // append elements
-    lineItem.appendChild(lineItemAnchor);
-    tabsList.appendChild(lineItem);
-    
-    /*
-     * create new div to hold tab's content
-     */
-
-    var tabsList = document.getElementById('afd-tabs');
-    var newTabDiv = document.createElement('div');    
-
-    // set id and style attributes of div
-    newTabDiv.id = 'tabs-' + (numTabs+1);
-    newTabDiv.style.height = '100%';
-    newTabDiv.style.width = '100%';
-    newTabDiv.style.display = 'none';
-
-    // set additional attributes of div
-    var divAriaLabelledBy = document.createAttribute('aria-labelledby');
-    divAriaLabelledBy.value = 'ui-id-' + (numTabs+1);
-    newTabDiv.setAttributeNode(divAriaLabelledBy);    
-
-    divRole = document.createAttribute('role');
-    divRole.value = 'tabpanel';
-    newTabDiv.setAttributeNode(divRole);    
-
-    var divCls = document.createAttribute('class');
-    divCls.value = 'ui-tabs-panel ui-corner-bottom ui-widget-content';
-    newTabDiv.setAttributeNode(divCls);    
-
-    var divAriaHidden = document.createAttribute('aria-hidden');
-    divAriaHidden.value = 'true';
-    newTabDiv.setAttributeNode(divAriaHidden);
-
-    // set div content
-    var paragraph = document.createElement('p');
-    paragraph.innerHTML = 'This is content for tab #' + (numTabs+1);
-    newTabDiv.appendChild(paragraph);
-    tabsList.appendChild(newTabDiv);
-
-    $("#afd-tabs").tabs("refresh");
-
-}
-
-
-
-
-
-
-
-
-
-
-
-

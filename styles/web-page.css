@@ -23,11 +23,10 @@ body {
 	'overflow: hidden;' is disabled.
     */
     font-size: 16px;
-    height: 100%;
     margin: 0px 5px 0px 5px;
 }
 html {
-    height: 100%;
+
 }
 ul {
     margin: 0px !important;
@@ -41,6 +40,8 @@ ul {
     display: block;
     text-decoration: none;
 }
+/* 
+Deprecated
 .a-license:hover {
     color: #0078A8;
     text-decoration: underline;
@@ -49,11 +50,12 @@ ul {
     color: #0078A8;
     text-decoration: none;
 }
+*/
 .help-block {
     display: inline-block;
     padding: 0px 10px 0px 10px;
 }
-.help-block-row-1 {
+.help-block-1-col {
     display: block;
     padding: 0px 5px 0px 5px;
     width: 90%;
@@ -64,11 +66,12 @@ ul {
     grid-gap: 5px;
     justify-content: space-evenly;
 }
-.help-block-container-row-1 {
+.help-block-container-1-col {
     display: grid;  
     grid-template-columns: auto;
     grid-gap: 5px;
     justify-items: center;
+    margin: 0% 15% 0% 15%;
 }
 .help-container {
     padding: 0px 30px 0px 30px;
@@ -111,31 +114,18 @@ ul {
 .help-text {
     
 }
+/* 
+Deprecated
 .licenses {
     margin: auto;
     padding: 10px 0px 10px 0px;
     text-align: center;
     width: 70%;
-}
+} 
+*/
 
 #main-container {
-    height: 90%;
-    padding-top: 30px;
-}
-
-/* AFD styles */
-.afd-widget {
-    float: right;
-    font-family: Arial, Helvetica, sans-serif;
-    height: 80%;
-    margin: 7px 0px 0px 0px;
-    width: 30%;
-}
-.afd-widget fieldset {
-    margin: 0px;
-}
-#afd-tabs {
-    overflow: auto;
+    height: 100%;
 }
 
 /* Leaflet map styles */
@@ -143,7 +133,7 @@ ul {
     border-style: solid;
     border-width: 1px;
     float: left;
-    width: 69%;
+    width: 100%;
     z-index: 1;
 
 }
@@ -270,7 +260,50 @@ ul {
     z-index: 3;
 }
 
-/* Query builder styles */
+/* Widget styles */
+.afd-widget {
+    background-color: #343a40;
+    border: 1px solid #6c757d;
+    color: rgba(255,255,255,.5);
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 80%;
+    margin-top: 39px;
+    min-width: 200px;
+    overflow: auto;
+    position: absolute;
+    right: 0%;
+    width: 30%;
+    z-index: 5;
+}
+.afd-widget-title {
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    text-align: center;
+}
+.afd-content-container {
+    margin: 5px;
+}
+.btn-widget-exit {
+    float: right;
+    margin: 5px 10px 0px 0px;
+}
+.btn-widget-exit > a {
+    color: #ffffff;
+    text-decoration: none !important;
+}
+.btn-widget-exit > a:hover {
+    color: #88d0ed;
+}
+.qb-button {
+    border-radius: 5px;
+    margin: 5px 5px 5px 5px;
+}
+.qb-button:hover {
+    background-color: #88d0ed;
+    border-color: #88d0ed;
+}
 .qb-clear-map {
     float: right;
 }
@@ -284,7 +317,6 @@ ul {
 }
 .qb-run-query {
     float: left;
-    margin-left: 5px;
 }
 .qb-select-dropdown {
     font-size: 10px; 
@@ -303,6 +335,30 @@ ul {
     resize: none;
     width: 100%;
 }
+.qb-widget {
+    background-color: #343a40;
+    border: 1px solid #6c757d;
+    color: rgba(255,255,255,.5);
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 80%;
+    margin-top: 39px;
+    min-width: 200px;
+    overflow: auto;
+    position: absolute;
+    right: 0%;
+    width: 30%;
+    z-index: 5;
+}
+.qb-widget-tab {
+    
+}
+.qb-widget-title {
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    text-align: center;
+}
 
 /* Misc page styles */
 #loading-layer-overlay {
@@ -317,20 +373,37 @@ ul {
     z-index: 50000;
 }
 #txtbox-container {
-    float: right;
-    width: 30%;
+    background-color: #343a40;
+    border: 1px solid #6c757d;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 5px;
+    justify-content: space-between;
+    margin: auto;
+    padding: 5px;
+    position: relative;
+    width: 18%;
+    z-index: 5000;
 }
 #txtbox-Latitude {
-	float: right;
-	text-align: center;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    position: relative;
+    right: 0%;
+    text-align: center;
 }
 #txtbox-Longitude {
-	float: right;
-	text-align: center;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    position: relative;
+    right: 0%;
+    text-align: center;
 }
 #txtbox-text-lat {
-    float: left;
+    color: rgba(255,255,255,.5);
 }
 #txtbox-text-long {
-    float: left;
+    color: rgba(255,255,255,.5);
 }
