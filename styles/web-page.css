@@ -31,14 +31,22 @@ html {
 ul {
     margin: 0px !important;
 }
-.a-help:hover {
-    color: #5a5353;
-    text-decoration: underline;
-}
-.a-help {
+.a-help-block {
     color: #5a5353;
     display: block;
     text-decoration: none;
+}
+.a-help-block:hover {
+    color: #5a5353;
+    text-decoration: underline;
+}
+.a-help-inline {
+    color: #5a5353;
+    text-decoration: none;
+}
+.a-help-inline:hover {
+    color: #5a5353;
+    text-decoration: underline;
 }
 /* 
 Deprecated
