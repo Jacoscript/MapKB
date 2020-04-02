@@ -445,7 +445,7 @@ function findQueryFilters(){
 		// from the cache graph
 		var unknown_predicates = ['http://www.opengis.net/ont/geosparql#asGML', 'http://www.opengis.net/ont/geosparql#asWKT', 
 								  'http://dbpedia.org/ontology/dateLastUpdated', 'dct:dateSubmitted', 'http://www.opengis.net/ont/geosparql#hasGeometry', 
-								  'dc:identifier', 'http://www.w3.org/2002/07/owl#sameAs'];
+								  'dc:identifier', 'http://www.w3.org/2002/07/owl#sameAs', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'];
 
 		// TODO: Based on predicate classification, add the filter options and only allow specific options for each predicate
 		// Example: User wants the first predicate to be title but the second to be dimension. One is string and the other is a number
@@ -456,12 +456,12 @@ function findQueryFilters(){
 			// Perform predicate checks
 			var specific_predicate = query_tab_list[id_sliced].graph_predicate_values[i];
 			for(var j = 0; j < string_predicates.length; j++) {
-				if(specific_predicate == string_predicates[j]) {
+				if(specific_predicate == string_predicates[j] || specific_predicate == unknown_predicates[j]) {
 					HTML += '<option value="regex">Contains String</option>';
 				}
 			}
 			for(var j = 0; j < number_predicates.length; j++) {
-				if(specific_predicate == number_predicates[j]) {
+				if(specific_predicate == number_predicates[j] || specific_predicate == unknown_predicates[j]) {
 					HTML += '<option value="lessthan">Is Less Than</option>';
 					HTML += '<option value="lessthanorequal">Is Less Than Or Equal</option>';
 					HTML += '<option value="greaterthan">Is Greater Than</option>';
@@ -558,6 +558,7 @@ function generateQuery(){
 					'?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ';
 	
 	// Add specific geometry statements
+	// TODO: What to do when there are no predicates
 	var geom_predicates = ['http://www.opengis.net/ont/geosparql#asGML', 'http://www.opengis.net/ont/geosparql#asWKT', 'http://www.opengis.net/ont/geosparql#dimension'];
 	var is_geom = false;
 	for(var i = 0; i < query_tab_list[id_sliced].current_custom_predicates; i++) {
