@@ -2,21 +2,42 @@
 // tfry@contractor.usgs.gov
 // This script is used for handling basic information and other misc issues.
 
+function checkUserDevice() {
+    if(navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)
+    ){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function closeAFDWidget() {
+    // Function that is called when the afd widget 'X' button is pressed.
     $('.afd-widget').css('display', 'none');
 }
 
 function closeQBWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
     $('.qb-widget').css('display', 'none');
 };
 
 function displayUpdateQBWidget() {
-	// Make sure widget is showing
+    // Function that is called when the user clicks on 'Custom Query Builder'
+    // in the nav bar
     $('.qb-widget').css('display', 'block');
 };
 
 function displayUpdateAFDWidget() {
-    // Make sure widget is showing
+    // Function that is called when the user clicks on 'additional information'
+    // on a object within the leaflet map or if they click 'advanced feature
+    // description' on a object within the leaflet map.
     $('.afd-widget').css('display', 'block');
 }
 
@@ -52,6 +73,8 @@ function performBasicDeviceCheck() {
 //     }
 
 function testQuery() {
+    // Function for testing queries through the system without needing
+    // to go through all of the motions required by the system.
     // Get query and encode it
     // TODO: Ask Matthew why the below PREFIX doesn't work
     var query_info = `
@@ -118,6 +141,7 @@ $(document).ready(function() {
         }
     }
 
+    // Help section display more/less button functionality
     $('.display-help-more').click(function () {
         // Find parent div so we know which help block we're in
         var parent_id = $(this).parent().attr('id');
