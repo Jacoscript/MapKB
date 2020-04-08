@@ -55,11 +55,11 @@ function addLeafletMarker() {
     // Add marker to the html ul, sub-del-marker, as well as dropdown-menu-2-markers
     // Note: Marker name is passed to the del-marker function so that the 
     // Note: function can know which marker to delete when selected.
-    $("#dropdown-menu-2-del-marker-list").append('<a class="dropdown-item" id="user-created-marker-' + user_markers_Builder.markerID 
+    $("#dropdown-menu-4-del-marker-list").append('<a class="dropdown-item" id="user-created-marker-' + user_markers_Builder.markerID 
                                                  + '" href="#" onclick="delLeafletMarker(' + user_markers_Builder.markerID + ');">' 
                                                  + user_markers_Builder.markerName + '</a>');
 
-    $("#dropdown-menu-2-markers-list").append('<a class="dropdown-item" id="user-created-marker-' + user_markers_Builder.markerID 
+    $("#dropdown-menu-4-markers-list").append('<a class="dropdown-item" id="user-created-marker-' + user_markers_Builder.markerID 
                                               + '" href="#" onclick="zoomMapToLocation(\'User Marker\', ' + user_markers_Builder.markerLat 
                                               + ', ' + user_markers_Builder.markerLong + ', ' + user_markers_Builder.markerZoom + ');">' 
                                               + user_markers_Builder.markerName + '</a>');
@@ -74,8 +74,8 @@ function clrLeafletMarkers() {
     }
     user_markers = [];
 	// Remove html of sub-tabs for add-markers and del-markers
-    $('#dropdown-menu-2-del-marker-list a').remove();
-    $('#dropdown-menu-2-markers-list a').remove();
+    $('#dropdown-menu-4-del-marker-list a').remove();
+    $('#dropdown-menu-4-markers-list a').remove();
 }
 
 function delLeafletMarker(markerID) {
@@ -90,6 +90,7 @@ function delLeafletMarker(markerID) {
         }
     }
     // Delete specifc dropdowns
+    // TODO: Depreciated? 
     $("#user-created-marker-" + markerID).remove();
     $("#user-created-marker-" + markerID).remove();
 }
