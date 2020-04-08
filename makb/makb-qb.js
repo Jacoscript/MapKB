@@ -347,16 +347,26 @@ function findQueryPredicates(){
 			notification_manager.addToNotificationQueue('Warning', 'Query builder failed to find common predicates among the selected graphs.');
 		}
 
-			// TODO: Rearrange all options into alphabetical order
-			// NOTE: May have to put options in a list, sort list, and then build the options again
-			// for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
-			// 	var select_list = $('#' + query_tab_id + '-qb-predicate-selector-' + i + ' option')
-			// 	select_list.sort();
-			// 	$('#' + query_tab_id + '-qb-predicate-selector-' + i).html(select_list);
-			// }
-			
+		// TODO: Rearrange all options into alphabetical order
+		// NOTE: May have to put options in a list, sort list, and then build the options again
+		// for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
+		// 	var select_list = $('#' + query_tab_id + '-qb-predicate-selector-' + i + ' option')
+		// 	select_list.sort();
+		// 	$('#' + query_tab_id + '-qb-predicate-selector-' + i).html(select_list);
+		// }
 		}, 500);  // 500 gives enough time for asynch callback of predicates before parsing predicates
 	}
+	
+	setTimeout(function() {
+		// Delete extra predicate selections if user spam clicks the find predicates button
+		for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
+			if($('#' + query_tab_id + '-qb-div-predicate-' + i + ' select').length > 1){
+				for(var j = 0; j < $('#' + query_tab_id + '-qb-div-predicate-' + i + ' select').length; j++) {
+					$('#' + query_tab_id + '-qb-div-predicate-' + i + ' > select:nth-child(' + (j + 2) +')').remove();
+				}
+			}
+		}
+	}, 800);
 
 	// Create find filter options button
 	$('#' + query_tab_id + '-section-predicate-selection').append('<button class="qb-button" id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button><hr/>');
@@ -514,7 +524,10 @@ function generateQuery(){
 	// Graph user input on filters
 	for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
 		var filter_object = $('#' + query_tab_id + '-qb-input-graph-filter-' + i);
-		filter_objects_list.push(filter_object.val());
+		// Apply user input to list if user gave niput
+		if(filter_object.val() != '') {
+			filter_objects_list.push(filter_object.val());
+		}
 	}
 	
 	// Generate the selected graphs
@@ -526,20 +539,29 @@ function generateQuery(){
 	// Generate the subject, predicate, object, and filter statements
 	var selected_filters_qb_text = [];
 	for(var i = 0; i < query_tab_list[id_sliced].current_custom_predicates; i++) {
+		var filter_object_value = '';
+		// If user input doesn't exist then fill with blank
+		if(jQuery.isEmptyObject(filter_objects_list) && selected_filters[i] != 'regex') {
+			filter_object_value = '\"\"';
+		} else if (jQuery.isEmptyObject(filter_objects_list) && selected_filters[i] == 'regex') {
+			filter_object_value = '';
+		} else {
+			filter_object_value = filter_objects_list[i];
+		}
 		if(selected_filters[i] == 'regex')
-			selected_filters_qb_text.push('regex(?filter_obj' + i + ', "' + filter_objects_list[i] + '") ');
+			selected_filters_qb_text.push('regex(?filter_obj' + i + ', "' + filter_object_value + '") ');
 		else if (selected_filters[i] == 'lessthan')
-			selected_filters_qb_text.push('(?filter_obj' + i + ' < ' + filter_objects_list[i] + ')');
+			selected_filters_qb_text.push('(?filter_obj' + i + ' < ' + filter_object_value + ')');
 		else if (selected_filters[i] == 'lessthanorequal')
-			selected_filters_qb_text.push('(?filter_obj' + i + ' <= ' + filter_objects_list[i] + ')');
+			selected_filters_qb_text.push('(?filter_obj' + i + ' <= ' + filter_object_value + ')');
 		else if (selected_filters[i] == 'greaterthan')
-			selected_filters_qb_text.push('(?filter_obj' + i + ' > ' + filter_objects_list[i] + ')');
+			selected_filters_qb_text.push('(?filter_obj' + i + ' > ' + filter_object_value + ')');
 		else if (selected_filters[i] == 'greaterthanorequal')
-			selected_filters_qb_text.push('(?filter_obj' + i + ' >= ' + filter_objects_list[i] + ')');
+			selected_filters_qb_text.push('(?filter_obj' + i + ' >= ' + filter_object_value + ')');
 		else if (selected_filters[i] == 'equalto')
-			selected_filters_qb_text.push('(?filter_obj' + i + ' = ' + filter_objects_list[i] + ')');
+			selected_filters_qb_text.push('(?filter_obj' + i + ' = ' + filter_object_value + ')');
 		else if (selected_filters[i] == 'notequalto')
-			selected_filters_qb_text.push('(?filter_obj' + i + ' != ' + filter_objects_list[i] + ')');
+			selected_filters_qb_text.push('(?filter_obj' + i + ' != ' + filter_object_value + ')');
 		else if (selected_filters[i] == 'none') {
 			// Pass
 		}
