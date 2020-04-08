@@ -106,7 +106,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 							else if(ftypeName[3] == "trails" || ftypeName[3] == "nhdflowline" || ftypeName[3] == "nhdline")
 							{
 								//According to the number of dimension, properly visualize the geometry.
-								if(dimensions = "3")
+								if(dimensions == "3")
 									latlngs = makeLatLngs(null,null,null,geometry);
 								else
 									latlngs = makeLatLngs(geometry); 
