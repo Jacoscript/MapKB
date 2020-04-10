@@ -301,9 +301,9 @@ function findQueryPredicates(){
 
 	// Delete options that are not common among multiple graphs if user specifies
 	if(query_tab_list[id_sliced].current_custom_graphs > 1 && query_tab_list[id_sliced].show_common_predicates === true) {
-		var predicates = [];
+		var predicates = [];  // List of lists, each list with predicates from a graph
 		setTimeout(function() {
-			// Grab all predicates
+			// Grab all predicates from each graph
 			for(var i = 0; i < query_tab_list[id_sliced].current_custom_graphs; i++) {
 				var new_list = [];
 				$('#' + query_tab_id + '-qb-predicate-selector-' + (i + 1) + ' option').each(function() {
@@ -356,9 +356,9 @@ function findQueryPredicates(){
 		// }
 		}, 500);  // 500 gives enough time for asynch callback of predicates before parsing predicates
 	}
-	
+
+	// Delete extra predicate selections if user spam clicks the find predicates button
 	setTimeout(function() {
-		// Delete extra predicate selections if user spam clicks the find predicates button
 		for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
 			if($('#' + query_tab_id + '-qb-div-predicate-' + i + ' select').length > 1){
 				for(var j = 0; j < $('#' + query_tab_id + '-qb-div-predicate-' + i + ' select').length; j++) {
@@ -572,7 +572,7 @@ function generateQuery(){
 	var query_intro = '';
 	var query_graph = '';
 	var query_outro = '';
-	var query_intro = 'SELECT ?subject ?geom ?name ?purpose (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR="; ") AS ?geometry) ' +
+	var query_intro = 'SELECT ?subject ?geom ?name ?purpose (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=";") AS ?geometry) ' +
 					  selected_graphs + 'WHERE { ';
 					  
 	query_graph += 'GRAPH ?g { ' +

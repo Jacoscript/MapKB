@@ -108,6 +108,8 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								//According to the number of dimension, properly visualize the geometry.
 								if(dimensions == "3")
 									latlngs = makeLatLngs(null,null,null,geometry);
+								else if (ftypeName[3] == 'nhdflowline')
+									latlngs = makeLatLngs(null,null,null,geometry);
 								else
 									latlngs = makeLatLngs(geometry); 
 								
@@ -119,12 +121,15 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								latlngs = makeLatLngs(geometry); 
 								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							}*/
-						else if(ftypeName[3] == "countyorequivalent" || ftypeName[3] == "stateorterritory" || ftypeName[3]== "nhdwaterbody" )
+						else if(ftypeName[3] == "countyorequivalent" || ftypeName[3] == "stateorterritory" || ftypeName[3] == "nhdwaterbody")
 							{
-								if(dimensions == "3")
+								if(dimensions == "3" || ftypeName[3] == "nhdwaterbody")
 									latlngs = makeLatLngs(null,null,null,geometry);
+								else if (ftypeName[3] == "stateorterritory")
+									latlngs = makeLatLngs(null, geometry, null, null); 
 								else
-									latlngs = makeLatLngs(null,geometry); 
+									latlngs = makeLatLngs(geometry, null, null, null); 
+
 								marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
 							}
 							else if(ftypeName[3] == "padus")
@@ -348,6 +353,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 		//get the query and encode it.
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
+		debugger;
 		//get the http requuest URL
 		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
@@ -712,7 +718,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 		//NOTE, this has only been applied to PADUS data. The data is returning to us swapped coordinates. Need to figure out why then standardize the function.
 		else if(geometry3 != null)
 		{
-			var multipolygon = geometry3.split('; ');
+			var multipolygon = geometry3.split(';');
 			for(var j=0; j < multipolygon.length; j++) {
 				coordinates = multipolygon[j].split(" ");
 				var templatlngs = new Array();

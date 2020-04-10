@@ -109,7 +109,7 @@
         "GROUP BY ?subject ?gm ?purpose ?name ?dimensions"],
     "padus":
 		[ "SELECT ?subject ?gm ?purpose ?name ",
-		"(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=\"; \") AS ?geometry) ",
+		"(GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=\";\") AS ?geometry) ",
 		"FROM NAMED <http://localhost:8080/marmotta/context/padus> ",
 		"WHERE { GRAPH ?g { ",
 			"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?gm . ",
