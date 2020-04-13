@@ -353,7 +353,6 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 		//get the query and encode it.
 		var query = getQuery(inputQuery);
 		query = encodeURIComponent(query);
-		debugger;
 		//get the http requuest URL
 		var http_get = MARMOTTA_SPARQL_URL + query;
 		// execute sparql query in marmotta
