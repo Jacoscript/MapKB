@@ -995,5 +995,5 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 	}
 	//This function will return the symbol that should be used for a particular feature type.
 	function getSymbol(featureType){
-		return symbolLibrary[featureType];	
+		return "images/" + symbolLibrary[featureType];	
 	}
