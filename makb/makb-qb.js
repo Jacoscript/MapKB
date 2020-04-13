@@ -6,6 +6,7 @@ const MAX_CUSTOM_QUERIES = 1;
 const MAX_CUSTOM_GRAPHS = 15;
 
 var current_custom_queries = 0;
+var pending_predicates = false;
 var query_tab_list = [];
 var selected_comparison = '';
 
@@ -245,6 +246,9 @@ function chooseQueryGraphs(number_of_graphs) {
 function findQueryPredicates(){
 	var id_sliced = query_tab_id.slice(5, 6) - 1;
 
+	// Disable button til all predicates are found
+	$('#' + query_tab_id + '-qb-btn-find-query-predicates').attr('disabled', true);
+
 	// Set default values for the class if nothing was changed before pressing Find Predicates
 	if (query_tab_list[id_sliced].graph_context_values === undefined || query_tab_list[id_sliced].graph_context_values.length == 0) {
 		for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
@@ -297,12 +301,23 @@ function findQueryPredicates(){
 		selected_graph = 'FROM NAMED <' + item + '> ';
 		index_updated = index + 1
 		createPredicateSelections(index_updated, selected_graph);
+		asyncPredicateWait();
 	});
 
-	// Delete options that are not common among multiple graphs if user specifies
-	if(query_tab_list[id_sliced].current_custom_graphs > 1 && query_tab_list[id_sliced].show_common_predicates === true) {
-		var predicates = [];  // List of lists, each list with predicates from a graph
-		setTimeout(function() {
+	// Create find filter options button
+	$('#' + query_tab_id + '-section-predicate-selection').append('<button class="qb-button" id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button><hr/>');
+}
+
+function asyncPredicateWait() {
+	var id_sliced = query_tab_id.slice(5, 6) - 1;
+	if(pending_predicates == true){
+		setTimeout(() => {
+			asyncPredicateWait();
+		}, 1000);
+	} else {
+		// Delete options that are not common among multiple graphs if user specifies
+		if(query_tab_list[id_sliced].current_custom_graphs > 1 && query_tab_list[id_sliced].show_common_predicates === true) {
+			var predicates = [];  // List of lists, each list with predicates from a graph
 			// Grab all predicates from each graph
 			for(var i = 0; i < query_tab_list[id_sliced].current_custom_graphs; i++) {
 				var new_list = [];
@@ -324,8 +339,6 @@ function findQueryPredicates(){
 				predicates = [];
 			}
 
-			// TODO: Fix, doesn't work on 3 or more graphs. I believe it has to do with how common predicates
-			// 		 is used
 			// Compare options for each dropdown to the common elements list
 			for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
 				$('#' + query_tab_id + '-qb-predicate-selector-' + i + ' option').each(function() {
@@ -343,22 +356,20 @@ function findQueryPredicates(){
 				});
 			}
 		
-		if(jQuery.isEmptyObject(predicates)) {
-			notification_manager.addToNotificationQueue('Warning', 'Query builder failed to find common predicates among the selected graphs.');
+			if(jQuery.isEmptyObject(predicates)) {
+				notification_manager.addToNotificationQueue('Warning', 'Query builder failed to find common predicates among the selected graphs.');
+			}
+
+			// TODO: Rearrange all options into alphabetical order
+			// NOTE: May have to put options in a list, sort list, and then build the options again
+			// for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
+			// 	var select_list = $('#' + query_tab_id + '-qb-predicate-selector-' + i + ' option')
+			// 	select_list.sort();
+			// 	$('#' + query_tab_id + '-qb-predicate-selector-' + i).html(select_list);
+			// }
 		}
 
-		// TODO: Rearrange all options into alphabetical order
-		// NOTE: May have to put options in a list, sort list, and then build the options again
-		// for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
-		// 	var select_list = $('#' + query_tab_id + '-qb-predicate-selector-' + i + ' option')
-		// 	select_list.sort();
-		// 	$('#' + query_tab_id + '-qb-predicate-selector-' + i).html(select_list);
-		// }
-		}, 500);  // 500 gives enough time for asynch callback of predicates before parsing predicates
-	}
-
-	// Delete extra predicate selections if user spam clicks the find predicates button
-	setTimeout(function() {
+		// Delete extra predicate selections if user spam clicks the find predicates button
 		for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
 			if($('#' + query_tab_id + '-qb-div-predicate-' + i + ' select').length > 1){
 				for(var j = 0; j < $('#' + query_tab_id + '-qb-div-predicate-' + i + ' select').length; j++) {
@@ -366,12 +377,9 @@ function findQueryPredicates(){
 				}
 			}
 		}
-	}, 800);
-
-	// Create find filter options button
-	$('#' + query_tab_id + '-section-predicate-selection').append('<button class="qb-button" id="' + query_tab_id + '-qb-btn-find-query-filters" type="button" onclick="findQueryFilters();">Find Filter Options</button><hr/>');
+		$('#' + query_tab_id + '-qb-btn-find-query-predicates').attr('disabled', false);
+	}
 }
-
 function createPredicateSelections(index, selected_graph) {
 	var div_html = '';
 	var HTML = '';
@@ -389,6 +397,7 @@ function createPredicateSelections(index, selected_graph) {
 	var http_get = MARMOTTA_SPARQL_URL + query;
 	
 	// execute sparql query in marmotta
+	pending_predicates = true;
 	$.get({url: http_get, 
 		success: function(result) {
 			//If there are no results say so. Otherwise, visualize them.
@@ -417,6 +426,7 @@ function createPredicateSelections(index, selected_graph) {
 					$('#' + query_tab_id + '-section-predicate-selection .qb-select-dropdown').change(function() {
 						query_tab_list[id_sliced].recalculatePredicateValues();
 					});
+					pending_predicates = false;
 				}
 				else { //There was no results so do nothing.
 					notification_manager.addToNotificationQueue('Error', 'No results for bindings while finding query predicates.');
@@ -429,6 +439,7 @@ function createPredicateSelections(index, selected_graph) {
 //Function to gets filters for the given predicate
 function findQueryFilters(){
 	var id_sliced = query_tab_id.slice(5, 6) - 1;
+
 	// Set default values for the class since we only update when it's changed
 	if (query_tab_list[id_sliced].graph_predicate_values === undefined || query_tab_list[id_sliced].graph_predicate_values.length == 0) {
 		for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
@@ -531,7 +542,7 @@ function generateQuery(){
 	}
 	
 	// Generate the selected graphs
-	var selected_graphs = '';
+	var selected_graphs = '';	
 	query_tab_list[id_sliced].graph_context_values.forEach(function(item, index) {
 		selected_graphs += 'FROM NAMED <' + item + '> ';
 	});
