@@ -95,7 +95,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								  iconSize: [27, 27],
 								  iconAnchor: [13, 27],
 								  popupAnchor:  [1, -24],
-								  iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+								  iconUrl: getSymbol(purpose) + '.png'
 									});
 							//if the entity is a point, create a point. Otherwise, create a polyline or polygon.		
 							if( ftypeName[3] == "gnis" || ftypeName[3] == "structures" || ftypeName[3] == "geonames" || ftypeName[3] == "nhdpoint")
@@ -219,7 +219,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								iconAnchor: [13, 27],
 								popupAnchor:  [0, -30],
                                 tooltipAnchor: [0, -25],
-								iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+								iconUrl: getSymbol(purpose) + '.png'
 							});
 							featureToolTip = purpose;
 							//get the type name from the URI of the feature
@@ -629,7 +629,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								  iconSize: [27, 27],
 								  iconAnchor: [13, 27],
 								  popupAnchor:  [1, -24],
-								  iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+								  iconUrl: getSymbol(purpose) + '.png'
 									});
 							//if the entity is a point, create a point. Otherwise, create a polyline or polygon.		
 							if( ftypeName[3] == "gnis" || ftypeName[3] == "structures" || ftypeName[3] == "geonames")
@@ -868,7 +868,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								iconAnchor: [13, 27],
 								popupAnchor:  [0, -30],
                                 tooltipAnchor: [0, -25],
-								iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+								iconUrl: getSymbol(purpose) + '.png'
 							});
 							featureToolTip = purpose;
 							//get the type name from the URI of the feature
@@ -951,7 +951,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 								iconAnchor: [13, 27],
 								popupAnchor:  [0, -30],
                                 tooltipAnchor: [0, -25],
-								iconUrl: 'leaflet/icons/' + getSymbol(purpose) + '.png'
+								iconUrl:  getSymbol(purpose) + '.png'
 							});
 							featureToolTip = purpose;
 							//get the type name from the URI of the feature
@@ -995,5 +995,8 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 	}
 	//This function will return the symbol that should be used for a particular feature type.
 	function getSymbol(featureType){
-		return "images/" + symbolLibrary[featureType];	
+		if (featureType in symbolLibrary)
+		return "images/" + symbolLibrary[featureType];
+		else
+		return "images/" + symbolLibrary["Unknown"];
 	}
