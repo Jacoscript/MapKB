@@ -21,6 +21,12 @@ var DBPEDIA_BASE_URL = 'https://dbpedia.org';
 var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query=';
 
 /*
+* These variables describe the sparql endpoint for Wikidata. 
+*/
+var WIKIDATA_BASE_URL = 'https://query.wikidata.org/bigdata/namespace/wdq';
+var WIKIDATA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql?output=json&query=';
+
+/*
 * This is the variable used to determine the location your geoserver instance.
 */
 var WFS_BASE_URL = 'http://144.47.161.52:8080/geoserver/wfs';
