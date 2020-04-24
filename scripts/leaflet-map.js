@@ -9,6 +9,7 @@ var grouping = L.markerClusterGroup({
 	spiderfyOnMaxZoom: false
 });
 var height_main_container = $('#main-container').height();
+var leaflet_version = '';
 var query_tab_id;
 
 // ######################### //
@@ -16,7 +17,7 @@ var query_tab_id;
 // ######################### //
 
 // Init map with open street map as base map over DC area
-var map = L.map('mapid', {zoomSnap: .25, wheelPxPerZoomLevel: 120}).setView([38.88971, -77.00894], 12);
+var map = L.map('mapid', {zoomSnap: .25, wheelPxPerZoomLevel: 120, drawControl: true}).setView([38.88971, -77.00894], 12);
 map.options.minZoom = 2;
 
 L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
@@ -25,6 +26,73 @@ L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapSe
 				 + '| <a href="https://www.usgs.gov/laws/policies_notices.html">Policies</a> | <a href="http://vowl.visualdataweb.org/v2/">VOWL</a>',
 	id: 'USGSTopo'
 }).addTo(map);
+
+
+// Add leaflet draw functionality to the map
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+var MyCustomMarker = L.Icon.extend({
+	options: {
+		shadowUrl: null,
+		iconAnchor: new L.Point(12, 12),
+		iconSize: new L.Point(24, 24),
+		iconUrl: 'link/to/image.png'
+	}
+});
+
+var options = {
+	position: 'bottomleft',
+	draw: {
+		polyline: {
+			shapeOptions: {
+				color: '#f357a1',
+				weight: 10
+			}
+		},
+		polygon: {
+			allowIntersection: false, // Restricts shapes to simple polygons
+			drawError: {
+				color: '#e1e100', // Color the shape will turn when intersects
+				message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+			},
+			shapeOptions: {
+				color: '#bada55'
+			}
+		},
+		circle: false, // Turns off this drawing tool
+		rectangle: {
+			shapeOptions: {
+				clickable: false
+			}
+		},
+		marker: {
+			icon: new MyCustomMarker()
+		}
+	},
+	edit: {
+		featureGroup: editableLayers, //REQUIRED!!
+		remove: false
+	}
+};
+
+// Note: depreciated lines below
+// var drawControl = new L.Control.Draw(options);
+// map.addControl(drawControl);
+
+// Saves user created geometry from the leaflet draw plugin to the map
+map.on(L.Draw.Event.CREATED, function (e) {
+	var type = e.layerType,
+		layer = e.layer;
+
+	if (type === 'marker') {
+		layer.bindPopup('A popup!');
+	}
+
+	editableLayers.addLayer(layer);
+});
+
+leaflet_version = L.version; // Current is 1.6.0
 
 // Add coordinate information
 L.control.mousePosition().addTo(map);
