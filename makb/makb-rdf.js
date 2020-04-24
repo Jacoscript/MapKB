@@ -234,7 +234,8 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 									"<p> <a href='#' onClick=\"additionalInformation('"+uri+"');\">Additional Information</a><br>" +
 									"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a><br>" +
 									"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName[3]+"');\">Nearby Points</a><br>" +
-									"<a href='#' onClick=\"createDBpediaQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Dbpedia Info</a></p>"
+									"<a href='#' onClick=\"createDBpediaQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Dbpedia Info</a></br>" +
+									"<a href='#' onClick=\"createWikidataQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Wikidata Info</a></p>"
 									);
 							//add the new marker for the given entity to the mapping layer.
 							grouping.addLayer(circlePoint);
