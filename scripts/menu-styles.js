@@ -7,7 +7,7 @@ function pageLoad() {
 	// A function to run once the web page loads.
 	$(function() {
 		// --------------------- //
-		// Multi Level dropdowns
+		// Multi Level dropdowns //
 		// --------------------- //
 		$("ul.dropdown-menu [data-toggle='dropdown']").on("click", function(event) {
 			event.preventDefault();

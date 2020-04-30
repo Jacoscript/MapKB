@@ -17,7 +17,7 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 			stroke: true,
 			color: '#3388ff',
 			weight: 4,
-			opacity: 0.5,
+			opacity: 0.6,
 			fill: true,
 			fillColor: null, //same as color by default
 			fillOpacity: 0.2,
@@ -99,10 +99,28 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 	},
 
 	_shapeIsValid: function () {
+		console.log('Polygon completed.');
 		return this._markers.length >= 3;
 	},
 
 	_vertexChanged: function (latlng, added) {
+		var markerCount = this._markers.length;
+		// Create geometry object with id if not created, add lat/long to the geometry object
+		// TODO: What should the max user created geometries be?
+		if (markerCount === 1) {
+			// Create new user geom object to hold lat/long
+			var geom_poly = {
+				latlng: [],
+				id: created_leaflet_objects.length
+			};
+			geom_poly.latlng.push(latlng);
+			console.log(geom_poly.latlng);
+			created_leaflet_objects.push(geom_poly);
+		} else {
+			// Add the other lat/lngs to the latest geometry being created
+			created_leaflet_objects[created_leaflet_objects.length - 1].latlng.push(latlng);
+			console.log(created_leaflet_objects[created_leaflet_objects.length - 1].latlng);
+		}
 		var latLngs;
 
 		// Check to see if we should show the area
@@ -113,6 +131,7 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 		}
 
 		L.Draw.Polyline.prototype._vertexChanged.call(this, latlng, added);
+		console.log('Polygon point added.');
 	},
 
 	_cleanUpShape: function () {

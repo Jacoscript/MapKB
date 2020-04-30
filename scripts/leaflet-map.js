@@ -3,21 +3,23 @@
 // This script is used for the general interaction and loading of the leaflet
 //  map as well as other functions regarding the map.
 
-var countFilter = 0;
+var countFilter = 0;  // TODO: Is this depreciated?
+var created_leaflet_objects = [];  // List of all current user created leaflet draw obects
 var grouping = L.markerClusterGroup({
 	disableClusteringAtZoom: 15,
 	spiderfyOnMaxZoom: false
 });
-var height_main_container = $('#main-container').height();
-var leaflet_version = '';
-var query_tab_id;
+var height_main_container = $('#main-container').height();  // Used for other containers' measurements
+var leaflet_draw_finished = false;  // TODO: May not need. 
+var leaflet_version = '';  // Current leaflet version being used
+var query_tab_id;  // Current query tab being display (somewhat depreciated/not working atm)
 
 // ######################### //
 // ### Leaflet Map Setup ### //
 // ######################### //
 
 // Init map with open street map as base map over DC area
-var map = L.map('mapid', {zoomSnap: .25, wheelPxPerZoomLevel: 120, drawControl: true}).setView([38.88971, -77.00894], 12);
+var map = L.map('mapid', {zoomSnap: .25, wheelPxPerZoomLevel: 120}).setView([38.88971, -77.00894], 12);  // Add drawControl: true if you don't want editable draw layers
 map.options.minZoom = 2;
 
 L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
@@ -32,53 +34,15 @@ L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapSe
 var editableLayers = new L.FeatureGroup();
 map.addLayer(editableLayers);
 
-var MyCustomMarker = L.Icon.extend({
-	options: {
-		shadowUrl: null,
-		iconAnchor: new L.Point(12, 12),
-		iconSize: new L.Point(24, 24),
-		iconUrl: 'link/to/image.png'
+// Add edit toolbar
+// FeatureGroup is to store editable layers
+var drawControl = new L.Control.Draw({
+	edit: {
+		featureGroup: editableLayers
 	}
 });
 
-var options = {
-	position: 'bottomleft',
-	draw: {
-		polyline: {
-			shapeOptions: {
-				color: '#f357a1',
-				weight: 10
-			}
-		},
-		polygon: {
-			allowIntersection: false, // Restricts shapes to simple polygons
-			drawError: {
-				color: '#e1e100', // Color the shape will turn when intersects
-				message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-			},
-			shapeOptions: {
-				color: '#bada55'
-			}
-		},
-		circle: false, // Turns off this drawing tool
-		rectangle: {
-			shapeOptions: {
-				clickable: false
-			}
-		},
-		marker: {
-			icon: new MyCustomMarker()
-		}
-	},
-	edit: {
-		featureGroup: editableLayers, //REQUIRED!!
-		remove: false
-	}
-};
-
-// Note: depreciated lines below
-// var drawControl = new L.Control.Draw(options);
-// map.addControl(drawControl);
+map.addControl(drawControl);
 
 // Saves user created geometry from the leaflet draw plugin to the map
 map.on(L.Draw.Event.CREATED, function (e) {
@@ -86,11 +50,63 @@ map.on(L.Draw.Event.CREATED, function (e) {
 		layer = e.layer;
 
 	if (type === 'marker') {
+		// TODO: Get user input on what they want the marker popup to say
 		layer.bindPopup('A popup!');
 	}
 
+	console.log('User created geomtry has been saved to the leaflet map.');
 	editableLayers.addLayer(layer);
 });
+
+// Below lines are depreciated as they don't have editable layers.
+
+// var MyCustomMarker = L.Icon.extend({
+// 	options: {
+// 		shadowUrl: null,
+// 		iconAnchor: new L.Point(12, 12),
+// 		iconSize: new L.Point(24, 24),
+// 		iconUrl: 'link/to/image.png'
+// 	}
+// });
+
+// var options = {
+// 	position: 'bottomleft',
+// 	draw: {
+// 		polyline: {
+// 			shapeOptions: {
+// 				color: '#f357a1',
+// 				weight: 10
+// 			}
+// 		},
+// 		polygon: {
+// 			allowIntersection: false, // Restricts shapes to simple polygons
+// 			drawError: {
+// 				color: '#e1e100', // Color the shape will turn when intersects
+// 				message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+// 			},
+// 			shapeOptions: {
+// 				color: '#bada55'
+// 			}
+// 		},
+// 		circle: false, // Turns off this drawing tool
+// 		rectangle: {
+// 			shapeOptions: {
+// 				clickable: false
+// 			}
+// 		},
+// 		marker: {
+// 			icon: new MyCustomMarker()
+// 		}
+// 	},
+// 	edit: {
+// 		featureGroup: editableLayers, //REQUIRED!!
+// 		remove: false
+// 	}
+// };
+
+// Note: depreciated lines below
+// var drawControl = new L.Control.Draw(options);
+// map.addControl(drawControl);
 
 leaflet_version = L.version; // Current is 1.6.0
 
@@ -106,7 +122,7 @@ map.addControl(zoom);
 // ### Special Leaflet Handling ### //
 // ################################ //
 
-// When the map moves we run our function up above
+// When the map moves we run our function below
 map.on('move', onMapMove);
  
 // Boilerplate
