@@ -10,7 +10,7 @@ var grouping = L.markerClusterGroup({
 	spiderfyOnMaxZoom: false
 });
 var height_main_container = $('#main-container').height();  // Used for other containers' measurements
-var leaflet_draw_finished = false;  // TODO: May not need. 
+var leaflet_draw_finished = false;  // TODO: May not need. Depends on if we are going to use one user created geometry or multiple
 var leaflet_version = '';  // Current leaflet version being used
 var query_tab_id;  // Current query tab being display (somewhat depreciated/not working atm)
 

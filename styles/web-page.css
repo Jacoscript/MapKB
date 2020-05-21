@@ -334,7 +334,7 @@ Deprecated
 }
 .qb-text {
     font-family: Arial, Helvetica, sans-serif !important;
-    font-size:15px; 
+    font-size: 15px; 
     margin: 0px;
 }
 .qb-text-area {
@@ -342,6 +342,11 @@ Deprecated
     font-size: 15px !important;
     resize: none;
     width: 100%;
+}
+.qb-text-title {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 20px; 
+    margin: 0px;
 }
 .qb-widget {
     background-color: #343a40;

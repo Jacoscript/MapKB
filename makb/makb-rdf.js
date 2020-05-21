@@ -905,7 +905,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 	
 	
 	//This function performs a GeoSPARQL query to look-up and find geometries withing the current geometry.
-	function entitiesWithin(inputGeometry,URI,namespace){
+	function entitiesWithin(inputGeometry, URI, namespace){
 		//Check whether specific query has been applied
 		if (triggerLayers["doSomething"] == true) {
 			return;
@@ -920,6 +920,7 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 
 		else if (namespace == "stateorterritory")
 			var query = getQuery("entitiesWithin_stateorterritory",URI)
+			console.log(query);
 
 		//HTTP encode the query
 		query = encodeURIComponent(query);
