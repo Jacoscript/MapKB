@@ -19,16 +19,57 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 		<!-- leaflet map css -->
-		<link rel="stylesheet" href="leaflet/leaflet.css" />
+		<link rel="stylesheet" href="leaflet-1.3.4-depreciated/leaflet.css" />
+		<!-- <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" /> <-- Messes up map css -->
 		<link rel="stylesheet" href="leaflet-cluster/dist/MarkerCluster.css" />
 		<link rel="stylesheet" href="leaflet-cluster/dist/MarkerCluster.Default.css" />
 		<link rel="stylesheet" href="styles/markers.css" />
-		
+
 		<!-- leaflet map and wfs-t plugin js -->
-		<script src="leaflet/leaflet.js"></script>
-		<script src="leaflet-wfts/leaflet-wfst.min.js"></script>
+		<script src="node_modules/leaflet/dist/leaflet-src.js"></script>
+		<script src="leaflet-wfts/leaflet-wfst.min.js"></script> <!-- <-- Not sure if needed -->
 		<script src="leaflet-cluster/dist/leaflet.markercluster.js"></script>
 		<script src="scripts/markers.js"></script>
+
+		<!-- leaflet draw plugin -->
+		<script src="leaflet-draw/src/Leaflet.draw.js"></script>
+		<script src="leaflet-draw/src/Leaflet.Draw.Event.js"></script>
+		<link rel="stylesheet" href="leaflet-draw/src/leaflet.draw.css" />
+
+		<script src="leaflet-draw/src/Toolbar.js"></script>
+		<script src="leaflet-draw/src/Tooltip.js"></script>
+
+		<script src="leaflet-draw/src/ext/GeometryUtil.js"></script>
+		<script src="leaflet-draw/src/ext/LatLngUtil.js"></script>
+		<script src="leaflet-draw/src/ext/LineUtil.Intersect.js"></script>
+		<script src="leaflet-draw/src/ext/Polygon.Intersect.js"></script>
+		<script src="leaflet-draw/src/ext/Polyline.Intersect.js"></script>
+		<script src="leaflet-draw/src/ext/TouchEvents.js"></script>
+
+		<script src="leaflet-draw/src/draw/DrawToolbar.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.Feature.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.SimpleShape.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.Polyline.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.Marker.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.Circle.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.CircleMarker.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.Polygon.js"></script>
+		<script src="leaflet-draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+		<script src="leaflet-draw/src/edit/EditToolbar.js"></script>
+		<script src="leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
+		<script src="leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+		<script src="leaflet-draw/src/Control.Draw.js"></script>
+
+		<script src="leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
+		<script src="leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
+		<script src="leaflet-draw/src/edit/handler/Edit.Rectangle.js"></script>
+		<script src="leaflet-draw/src/edit/handler/Edit.Marker.js"></script>
+		<script src="leaflet-draw/src/edit/handler/Edit.CircleMarker.js"></script>
+		<script src="leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
+
+		<script src="leaflet-draw/src/copyright.js"></script>
 
 		<!-- leaflet MousePosition plugin  -->
 		<link rel="stylesheet" href="leaflet-coord/L.Control.MousePosition.css" />
