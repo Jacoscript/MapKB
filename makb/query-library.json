@@ -42,7 +42,7 @@
 			"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } " ,
 			"OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } " ,
         "}}"] ,
-    "nhdflowline":
+    "nhdflowline123":
 		[ "SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt " ,
 		"FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> " ,
 		"WHERE { GRAPH ?g { " ,
@@ -53,7 +53,7 @@
 			"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } " ,
 			"OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } " ,
         "}}"] ,
-    "nhdline":
+    "nhdline123":
 		[ "SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt " ,
 		"FROM NAMED <http://localhost:8080/marmotta/context/nhdline> " ,
 		"WHERE { GRAPH ?g { " ,
@@ -64,7 +64,7 @@
 			"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } " ,
 			"OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } " ,
         "}}"] ,
-    "nhdpoint":
+    "nhdpoint123":
 		[ "SELECT ?subject ?geom ?dimensions ?purpose ?name ?geometry ?wkt " ,
 		"FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> " ,
 		"WHERE { GRAPH ?g { " ,
@@ -85,7 +85,7 @@
 			"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } " ,
 			"OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } " ,
         "}}"] ,
-    "nhdwaterbody":
+    "nhdwaterbody123":
 		[ "SELECT ?subject ?geom ?purpose ?name ?dimensions ?geometry " , 
 		"FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> " ,
 		"WHERE { GRAPH ?g { " ,
@@ -119,59 +119,24 @@
 		"}} ",
         "GROUP BY ?subject ?gm ?purpose ?name "],
     "moreInfo":
-        [ "SELECT * FROM NAMED <http://localhost:8080/marmotta/context/gnis> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/geonames> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/structures> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/trails> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/padus> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/nhdline> " ,
-        "FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> " ,
-        "WHERE { GRAPH ?g {<INPUT_STRING_1> ?property ?object }}"],
+        [ 
+		"SELECT * ",
+		"WHERE { GRAPH ?g {<INPUT_STRING_1> ?property ?object }}"],
     "IRI_Search_1":
-        ["SELECT ?subject ?geom ?name ?purpose INPUT_STRING_1 (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=\"; \") AS ?geometry) ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/gnis> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/geonames> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/structures> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/trails> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ",
-        "FROM NAMED <http://localhost:8080/marmotta/context/padus> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ",
+        ["SELECT ?subject ?gml ?dimensions INPUT_STRING_1 ",
 		"WHERE { GRAPH ?g { ",
 			"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . INPUT_STRING_2 " ,
-			"?geom <http://www.opengis.net/ont/geosparql#asGML> ?geo . ",
-			"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ",
-			"OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ",
+			"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+			"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
 		" } ",
-		"FILTER regex( INPUT_STRING_3 , \"INPUT_STRING_4\")  } ",
-        "GROUP BY ?subject ?geom ?name ?purpose INPUT_STRING_5" ],
+		"FILTER regex( INPUT_STRING_3 , \"INPUT_STRING_4\")  } "],
     "IRI_Search_2":
-        ["SELECT  ?subject ?geometry2 ?dimensions (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=\"; \") AS ?geometry) ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/gnis> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/geonames> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/structures> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/trails> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/countyorequivalent> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/stateorterritory> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/padus> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdwaterbody> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdflowline> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdline> ",
-		"FROM NAMED <http://localhost:8080/marmotta/context/nhdpoint> ",
+        ["SELECT  ?subject ?dimensions ?gml ",
 		"WHERE { GRAPH ?g { ",
-		    "?subject <http://www.opengis.net/ont/geosparql#asGML> ?geo . ",
-		    "?geom <http://www.opengis.net/ont/geosparql#dimension> ?dimensions . ",
-		    "OPTIONAL { ?subject <http://dbpedia.org/ontology/coordinates> ?geometry2 . } ",
+		    "?subject <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		    "?subject <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
 		" } ",
-		"FILTER regex( ?subject , \"INPUT_STRING_1\")  } ",
-        "GROUP BY ?subject ?geometry2 ?dimensions"],
+		"FILTER regex( ?subject , \"INPUT_STRING_1\")  } "],
     "nearbyPoints":
         ["PREFIX geo: <http://www.opengis.net/ont/geosparql#> ",
 		"PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ",
@@ -288,5 +253,338 @@
         "OPTIONAL { <INPUT_STRING_2> <http://dbpedia.org/ontology/purpose> ?purpose . } ",
         "OPTIONAL { <INPUT_STRING_3> <http://purl.org/dc/elements/1.1/title> ?name . } ",
         " } ",
-        " }"]
+		" }"],
+	"struct_point":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/struct_point> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom .  ",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode .",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"trans_roadsegment":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/trans_roadsegment> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"trans_trailsegment":
+	[
+		"SELECT ?subject ?dimensions ?trailType ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/trans_trailsegment> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/trailType> ?trailType . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"trans_airportrunway":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/trans_airportrunway> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"trans_railfeature":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/trans_railfeature> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"trans_airportpoint":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/trans_airportpoint> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"gu_minorcivildivision":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/gu_minorcivildivision> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"gu_stateorterritory":
+	[
+		"SELECT ?subject ?geom ?subgeom ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/gu_stateorterritory> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#ehCovers> ?subgeom . ",
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"gu_incorporatedplace":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/gu_incorporatedplace> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"gu_jurisdictional":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/gu_jurisdictional> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"gu_countyorequivalent":
+	[
+		"SELECT ?subject ?geom ?subgeom ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/gu_countyorequivalent> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#ehCovers> ?subgeom . ",
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"gu_reserve":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/gu_reserve> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"nhdwaterbody":
+	[
+		"SELECT ?subject ?geom ?dimensions ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdwaterbody> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"nhdpluswall":
+	[
+
+	],
+	"nhdplusburnlineevent":
+	[
+		"SELECT ?subject ?dimensions ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdplusburnlineevent> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"nhdplusburnwaterbody":
+	[
+
+	],
+	"nhdpoint":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdpoint> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom .  ",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode .",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"nhdpluscatchment":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdpluscatchment> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} ",
+		"LIMIT 100000"
+	],
+	"nhdplussink":
+	[
+
+	],
+	"wbdhu12":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/wbdhu12> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"wbdhu10":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/wbdhu10> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"nhdarea":
+	[
+		"SELECT ?subject ?geom ?subgeom ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdarea> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#ehCovers> ?subgeom . ",
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}"
+	],
+	"nhdline":
+	[
+		"SELECT ?subject ?dimensions ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdline> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"wbdhu8":
+	[
+		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/wbdhu8> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"} "
+	],
+	"wbdhu4":
+	[
+		"SELECT ?subject ?geom ?subgeom ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/wbdhu4> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#ehCovers> ?subgeom . ",
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}"
+	],
+	"wbdhu6":
+	[
+		"SELECT ?subject ?geom ?subgeom ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/wbdhu6> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#ehCovers> ?subgeom . ",
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}"
+	],
+	"nhdflowline":
+	[
+		"SELECT ?subject ?dimensions ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdflowline> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"wbdline":
+	[
+		"SELECT ?subject ?dimensions ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/wbdline> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"nhdpluslandsea":
+	[
+		"SELECT ?subject ?geom ?subgeom ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/nhdpluslandsea> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#ehCovers> ?subgeom . ",
+		"?subgeom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}"
+	],
+	"state_and_county_code":
+	[
+		"SELECT ?subject ?dimensions ?feature_Class ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/state_and_county_code> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/feature_Class> ?feature_Class . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"concise_feature":
+	[
+		"SELECT ?subject ?dimensions ?feature_Class ?gml ",
+		"FROM <http://localhost:8080/marmotta/context/v2/concise_feature> ",
+		"WHERE { ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/feature_Class> ?feature_Class . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"}" 
+	],
+	"nearbyRoad":
+	[
+	"PREFIX geo: <http://www.opengis.net/ont/geosparql#> ",
+	"PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ",
+	"PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ",
+	"PREFIX sf: <http://www.opengis.net/ont/sf#> ",
+	"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ",
+	"SELECT ?subject ?gml  ?dimensions ?feature_Class ",
+	"FROM NAMED <http://localhost:8080/marmotta/context/v2/concise_feature> ",
+	"FROM  <http://localhost:8080/marmotta/context/v2/trans_roadsegment> ",
+	"WHERE { ",
+	"<http://data.usgs.gov/lod/topo/trans_roadsegment/Trans_RoadSegment.15366> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom1 . ",
+	"?geom1 <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT1 . ",
+	"GRAPH ?g{ ",
+	"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+	"?subject <http://data.usgs.gov/lod/topo/feature_Class> ?feature_Class . ",
+	"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT . ",
+	"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+	"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+	"} ",
+	"BIND( geof:buffer(?gWKT1, .0001 , units:degree) AS ?area ) ",
+	"FILTER( geof:sfWithin(?gWKT, ?area) && ?g = <http://localhost:8080/marmotta/context/v2/concise_feature>) ",
+	"} "
+	]
+
 }

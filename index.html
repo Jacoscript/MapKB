@@ -58,6 +58,7 @@
 		
 		<!-- makb js -->
 		<script src="makb/makb-rdf.js"></script>
+		<script src="makb/makb-rdf-v2.js"></script>
 		<script src="makb/makb-qb.js"></script>
 	
 		<!-- config js-->
@@ -91,24 +92,116 @@
 						<a class="nav-link" href="#" onclick="createQueryTab();">Custom Query Builder</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a id="dropdown-menu-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
 							Layers
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#" onclick="makePointQuery('gnis');">USGS GNIS - DC</a>
-							<a class="dropdown-item" href="#" onclick="makePointQuery('structures');">USGS Structures - DC</a>
-							<a class="dropdown-item" href="#" onclick="makePointQuery('geonames');">GeoNames.org - DC</a>
-							<a class="dropdown-item" href="#" onclick="makeLineQuery('trails');">Trails - DC</a>
-							<a class="dropdown-item" href="#" onclick="makePolygonQuery('countyorequivalent');">CountyOrEqual - DC</a>
-							<a class="dropdown-item" href="#" onclick="makePolygonQuery('stateorterritory');">StateOrEqual - DC</a>
-							<a class="dropdown-item" href="#" onclick="makeMultiPolygonQuery();">PADUS - DC</a>
-							<a class="dropdown-item" href="#" onclick="makePointQuery('nhdpoint');">NHD Point - DC</a>
-							<a class="dropdown-item" href="#" onclick="makeLineQuery('nhdflowline');">NHD Flowline - DC</a>
-							<a class="dropdown-item" href="#" onclick="makeLineQuery('nhdline');">NHD Line - DC</a>
-							<a class="dropdown-item" href="#" onclick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
+						<ul aria-labelledby="dropdown-menu-2" class="dropdown-menu dropright border-0 shadow">
+							<!-- <li>
+								<a class="dropdown-item" href="#">
+									Dataset one without subdropdown
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#" onclick="toSomewhere();">
+									Dataset two with function call but no subdropdown
+								</a>
+							</li> -->
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-dataset-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									All Layers - Version 1
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-dataset-3" class="dropdown-menu border-0 shadow" id="dropdown-menu-2-dataset-3">
+									<li>
+										<a class="dropdown-item" href="#" onclick="makePointQuery('gnis');">USGS GNIS - DC</a>
+										<a class="dropdown-item" href="#" onclick="makePointQuery('structures');">USGS Structures - DC</a>
+										<a class="dropdown-item" href="#" onclick="makePointQuery('geonames');">GeoNames.org - DC</a>
+										<a class="dropdown-item" href="#" onclick="makeLineQuery('trails');">Trails - DC</a>
+										<a class="dropdown-item" href="#" onclick="makePolygonQuery('countyorequivalent');">CountyOrEqual - DC</a>
+										<a class="dropdown-item" href="#" onclick="makePolygonQuery('stateorterritory');">StateOrEqual - DC</a>
+										<a class="dropdown-item" href="#" onclick="makeMultiPolygonQuery();">PADUS - DC</a>
+										<a class="dropdown-item" href="#" onclick="makePointQuery('nhdpoint');">NHD Point - DC</a>
+										<a class="dropdown-item" href="#" onclick="makeLineQuery('nhdflowline');">NHD Flowline - DC</a>
+										<a class="dropdown-item" href="#" onclick="makeLineQuery('nhdline');">NHD Line - DC</a>
+										<a class="dropdown-item" href="#" onclick="makePolygonQuery('nhdwaterbody');">NHD Waterbody - DC</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-dataset-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Structures - Version 2
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-dataset-3" class="dropdown-menu border-0 shadow" id="dropdown-menu-2-dataset-3">
+									<li>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('struct_point');">Struct_Point</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-dataset-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Transportation - Version 2
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-dataset-3" class="dropdown-menu border-0 shadow" id="dropdown-menu-2-dataset-3">
+									<li>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('trans_roadsegment');">Trans_Roadsegment</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('trans_trailsegment');">Trans_Trailsegment</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('trans_airportrunway');">Trans_Airportrunway</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('trans_railfeature');">Trans_Railfeature</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('trans_airportpoint');">Trans_Airportpoint</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-dataset-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Boundaries - Version 2
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-dataset-3" class="dropdown-menu border-0 shadow" id="dropdown-menu-2-dataset-3">
+									<li>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('gu_minorcivildivision');">GU_MinorCivilDivision</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('gu_incorporatedplace');">GU_IncorporatedPlace</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('gu_jurisdictional');">GU_Jurisdictional</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('gu_stateorterritory');">GU_StateOrTerritory</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('gu_countyorequivalent');">GU_CountyOrEquivalent</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('gu_reserve');">GU_Reserve</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-dataset-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									GNIS - Version 2
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-dataset-3" class="dropdown-menu border-0 shadow" id="dropdown-menu-2-dataset-3">
+									<li>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('concise_feature');">concise_feature</a> 
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('state_and_county_code');">state_and_county_code</a> 
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-toggle" id="dropdown-menu-2-dataset-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									NHD - Version 2
+								</a>
+								<ul aria-labelledby="dropdown-menu-2-dataset-3" class="dropdown-menu border-0 shadow" id="dropdown-menu-2-dataset-3">
+									<li>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdflowline');">NHDFlowline</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('wbdline');">WBDLine</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdline');">NHDLine</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdplusburnlineevent');">nhdplusburnlineevent</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdpluscatchment');">nhdpluscatchment</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('wbdhu12');">wbdhu12</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('wbdhu10');">wbdhu10</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdpluslandsea');">nhdpluslandsea</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdwaterbody');">nhdwaterbody</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdarea');">nhdarea</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('wbdhu8');">wbdhu8</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('wbdhu4');">wbdhu4</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('wbdhu6');">wbdhu6</a>
+										<a class="dropdown-item" href="#" onclick="makeUniversalQuery_v2('nhdpoint');">NHDPoint</a> 
+									</li>
+								</ul>
+							</li>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="help/">Help?</a>
-						</div>
+						</ul>
 					</li>
 					<li class="nav-item dropdown">
 						<a id="dropdown-menu-1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">

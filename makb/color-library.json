@@ -6,5 +6,13 @@
 	"padus":"#B22222",
 	"stateorterritory":"#000000",
     "trails":"#228B22",
-	"default": "#000000"
+	"default": "#000000",
+	"trans_roadsegment":"#000000",
+	"trans_trailsegment":"#228B22",
+	"trans_airportrunway":"#B22222",
+	"trans_railfeature":"#696969",
+	"gu_minorcivildivision":"#696969",
+	"gu_stateorterritory":"#000000",
+	"gu_incorporatedplace":"#696969",
+	"gu_jurisdictional":"#696969"
 }

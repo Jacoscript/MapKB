@@ -489,10 +489,11 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 			notification_manager.addToNotificationQueue("Error", "No query selected.");
 			return null;
 		}
-		//If it is a custom query, simply retrieve the contents of the query box.
+		//If it is a custom query, Use the Input string as the query. //simply retrieve the contents of the query box.
 		if(queryType == "Custom")
 		{
-			query = document.getElementById(query_tab_id+'-qb-generated-query').value;
+			//query = document.getElementById(query_tab_id+'-qb-generated-query').value;
+			query = INPUT_STRING_1;
 		}
 		//Pull in the correct query from the query library. replace the holders with the 
 		//	inputs if they exist.
@@ -526,6 +527,8 @@ $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 
 	//Function to perform an IRI search for a user
 	function IRISearch(property, object){
+		console.log(property);
+		console.log(object);
 		//clear the map
 		clearMap();
 		//initalize some variables used to make the query
