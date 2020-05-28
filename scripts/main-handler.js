@@ -28,6 +28,11 @@ function closeQBWidget() {
     $('.qb-widget').css('display', 'none');
 };
 
+function closePreBWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
+    $('.preb-widget').css('display', 'none');
+};
+
 function displayUpdateQBWidget() {
     // Function that is called when the user clicks on 'Custom Query Builder'
     // in the nav bar
@@ -40,6 +45,12 @@ function displayUpdateAFDWidget() {
     // description' on a object within the leaflet map.
     $('.afd-widget').css('display', 'block');
 }
+
+function displayUpdatePreBWidget() {
+    // Function that is called when the user clicks on 'Custom Query Builder'
+    // in the nav bar
+    $('.preb-widget').css('display', 'block');
+};
 
 function performBasicDeviceCheck() {
     if (checkUserDevice() == true) {

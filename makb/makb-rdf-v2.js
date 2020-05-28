@@ -10,6 +10,9 @@ $.getJSON('./makb/query-library.json', function(data) { queryLibrary = data; });
 var colorLibrary = {};
 $.getJSON('./makb/color-library.json', function(data) { colorLibrary = data; });
 
+//global variable used during recrusive search functions.
+var done_flag;
+
 //Function to make a query that can understand how to visualize all the different geometries
 function makeUniversalQuery_v2(inputType, inputQuery){
     // TODO: Add below into trigger mechanics. There's an issue on gitlab
@@ -37,7 +40,6 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                 onLayerLoadingFinished("doSomething");
             }
             else {
-                console.log(result.results.bindings);
                 bindings = result.results.bindings;
                 //Check how many results there are. If 0 through an error. Otherwise, visualize them.
                 if(bindings.length > 0) {
@@ -162,7 +164,8 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                             //"<br>Purpose: " + purpose +
                             " "+uri+"<br> " +
                             "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
-                            "<p> <a href='#' onClick=\"makeUniversalQuery_v2('nearbyRoad');\">Nearby</a><br>"
+                            // "<p> <a href='#' onClick=\"makeUniversalQuery_v2('nearbyRoad');\">Nearby</a><br>" + 
+                            "<p> <a href='#' onClick=\"crossRoads();\">CrossRoads</a><br>"
                             //"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a></p>"
                         );
                         //Add the marker to the map layer
@@ -453,4 +456,135 @@ function additionalInformation_v2(URI)
             notification_manager.addToNotificationQueue("Error", "Creating additional information failed.");
         }
     });
+}
+function crossRoads(crossRoad1_Name, crossRoad2_Name, street_Name, point_Type)
+{
+    // crossRoad1_Name= "F St NW";
+    // crossRoad2_Name="H St NW";
+    // street_Name="14th St NW";
+    // point_Type="Building";
+    done_flag = false;
+    var dict_side1 = [];
+    var dict_side2 = [];
+    var dict_main;
+    //Get Crossroad1 that intersects with Street Name
+    var query = getQuery("crossRoads",street_Name,crossRoad1_Name);
+    query = encodeURIComponent(query);
+    //Get the http request url.
+    var http_get = MARMOTTA_SPARQL_URL + query;
+    //create an object to store the HTML for the additional information tab and declare the first line
+    // execute sparql query in marmotta
+    $.get({url: http_get, 
+        success: function(result) {
+            //if no results, throw an error
+            if(!result) {
+                notification_manager.addToNotificationQueue("Warning", "No results while performing CrossRoads.");
+            }
+            else {
+            bindings = result.results.bindings;
+                //go through all of the results. If 0 items, throw an error
+                if(bindings.length > 0) {
+                    //go through all of the results and add them to the tab.
+                    if(bindings.length == 2)
+                    {
+                        for(var i=0; i < bindings.length; i++) {
+                            if(i == 0)
+                            {
+                                dict_side1.push(bindings[i].subject.value);
+                                recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side1, dict_side2, point_Type);
+                            }
+                            else if(i == 1)
+                            {
+                                dict_side2.push(bindings[i].subject.value);
+                                recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side2, dict_side1, point_Type);
+                            }
+                        }
+                    } 
+                    else{
+                        notification_manager.addToNotificationQueue("Error", "More than two paths occur on this road.");
+                        return;
+                    }
+                }
+                else { //There was no results so do nothing.
+                    notification_manager.addToNotificationQueue("Warning", "No results for bindings while performing CrossRoads.");
+                }
+            }
+        },
+        error: function(result) {
+            notification_manager.addToNotificationQueue("Error", "Creating additional information failed.");
+        }
+    });
+//Search for all points nearby withthe point_Type
+}
+//Need a recursive search to handle the asychronous nature of the calls
+function recursiveSearch(last_subject,crossRoad2_Name, street_Name, dict_side_main, dict_side_other, point_Type)
+{
+    console.log(last_subject);
+    if(!done_flag)
+    {
+        //Get Crossroad1 that intersects with Street Name
+        var query = getQuery("roadwayTouches",last_subject,street_Name,street_Name,crossRoad2_Name);
+        console.log(query);
+        query = encodeURIComponent(query);
+        //Get the http request url.
+        var http_get = MARMOTTA_SPARQL_URL + query;
+        //create an object to store the HTML for the additional information tab and declare the first line
+        // execute sparql query in marmotta
+        $.get({url: http_get, 
+            success: function(result) {
+                //if no results, throw an error
+                if(!result) {
+                    notification_manager.addToNotificationQueue("Warning", "No results while performing recursiveSearch.");
+                }
+                else {
+                bindings = result.results.bindings;
+                    //go through all of the results. If 0 items, throw an error
+                    if(bindings.length > 0) {
+                        //go through all of the results and add them to the tab.
+                        if(bindings.length = 2)
+                        {
+                            for(var i=0; i < bindings.length; i++) {
+                            
+                                if(!(dict_side_main.includes(bindings[i].subject.value) || dict_side_other.includes(bindings[i].subject.value)))
+                                {
+                                    dict_side_main.push(bindings[i].subject.value);
+                                    //If this intersects with the correct road segment be done and return the correct dictonary
+                                    if(bindings[i].done.value == "Yes")
+                                    {
+                                        done_flag = true;
+                                        finalStep(dict_side_main, point_Type);
+                                        
+                                    }
+                                    //If this doesn't intersect with the correct road segment, continue searching
+                                    else if(bindings[i].done.value == "No") 
+                                    {
+                                        dict_side_main = recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side_main, dict_side_other, point_Type);
+                                    }
+                                } 
+                            }
+                        }
+                        else
+                        {
+                            notification_manager.addToNotificationQueue("Error", "More than two paths occur on this road.");
+                        }
+                    }
+                    else { //There was no results so do nothing.
+                        notification_manager.addToNotificationQueue("Warning", "No results for bindings while performing recursiveSearch.");
+                    }
+                }
+            },
+            error: function(result) {
+                notification_manager.addToNotificationQueue("Error", "Creating additional information failed.");
+            }
+        });
+    }
+}
+
+function finalStep(dict_main, point_Type){
+    for(var i = 0; i < dict_main.length; i++)
+    {
+        var query = getQuery("nearbyRoad", dict_main[i], point_Type)
+        console.log(query);
+        makeUniversalQuery_v2("Custom", query);
+    }
 }

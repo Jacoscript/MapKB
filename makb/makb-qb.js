@@ -2,7 +2,7 @@
 // mewagner@contractor.usgs.gov & tfry@contractor.usgs.gov
 // Map As A Knowledge Base functions for custom query builder operations.
 
-const MAX_CUSTOM_QUERIES = 1;
+const MAX_CUSTOM_QUERIES = 2;
 const MAX_CUSTOM_GRAPHS = 15;
 
 var current_custom_queries = 0;
