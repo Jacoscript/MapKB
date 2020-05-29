@@ -316,7 +316,11 @@ function createTab(name, content) {
                 + '<hr/>'
         HTML += '<div class="afd-widget-tab afd-content-container" id="tabs-' + current_custom_queries + '"></div>';
         $('.afd-widget').append(HTML);
-    } else {
+	} else if(name == 'Pre-Built Queries') {
+		HTML += '<div class="qb-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.preb-widget').append(HTML);
+	}
+	else {
         $('.afd-widget').empty();
         HTML += '<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>'
                 + '<span class="afd-widget-title">Advanced Feature Description</span>'

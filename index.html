@@ -101,6 +101,7 @@
 		<script src="makb/makb-rdf.js"></script>
 		<script src="makb/makb-rdf-v2.js"></script>
 		<script src="makb/makb-qb.js"></script>
+		<script src="makb/makb-preb.js"></script>
 	
 		<!-- config js-->
 		<script src="config/config.js"></script>
@@ -131,6 +132,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" onclick="createQueryTab();">Custom Query Builder</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="createPreBuiltQueryTab();">Pre-Built Queries</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a id="dropdown-menu-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
@@ -382,6 +386,12 @@
 			<div class="qb-widget">
 				<button class="close" type="button" onclick="closeQBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="qb-btn-widget-exit"><a href="#">&times;</a></span></button>
 				<span class="qb-widget-title">Custom Query Builder</span>
+				<hr/>
+			</div>
+			<!-- preb builder tabs -->
+			<div class="preb-widget">
+				<button class="close" type="button" onclick="closePreBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="preb-btn-widget-exit"><a href="#">&times;</a></span></button>
+				<span class="qb-widget-title">Pre-Built Queries</span>
 				<hr/>
 			</div>
 			<!-- AFD Tabs tabs -->

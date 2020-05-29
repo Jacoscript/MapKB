@@ -573,7 +573,7 @@
 	"FROM NAMED <http://localhost:8080/marmotta/context/v2/concise_feature> ",
 	"FROM  <http://localhost:8080/marmotta/context/v2/trans_roadsegment> ",
 	"WHERE { ",
-	"<http://data.usgs.gov/lod/topo/trans_roadsegment/Trans_RoadSegment.15366> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom1 . ",
+	"<INPUT_STRING_1> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom1 . ",
 	"?geom1 <http://www.opengis.net/ont/geosparql#asWKT> ?gWKT1 . ",
 	"GRAPH ?g{ ",
 	"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
@@ -583,8 +583,50 @@
 	"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
 	"} ",
 	"BIND( geof:buffer(?gWKT1, .0001 , units:degree) AS ?area ) ",
-	"FILTER( geof:sfWithin(?gWKT, ?area) && ?g = <http://localhost:8080/marmotta/context/v2/concise_feature>) ",
+	"FILTER( geof:sfWithin(?gWKT, ?area) && ?g = <http://localhost:8080/marmotta/context/v2/concise_feature> && regex(?feature_Class,\"INPUT_STRING_2\")) ",
 	"} "
+	],
+	"crossRoads":
+	[
+		"PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ",
+		"SELECT DISTINCT ?subject ?gml WHERE { ",
+			"?subject <http://data.usgs.gov/lod/topo/full_Street_Name> \"INPUT_STRING_1\"^^xsd:string . ",
+			"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+			"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gml . ",
+			"?subject2 <http://data.usgs.gov/lod/topo/full_Street_Name> \"INPUT_STRING_2\"^^xsd:string . ",
+			"?subject2 <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom2 . ",
+			"?geom2 <http://www.opengis.net/ont/geosparql#asWKT> ?gml2 . ",
+			"filter(geof:sfTouches(?gml, ?gml2)) ",
+			"} "
+	],
+	"roadwayTouches":
+	[
+		"PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ",
+		"SELECT DISTINCT ?subject ?gml ?done WHERE { ",
+  
+			"{ ",
+			"<INPUT_STRING_1> <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom1 . ",
+			"?geom1 <http://www.opengis.net/ont/geosparql#asWKT> ?gml1 . ",
+              
+			"?subject <http://data.usgs.gov/lod/topo/full_Street_Name> \"INPUT_STRING_2\"^^xsd:string . ",
+			"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+			"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?gml . ",
+			"filter(geof:sfTouches(?gml1, ?gml) ) ",
+            "} ",
+  			
+			"{ ",
+			"?subject2 <http://data.usgs.gov/lod/topo/full_Street_Name> \"INPUT_STRING_3\"^^xsd:string . ",
+			"?subject2 <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom2 . ",
+			"?geom2 <http://www.opengis.net/ont/geosparql#asWKT> ?gml2 . ",
+
+			"?subject3 <http://data.usgs.gov/lod/topo/full_Street_Name> \"INPUT_STRING_4\"^^xsd:string . ",
+			"?subject3 <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom3 . ",
+			"?geom3 <http://www.opengis.net/ont/geosparql#asWKT> ?gml3 . ",
+              
+			"filter(geof:sfTouches(?gml3, ?gml2)) ",
+			"} ",
+            "BIND(IF(geof:sfTouches(?gml, ?gml3), \"Yes\", \"No\") AS ?done) ",
+  			"} "
 	]
 
 }
