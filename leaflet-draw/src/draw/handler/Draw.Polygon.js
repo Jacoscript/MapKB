@@ -101,7 +101,7 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 	_shapeIsValid: function () {
 		console.log('Polygon completed.');
 		leaflet_draw_finished = true; // TODO: May change based on whether we are doing one user created geometry or multiple
-		getBasicGeoSPARQLInfo();  // Retry basic GeoSPARQL info now that the user created a geometry
+		getGeoBasicGeoSPARQLInfo();  // Retry basic GeoSPARQL info now that the user created a geometry
 		return this._markers.length >= 3;
 	},
 
