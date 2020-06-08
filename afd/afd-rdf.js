@@ -320,6 +320,22 @@ function createTab(name, content) {
 		HTML += '<div class="qb-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
         $('.preb-widget').append(HTML);
 	}
+	else if(name == 'Wikidata') {
+		HTML += '<div class="wkd-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.wkd-widget').append(HTML);
+	}
+	else if(name == 'DBPedia') {
+		HTML += '<div class="dbp-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.dbp-widget').append(HTML);
+	}
+	else if(name == 'Publications') {
+		HTML += '<div class="pub-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.pub-widget').append(HTML);
+	}
+	else if(name == 'Metadata') {
+		HTML += '<div class="meta-widget-tab qb-content-container" id="tabs-' + current_custom_queries + '"></div>';
+        $('.meta-widget').append(HTML);
+	}
 	else {
         $('.afd-widget').empty();
         HTML += '<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>'

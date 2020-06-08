@@ -24,7 +24,14 @@ var DBPEDIA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql/select?output=json&query='
 * These variables describe the sparql endpoint for Wikidata. 
 */
 var WIKIDATA_BASE_URL = 'https://query.wikidata.org/bigdata/namespace/wdq';
-var WIKIDATA_SPARQL_URL =  DBPEDIA_BASE_URL + '/sparql?output=json&query=';
+var WIKIDATA_SPARQL_URL =  WIKIDATA_BASE_URL + '/sparql?format=json&query=';
+
+/*
+* These variables describe the rest endpoint for Publications. 
+*/
+var PUBLICATIONS_BASE_URL = 'https://pubs.er.usgs.gov/pubs-services/publication';
+var PUBLICATIONS_REST_URL =  PUBLICATIONS_BASE_URL + '/?mimeType=json&page_size=40&title=';
+
 
 /*
 * This is the variable used to determine the location your geoserver instance.

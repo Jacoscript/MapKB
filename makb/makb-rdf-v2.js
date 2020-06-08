@@ -54,9 +54,10 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                             uri = bindings[i].subject.value;
                         
                         //If there is no name, set to Unknown
-                        // name = "Unknown";
-                        // if(bindings[i].name != undefined)
-                        //     name = bindings[i].name.value;
+                        //This is used as an input into some functions.
+                        name = "Unknown";
+                        if(bindings[i].name != undefined)
+                            name = bindings[i].name.value;
 
                         //If there is no fcode or feature_Class, set to Unknown
                         // fcode is used to determine the mapping symbol
@@ -88,6 +89,13 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                         dimensions = "Unknown";
                         if(bindings[i].dimensions != undefined)
                             dimensions = bindings[i].dimensions.value;
+
+                        //Check if there is a wkt. Otherwise purpose will be "Unknown"
+                        //This is used to pass in wkt arguements to some functions.
+						wkt = "Unknown";
+						if(bindings[i].wkt != undefined)
+							wkt = bindings[i].wkt.value;
+							
                         
                         //get the type name via the uri
                         var ftypeName = uri.split("/");
@@ -107,9 +115,22 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                                 popupAnchor:  [1, -24],
                                 iconUrl: getSymbol(symbol) + '.png'
                                 });
-
+                            
+                            var coordinates =  gml.split("<gml:pos>");
+                            coordinates = coordinates[1].split("</gml:pos>");
+                            coordinates = coordinates[0];
+                            coordinates = coordinates.split(" ");
                             latlngs = makeLatLngs_v2(gml); 
                             marker = new L.marker(latlngs, {icon: smallIcon});
+                            marker.bindPopup(//"<br>Name: " +  name +'</a>' +
+                            //"<br>Purpose: " + purpose +
+                            " "+uri+"<br> " +
+                            "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
+							"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName+"');\">Nearby Points</a><br>" +
+							"<a href='#' onClick=\"createDBpediaQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Dbpedia Info</a></br>" +
+                            "<a href='#' onClick=\"createWikidataQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Wikidata Info</a><br>" +
+                            "<a href='#' onClick=\"createPublicationsQuery('"+name+"',"+coordinates[0]+",'"+coordinates[1]+","+wkt+"');\">View Related USGS Publications</a></p>"
+                        );
                         }
                         //if the entity is a polyline do the following
                         else if(ftypeName[5] == "trans_roadsegment" || ftypeName[5] == "trans_trailsegment" 
@@ -125,6 +146,12 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                                 latlngs = makeLatLngs_v2(gml); 
                             
                             marker = new L.polyline(latlngs,{color: getColor(ftypeName[5])});
+                            marker.bindPopup(//"<br>Name: " +  name +'</a>' +
+                            //"<br>Purpose: " + purpose +
+                            " "+uri+"<br> " +
+                            "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
+							"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName+"');\">Nearby Points</a><br>" 
+                        );
                         }
                         //if the entity is a normal polygon do the following
                         else if (ftypeName[5] == "gu_minorcivildivision" || ftypeName[5] == "gu_incorporatedplace" || ftypeName[5] == "gu_jurisdictional"
@@ -137,6 +164,12 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                                 latlngs = makeLatLngs_v2(gml); 
 
                             marker = new L.polygon(latlngs,{color: getColor(ftypeName[5])});
+                            marker.bindPopup(//"<br>Name: " +  name +'</a>' +
+                            //"<br>Purpose: " + purpose +
+                            " "+uri+"<br> " +
+                            "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
+							"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName+"');\">Nearby Points</a><br>" 
+                        );
                         }
 
                         //if the entity is a split polygon, do the following.
@@ -154,20 +187,20 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                             //     latlngs = makeLatLngs2(gml, null, null, null); 
 
                             marker = new L.polygon(latlngs,{color: getColor(ftypeName[5])});
-                            }
+                        }
                     //     else if(ftypeName[3] == "padus")
                     //     {
                     //         latlngs = makeLatLngs(null,null,geometry); 
                     //         marker = new L.polygon(latlngs,{color: getColor(ftypeName[3])});
                     //     }
-                        marker.bindPopup(//"<br>Name: " +  name +'</a>' +
-                            //"<br>Purpose: " + purpose +
-                            " "+uri+"<br> " +
-                            "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
-                            // "<p> <a href='#' onClick=\"makeUniversalQuery_v2('nearbyRoad');\">Nearby</a><br>" + 
-                            "<p> <a href='#' onClick=\"crossRoads();\">CrossRoads</a><br>"
-                            //"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a></p>"
-                        );
+                        // marker.bindPopup(//"<br>Name: " +  name +'</a>' +
+                        //     //"<br>Purpose: " + purpose +
+                        //     " "+uri+"<br> " +
+                        //     "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
+                        //     // "<p> <a href='#' onClick=\"makeUniversalQuery_v2('nearbyRoad');\">Nearby</a><br>" + 
+                        //     "<p> <a href='#' onClick=\"crossRoads();\">CrossRoads</a><br>"
+                        //     //"<a href='#' onClick=\"getAdvFtrDesc('"+ftypeName[3]+"', '"+uri+"');\">Advanced Feature Description</a></p>"
+                        // );
                         //Add the marker to the map layer
                         grouping.addLayer(marker);
                     }
@@ -391,7 +424,7 @@ function remakeGeo(bindings)
         }
         marker = new L.polygon(latlngs,{color: getColor(ftypeName[5])});
         marker.bindPopup(
-                    "<p> <a href='#' onClick=\"additionalInformation_v2('TEMP');\">Additional Information</a><br>" 
+                    "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" 
                     );
                     //Add the marker to the map layer
                     grouping.addLayer(marker);
@@ -432,9 +465,9 @@ function additionalInformation_v2(URI)
                     //go through all of the results and add them to the tab.
                     for(var i=0; i < bindings.length; i++) {
                         if (bindings[i].property.value!="http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
-                            HTML+=
-                            "<b>" + bindings[i].property.value + ": &nbsp; </b> <a href='#' onClick=\"IRISearch_v2('"+
-                            bindings[i].property.value+"','"+ bindings[i].object.value + "');\">" + 
+                            HTML+= "<b>" + " </b> <a href='#' onClick=\"MetadataSearch_v2('"+ bindings[i].property.value+"');\">" + 
+                            bindings[i].property.value + "</a>: &nbsp; " + 
+                            " </b> <a href='#' onClick=\"IRISearch_v2('"+ bindings[i].property.value+"','"+ bindings[i].object.value + "');\">" + 
                             bindings[i].object.value + "</a><br>";
                         else 
                             HTML+=
@@ -587,4 +620,67 @@ function finalStep(dict_main, point_Type){
         console.log(query);
         makeUniversalQuery_v2("Custom", query);
     }
+}
+
+function MetadataSearch_v2(property){
+
+    var HTML = '';
+
+    var query = 'SELECT * WHERE { <' + property + '> ?p ?o }'
+    
+    //HTTP encode the query
+    query = encodeURIComponent(query);
+    //Create the URL for the HTTP request
+    var httpGet = MARMOTTA_SPARQL_URL+ query;
+    console.log(query);
+    // execute sparql query in the dbpedia sparql endpoint
+    $.get({url: httpGet, 
+        success: function(result) {
+            //If there are no results say so. Otherwise, visualize them.
+            if(!result) {
+                // no_results_callback('No results!');
+            }
+            else {
+
+
+                // Check whether max queries are already open
+                if (current_custom_queries == MAX_CUSTOM_QUERIES) {
+                    // Still need to display the qb widget
+                    displayUpdateMetaWidget();
+                     return;
+                } else {
+                    current_custom_queries += 1;
+                    query_tab_list.push(new QueryTab(current_custom_queries));
+                    query_tab_id = 'tabs-' + current_custom_queries;
+                    var id_sliced = query_tab_id.slice(5, 6) - 1;
+                    createTab('Metadata');
+
+                    bindings = result.results.bindings;
+                    console.log(bindings);
+                    //Check how many results there are. If 0 through an error. Otherwise, visualize them.
+                    if(bindings.length > 0) {
+                        //go through all of the results.
+                        for(var i=0; i < bindings.length; i++) {
+                            //declare the variables given the results.
+                            pvalue = bindings[i].p.value;
+                            ovalue = bindings[i].o.value;
+
+                            var tempString = pvalue+': '+ovalue+'<br>';
+                            HTML = HTML + tempString;
+
+                        }
+                    
+                    }
+                    else { //There was no results so do nothing.
+                        // 	// no_results_callback("No Dbpedia Entities Matching This One.");
+                        }
+                    // Display/Update the afd tab section after everything is created
+                    $('#' + query_tab_id).append(HTML);
+                    displayUpdateMetaWidget();
+                }
+            }
+            
+        }
+    });
+
 }

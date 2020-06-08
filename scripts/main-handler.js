@@ -23,14 +23,16 @@ function closeAFDWidget() {
     $('.afd-widget').css('display', 'none');
 }
 
+function displayUpdateAFDWidget() {
+    // Function that is called when the user clicks on 'additional information'
+    // on a object within the leaflet map or if they click 'advanced feature
+    // description' on a object within the leaflet map.
+    $('.afd-widget').css('display', 'block');
+}
+
 function closeQBWidget() {
     // Function that is called when the qb widget 'X' button is pressed.
     $('.qb-widget').css('display', 'none');
-};
-
-function closePreBWidget() {
-    // Function that is called when the qb widget 'X' button is pressed.
-    $('.preb-widget').css('display', 'none');
 };
 
 function displayUpdateQBWidget() {
@@ -39,17 +41,60 @@ function displayUpdateQBWidget() {
     $('.qb-widget').css('display', 'block');
 };
 
-function displayUpdateAFDWidget() {
-    // Function that is called when the user clicks on 'additional information'
-    // on a object within the leaflet map or if they click 'advanced feature
-    // description' on a object within the leaflet map.
-    $('.afd-widget').css('display', 'block');
-}
+
+function closePreBWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
+    $('.preb-widget').css('display', 'none');
+};
 
 function displayUpdatePreBWidget() {
     // Function that is called when the user clicks on 'Custom Query Builder'
     // in the nav bar
     $('.preb-widget').css('display', 'block');
+};
+
+function closeWikiWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
+    $('.wkd-widget').css('display', 'none');
+};
+
+function displayUpdateWikiWidget() {
+    // Function that is called when the user clicks on 'Custom Query Builder'
+    // in the nav bar
+    $('.wkd-widget').css('display', 'block');
+};
+
+function closePubWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
+    $('.pub-widget').css('display', 'none');
+};
+
+function displayUpdatePubWidget() {
+    // Function that is called when the user clicks on 'Custom Query Builder'
+    // in the nav bar
+    $('.pub-widget').css('display', 'block');
+};
+
+function closeDBPWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
+    $('.dbp-widget').css('display', 'none');
+};
+
+function displayUpdateDBPWidget() {
+    // Function that is called when the user clicks on 'Custom Query Builder'
+    // in the nav bar
+    $('.dbp-widget').css('display', 'block');
+};
+
+function closeMetaWidget() {
+    // Function that is called when the qb widget 'X' button is pressed.
+    $('.meta-widget').css('display', 'none');
+};
+
+function displayUpdateMetaWidget() {
+    // Function that is called when the user clicks on 'Custom Query Builder'
+    // in the nav bar
+    $('.meta-widget').css('display', 'block');
 };
 
 function performBasicDeviceCheck() {

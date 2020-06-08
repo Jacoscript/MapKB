@@ -144,7 +144,7 @@
 		"PREFIX sf: <http://www.opengis.net/ont/sf#> ",
 		"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ",
 		"SELECT ?subject ?name ?lat ?long ?purpose ?geom ?geometry ?dimensions ",
-		"FROM <http://localhost:8080/marmotta/context/INPUT_STRING_1> ",
+		"FROM <INPUT_STRING_1> ",
 		"WHERE { ",
         "OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ",
 		"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ",
@@ -256,13 +256,15 @@
 		" }"],
 	"struct_point":
 	[
-		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"SELECT ?subject ?dimensions ?name ?wkt ?fcode ?gml ",
 		"FROM <http://localhost:8080/marmotta/context/v2/struct_point> ",
 		"WHERE { ",
 		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom .  ",
-		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode .",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . ",
+		"OPTIONAL{ ?subject <http://data.usgs.gov/lod/topo/name_100> ?name . } ",
 		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
 		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ",
 		"}" 
 	],
 	"trans_roadsegment":
@@ -310,13 +312,15 @@
 	],
 	"trans_airportpoint":
 	[
-		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"SELECT ?subject ?dimensions ?name ?wkt ?fcode ?gml ",
 		"FROM <http://localhost:8080/marmotta/context/v2/trans_airportpoint> ",
 		"WHERE { ",
 		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
 		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . ",
+		"OPTIONAL{ ?subject <http://data.usgs.gov/lod/topo/name_100> ?name . } ",
 		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
 		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ",
 		"} "
 	],
 	"gu_minorcivildivision":
@@ -412,13 +416,15 @@
 	],
 	"nhdpoint":
 	[
-		"SELECT ?subject ?dimensions ?fcode ?gml ",
+		"SELECT ?subject ?dimensions ?name ?wkt ?fcode ?gml ",
 		"FROM <http://localhost:8080/marmotta/context/v2/nhdpoint> ",
 		"WHERE { ",
 		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom .  ",
-		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode .",
-		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . ",
+		"OPTIONAL{ ?subject <http://data.usgs.gov/lod/topo/gnis_Name> ?name . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . }",
 		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ",
 		"}" 
 	],
 	"nhdpluscatchment":
@@ -542,24 +548,28 @@
 	],
 	"state_and_county_code":
 	[
-		"SELECT ?subject ?dimensions ?feature_Class ?gml ",
+		"SELECT ?subject ?dimensions ?name ?wkt ?feature_Class ?gml ",
 		"FROM <http://localhost:8080/marmotta/context/v2/state_and_county_code> ",
 		"WHERE { ",
 		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
 		"?subject <http://data.usgs.gov/lod/topo/feature_Class> ?feature_Class . ",
+		"OPTIONAL{ ?subject <http://data.usgs.gov/lod/topo/GNIS/feature_Name> ?name . } ",
 		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
 		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ",
 		"}" 
 	],
 	"concise_feature":
 	[
-		"SELECT ?subject ?dimensions ?feature_Class ?gml ",
+		"SELECT ?subject ?dimensions ?name ?wkt ?feature_Class ?gml ",
 		"FROM <http://localhost:8080/marmotta/context/v2/concise_feature> ",
 		"WHERE { ",
 		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
 		"?subject <http://data.usgs.gov/lod/topo/feature_Class> ?feature_Class . ",
+		"OPTIONAL{ ?subject <http://data.usgs.gov/lod/topo/GNIS/feature_Name> ?name . } ",
 		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
 		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt . ",
 		"}" 
 	],
 	"nearbyRoad":
