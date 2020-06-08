@@ -45,6 +45,23 @@ class QueryTab {
 		}
 	}
 
+	recalculateGeoGraphValues() {
+		try {
+			var id_sliced = query_tab_id.slice(5, 6) - 1;
+			this.old_graph_context_values = this.graph_context_values;
+			this.geo_graph_context_values = [];
+
+			for(var i = 1; i <= query_tab_list[id_sliced].geo_current_custom_graphs; i++) {
+				query_tab_list[id_sliced].geo_graph_context_values.push($('#' + query_tab_id + '-qb-context-selector-' + i).val());
+			}
+			if (this.geo_current_custom_graphs != 0) {
+				$('#' + query_tab_id + '-qb-btn-find-query-predicates').html('Update Predicates');
+			}
+		} catch (err) {
+			notification_manager.addToNotificationQueue('Error', 'Recalculate graph values - ' + err)
+		}
+	}
+
 	// A function to dynamically update the predicates for a query tab whenever the selection is changed.
 	recalculatePredicateValues() {
 		try {
@@ -153,9 +170,13 @@ function getGeoBasicGeoSPARQLInfo() {
 }
 
 function getGeoUserDesiredGeoSPARQLFunction() {
-	var geosparql_functions = ['ehContains', 'ehCoveredBy', 'ehCovers', 'ehDisjoint', 'ehEqual', 'ehInside', 'ehMeet', 'ehOverlap',
-							   'rcc8Contains', 'rcc8CoveredBy', 'rcc8Covers', 'rcc8Disjoint', 'rcc8Equal', 'rcc8Inside', 'rcc8Meet', 'rcc8Overlap',
-							   'sfContains', 'sfCoveredBy', 'sfCovers', 'sfDisjoint', 'sfEqual', 'sfInside', 'sfMeet', 'sfOverlap'];
+	// var geosparql_functions = ['sfWithin', 'ehContains', 'ehCoveredBy', 'ehCovers', 'ehDisjoint', 'ehEqual', 'ehInside', 'ehMeet', 'ehOverlap',
+	// 						   'rcc8Contains', 'rcc8CoveredBy', 'rcc8Covers', 'rcc8Disjoint', 'rcc8Equal', 'rcc8Inside', 'rcc8Meet', 'rcc8Overlap',
+	// 						   'sfContains', 'sfCoveredBy', 'sfCovers', 'sfDisjoint', 'sfEqual', 'sfInside', 'sfMeet', 'sfOverlap'];
+	// Simple feature, Egenhofer, and RCC8 functions
+	var geosparql_functions_marmotta = ['sfContains', 'sfCrosses', 'sfDisjoint', 'sfEquals', 'sfIntersects', 'sfOverlaps', 'sfTouches', 'sfWithin',
+										'ehContains', 'ehCoveredBy', 'ehCovers', 'ehDisjoint', 'ehEquals', 'ehInside', 'ehMeet', 'ehOverlap', 
+										'rcc8dc', 'rcc8ec', 'rcc8eq', 'rcc8ntpp', 'rcc8ntppi', 'rcc8po', 'rcc8tpp', 'rcc8tppi'];
 	var HTML = '';
 	var query_tab_id = 'tabs-' + current_custom_queries;
 
@@ -163,8 +184,8 @@ function getGeoUserDesiredGeoSPARQLFunction() {
 	HTML += '<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-functions-info">Choose a GeoSPARQL Function</span><br/>';
 	HTML += '<select class="qb-select-dropdown" id="' + query_tab_id + '-qb-geosparql-function-selector" title="GeoSPARQL Functions">';
 	// Get Options
-	for(var i = 0; i < geosparql_functions.length; i++) {
-		var temp_string = '<option value="' + geosparql_functions[i] + '">' + geosparql_functions[i] + '</option>';
+	for(var i = 0; i < geosparql_functions_marmotta.length; i++) {
+		var temp_string = '<option value="' + geosparql_functions_marmotta[i] + '">' + geosparql_functions_marmotta[i] + '</option>';
 		HTML = HTML + temp_string;
 	}
 	HTML += '</select>';
@@ -174,6 +195,7 @@ function getGeoUserDesiredGeoSPARQLFunction() {
 
 function getGeoUserDesiredGraphNumber() {
 	var HTML = '';
+
 	HTML += '<div class="" id="' + query_tab_id +'-section-graph-number"><span class="qb-text-title" id="' + query_tab_id + '-qb-text-graph-number">How many layers would you like:</span>'
 			+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
 			+ '<button class="qb-button" id="' + query_tab_id + '-qb-btn-graph-number-submit" type="button" onclick="checkUserQueryValidity(\'Geo Graph\');">Submit</button></div>'
@@ -213,16 +235,14 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 				bindings = result.results.bindings;
 				// Check how many results there are. If 0 throw an error. Otherwise, visualize them.
 				if(bindings.length > 0) {
-					if(query_tab_list[id_sliced].current_custom_graphs == number_of_graphs) {
+					if(query_tab_list[id_sliced].geo_current_custom_graphs == number_of_graphs) {
 						// Reload if user hits submit again
 						// Update new section if graph number was changed
-						query_tab_list[id_sliced].current_custom_graphs = number_of_graphs;
+						query_tab_list[id_sliced].geo_current_custom_graphs = number_of_graphs;
 						for(var i = 1; i <= MAX_CUSTOM_GRAPHS; i++) {
 							$('#' + query_tab_id + '-qb-context-selector-' + i).remove();
 						}
 						$('#' + query_tab_id + '-section-graph-selection').remove();
-						$('#' + query_tab_id + '-section-predicate-selection').remove();
-						$('#' + query_tab_id + '-section-filter-selection').remove();
 						$('#' + query_tab_id + '-section-query-selection').remove();
 				
 						$('#' + query_tab_id).append('<div class="" id="' + query_tab_id + '-section-graph-selection"></div><div class="" id="' + query_tab_id + '-section-predicate-selection"></div>'
@@ -230,32 +250,29 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
 						// Update class variables
 						query_tab_list[id_sliced].geo_graph_context_values = [];
-						query_tab_list[id_sliced].graph_predicate_values = [];
-					} else if (query_tab_list[id_sliced].current_custom_graphs == 0) {
+					} else if (query_tab_list[id_sliced].geo_current_custom_graphs == 0) {
 						// Create new section based
-						query_tab_list[id_sliced].current_custom_graphs = number_of_graphs;
+						query_tab_list[id_sliced].geo_current_custom_graphs = number_of_graphs;
 						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
 					} else {
 						// Update new section if graph number was changed
-						query_tab_list[id_sliced].current_custom_graphs = number_of_graphs;
+						query_tab_list[id_sliced].geo_current_custom_graphs = number_of_graphs;
 						for(var i = 1; i <= MAX_CUSTOM_GRAPHS; i++) {
 							$('#' + query_tab_id + '-qb-context-selector-' + i).remove();
 						}
 						$('#' + query_tab_id + '-section-graph-selection').remove();
-						$('#' + query_tab_id + '-section-predicate-selection').remove();
-						$('#' + query_tab_id + '-section-filter-selection').remove();
 						$('#' + query_tab_id + '-section-query-selection').remove();
 				
 						$('#' + query_tab_id).append('<div class="" id="' + query_tab_id + '-section-graph-selection"></div><div class="" id="' + query_tab_id + '-section-predicate-selection"></div>'
 													 + '<div class="" id="' + query_tab_id + '-section-filter-selection"></div><div class="" id="' + query_tab_id + '-section-query-selection"></div>')
 						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
 						// Update class variables
-						query_tab_list[id_sliced].graph_context_values = [];
-						query_tab_list[id_sliced].graph_predicate_values = [];
+						query_tab_list[id_sliced].geo_graph_context_values = [];
 					}
 
 					//go through all of the results.
-					for(var i = 1; i <= query_tab_list[id_sliced].current_custom_graphs; i++) {
+					var first_context;
+					for(var i = 1; i <= query_tab_list[id_sliced].geo_current_custom_graphs; i++) {
 						HTML += '<select class="qb-select-dropdown" id="' + query_tab_id + '-qb-context-selector-'+ i +'" title="Graph ' + i + '">';
 						// Get Options
 						for(var j = 0; j < bindings.length; j++) {
@@ -270,29 +287,31 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 						}
 						HTML += '</select>'
 					}
-					if(query_tab_list[id_sliced].current_custom_graphs > 1) {
-						HTML += '<span class="qb-text" id="' + query_tab_id + '-qb-text-common-predicates">Would you like to show common predicates between the multiple graphs?</span>'
-						HTML += '<input checked="true" id="' + query_tab_id + '-qb-radio-geo-predicates-yes" name="predicates" type="radio" value="Yes"/>Yes<input id="' + query_tab_id + '-qb-radio-geo-predicates-no" name="predicates" type="radio" value="No"/>No<br/>';
-					}
+					// NOTE: Not needed on geosparql
+					// if(query_tab_list[id_sliced].current_custom_graphs > 1) {
+					// 	HTML += '<span class="qb-text" id="' + query_tab_id + '-qb-text-common-predicates">Would you like to show common predicates between the multiple graphs?</span>'
+					// 	HTML += '<input checked="true" id="' + query_tab_id + '-qb-radio-geo-predicates-yes" name="predicates" type="radio" value="Yes"/>Yes<input id="' + query_tab_id + '-qb-radio-geo-predicates-no" name="predicates" type="radio" value="No"/>No<br/>';
+					// }
 					HTML += '<button class="qb-button" id="' + query_tab_id + '-qb-btn-get-user-geosparql-query" type="button" onclick="displayGeoSPARQLQuery();">Submit</button><hr/>';				
 					
 					// Append to specific section inside query tab
 					$('#' + query_tab_id + '-section-graph-selection').append(HTML);
 					$('#' + query_tab_id + '-section-graph-selection .qb-select-dropdown').change(function() {
-						query_tab_list[id_sliced].recalculateGraphValues();
+						query_tab_list[id_sliced].recalculateGeoGraphValues();
 					});
 
+					// NOTE: Not needed on geosparql
 					// Setup checks for radio buttons (radio btns for common predicates only show if there's more than 1 graph)
-					$('#' + query_tab_id + '-qb-radio-geo-predicates-yes').click(function() {
-						if($('#' + query_tab_id + '-qb-radio-geo-predicates-yes').is(':checked')) {
-							query_tab_list[id_sliced].show_common_predicates = true;
-						}
-					});
-					$('#' + query_tab_id + '-qb-radio-geo-predicates-no').click(function() {
-						if($('#' + query_tab_id + '-qb-radio-geo-predicates-no').is(':checked')) {
-							query_tab_list[id_sliced].show_common_predicates = false;
-						}
-					});
+					// $('#' + query_tab_id + '-qb-radio-geo-predicates-yes').click(function() {
+					// 	if($('#' + query_tab_id + '-qb-radio-geo-predicates-yes').is(':checked')) {
+					// 		query_tab_list[id_sliced].show_common_predicates = true;
+					// 	}
+					// });
+					// $('#' + query_tab_id + '-qb-radio-geo-predicates-no').click(function() {
+					// 	if($('#' + query_tab_id + '-qb-radio-geo-predicates-no').is(':checked')) {
+					// 		query_tab_list[id_sliced].show_common_predicates = false;
+					// 	}
+					// });
 				}
 				else { //There was no results so do nothing.
 					notification_manager.addToNotificationQueue('Error', 'No results for bindings while modifying query tab.');
@@ -306,16 +325,37 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 
 function displayGeoSPARQLQuery() {
 	var HTML = '';
+	var id_sliced = query_tab_id.slice(5, 6) - 1;
+
+	// Retrieve GeoSPARQL Graphs
+	query_tab_list[id_sliced].recalculateGeoGraphValues();
+
 	HTML += '<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-functions-info">GeoSPARQL Query</span><br/>';
 
 	// TODO: Display query for user to copy/look/modify
 	// Coords - query_tab_list[id_sliced].geo_coordinates[0].lat (or lng)
 	var query = '';
 	var query_intro = 'PREFIX geo: <http://www.opengis.net/ont/geosparql#>' + 
+					  'PREFIX sf: <http://www.opengis.net/ont/sf#> ' +
 					  'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ' +
-					  'PREFIX sf: <http://www.opengis.net/ont/sf#> ';
+					  'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ';
 	var query_graph = '';
 	var query_outro = '';
+
+	// Grab specific GeoSPARQL function
+	var geo_function = $('#' + query_tab_id + '-qb-geosparql-function-selector').val();
+
+	// Convert geometry lat/lngs to wkt
+	// WKT format ((start, x2, x3, end)) - Start and end should be same coord
+	var wkt_string = '';
+	var wkt_guts = '';
+	for (var i = 0; i < query_tab_list[id_sliced].geo_coordinates.length; i++) {
+		wkt_guts += query_tab_list[id_sliced].geo_coordinates[i].lng;
+		wkt_guts += ' ' + query_tab_list[id_sliced].geo_coordinates[i].lat + ', ';
+	}
+	wkt_guts += query_tab_list[id_sliced].geo_coordinates[0].lng;
+	wkt_guts += ' ' + query_tab_list[id_sliced].geo_coordinates[0].lat;
+	wkt_string = '(((' + wkt_guts + ')))';
 
 	// Generate the selected graphs
 	var selected_graphs = '';	
@@ -323,14 +363,41 @@ function displayGeoSPARQLQuery() {
 		selected_graphs += 'FROM NAMED <' + item + '> ';
 	});
 
+	// NOTE: Below only works with version 2 data and NOT version 1
+	// Build intro
+	query_intro += 'SELECT ?subject ?geom ?gml ?wkt ?fcode ?ftype ' +
+				   selected_graphs + 'WHERE { ';
+
+	// Build graph					  
+	query_graph += 'GRAPH ?g { ' +
+					'?subject geo:hasGeometry ?geom . ' + 
+					'?geom geo:asGML ?gml . ' + 
+					'?geom geo:asWKT ?wkt . ';
+
+	// FILTER (geof:sfContains(?aWKT, ?fWKT) && !sameTerm(?aGeom, ?fGeom))
+	// Optional info
+	query_graph += 'OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ' +
+				   'OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ' + 
+				   'OPTIONAL { ?subject <http://data.usgs.gov/lod/topo/fCode> ?fcode . } ' +
+				   'OPTIONAL { ?subject <http://data.usgs.gov/lod/topo/ftype> ?ftype . } ' +
+				   'OPTIONAL { ?geom geo:dimension ?dimensions . } ' + 
+				   'FILTER (geof:' + geo_function + '(?wkt, \"MULTIPOLYGON ' + wkt_string + '\"^^geo:wktLiteral))';
+
+	// Build outro
+	query_outro = '} }' ;
+
 	// Combine all parts of the query
 	query = query_intro + query_graph + query_outro;
 	
 	// Build query area and show to user their generated query
-	HTML += '<textarea class="qb-text-area" cols="50" rows="20" id="' + query_tab_id + '-qb-generated-query">' + query + '</textarea>'
+	HTML += '<textarea class="qb-text-area" cols="50" rows="20" id="' + query_tab_id + '-qb-generated-query"></textarea>'
 			+ '<button class="qb-run-query qb-button" id="' + query_tab_id + '-qb-run-query" type="button" onclick="getQueryField()">Run Query</button>'
 			+ '<button class="qb-clear-map qb-button" id="' + query_tab_id + '-qb-clear-map" type="button" onclick="clearMap()">Clear Map</button>';
-	$('#' + query_tab_id).append(HTML);
+	$('#' + query_tab_id + '-section-query-selection').append(HTML);
+	function setGeoQueryIntoText(query) {
+		$('#' + query_tab_id + '-qb-generated-query').val(query);
+	}
+	setGeoQueryIntoText(query);	
 }
 
 // #################### //
@@ -343,7 +410,7 @@ function getBasicSPARQLInfo() {
 
 	// Add back the question for the user in case they want to change from geosparql to sparql
 	HTML += '<div class="" id="' + query_tab_id +'-section-intro"><span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-or-not">Would you like to use GeoSPARQL or SPARQL?</span><br/>';
-	HTML += '<input id="' + query_tab_id + '-qb-radio-choose-geosparql" name="sparql" type="radio" value="GeoSPARQL"/> GeoSPARQL <input checked id="' + query_tab_id + '-qb-radio-choose-sparql" name="sparql" type="radio" value="SPARQL"/> SPARQL <br/>';
+	HTML += '<input checked id="' + query_tab_id + '-qb-radio-choose-sparql" name="sparql" type="radio" value="SPARQL"/> SPARQL <input id="' + query_tab_id + '-qb-radio-choose-geosparql" name="sparql" type="radio" value="GeoSPARQL"/> GeoSPARQL <br/>';
 	HTML += '<button class="qb-button" id="' + query_tab_id + '-qb-btn-get-user-sparql-option" type="button" onclick="determineSPARQLFunction();">Submit</button><hr/>';
 	HTML += '<div class="" id="' + query_tab_id +'-section-intro"><span class="qb-text" id="' + query_tab_id + '-qb-text-graph-number">How many layers would you like:</span>'
 			+ '<input class="qb-input-graph-number" id="' + query_tab_id + '-qb-input-graph-number" name="graph-number" title="Number between 1-' + MAX_CUSTOM_GRAPHS + '" type="text" value="Number here"/>'
@@ -827,8 +894,7 @@ function generateQuery(){
 	var id_sliced = query_tab_id.slice(5, 6) - 1;
 	var selected_filters = [];
 	var filter_objects_list = [];
-	// TODO: Add geosparql capabilities
-	
+
 	// Graph specific filter vals
 	for(var i = 0; i < query_tab_list[id_sliced].current_custom_predicates; i++) {
 		selected_filters.push($('#' + query_tab_id + '-qb-filter-selector-' + (i + 1)).val());
@@ -936,6 +1002,7 @@ function generateQuery(){
 
 	if(document.getElementById(query_tab_id + '-qb-generated-query') == null)
 	{
+		console.log(query);
 		var HTML = '<textarea class="qb-text-area" cols="50" rows="20" id="' + query_tab_id + '-qb-generated-query"></textarea>'
 					+ '<button class="qb-run-query qb-button" id="' + query_tab_id + '-qb-run-query" type="button" onclick="getQueryField()">Run Query</button>'
 					+ '<button class="qb-clear-map qb-button" id="' + query_tab_id + '-qb-clear-map" type="button" onclick="clearMap()">Clear Map</button>';
@@ -973,10 +1040,12 @@ function setSelect(){
 		});
 	} catch (err) {
 		notification_manager.addToNotificationQueue('Error', 'With setSelect(): ' + err);
-}
+	}
 }
 
 //Function to get the query from the query field and then run the universal query functon
 function getQueryField(){
-	makeUniversalQuery('Custom');
+	var query = $('#' + query_tab_id + '-qb-generated-query').val();
+	//makeUniversalQuery('Custom');
+	makeUniversalQuery_v2('Custom', query);
 }
