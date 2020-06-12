@@ -18,8 +18,8 @@
 					'?s ?p ?o ' +
 					'FILTER ( (regex(?label, \''+name+'\') && (?lat >= '+lat+' - .001 && ?lat <= '+lat+' + .001) && (?long >= '+lng+' - .001 && ?long <= '+lng+' + .001)) ' +
 					'|| ((?lat >= '+lat+' - .001 && ?lat <= '+lat+' + .001) && (?long >= '+lng+' - .001 && ?long <= '+lng+' + .001)))' +
-					'}' +
-					'LIMIT 100'; 
+					'}'; //+
+					//'LIMIT 100'; 
 		
 		//HTTP encode the query
 		query = encodeURIComponent(query);
