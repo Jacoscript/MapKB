@@ -233,6 +233,7 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 			}
 			else {
 				bindings = result.results.bindings;
+				console.log(bindings);
 				// Check how many results there are. If 0 throw an error. Otherwise, visualize them.
 				if(bindings.length > 0) {
 					if(query_tab_list[id_sliced].geo_current_custom_graphs == number_of_graphs) {
@@ -244,16 +245,22 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 						}
 						$('#' + query_tab_id + '-section-graph-selection').remove();
 						$('#' + query_tab_id + '-section-query-selection').remove();
+
+						$('#' + query_tab_id).append('<div class="" id="' + query_tab_id + '-section-graph-selection"></div><div class="" id="' + query_tab_id + '-section-predicate-selection"></div>');
 				
 						$('#' + query_tab_id).append('<div class="" id="' + query_tab_id + '-section-graph-selection"></div><div class="" id="' + query_tab_id + '-section-predicate-selection"></div>'
 													 + '<div class="" id="' + query_tab_id + '-section-filter-selection"></div><div class="" id="' + query_tab_id + '-section-query-selection"></div>')
-						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
+						
 						// Update class variables
 						query_tab_list[id_sliced].geo_graph_context_values = [];
+						console.log("Hello1");
 					} else if (query_tab_list[id_sliced].geo_current_custom_graphs == 0) {
 						// Create new section based
 						query_tab_list[id_sliced].geo_current_custom_graphs = number_of_graphs;
 						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
+						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
+						console.log("Hello2");
+						console.log(query_tab_id);
 					} else {
 						// Update new section if graph number was changed
 						query_tab_list[id_sliced].geo_current_custom_graphs = number_of_graphs;
@@ -268,6 +275,7 @@ function getGeoUserDesiredGraph(number_of_graphs) {
 						$('#' + query_tab_id + '-section-graph-selection').append('<span class="qb-text-title" id="' + query_tab_id + '-qb-text-geo-graph-info">Choose a Graph to Apply Your Desired Function to</span><br/>');
 						// Update class variables
 						query_tab_list[id_sliced].geo_graph_context_values = [];
+						console.log("Hello3");
 					}
 
 					//go through all of the results.
@@ -472,13 +480,14 @@ function checkUserQueryValidity(type_of_input) {
 		let arr;
 		let input_field = $('#' + query_tab_id + '-qb-input-graph-number');
 		let input_value = parseInt(input_field.val());  // Num of graphs
-
+		
 		if((arr = pattern.exec(input_value)) !== null) {
 			if(arr[0] <= MAX_CUSTOM_GRAPHS && arr[0] > 0) {
 				// If validy succeeds, change value of input box
 				$('#' + query_tab_id + '-qb-input-graph-number').attr('value', arr[0]);
 				$('#' + query_tab_id + '-qb-input-graph-number').css('border', '');
 				getGeoUserDesiredGraph(arr[0]);  // Tell function to make x amt of graphs
+
 			} else if(arr[0] > MAX_CUSTOM_GRAPHS) {
 				alert(`Input is more than max graphs: ${arr[0]}/${MAX_CUSTOM_GRAPHS}.`);
 				$('#' + query_tab_id + '-qb-input-graph-number').css('border', '1px solid red');

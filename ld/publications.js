@@ -6,7 +6,8 @@
         name, 
         lat,
         long,
-        gml ) {
+        gml 
+        ) {
 
 		var HTML = '';
 

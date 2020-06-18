@@ -30,7 +30,7 @@ var WIKIDATA_SPARQL_URL =  WIKIDATA_BASE_URL + '/sparql?format=json&query=';
 * These variables describe the rest endpoint for Publications. 
 */
 var PUBLICATIONS_BASE_URL = 'https://pubs.er.usgs.gov/pubs-services/publication';
-var PUBLICATIONS_REST_URL =  PUBLICATIONS_BASE_URL + '/?mimeType=json&page_size=40&title=';
+var PUBLICATIONS_REST_URL =  PUBLICATIONS_BASE_URL + '/?mimeType=json&page_size=10&title=';
 
 
 /*

@@ -498,7 +498,9 @@ function crossRoads(crossRoad1_Name, crossRoad2_Name, street_Name, point_Type)
     // point_Type="Building";
     done_flag = false;
     var dict_side1 = [];
+    var dict_side1_wkt = [];
     var dict_side2 = [];
+    var dict_side2_wkt = [];
     var dict_main;
     //Get Crossroad1 that intersects with Street Name
     var query = getQuery("crossRoads",street_Name,crossRoad1_Name);
@@ -524,12 +526,14 @@ function crossRoads(crossRoad1_Name, crossRoad2_Name, street_Name, point_Type)
                             if(i == 0)
                             {
                                 dict_side1.push(bindings[i].subject.value);
-                                recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side1, dict_side2, point_Type);
+                                dict_side1_wkt.push(bindings[i].wkt.value);
+                                recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side1, dict_side1_wkt, dict_side2, point_Type);
                             }
                             else if(i == 1)
                             {
                                 dict_side2.push(bindings[i].subject.value);
-                                recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side2, dict_side1, point_Type);
+                                dict_side2_wkt.push(bindings[i].wkt.value);
+                                recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side2, dict_side2_wkt, dict_side1, point_Type);
                             }
                         }
                     } 
@@ -550,7 +554,7 @@ function crossRoads(crossRoad1_Name, crossRoad2_Name, street_Name, point_Type)
 //Search for all points nearby withthe point_Type
 }
 //Need a recursive search to handle the asychronous nature of the calls
-function recursiveSearch(last_subject,crossRoad2_Name, street_Name, dict_side_main, dict_side_other, point_Type)
+function recursiveSearch(last_subject,crossRoad2_Name, street_Name, dict_side_main, dict_side_main_wkt, dict_side_other, point_Type)
 {
     console.log(last_subject);
     if(!done_flag)
@@ -581,17 +585,18 @@ function recursiveSearch(last_subject,crossRoad2_Name, street_Name, dict_side_ma
                                 if(!(dict_side_main.includes(bindings[i].subject.value) || dict_side_other.includes(bindings[i].subject.value)))
                                 {
                                     dict_side_main.push(bindings[i].subject.value);
+                                    dict_side_main_wkt.push(bindings[i].wkt.value);
                                     //If this intersects with the correct road segment be done and return the correct dictonary
                                     if(bindings[i].done.value == "Yes")
                                     {
                                         done_flag = true;
-                                        finalStep(dict_side_main, point_Type);
+                                        finalStep(dict_side_main, dict_side_main_wkt, point_Type);
                                         
                                     }
                                     //If this doesn't intersect with the correct road segment, continue searching
                                     else if(bindings[i].done.value == "No") 
                                     {
-                                        dict_side_main = recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side_main, dict_side_other, point_Type);
+                                        dict_side_main = recursiveSearch(bindings[i].subject.value, crossRoad2_Name, street_Name, dict_side_main, dict_side_main_wkt, dict_side_other, point_Type);
                                     }
                                 } 
                             }
@@ -613,19 +618,34 @@ function recursiveSearch(last_subject,crossRoad2_Name, street_Name, dict_side_ma
     }
 }
 
-function finalStep(dict_main, point_Type){
-    for(var i = 0; i < dict_main.length; i++)
+function finalStep(dict_main, dict_main_wkt, point_Type){
+
+    var lineString = "";
+    for(var i = 0; i < dict_main_wkt.length; i++)
     {
-        var query = getQuery("nearbyRoad", dict_main[i], point_Type)
-        console.log(query);
-        makeUniversalQuery_v2("Custom", query);
+        // var query = getQuery("nearbyRoad", dict_main[i], point_Type)
+        // console.log(query);
+        // makeUniversalQuery_v2("Custom", query);
+        var temp = dict_main_wkt[i];
+        temp = temp.split("((");
+        temp = temp[1].split("))");
+        temp = temp[0];
+        
+        if(i!=(dict_main_wkt.length-1))
+            lineString += temp + ", ";
+        else    
+            lineString += temp;
     }
+    lineString = "MULTILINESTRING((" + lineString + "))";
+    //console.log(lineString);
+    var query = getQuery("nearbyRoad", lineString, point_Type)
+    console.log(query);
+    makeUniversalQuery_v2("Custom", query);
 }
 
 function MetadataSearch_v2(property){
 
     var HTML = '';
-
     var query = 'SELECT * WHERE { <' + property + '> ?p ?o }'
     
     //HTTP encode the query
