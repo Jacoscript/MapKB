@@ -1,3 +1,4 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
 /* ================INSTRUCTIONS=================*/ 
 /* By changing the info below, you can reduce the size of the logo or hide the search box. You can also override the standard font characteristics if you would like to use your own custom styles. In order for your changes to work though, you MUST include a reference in your HTML pages to both the common CSS file and custom CSS file in that order.
 
@@ -67,3 +68,7 @@ For simplification, search bar is visible on larger screens but is hidden on sma
 /* If you would prefer not to have the social media links, you can remove the comment out slashes and astricks surrounding the content below */
  /* .footer-social-links { 
 	display: none} */
+#maincontent,
+.col-md-12 {
+	padding: 0 !important;
+}

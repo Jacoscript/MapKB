@@ -1,15 +1,22 @@
-<!DOCTYPE HTML>
-<html>
+<!--<!DOCTYPE HTML>
+<html>-->
 	<!--#include virtual="includes/header.txt"-->
-	<head>
+	<!--<head>
 		<meta charset = "utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
+	</head>
+	
+	<body>-->
 		<!-- Main CSS styles and webpage js -->
 		<link rel="stylesheet" href="styles/menu-styles.css" />
 		<link rel="stylesheet" href="styles/notification.css" />
 		<link rel="stylesheet" href="styles/web-page.css" />
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript">
+			// Append viewport meta to head without changing the template.
+			jQuery('head').append('<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">');
+		</script>
 		<script src="scripts/main-handler.js"></script>
 		<script src="scripts/menu-styles.js"></script>
 		<script src="scripts/logging/notification-manager.js"></script>
@@ -121,9 +128,6 @@
 				});
 			});
 		</script>
-	</head>
-	
-	<body>
 		<!-- Menu help: https://bootstrapious.com/p/bootstrap-multilevel-dropdown-->
 		<div class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="bootstrap-navbar">
 			<a class="navbar-brand" href="#">MAKB</a>
@@ -365,71 +369,77 @@
 				</ul>
 			</div>
 		</div>
-		<div id="main-container">
-			<!-- Ontology view -->
-			<section id="example">
-				<div id="graph">
-					<div id="reset-view-ontology-option"></div>
-					<div id="slider-ontology-option"></div>
-					<div id="toggle-leaflet-option"></div>
-					<div id="policies-and-contributions"></div>
+		<div class="container-fluid d-flex h-100 flex-column">
+			<div class="row d-flex h-100 flex-column">
+				<div class="col-md-12 d-flex h-100 flex-column">
+					<div id="main-container" class="d-flex h-100 flex-column">
+						<!-- Ontology view -->
+						<section id="example">
+							<div id="graph">
+								<div id="reset-view-ontology-option"></div>
+								<div id="slider-ontology-option"></div>
+								<div id="toggle-leaflet-option"></div>
+								<div id="policies-and-contributions"></div>
+							</div>
+							<p id="browserCheck" class="hidden"></p>
+						</section>
+			
+						<!-- leaflet map -->
+						<div id="mapid" class="d-flex h-100 flex-column container-fluid">
+							<div id="txtbox-container">
+								<span id="txtbox-text-lat">Crosshair Latitude:</span><input type="text" id="txtbox-Latitude" />
+								<span id="txtbox-text-long">Crosshair Longitude:</span><input type="text" id="txtbox-Longitude" />
+							</div>
+							<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
+							<div id="reset-view-leaflet-option"></div>
+							<div id="toggle-ontology-option"></div>
+						</div>
+						<!-- Query builder tabs -->
+						<div class="qb-widget">
+							<button class="close" type="button" onclick="closeQBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="qb-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="qb-widget-title">Custom Query Builder</span>
+							<hr/>
+						</div>
+						<!-- Pre-Built Query builder tabs -->
+						<div class="preb-widget">
+							<button class="close" type="button" onclick="closePreBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="preb-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="qb-widget-title">Pre-Built Queries</span>
+							<hr/>
+						</div>
+						<!-- AFD Tabs tabs -->
+						<div class="afd-widget">
+							<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="afd-widget-title">Advanced Feature Description</span>
+							<hr/>
+						</div>
+						<!-- DBPedia Tabs tabs -->
+						<div class="dbp-widget">
+							<button class="close" type="button" onclick="closeDBPWidget();"><span aria-hidden="true" class="btn-widget-exit" id="dbp-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="qb-widget-title">DBPedia Information</span>
+							<hr/>
+						</div>
+						<!-- Publications Tabs tabs -->
+						<div class="pub-widget">
+							<button class="close" type="button" onclick="closePubWidget();"><span aria-hidden="true" class="btn-widget-exit" id="pub-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="qb-widget-title">Related Publications</span>
+							<hr/>
+						</div>
+						<!-- Wikidata Tabs tabs -->
+						<div class="wkd-widget">
+							<button class="close" type="button" onclick="closeWikiWidget();"><span aria-hidden="true" class="btn-widget-exit" id="wkd-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="qb-widget-title">Wikidata Information</span>
+							<hr/>
+						</div>
+						<!-- Metadata Tabs tabs -->
+						<div class="meta-widget">
+							<button class="close" type="button" onclick="closeMetaWidget();"><span aria-hidden="true" class="btn-widget-exit" id="meta-btn-widget-exit"><a href="#">&times;</a></span></button>
+							<span class="qb-widget-title">Metadata Information</span>
+							<hr/>
+						</div>
+					</div>
 				</div>
-				<p id="browserCheck" class="hidden"></p>
-			</section>
-
-			<!-- leaflet map -->
-			<div id="mapid">
-				<div id="txtbox-container">
-					<span id="txtbox-text-lat">Crosshair Latitude:</span><input type="text" id="txtbox-Latitude" />
-					<span id="txtbox-text-long">Crosshair Longitude:</span><input type="text" id="txtbox-Longitude" />
-				</div>
-				<div id="crosshair"><img class="crosshair" src=images/map_crosshair.png /></div>
-				<div id="reset-view-leaflet-option"></div>
-				<div id="toggle-ontology-option"></div>
 			</div>
-			<!-- Query builder tabs -->
-			<div class="qb-widget">
-				<button class="close" type="button" onclick="closeQBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="qb-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="qb-widget-title">Custom Query Builder</span>
-				<hr/>
-			</div>
-			<!-- Pre-Built Query builder tabs -->
-			<div class="preb-widget">
-				<button class="close" type="button" onclick="closePreBWidget();"><span aria-hidden="true" class="btn-widget-exit" id="preb-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="qb-widget-title">Pre-Built Queries</span>
-				<hr/>
-			</div>
-			<!-- AFD Tabs tabs -->
-			<div class="afd-widget">
-				<button class="close" type="button" onclick="closeAFDWidget();"><span aria-hidden="true" class="btn-widget-exit" id="afd-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="afd-widget-title">Advanced Feature Description</span>
-				<hr/>
-			</div>
-			<!-- DBPedia Tabs tabs -->
-			<div class="dbp-widget">
-				<button class="close" type="button" onclick="closeDBPWidget();"><span aria-hidden="true" class="btn-widget-exit" id="dbp-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="qb-widget-title">DBPedia Information</span>
-				<hr/>
-			</div>
-			<!-- Publications Tabs tabs -->
-			<div class="pub-widget">
-				<button class="close" type="button" onclick="closePubWidget();"><span aria-hidden="true" class="btn-widget-exit" id="pub-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="qb-widget-title">Related Publications</span>
-				<hr/>
-			</div>
-			<!-- Wikidata Tabs tabs -->
-			<div class="wkd-widget">
-				<button class="close" type="button" onclick="closeWikiWidget();"><span aria-hidden="true" class="btn-widget-exit" id="wkd-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="qb-widget-title">Wikidata Information</span>
-				<hr/>
-			</div>
-			<!-- Metadata Tabs tabs -->
-			<div class="meta-widget">
-				<button class="close" type="button" onclick="closeMetaWidget();"><span aria-hidden="true" class="btn-widget-exit" id="meta-btn-widget-exit"><a href="#">&times;</a></span></button>
-				<span class="qb-widget-title">Metadata Information</span>
-				<hr/>
-			</div>
-		</div>
+		</div>	
 		<!-- Initialize leaflet map, note: must run script after leaflet map is created -->
 		<script src="scripts/leaflet-map.js"></script>
 		<div class="notification-bar"></div>
@@ -442,9 +452,9 @@
 
 		<!-- Overlay for disabled page -->
 		<div id="loading-layer-overlay"></div>
-	</body>
+	<!--</body>-->
 
 <!--#include virtual="includes/footer.txt"-->
-</html>
+<!--</html>-->
 
 

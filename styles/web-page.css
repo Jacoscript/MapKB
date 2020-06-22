@@ -132,9 +132,10 @@ Deprecated
 } 
 */
 
-#main-container {
-    height: 640px;
-}
+/*#main-container {
+    height: 100%;
+    min-height: 100%;
+}*/
 
 /* Leaflet map styles */
 #mapid {
@@ -469,7 +470,9 @@ Deprecated
     grid-template-columns: auto auto;
     grid-gap: 5px;
     justify-content: space-between;
-    margin: auto;
+    /*margin: auto;*/
+    margin-left: auto;
+    margin-right: auto;
     padding: 5px;
     position: relative;
     width: 18%;
