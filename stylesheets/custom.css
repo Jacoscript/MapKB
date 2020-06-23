@@ -46,6 +46,10 @@ If you want the logo to be smaller (50px), comment out the ".logo-header img {he
 /* =============STANDARD CONTENT===============*/ 
 /* TO CHANGE THE TEXT SIZE OF THE CONTENT, FONT, ETC:
 By default, USGS has set the font size, family, etc. in order to provide a consistent size for content across all pages. If you would prefer not to have any of these pre-defined formats, you can change them below. NOTE: header and footer will not be changed. */
+html, body {
+	background-color: #00264c !important;
+	height: 100%;
+}
 #maincontent {
 	font-family: 'Source Sans Pro',sans-serif;
 	font-size: 14px;
@@ -54,6 +58,11 @@ By default, USGS has set the font size, family, etc. in order to provide a consi
     background-color: #fff;
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+#parent-container {
+	max-height: 65%;
+	height: 65%;
 }
 
 /* =============SEARCH===============*/ 
