@@ -65,6 +65,15 @@ html, body {
 	height: 65%;
 }
 
+
+
+.header-search button[type="submit"] {
+	position: relative;
+	top: 50%;
+	right: 15%
+	/*transform: translateY(-50%);*/
+}
+
 /* =============SEARCH===============*/ 
 /* THIS HIDES THE SEARCH BOX ON VERY SMALL DEVICES:
 For simplification, search bar is visible on larger screens but is hidden on small screens. If you would prefer not to have the search box at all, you can remove the "@media (max-width:500px) {" and the second closing "}". below */
