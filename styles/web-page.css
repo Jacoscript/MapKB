@@ -498,3 +498,7 @@ Deprecated
 #txtbox-text-long {
     color: rgba(255,255,255,.5);
 }
+
+.hide-map {
+	display: none !important;
+}

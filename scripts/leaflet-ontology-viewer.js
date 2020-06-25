@@ -10,7 +10,8 @@ function toggleOntologyViewer() {
     // ontology view
 
     if (toggle_viewer == false) {
-        $("#mapid").css("display", "none");
+        //$("#mapid").css("display", "none");
+        $("#mapid").addClass("hide-map").removeClass("d-flex");
         $(".svgGraph").css("display", "block");
         $("#example").css("display", "block");
         $("#graph").css("display", "block");
@@ -19,7 +20,8 @@ function toggleOntologyViewer() {
         $("#slider-ontology-option").css("display", "block");
         toggle_viewer = true;
     } else {
-        $("#mapid").css("display", "block");
+        //$("#mapid").css("display", "block");
+        $("#mapid").removeClass("hide-map").addClass("d-flex");
         $(".svgGraph").css("display", "none");
         $("#example").css("display", "none");
         $("#graph").css("display", "none");
