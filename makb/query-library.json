@@ -652,6 +652,26 @@
 			"} ",
             "BIND(IF(geof:sfTouches(?wkt, ?wkt3), \"Yes\", \"No\") AS ?done) ",
   			"} "
-	]
+	],
+	"nearbyPoints_v2":
+        ["PREFIX geo: <http://www.opengis.net/ont/geosparql#> ",
+		"PREFIX geof: <http://www.opengis.net/def/function/geosparql/> ",
+		"PREFIX units: <http://www.opengis.net/def/uom/OGC/1.0/> ",
+		"PREFIX sf: <http://www.opengis.net/ont/sf#> ",
+		"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ",
+		"SELECT ?subject ?name  ?purpose ?geom ?gml ?dimensions ?wkt ?feature_Class ",
+		"FROM <INPUT_STRING_1> ",
+		"WHERE { ",
+        "OPTIONAL { ?subject <http://purl.org/dc/elements/1.1/title> ?name . } ",
+		"OPTIONAL { ?subject <http://dbpedia.org/ontology/purpose> ?purpose . } ",
+		"?subject <http://www.opengis.net/ont/geosparql#hasGeometry> ?geom . ",
+		"?subject <http://data.usgs.gov/lod/topo/feature_Class> ?feature_Class . ",
+		"?geom <http://www.opengis.net/ont/geosparql#coordinateDimension> ?dimensions . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asGML> ?gml . ",
+		"?geom <http://www.opengis.net/ont/geosparql#asWKT> ?wkt. ",
+		"BIND(\"SRID=4326;INPUT_STRING_2\"^^geo:wktLiteral AS ?inputPoint ) . ",
+		"BIND( geof:buffer(?inputPoint, .02 , units:degree) AS ?area ) ",
+		"FILTER( geof:sfWithin(?wkt, ?area) )",
+        "}"	]
 
 }

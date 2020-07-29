@@ -126,7 +126,7 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                             //"<br>Purpose: " + purpose +
                             " "+uri+"<br> " +
                             "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
-							"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName+"');\">Nearby Points</a><br>" +
+							"<a href='#' onClick=\"nearbyPoints_v2('"+wkt+"', '"+uri+"', 'http://localhost:8080/marmotta/context/v2/"+ftypeName[5]+"');\">Nearby Points</a><br>" +
 							"<a href='#' onClick=\"createDBpediaQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Dbpedia Info</a></br>" +
                             "<a href='#' onClick=\"createWikidataQuery('"+name+"',"+coordinates[0]+","+coordinates[1]+");\">Wikidata Info</a><br>" +
                             "<a href='#' onClick=\"createPublicationsQuery('"+name+"',"+coordinates[0]+",'"+coordinates[1]+","+wkt+"');\">View Related USGS Publications</a></p>"
@@ -150,7 +150,7 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                             //"<br>Purpose: " + purpose +
                             " "+uri+"<br> " +
                             "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
-							"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName+"');\">Nearby Points</a><br>" 
+							"<a href='#' onClick=\"nearbyPoints_v2('"+wkt+"', '"+uri+"', 'http://localhost:8080/marmotta/context/v2/"+ftypeName+"');\">Nearby Points</a><br>" 
                         );
                         }
                         //if the entity is a normal polygon do the following
@@ -168,7 +168,7 @@ function makeUniversalQuery_v2(inputType, inputQuery){
                             //"<br>Purpose: " + purpose +
                             " "+uri+"<br> " +
                             "<p> <a href='#' onClick=\"additionalInformation_v2('"+uri+"');\">Additional Information</a><br>" +
-							"<a href='#' onClick=\"nearbyPoints('"+wkt+"', '"+uri+"', '"+ftypeName+"');\">Nearby Points</a><br>" 
+							"<a href='#' onClick=\"nearbyPoints_v2('"+wkt+"', '"+uri+"', 'http://localhost:8080/marmotta/context/v2/"+ftypeName+"');\">Nearby Points</a><br>" 
                         );
                         }
 
@@ -703,4 +703,24 @@ function MetadataSearch_v2(property){
         }
     });
 
+}
+
+function nearbyPoints_v2(inputGeometry,URI,namespace){
+    clearMap();
+
+    //Check whether specific query has been applied
+    if (triggerLayers["doSomething"] == true) {
+        return;
+    } else {
+        triggerLayers["doSomething"] = true;
+        onLayerLoading("doSomething");  // Lock down browser while loading
+    }
+    //Get the specified query
+    var query = getQuery("nearbyPoints_v2", namespace, inputGeometry);
+    //HTTP encode the query
+    //query = encodeURIComponent(query);
+    //Create the URL for the HTTP request
+    var http_get = MARMOTTA_SPARQL_URL + query;
+    // execute sparql query in marmotta
+    makeUniversalQuery_v2("Custom", query);
 }

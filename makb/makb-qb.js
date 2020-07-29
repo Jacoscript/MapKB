@@ -869,6 +869,15 @@ function findQueryFilters(){
 					HTML += '<option value="notequalto">Is Not Equal To</option>';
 				}
 			}
+			HTML += '<option value="regex">Contains String</option>';
+			HTML += '<option value="lessthan">Is Less Than</option>';
+			HTML += '<option value="lessthanorequal">Is Less Than Or Equal</option>';
+			HTML += '<option value="greaterthan">Is Greater Than</option>';
+			HTML += '<option value="greaterthanorequal">Is Greater Than Or Equal</option>';
+			HTML += '<option value="equalto">Is Equal To</option>';
+			HTML += '<option value="notequalto">Is Not Equal To</option>';
+
+			
 			HTML += '<option value="none">None</option>';
 				
 			HTML += '</select>';
@@ -960,7 +969,7 @@ function generateQuery(){
 	var query_intro = '';
 	var query_graph = '';
 	var query_outro = '';
-	var query_intro = 'SELECT ?subject ?geom ?name ?purpose (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=";") AS ?geometry) ' +
+	var query_intro = 'SELECT ?subject ?geom ?name ?purpose (GROUP_CONCAT(DISTINCT ?geo; SEPARATOR=";") AS ?gml) ' +
 					  selected_graphs + 'WHERE { ';
 					  
 	query_graph += 'GRAPH ?g { ' +
