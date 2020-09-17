@@ -18,7 +18,7 @@
 
     "homepageURL": "https://code.usgs.gov/makb/MapKB",
     "downloadURL": "https://code.usgs.gov/makb/MapKB/-/blob/master/LICENSE.md",
-    "disclaimerURL": "https://code.usgs.gov/umesc/FishStan/raw/master/DISCLAIMER.md",
+    "disclaimerURL": "https://code.usgs.gov/makb/MapKB/-/blob/master/DISCLAIMER.md",
     "repositoryURL": "https://code.usgs.gov/makb/MapKB.git",
     "vcs": "git",
 
