@@ -1,0 +1,52 @@
+[
+  {
+    "name": "MapKB",
+    "organization": "U.S. Geological Survey",
+    "description": "A Semantic visualization of USGS and outside data sources", 
+    "version": "0.1",
+    "status": "Development",
+
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://code.usgs.gov/makb/MapKB/-/blob/master/LICENSE.md"
+        }
+      ]
+    },
+
+    "homepageURL": "https://code.usgs.gov/makb/MapKB",
+    "downloadURL": "https://code.usgs.gov/makb/MapKB/-/blob/master/LICENSE.md",
+    "disclaimerURL": "https://code.usgs.gov/umesc/FishStan/raw/master/DISCLAIMER.md",
+    "repositoryURL": "https://code.usgs.gov/makb/MapKB.git",
+    "vcs": "git",
+
+    "laborHours": 0,
+
+    "tags": [
+      "MAKB",
+      "MapKB",
+      "Semantic Web",
+      "CEGIS",
+      "SemWeb",
+      "Map as a Knowledge Base"
+    ],
+
+    "languages": [
+      "docker",
+      "python",
+      "java",
+      "bash"
+    ],
+
+    "contact": {
+      "name": "Dalia Varanka",
+      "email": "dvaranka@usgs.gov"
+    },
+
+    "date": {
+      "metadataLastUpdated": "2020-09-17"
+    }
+  }
+]
