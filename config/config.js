@@ -3,13 +3,13 @@
 * the UI can connect to the correct endpoint. This should be updated anytime the projected is moved to a 
 * new machine.
 */
-var MARMOTTA_IP = '144.47.161.52:8080';
+var MARMOTTA_IP = 'localhost:8080';
 
 /*
 * These variables are describe the rest endpoints for marmotta.
 */
-//var MARMOTTA_BASE_URL = 'http://'+MARMOTTA_IP+'/marmotta';
-var MARMOTTA_BASE_URL = '/marmotta';
+var MARMOTTA_BASE_URL = 'http://'+MARMOTTA_IP+'/marmotta';
+//var MARMOTTA_BASE_URL = '/marmotta';
 var MARMOTTA_DEREF_URL = MARMOTTA_BASE_URL + '/meta/application/ld+json?uri=';
 var MARMOTTA_SPARQL_URL = MARMOTTA_BASE_URL + '/sparql/select?output=json&query=';
 var FEATURE_BASE_URL = 'http://data.usgs.gov/';
@@ -36,4 +36,4 @@ var PUBLICATIONS_REST_URL =  PUBLICATIONS_BASE_URL + '/?mimeType=json&page_size=
 /*
 * This is the variable used to determine the location your geoserver instance.
 */
-var WFS_BASE_URL = 'http://144.47.161.52:8080/geoserver/wfs';
+var WFS_BASE_URL = 'http://localhost:8080/geoserver/wfs';
